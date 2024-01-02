@@ -115,11 +115,14 @@ document.querySelector("#newPassword").addEventListener("keyup", () => {
  * @author mydev
  */
 onAuthStateChanged(auth, (user) => {
+
     console.log("auth")
     if (user) {
         console.log("if")
         loggedIn = true
         onLoggedIn();
+
+        userDisplayMessage();
         const docRef = doc(firestore, "learners", user.uid);
         console.log(user.uid)
         const docSnap = getDoc(docRef);
@@ -456,6 +459,17 @@ async function checkUserSchoolDocumentExists(userId) {
 
 // ------------------------------------------------------------------------------------
 
+// ------------------ Display the message -------------------------------
+function userDisplayMessage(){
+     userAddressDisplayMsg();
+     userSchoolDisplayMsg();
+     userInterDisplayMsg();
+     userDegreeDisplayMsg();
+     userMastersDisplayMsg();
+     userInternshipDisplayMsg();
+     userAdditionalDisplayMsg()
+} 
+
 //---------------------------------- user Add or update section------------------------
 
 /**
@@ -493,11 +507,27 @@ async function showOrHideUserAddressForm() {
  * @returns 
  */
 async function checkAddressDocumentExists(userId) {
-    const addressCollectionRef = collection(firestore, 'learners', userId, 'address');
+    const addressCollectionRef = collection(firestore, 'learners', userId, 'useraddress');
     const addressSnapshot = await getDocs(addressCollectionRef);
     return !addressSnapshot.empty;
 }
 
+/**
+ * 
+ * to display address message
+ */
+ async function userAddressDisplayMsg(){
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userAddressDataExist = await checkAddressDocumentExists(userId);
+
+    if(!userAddressDataExist){
+        document.querySelector('.user-address-display-message').classList.remove('d-none');
+        document.querySelector('.user-address-display-message').textContent = "Please fill your address details"
+    }
+    else{
+        document.querySelector('.user-address-display-message').classList.add('d-none'); 
+    }
+}
 
 /**
  * edit the address details
@@ -521,7 +551,7 @@ async function openUserAddressModel(userId) {
     const userCountryEdit = document.querySelector('#user-country');
 
     if (userId) {
-        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'address');
+        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress');
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
 
         if (!userAddressSnapshot.empty) {
@@ -546,57 +576,90 @@ async function openUserAddressModel(userId) {
 
 document.getElementById('save-user-address-button').addEventListener('click', async function () {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userAddressEdit = document.querySelector('#user-address').value;
+    const userPostcodeEdit = document.querySelector('#user-postcode').value;
+    const userCityEdit = document.querySelector('#user-city').value;
+    const userStateEdit = document.querySelector('#user-state').value;
+    const userCountryEdit = document.querySelector('#user-country').value;
 
-    if (userId) {
-        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'address');
-        const userAddressData = {
-            address: document.getElementById('user-address').value,
-            postcode: document.getElementById('user-postcode').value,
-            city: document.getElementById('user-city').value,
-            state: document.getElementById('user-state').value,
-            country: document.getElementById('user-country').value
-        };
-        const userAdrressDocRef = doc(userAddressCollectionRef, userAddressDocId)
-        await updateDoc(userAdrressDocRef, userAddressData, { merge: true });
+    if(userAddressEdit && userPostcodeEdit && userCityEdit && userStateEdit && userCountryEdit){
 
-        console.log('User Address details updated successfully');
-        displayMessage('User Address details updated successfully', 'success');
-    } else {
-        console.log('User is not authenticated');
-        displayMessage('User is not authenticated', 'danger');
+        if (userId) {
+            const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress');
+            const userAddressSnapshot = await getDocs(userAddressCollectionRef);
+
+            if(!userAddressSnapshot.empty){
+                userAddressSnapshot.forEach(async(document)=>{
+                    const userAddressData = document.data();
+
+                    const userAdditionalDocRef = collection(firestore, 'learners', userId, 'useraddress')
+                    await updateDoc(userAdditionalDocRef,{
+                        address:userAddressEdit,
+                        postcode:userPostcodeEdit,
+                        city: userCityEdit,
+                        state: userStateEdit,
+                        country:userCountryEdit
+                    })
+                    console.log('User Address details updated successfully');
+                    displayMessage('User Address details updated successfully', 'success');
+                    openUserAddressModel(userId)
+                    await userAddressDisplayMsg()
+                })
+            }
+            else{
+                const userAddressDocRef = await addDoc(userAddressCollectionRef,{
+                    address:userAddressEdit,
+                    postcode:userPostcodeEdit,
+                    city: userCityEdit,
+                    state: userStateEdit,
+                    country:userCountryEdit
+                })
+                console.log('User Address details saved successfully');
+                displayMessage('User Address details saved successfully', 'success');
+                await updateDoc(userAddressDocRef,{userAddressId : userAddressDocRef.id});
+                openUserAddressModel(userId);
+                await userAddressDisplayMsg()
+            }
+    
+        } else {
+            console.log('User is not authenticated');
+            displayMessage('User is not authenticated', 'danger');
+        }
+    }
+    else {
+        console.log('please fill all the details');
+        displayMessage('please fill all the details', 'danger');
     }
 });
 //---------------------------------------------------------------------------------------------------
 
 
 //------------------------------------ School Details ---------------------------------------------------
+/**
+ * it checking the user school doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkSchoolDocumentExists(userId) {
+    const userschoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
+    const userSchoolSnapshot = await getDocs(userschoolCollectionRef);
+    return !userSchoolSnapshot.empty;
+}
 
 /**
- * to hide the save address form 
- * @author mydev
+ * 
+ * to display school edu details message
  */
-// document.querySelector('#user-school-accordion-btn').addEventListener('click',async(e)=>{
-//     await showOrHideUserSchoolForm();
-// })
-
-async function showOrHideUserSchoolForm() {
+async function userSchoolDisplayMsg(){
     const userId = auth.currentUser ? auth.currentUser.uid : null;
-    if (userId) {
-        const addressExists = await checkUserSchoolDocumentExists(userId);
+    const userSchoolDataExist = await checkSchoolDocumentExists(userId);
 
-        if (addressExists) {
-            console.log("if")
-            document.getElementById('school-edu-details-form').style.display = 'none';
-            document.querySelector('.user-school-message').style.display = 'block'
-            document.getElementById('edit-school-edu-details').style.display = 'block';
-            document.querySelector('.user-school-message').textContent = 'Address Details Already Exists please Update the Address Details';
-        } else {
-            console.log("else")
-            document.getElementById('school-edu-details-form').style.display = 'block';
-            document.querySelector('.user-school-message').style.display = 'block'
-            document.getElementById('edit-school-edu-details').style.display = 'none';
-            document.querySelector('.user-school-message').textContent = 'Please Enter Address Details';
-        }
+    if(!userSchoolDataExist){
+        document.querySelector('.user-school-display-message').classList.remove('d-none');
+        document.querySelector('.user-school-display-message').textContent = "Please fill your school education details"
+    }
+    else{
+        document.querySelector('.user-school-display-message').classList.add('d-none'); 
     }
 }
 
@@ -733,6 +796,7 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                     console.log('user 10th class details saved successfully');
                     displayMessage('user 10th class details saved successfully', 'success');
                     openUserSchoolModel(userId)
+                    await userSchoolDisplayMsg();
                 }
                 else {
                     console.log("else")
@@ -750,13 +814,38 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                     console.log('user 10th class details saved successfully');
                     displayMessage('user 10th class details saved successfully', 'success');
                     openUserSchoolModel(userId)
+                    await userSchoolDisplayMsg();
                 }
             })
 
         }
         else {
-            console.log('10th class details not exist for the user');
-            displayMessage('10th class details not exist for the user', 'success');
+            if(userSchoolCertificateEdit.files.length > 0){
+                const storageRef = ref(storage, 'certificate_images/' + userSchoolCertificateImageFileEdit.name);
+                await uploadBytes(storageRef, userSchoolCertificateImageFileEdit);
+                const certificateImageUrl = await getDownloadURL(storageRef);
+    
+                const userSchoolDocRef = await addDoc(userSchoolCollectionRef,{
+                    userSchoolBoard: userSchoolBoardEdit,
+                    userSchoolEducationName: userSchoolNameEdit,
+                    userSchoolEducationCity: userSchoolCityEdit,
+                    userSchoolEducationState: userSchoolStateEdit,
+                    userSchoolStart: userSchoolStartDateEdit,
+                    userSchoolEnd: userSchoolEndDateEdit,
+                    userSchoolPercentage: userSchoolPercentageEdit,
+                    schoolCertificateImageUrl: certificateImageUrl
+                })
+                console.log('user 10th class details saved successfully');
+                displayMessage('user 10th class details saved successfully', 'success');
+                
+                await updateDoc(userSchoolDocRef,{userSchoolId : userSchoolDocRef.id});
+                openUserSchoolModel(userId);
+                await userSchoolDisplayMsg();
+            }
+            else{
+                console.log('Please fill the all fields');
+                displayMessage('Please fill the all fields', 'danger');
+            }
         }
     }
     else {
@@ -768,6 +857,34 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
 
 
 //-----------------------------------------Inter/12th Details-----------------------------------------------
+
+/**
+ * it checking the user inter/12th class doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkInterDocumentExists(userId) {
+    const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
+    const userInterSnapshot = await getDocs(userInterCollectionRef);
+    return !userInterSnapshot.empty;
+}
+
+/**
+ * 
+ * to display inter/12th class edu details message
+ */
+async function userInterDisplayMsg(){
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userInterDataExist = await checkInterDocumentExists(userId);
+
+    if(!userInterDataExist){
+        document.querySelector('.user-inter-display-message').classList.remove('d-none');
+        document.querySelector('.user-inter-display-message').textContent = "Please fill your inter/12th class education details"
+    }
+    else{
+        document.querySelector('.user-inter-display-message').classList.add('d-none'); 
+    }
+}
 
 /**
  * edit or update the intermediate/12th details;
@@ -796,7 +913,7 @@ async function openUserInterModel(userId) {
 
 
     if (userId) {
-        const userInterCollectionRef = collection(firestore, 'learners', userId, 'userInter');
+        const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
         const userInterSnapshot = await getDocs(userInterCollectionRef);
 
         if (!userInterSnapshot.empty) {
@@ -863,7 +980,7 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
             displayMessage('User is not authenticated', 'danger')
             return;
         }
-        const userInterCollectionRef = collection(firestore, 'learners', userId, 'userInter');
+        const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
         const userInterSnapshot = await getDocs(userInterCollectionRef);
 
         if (!userInterSnapshot.empty) {
@@ -885,7 +1002,7 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                     await uploadBytes(storageRef, userInterCertificateImageFileEdit);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userInterDocRef = doc(firestore, 'learners', userId, 'userInter', document.id)
+                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', document.id)
                     await updateDoc(userInterDocRef,
                         {
                             userInterBoard: userInterBoardEdit,
@@ -903,7 +1020,7 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                 }
                 else {
                     console.log("else")
-                    const userInterDocRef = doc(firestore, 'learners', userId, 'userInter', document.id)
+                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', document.id)
                     await updateDoc(userInterDocRef,
                         {
                             userInterBoard: userInterBoardEdit,
@@ -922,8 +1039,32 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
 
         }
         else {
-            console.log('intermediate/12th details not exist for the user');
-            displayMessage('intermediate/12th details not exist for the user', 'success');
+            if(userInterCertificateEdit.files.length > 0){
+                const storageRef = ref(storage, 'inter_certificate_images/' + userInterCertificateImageFileEdit.name);
+                await uploadBytes(storageRef, userInterCertificateImageFileEdit);
+                const certificateImageUrl = await getDownloadURL(storageRef);
+    
+                const userInterDocRef = await addDoc(userInterCollectionRef,{
+                    userInterBoard: userInterBoardEdit,
+                    userInterEducationName: userInterEducationNameEdit,
+                    userInterEducationCity: userInterCityEdit,
+                    userInterEducationState: userInterStateEdit,
+                    userInterStart: userInterStartDateEdit,
+                    userInterEnd: userInterEndDateEdit,
+                    userInterPercentage: userInterPercentageEdit,
+                    interCertificateImageUrl: certificateImageUrl
+                })
+                console.log('intermediate/12th details not exist for the user');
+                displayMessage('intermediate/12th details not exist for the user', 'success');
+                
+                await updateDoc(userInterDocRef,{userInterId : userInterDocRef.id});
+                openUserInterModel(userId);
+                await userInterDisplayMsg();
+            }
+            else{
+                console.log('Please fill the all fields');
+                displayMessage('Please fill the all fields', 'danger');
+            }   
         }
     }
     else {
@@ -935,6 +1076,34 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
 
 
 //--------------------------------------- Graduation Details---------------------------------------------
+
+/**
+ * it checking the user graduation doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkDegreeDocumentExists(userId) {
+    const userDegreeCollectionRef = collection(firestore, 'learners', userId, 'userdegree');
+    const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
+    return !userDegreeSnapshot.empty;
+}
+
+/**
+ * 
+ * to display graduation edu details message
+ */
+async function userDegreeDisplayMsg(){
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userDegreeDataExist = await checkDegreeDocumentExists(userId);
+
+    if(!userDegreeDataExist){
+        document.querySelector('.user-degree-display-message').classList.remove('d-none');
+        document.querySelector('.user-degree-display-message').textContent = "Please fill your graduation details"
+    }
+    else{
+        document.querySelector('.user-degree-display-message').classList.add('d-none'); 
+    }
+}
 
 /**
  * edit or update the graduation/degree details;
@@ -955,6 +1124,7 @@ async function openUserDegreeModel(userId) {
     console.log("3")
     const userDegreeBoardEdit = document.querySelector('#degree-board');
     const userDegreeEducationNameEdit = document.querySelector('#degree-college-name');
+    const userDegreeSpeEdit =  document.querySelector('#degree-specialization-name');
     const userDegreeCityEdit = document.querySelector('#degree-education-city');
     const userDegreeStateEdit = document.querySelector('#degree-education-state');
     const userDegreeStartDateEdit = document.querySelector('#degree-education-sDate');
@@ -974,6 +1144,7 @@ async function openUserDegreeModel(userId) {
             console.log(userDegreeData)
             userDegreeBoardEdit.value = userDegreeData.userDegreeBoard || '';
             userDegreeEducationNameEdit.value = userDegreeData.userDegreeEducationName || '';
+            userDegreeSpeEdit.value = userDegreeData.userDegreeSpecialization || ''
             userDegreeCityEdit.value = userDegreeData.userDegreeEducationCity || '';
             userDegreeStateEdit.value = userDegreeData.userDegreeEducationState || '';
             userDegreeStartDateEdit.value = userDegreeData.userDegreeStart || '';
@@ -1005,6 +1176,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userDegreeBoardEdit = document.querySelector('#degree-board').value;
     const userDegreeEducationNameEdit = document.querySelector('#degree-college-name').value;
+    const userDegreeSpeEdit =  document.querySelector('#degree-specialization-name').value
     const userDegreeCityEdit = document.querySelector('#degree-education-city').value;
     const userDegreeStateEdit = document.querySelector('#degree-education-state').value;
     const userDegreeStartDateEdit = document.querySelector('#degree-education-sDate').value;
@@ -1056,6 +1228,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                         {
                             userDegreeBoard: userDegreeBoardEdit,
                             userDegreeEducationName: userDegreeEducationNameEdit,
+                            userDegreeSpecialization : userDegreeSpeEdit,
                             userDegreeEducationCity: userDegreeCityEdit,
                             userDegreeEducationState: userDegreeStateEdit,
                             userDegreeStart: userDegreeStartDateEdit,
@@ -1066,6 +1239,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                     console.log('user graduation/degree details saved successfully');
                     displayMessage('user graduation/degree details saved successfully', 'success');
                     openUserDegreeModel(userId)
+                    await userDegreeDisplayMsg();
                 }
                 else {
                     console.log("else")
@@ -1074,6 +1248,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                         {
                             userDegreeBoard: userDegreeBoardEdit,
                             userDegreeEducationName: userDegreeEducationNameEdit,
+                            userDegreeSpecialization : userDegreeSpeEdit,
                             userDegreeEducationCity: userDegreeCityEdit,
                             userDegreeEducationState: userDegreeStateEdit,
                             userDegreeStart: userDegreeStartDateEdit,
@@ -1083,13 +1258,40 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                     console.log('user graduation/degree details saved successfully');
                     displayMessage('user graduation/degree details saved successfully', 'success');
                     openUserDegreeModel(userId)
+                    await userDegreeDisplayMsg();
                 }
             })
 
         }
         else {
-            console.log('graduation/degree details not exist for the user');
-            displayMessage('graduation/degree details not exist for the user', 'success');
+            if(userDegreeCertificateEdit.files.length > 0){
+                const storageRef = ref(storage, 'degree_certificate_images/' + userDegreeCertificateEdit.name);
+                await uploadBytes(storageRef, userDegreeCertificateImageFileEdit);
+                const certificateImageUrl = await getDownloadURL(storageRef);
+    
+                const userDegreeDocRef = await addDoc(userDegreeCollectionRef,{
+                    userDegreeBoard: userDegreeBoardEdit,
+                    userDegreeEducationName: userDegreeEducationNameEdit,
+                    userDegreeSpecialization : userDegreeSpeEdit,
+                    userDegreeEducationCity: userDegreeCityEdit,
+                    userDegreeEducationState: userDegreeStateEdit,
+                    userDegreeStart: userDegreeStartDateEdit,
+                    userDegreeEnd: userDegreeEndDateEdit,
+                    userDegreePercentage: userDegreePercentageEdit,
+                    degreeCertificateImageUrl: certificateImageUrl
+                })
+                console.log('user graduation education details saved successfully');
+                displayMessage('user graduation education details saved successfully', 'success');
+                
+                await updateDoc(userDegreeDocRef,{userDegreeId : userDegreeDocRef.id});
+                openUserDegreeModel(userId);
+                await userDegreeDisplayMsg();
+            }
+            else{
+                console.log('Please fill the all fields');
+                displayMessage('Please fill the all fields', 'danger');
+            }  
+            
         }
     }
     else {
@@ -1097,11 +1299,42 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
         displayMessage('please fill all the details', 'danger');
     }
 });
-//------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 
 
 // ---------------------------------- Post Graduation Details  ------------------------------------
+/**
+ * it checking the user inter/12th class doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkMastersDocumentExists(userId) {
+    const userMastersCollectionRef = collection(firestore, 'learners', userId, 'usermasters');
+    const userMastersSnapshot = await getDocs(userMastersCollectionRef);
+    return !userMastersSnapshot.empty;
+}
 
+/**
+ * 
+ * to display inter/12th class edu details message
+ */
+async function userMastersDisplayMsg(){
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userMastersDataExist = await checkMastersDocumentExists(userId);
+
+    if(!userMastersDataExist){
+        document.querySelector('.user-masters-display-message').classList.remove('d-none');
+        document.querySelector('.user-masters-display-message').textContent = "Please fill your post-graduation details"
+    }
+    else{
+        document.querySelector('.user-masters-display-message').classList.add('d-none'); 
+    }
+}
+
+/**
+ * 
+ * 
+ */
 const accordionMastersBtn = document.querySelector("#user-masters-accordion-btn");
 accordionMastersBtn.addEventListener('click', async () => {
     console.log('1')
@@ -1248,6 +1481,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                     displayMessage('user post-graduation/masters details updated successfully', 'success');
                     // document.getElementById('masters-edu-details-form').reset();
                     openMastersModel(userId)
+                    await userMastersDisplayMsg();
                 }
                 else {
                     console.log("else")
@@ -1266,12 +1500,38 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                     console.log('user post-graduation/masters details updated successfully');
                     displayMessage('user post-graduation/masters details updated successfully', 'success');
                     openMastersModel(userId)
+                    await userMastersDisplayMsg();
                 }
             })
         }
         else {
-            console.log('post-graduation/masters details not exist for the user');
-            displayMessage('post-graduation/masters details not exist for the user', 'success');
+            if(userMastersCertificate.files.length > 0){
+                const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificate.name);
+                await uploadBytes(storageRef, userMastersCertificateImageFile);
+                const certificateImageUrl = await getDownloadURL(storageRef);
+    
+                const userMastersDocRef = await addDoc(userMastersCollectionRef,{
+                    userMastersBoard: userMastersBoard,
+                    userMastersEducationName: userMastersEducationName,
+                    userMastersSpecialization: userMastersEduSpeName,
+                    userMastersEducationCity: userMastersEducationCity,
+                    userMastersEducationState: userMastersEducationState,
+                    userMastersStart: userMastersStart,
+                    userMastersEnd: userMastersEnd,
+                    userMastersPercentage: userMastersPercentage,
+                    mastersCertificateImageUrl: certificateImageUrl
+                })
+                console.log('user post graduation education details saved successfully');
+                displayMessage('user post graduation education details saved successfully', 'success');
+                
+                await updateDoc(userMastersDocRef,{userMastersId : userMastersDocRef.id});
+                openMastersModel(userId);
+                await userMastersDisplayMsg();
+            }
+            else{
+                console.log('Please fill the all fields');
+                displayMessage('Please fill the all fields', 'danger');
+            }
         }
     }
     else {
@@ -1284,6 +1544,34 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
 
 
 // ---------------------------------- Internship/Academic Project Details  ------------------------------------
+/**
+ * it checking the user inter/12th class doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkInternshipDocumentExists(userId) {
+    const userInternshipCollectionRef = collection(firestore, 'learners', userId, 'userinternship');
+    const userInternshipSnapshot = await getDocs(userInternshipCollectionRef);
+    return !userInternshipSnapshot.empty;
+}
+
+/**
+ * 
+ * to display inter/12th class edu details message
+ */
+async function userInternshipDisplayMsg(){
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userMastersDataExist = await checkInternshipDocumentExists(userId);
+
+    if(!userMastersDataExist){
+        document.querySelector('.user-internship-display-message').classList.remove('d-none');
+        document.querySelector('.user-internship-display-message').textContent = "Please fill your internship details"
+    }
+    else{
+        document.querySelector('.user-internship-display-message').classList.add('d-none'); 
+    }
+}
+
 /**
  * edit or update the internship details;
  * @author mydev
@@ -1302,7 +1590,7 @@ var userInternshipDocId = null;
 async function openUserInternshipModel(userId) {
     console.log("3")
     const userProjectNameEdit = document.querySelector("#internship-project-name");
-    const userProjectTechnologiesEdit = document.querySelector("#internship-project-technologies");
+    const userProjectTechnologiesEdit = document.querySelector("#internship-technologies");
     const userInternshipCityEdit = document.querySelector("#internship-city");
     const userInternshipStartEdit = document.querySelector("#internship-sDate");
     const userInternshipEndEnit = document.querySelector("#internship-eDate");
@@ -1310,7 +1598,7 @@ async function openUserInternshipModel(userId) {
 
 
     if (userId) {
-        const userInternshipCollectionRef = collection(firestore, 'learners', userId, 'userInternship');
+        const userInternshipCollectionRef = collection(firestore, 'learners', userId, 'userinternship');
         const userInternshipSnapshot = await getDocs(userInternshipCollectionRef);
 
         if (!userInternshipSnapshot.empty) {
@@ -1350,7 +1638,7 @@ async function openUserInternshipModel(userId) {
 document.getElementById('save-internship-button').addEventListener('click', async function () {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userProjectNameEdit = document.querySelector("#internship-project-name").value;
-    const userProjectTechnologiesEdit = document.querySelector("#internship-project-technologies").value;
+    const userProjectTechnologiesEdit = document.querySelector("#internship-technologies").value;
     const userInternshipCityEdit = document.querySelector("#internship-city").value;
     const userInternshipStartEdit = document.querySelector("#internship-sDate").value;
     const userInternshipEndEdit = document.querySelector("#internship-eDate").value;
@@ -1376,7 +1664,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
             displayMessage('User is not authenticated', 'danger')
             return;
         }
-        const userInternshipCollectionRef = collection(firestore, 'learners', userId, 'userInternship');
+        const userInternshipCollectionRef = collection(firestore, 'learners', userId, 'userinternship');
         const userInternshipSnapshot = await getDocs(userInternshipCollectionRef);
 
         if (!userInternshipSnapshot.empty) {
@@ -1397,7 +1685,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userInternshipCertificateImageFileEdit);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userInternship', document.id)
+                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userinternship', document.id)
                     await updateDoc(userInternshipDocRef,
                         {
                             userProjectName: userProjectNameEdit,
@@ -1411,6 +1699,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                     console.log('user internship/academic project details updated successfully');
                     displayMessage('user internship/academic project details updated successfully', 'success');
                     openUserInternshipModel(userId)
+                    await userInternshipDisplayMsg();
                 }
                 else {
                     console.log("else")
@@ -1427,13 +1716,37 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                     console.log('user internship/academic project details updated successfully');
                     displayMessage('user internship/academic project details updated successfully', 'success');
                     openUserInternshipModel(userId)
+                    await userInternshipDisplayMsg();
                 }
             })
 
         }
         else {
-            console.log('No graduation/degree details exist for the user');
-            displayMessage('No graduation/degree details exist for the user', 'success');
+            if(userInternshipCertificateEdit.files.length > 0){
+                const storageRef = ref(storage, 'internship_certificate_images/' + userInternshipCertificateEdit.name);
+                await uploadBytes(storageRef, userInternshipCertificateImageFileEdit);
+                const certificateImageUrl = await getDownloadURL(storageRef);
+    
+                const userInternshipDocRef = await addDoc(userInternshipCollectionRef,{
+                    userProjectName: userProjectNameEdit,
+                    userProjectTechnologies: userProjectTechnologiesEdit,
+                    userInternshipCity: userInternshipCityEdit,
+                    userInternshipStart: userInternshipStartEdit,
+                    userInternshipEnd: userInternshipEndEdit,
+                    userProjectDescription: userProjectDescriptionEdit,
+                    internshipCertificateImageUrl: certificateImageUrl
+                })
+                console.log('user academic project/internship details saved successfully');
+                displayMessage('user academic project/internship details saved successfully', 'success');
+                
+                await updateDoc(userInternshipDocRef,{userinternshipId : userInternshipDocRef.id});
+                openUserInternshipModel(userId);
+                await userInternshipDisplayMsg();
+            }
+            else{
+                console.log('Please fill the all fields');
+                displayMessage('Please fill the all fields', 'danger');
+            }
         }
     }
     else {
@@ -1445,7 +1758,33 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
 
 
 //--------------------------------------- Other Details --------------------------------------------
+/**
+ * it checking the user inter/12th class doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkAdditionalDocumentExists(userId) {
+    const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'useradditional');
+    const userAdditionalSnapshot = await getDocs(userAdditionalCollectionRef);
+    return !userAdditionalSnapshot.empty;
+}
 
+/**
+ * 
+ * to display inter/12th class edu details message
+ */
+async function userAdditionalDisplayMsg(){
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userAdditionalDataExist = await checkAdditionalDocumentExists(userId);
+
+    if(!userAdditionalDataExist){
+        document.querySelector('.user-additional-details-display-message').classList.remove('d-none');
+        document.querySelector('.user-additional-details-display-message').textContent = "Please fill your internship details"
+    }
+    else{
+        document.querySelector('.user-additional-details-display-message').classList.add('d-none'); 
+    }
+}
 
 /**
  * edit the additional details
@@ -1468,7 +1807,7 @@ async function openUserAdditionalModel(userId) {
     const userAdditionalHobbiesEdit = document.querySelector('#user-hobbies');
 
     if (userId) {
-        const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'userAdditional');
+        const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'useradditional');
         const userAdditionalSnapshot = await getDocs(userAdditionalCollectionRef);
 
         if (!userAdditionalSnapshot.empty) {
@@ -1496,24 +1835,45 @@ document.getElementById('save-user-additional-button').addEventListener('click',
     const userAdditionalHobbiesEdit = document.querySelector('#user-hobbies').value;
 
     if (userId) {
+        
         if (userAdditionalSkillsEdit && userAdditionalLanguagesEdit && userAdditionalHobbiesEdit) {
-            const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'userAdditional');
-            const userAdditionalData = {
-                userAdditionalSkills: userAdditionalSkillsEdit,
-                userAdditionalLanguages: userAdditionalLanguagesEdit,
-                userAdditionalHobbies: userAdditionalHobbiesEdit
-            }
-            const userAdditionalDocRef = doc(userAdditionalCollectionRef, userAdditionalDocId)
-            await updateDoc(userAdditionalDocRef, userAdditionalData, { merge: true });
+            const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'useradditional');
+            const userAdditionalSnapshot = await getDocs(userAdditionalCollectionRef);
+            
+            if(!userAdditionalSnapshot.empty){
+                const userAdditionalData = {
+                    userAdditionalSkills: userAdditionalSkillsEdit,
+                    userAdditionalLanguages: userAdditionalLanguagesEdit,
+                    userAdditionalHobbies: userAdditionalHobbiesEdit
+                }
+                const userAdditionalDocRef = doc(userAdditionalCollectionRef, userAdditionalDocId)
+                await updateDoc(userAdditionalDocRef, userAdditionalData, { merge: true });
 
-            console.log('User additional details updated successfully');
-            displayMessage('User additional details updated successfully', 'success');
+                console.log('User additional details updated successfully');
+                displayMessage('User additional details updated successfully', 'success');
+                openUserAdditionalModel(userId);
+                await userAdditionalDisplayMsg();
+            }
+            else{
+                const usserAdditionalDocRef = await addDoc(userAdditionalCollectionRef,{
+                    userAdditionalSkills: userAdditionalSkillsEdit,
+                    userAdditionalLanguages: userAdditionalLanguagesEdit,
+                    userAdditionalHobbies: userAdditionalHobbiesEdit
+                })
+                console.log('User additional details saved successfully');
+                displayMessage('User additional details saved successfully', 'success');
+                
+                await updateDoc(usserAdditionalDocRef,{userAdditionalId : usserAdditionalDocRef.id});
+                openUserAdditionalModel(userId);
+                await userAdditionalDisplayMsg();
+            }
         }
-        else {
-            console.log('please fill all the details')
-            displayMessage('please fill all the details', 'danger')
+        else{
+            console.log('Please fill the all fields');
+            displayMessage('Please fill the all fields', 'danger');
         }
-    } else {
+    }
+    else {
         console.log('User is not authenticated');
         displayMessage('User is not authenticated', 'danger');
     }

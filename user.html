@@ -412,8 +412,12 @@
                                 Password</button>
                         </div>
 
+                        <!-- address message  -->
+                        <span class="user-address-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Address Section start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white"
@@ -504,8 +508,12 @@
                         </div>
                         <!-- Address Section end -->
 
+                         <!-- school message  -->
+                         <span class="user-school-display-message badge text-bg-danger d-none mt-4">
+
+                         </span>
                         <!-- School details Section start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
@@ -622,8 +630,12 @@
                         </div>
                         <!-- School Details Section end -->
 
+                        <!-- inter/12th class message  -->
+                        <span class="user-inter-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- 12th/Intermediate Details Section Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
@@ -680,18 +692,18 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="inter-education-sDate"
-                                                                id="inter-education-sDate" placeholder="MM/YYYY"
+                                                                id="inter-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="inter-education-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="inter-education-eDate"
-                                                                id="inter-education-eDate" placeholder="MM/YYYY"
+                                                                id="inter-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="inter-education-eDate-error" class="error-message"
                                                                 style="color: red"></span>
@@ -737,8 +749,12 @@
                         </div>
                         <!-- 12th/Inter Details Section end -->
 
+                        <!-- graduation message  -->
+                        <span class="user-degree-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Graduation Details Section Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
@@ -775,6 +791,16 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>College Name/Dept Name*</label>
+                                                            <input type="text" name="degree-specialization-name"
+                                                                id="degree-specialization-name"
+                                                                placeholder="Enter the Graduation Specialization name"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-name-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
                                                             <input type="text" name="degree-education-city"
                                                                 id="degree-education-city"
@@ -795,18 +821,18 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="degree-education-sDate"
-                                                                id="degree-education-sDate" placeholder="MM/YYYY"
+                                                                id="degree-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="degree-education-eDate"
-                                                                id="degree-education-eDate" placeholder="MM/YYYY"
+                                                                id="degree-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -849,14 +875,18 @@
                         </div>
                         <!-- Graduation Details Section End -->
 
+                        <!-- post graduation message  -->
+                        <span class="user-masters-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!--Post Graduation/Master Details Section Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button" data-bs-toggle="collapse"
                                         id="user-masters-accordion-btn" data-bs-target="#flush-collapseSeven" aria-expanded="false"
                                         aria-controls="flush-collapseSeven">
-                                        Post-graduation/Masters Education Details
+                                        Post-graduation/Masters Education Details &nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -907,17 +937,17 @@
                                                         </span>
                         
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="masters-education-sDate" id="masters-education-sDate"
-                                                                placeholder="MM/YYYY" class="mb-0" required>
+                                                                placeholder="YYYY" class="mb-0" required>
                                                             <span id="masters-education-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                         
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="masters-education-eDate" id="masters-education-eDate"
-                                                                placeholder="MM/YYYY" class="mb-0" required>
+                                                                placeholder="YYYY" class="mb-0" required>
                                                             <span id="degree-education-eDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -963,15 +993,19 @@
                         </div>
                         <!-- post-graduation/masters Details Section End -->
 
+                        <!-- post graduation message  -->
+                        <span class="user-internship-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Internship/Academic Project Details Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" id="user-internship-accordion-btn"
                                         data-bs-target="#flush-collapseFive" aria-expanded="false"
                                         aria-controls="flush-collapseFive">
-                                        Internship/Academic Project Details
+                                        Internship/Academic Project Details&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseFive" class="accordion-collapse collapse"
@@ -1084,15 +1118,20 @@
                         </div>
                         <!-- Internship/Employment Details End -->
 
+
+                        <!-- post graduation message  -->
+                        <span class="user-additional-details-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Other Personal Details/Skills Start-->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" id="user-additional-accordion-btn"
                                         data-bs-target="#flush-collapseSix" aria-expanded="false"
                                         aria-controls="flush-collapseSix">
-                                        Other Details/Skills, Languages and Hobbies
+                                        Other Details/Skills, Languages and Hobbies&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseSix" class="accordion-collapse collapse"

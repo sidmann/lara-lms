@@ -101,6 +101,7 @@ onAuthStateChanged(auth, (user) => {
     }
     else {
         console.log("else")
+        window.history.replaceState({}, "", "login.html");
         // window.location.href = "login.html";
         onLoggedOut()
     }
@@ -1022,7 +1023,9 @@ document.querySelector('.user-login-continue-btn').addEventListener('click',(eve
     if(event){
         const confirmation = confirm('Do you want enter post-graduation, internship and other additional details?')
         if(!confirmation){
+            console.log("if")
             window.location.href = 'login.html'
+            window.history.replaceState({}, "", "login.html");
         }
     }
 })
