@@ -209,37 +209,7 @@ function displayMessage(message, type) {
 //    userSchoolEducationFormShowOrHide();
 // })
 
-/**
- * 
- * check whether the user address details exist or not
- */
-// async function userSchoolEducationFormShowOrHide(){
-//     console.log(userId)
-//     const addressExists = await checkAddressDocumentExists(userId);
 
-//         if (addressExists) {
-//             console.log("if")
-//             document.getElementById('user-address-form').style.display = 'none';
-//             document.querySelector('.address-message').style.display = 'block'
-//             document.querySelector('.address-message').textContent = 'Address Details Already Exists Please fill remaining Details';
-//         } else {
-//             console.log("else")
-//             document.getElementById('user-address-form').style.display = 'block';
-//             document.querySelector('.address-message').style.display = 'block'
-//             document.querySelector('.address-message').textContent = 'Please Enter Address Details';
-//         }
-// }
-
-/**
- * to get user address details
- * @param {*} userId 
- * @returns 
- */
-// async function checkAddressDocumentExists(userId) {
-//     const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
-//     const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
-//     return !userSchoolSnapshot.empty;
-// }
 
 /**
  * save the user address 
