@@ -281,12 +281,12 @@
                                     <li class="nav-item">
                                         <a class="nav-link custom-brand" href="index.html">Home</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">Upcoming batch</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">Today's Schedule</a>
-                                    </li>
+                                    </li> -->
                                     <!-- <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">About Us</a>
                                     </li>
@@ -302,20 +302,25 @@
                                     <li class="nav-item d-none loggedIn" id="tpoAppbar">
                                         <a class="nav-link custom-brand active" aria-current="page">Profile</a>
                                     </li>
-                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                    <!-- <li class="nav-item d-none loggedIn" id="userAppbar">
                                         <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <!-- Logout button with data-toggle and data-target attributes -->
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <button class="nav-link custom-brand" data-bs-toggle="modal"
                                             data-bs-target="#logoutConfirmationModal">
                                             Logout
                                         </button>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div>
                                 <ul class="navbar-nav mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <!-- Logout button with data-toggle and data-target attributes -->
+                                        <button class="nav-link custom-brand" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal">
+                                            Logout
+                                        </button>
+                                    </li>
                                     <li class="nav-item loggedOut">
                                         <a class="nav-link custom-brand" href="signup.html">Sign Up</a>
                                     </li>
@@ -337,7 +342,6 @@
             <div class="container-xl mt-4 user-profile">
                 <div class="section-title-2">
                     <h2 class="gi-title">User Profile<span></span></h2>
-                    <p>Best place to buy and sell digital products.</p>
                 </div>
                 <!-- Account page navigation-->
                 <hr class="mt-0 mb-4">
@@ -437,35 +441,35 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Address*</label>
                                                             <input type="text" name="user-address" id="user-address"
-                                                                placeholder="Enter your address" class="mb-0" required>
+                                                                placeholder="Enter Your Address" class="mb-0" required>
                                                             <span id="user-address-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Postal Code*</label>
                                                             <input type="text" name="user-postcode" id="user-postcode"
-                                                                placeholder="Enter your postal code" class="mb-0" required>
+                                                                placeholder="Enter Your Postal Code" class="mb-0" required>
                                                             <span id="user-postcode-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
                                                             <input type="text" name="user-city" id="user-city"
-                                                                placeholder="Enter your city" class="mb-0" required>
+                                                                placeholder="Enter Your City" class="mb-0" required>
                                                             <span id="user-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>State*</label>
                                                             <input type="text" name="user-state" id="user-state"
-                                                                placeholder="Enter your state" class="mb-0" required>
+                                                                placeholder="Enter Your State" class="mb-0" required>
                                                             <span id="user-state-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Country*</label>
                                                             <input type="text" name="user-country" id="user-country"
-                                                                placeholder="Enter your country" class="mb-0" required>
+                                                                placeholder="Enter Your Country" class="mb-0" required>
                                                             <span id="user-country-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -508,7 +512,7 @@
                                         data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
                                         id="user-school-accordion-btn" aria-expanded="false"
                                         aria-controls="flush-collapseTwo">
-                                        School Education Details/10th
+                                        School/10th Education Details
                                     </button>
                                 </h2>
                                 <div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -522,7 +526,7 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board*</label>
                                                             <input type="text" name="school-board" id="school-board"
-                                                                placeholder="Enter the board name" class="mb-0"
+                                                                placeholder="Enter Board Name" class="mb-0"
                                                                 required>
                                                             <span id="school-board-error" class="error-message"
                                                                 style="color: red"></span>
@@ -531,7 +535,7 @@
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>School Name*</label>
                                                             <input type="text" name="school-name" id="school-name"
-                                                                placeholder="Enter your school name" class="mb-0"
+                                                                placeholder="Enter Your School Name" class="mb-0"
                                                                 required>
                                                             <span id="school-name-error" class="error-message"
                                                                 style="color: red"></span>
@@ -541,7 +545,7 @@
                                                             <label>City*</label>
                                                             <input type="text" name="school-education-city"
                                                                 id="school-education-city"
-                                                                placeholder="Enter the education City" class="mb-0"
+                                                                placeholder="Enter Education City" class="mb-0"
                                                                 required>
                                                             <span id="school-education-city-error" class="error-message"
                                                                 style="color: red"></span>
@@ -551,25 +555,25 @@
                                                             <label>State*</label>
                                                             <input type="text" name="school-education-state"
                                                                 id="school-education-state"
-                                                                placeholder="Enter the education State" class="mb-0"
+                                                                placeholder="Enter Education State" class="mb-0"
                                                                 required>
                                                             <span id="school-education-state-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="school-education-sDate"
-                                                                id="school-education-sDate" placeholder="MM/YYYY"
+                                                                id="school-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="school-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="school-education-eDate"
-                                                                id="school-education-eDate" placeholder="MM/YYYY"
+                                                                id="school-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="school-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -586,7 +590,7 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full">
-                                                            <label class="mt-3">Upload School/10th MarkCard
+                                                            <label class="mt-3">Upload School/10th Marks Card
                                                                 Certificate</label>
                                                             <input type="file" name="school-education-cert mt-3"
                                                                 id="school-education-cert">
@@ -639,7 +643,7 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="inter-board" id="inter-board"
-                                                                placeholder="Enter the board/university name"
+                                                                placeholder="Enter Board Name"
                                                                 class="mb-0" required>
                                                             <span id="inter-board-error" class="error-message"
                                                                 style="color: red"></span>
@@ -649,7 +653,7 @@
                                                             <label>Education Name*</label>
                                                             <input type="text" name="inter-college-name"
                                                                 id="inter-college-name"
-                                                                placeholder="Enter the college name" class="mb-0"
+                                                                placeholder="Enter Your School Name" class="mb-0"
                                                                 required>
                                                             <span id="inter-college-name-error" class="error-message"
                                                                 style="color: red"></span>
@@ -741,7 +745,7 @@
                                         data-bs-toggle="collapse" id="user-degree-accordion-btn"
                                         data-bs-target="#flush-collapseFour" aria-expanded="false"
                                         aria-controls="flush-collapseFour">
-                                        Graduation Education Details/Degree
+                                        Graduation/Degree Education Details
                                     </button>
                                 </h2>
                                 <div id="flush-collapseFour" class="accordion-collapse collapse"
@@ -852,7 +856,7 @@
                                     <button class="accordion-button collapsed bg-info text-white" type="button" data-bs-toggle="collapse"
                                         id="user-masters-accordion-btn" data-bs-target="#flush-collapseSeven" aria-expanded="false"
                                         aria-controls="flush-collapseSeven">
-                                        Post-graduation Education Details/Master
+                                        Post-graduation/Masters Education Details
                                     </button>
                                 </h2>
                                 <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -932,6 +936,11 @@
                                                                 Certificate</label>
                                                             <input type="file" name="masters-education-cert mt-3" id="masters-education-cert">
                                                             <span id="masters-cert-file-display"></span>
+
+                                                            <!-- Add this container for the file link -->
+                                                            <div id="file-link-container">
+                                                                <a href="#" id="masters-cert-file-link" target="_blank">Selected File: </a>
+                                                            </div>
                                                         </span>
                         
                                                         <div class="modal-footer d-flex justify-content-end gap-2">
@@ -1772,7 +1781,7 @@
     <!-- Change Password Modal -->
     <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog w-sm-50">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="changePasswordModalLabel">
@@ -1829,7 +1838,7 @@
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog w-sm-50">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="logoutConfirmationModalLabel">

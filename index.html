@@ -871,9 +871,9 @@
                             <li class="nav-item">
                                 <a class="nav-link custom-brand active" href="#">Home</a>
                             </li>
-                            <li class="nav-item p-0">
+                            <!-- <li class="nav-item p-0">
                                 <a class="nav-link custom-brand" href="#">Upcoming Batches</a>
-                                <!-- <div class="products-container p-2 bg-white position-absolute d-none"
+                                <div class="products-container p-2 bg-white position-absolute d-none"
                                     style="z-index: 1;">
                                     <ul class="navbar-nav">
                                         <li class="nav-item nav-subitem">
@@ -883,20 +883,20 @@
                                             <span class="nav-link">Interior</span>
                                         </li>
                                     </ul>
-                                </div> -->
-                            </li>
-                            <li class="nav-item p-0">
+                                </div>
+                            </li> -->
+                            <!-- <li class="nav-item p-0">
                                 <a class="nav-link custom-brand" href="products.html">Today's Schedule</a>
-                                <!-- <div class="products-container p-2 bg-white position-absolute d-none"
+                                <div class="products-container p-2 bg-white position-absolute d-none"
                                     style="z-index: 1;">
-                                </div> -->
-                            </li>
-                            <li class="nav-item">
+                                </div>
+                            </li> -->
+                            <!-- <li class="nav-item">
                                 <a class="nav-link custom-brand" href="aboutus.html">About Us</a>
-                            </li>
-                            <li class="nav-item">
+                            </li> -->
+                            <!-- <li class="nav-item">
                                 <a class="nav-link custom-brand" href="contactus.html">Contact Us</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item d-none loggedIn active" id="adminAppbar">
                                 <a class="nav-link custom-brand" href="#">Profile</a>
                             </li>
@@ -906,21 +906,21 @@
                             <li class="nav-item d-none loggedIn" id="tpoAppbar">
                                 <a class="nav-link custom-brand" href="#">Profile</a>
                             </li>
-                            <li class="nav-item d-none loggedIn" id="learnerAppbar">
-                                <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
-                            </li>
-                            <li class="nav-item d-none loggedIn" id="tpoAppbar">
-                                <a class="nav-link custom-brand" href="#">Tpo Dashboard</a>
-                            </li>
                             <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                 <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
                             </li> -->
-                            <li class="nav-item loggedIn">
+                            <!-- <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                <a class="nav-link custom-brand" href="#">Tpo Dashboard</a>
+                            </li> -->
+                            <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                                <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
+                            </li> -->
+                            <!-- <li class="nav-item loggedIn">
                                 <button class="nav-link custom-brand" data-bs-toggle="modal"
                                     data-bs-target="#logoutConfirmationModal">
                                     Logout
                                 </button>
-                            </li>
+                            </li> -->
                         </ul>
                         <div>
                             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -932,6 +932,11 @@
                                         <span class="ps-0 ms-0">Cart</span>
                                     </a>
                                 </li> -->
+                                <li class="nav-item loggedIn">
+                                    <button class="nav-link custom-brand" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal">
+                                        Logout
+                                    </button>
+                                </li>
                                 <li class="nav-item loggedOut">
                                     <a class="nav-link custom-brand" href="signup.html">Sign Up</a>
                                 </li>
@@ -1650,7 +1655,7 @@
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered w-sm-50">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="logoutConfirmationModalLabel">
