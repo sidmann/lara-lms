@@ -428,6 +428,34 @@ function togglePasswordVisibility(inputId, toggleBtnId) {
 togglePasswordVisibility("currentPassword", "currentPasswordToggle");
 togglePasswordVisibility("newPassword", "newPasswordToggle");
 
+//------------------------- check user details and notify the to user--------------------------
+/**
+ * 
+ */
+async function checkUserAddressSchoolDocumentExists(userId){
+    const userAddressCollectionRef = collection(firestore,'learners',userId,'useraddress');
+    const userAddressSnapshot = await getDocs(userAdditionalCollectionRef);
+    return !userAddressSnapshot;
+}
+
+/**
+ * it checking the 10th class doc exists or not 
+ * @param {*} userId 
+ * @returns 
+ */
+async function checkUserSchoolDocumentExists(userId) {
+    const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
+    const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
+    return !userSchoolSnapshot.empty;
+}
+
+// async function checkUserInterDocumentsExists(userId){
+//     const userInterCollectionRef = collection(fir)
+// }
+
+
+// ------------------------------------------------------------------------------------
+
 //---------------------------------- user Add or update section------------------------
 
 /**
@@ -570,17 +598,6 @@ async function showOrHideUserSchoolForm() {
             document.querySelector('.user-school-message').textContent = 'Please Enter Address Details';
         }
     }
-}
-
-/**
- * it checking the 10th class doc exists or not 
- * @param {*} userId 
- * @returns 
- */
-async function checkUserSchoolDocumentExists(userId) {
-    const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
-    const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
-    return !userSchoolSnapshot.empty;
 }
 
 
