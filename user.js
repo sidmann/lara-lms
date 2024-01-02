@@ -564,8 +564,8 @@ async function openUserAddressModel(userId) {
             userCountryEdit.value = userAddressData.country || '';
         }
         else {
-            console.log('No address data found for the user, please fill the details');
-            displayMessage('No address data found for the user, please fill the details', 'danger');
+            console.log('No Address details found for the user, please fill the details');
+            displayMessage('No Address details found for the user, please fill the details', 'danger');
         }
     }
     else {
@@ -742,13 +742,16 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
     const userSchoolCertificateEdit = document.querySelector('#school-education-cert')
     const userSchoolCertificateImageFileEdit = userSchoolCertificateEdit.files[0];
     const fileLink = document.getElementById('school-cert-file-link');
+    const fileLinkContainer = document.getElementById('file-link-container');
 
     if (userSchoolCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userSchoolCertificateImageFileEdit);
         fileLink.textContent = `Selected File: ${userSchoolCertificateImageFileEdit.name}`;
         fileLink.style.display = 'inline-block'; // Display the link
+        fileLinkContainer.style.display = 'block';
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
+        fileLinkContainer.style.display = 'none';
     }
 
     if (userSchoolBoardEdit && userSchoolNameEdit && userSchoolCityEdit && userSchoolStateEdit
@@ -793,8 +796,8 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                             userSchoolPercentage: userSchoolPercentageEdit,
                             schoolCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user 10th class details saved successfully');
-                    displayMessage('user 10th class details saved successfully', 'success');
+                    console.log('User 10th Class details saved successfully');
+                    displayMessage('User 10th Class details saved successfully', 'success');
                     openUserSchoolModel(userId)
                     await userSchoolDisplayMsg();
                 }
@@ -811,8 +814,8 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                             userSchoolEnd: userSchoolEndDateEdit,
                             userSchoolPercentage: userSchoolPercentageEdit,
                         });
-                    console.log('user 10th class details saved successfully');
-                    displayMessage('user 10th class details saved successfully', 'success');
+                    console.log('User 10th Class details saved successfully');
+                    displayMessage('User 10th Class details saved successfully', 'success');
                     openUserSchoolModel(userId)
                     await userSchoolDisplayMsg();
                 }
@@ -849,8 +852,8 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
         }
     }
     else {
-        console.log('please fill all the details');
-        displayMessage('please fill all the details', 'danger');
+        console.log('Please fill all the details');
+        displayMessage('Please fill all the details', 'danger');
     }
 });
 //--------------------------------------------------------------------------------------------------------
@@ -941,8 +944,8 @@ async function openUserInterModel(userId) {
             }
         }
         else {
-            console.log('No intermediate/12th details found for the user, please fill the details');
-            displayMessage('No intermediate/12th details found for the user, please fill the details', 'danger');
+            console.log('No Intermediate/12th details found for the user, please fill the details');
+            displayMessage('No Intermediate/12th details found for the user, please fill the details', 'danger');
         }
     }
     else {
@@ -963,13 +966,16 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
     const userInterCertificateEdit = document.querySelector('#inter-education-cert')
     const userInterCertificateImageFileEdit = userInterCertificateEdit.files[0];
     const fileLink = document.getElementById('inter-cert-file-link');
+    const fileLinkContainer = document.getElementById('file-link-container');
 
     if (userInterCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userInterCertificateImageFileEdit);
         fileLink.textContent = `Selected File: ${userInterCertificateImageFileEdit.name}`;
         fileLink.style.display = 'inline-block'; // Display the link
+        fileLinkContainer.style.display = 'block';
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
+        fileLinkContainer.style.display = 'none';
     }
 
     if (userInterBoardEdit && userInterEducationNameEdit && userInterCityEdit && userInterStartDateEdit
@@ -1014,8 +1020,8 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                             userInterPercentage: userInterPercentageEdit,
                             interCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user intermediate/12th details saved successfully');
-                    displayMessage('user intermediate/12th details saved successfully', 'success');
+                    console.log('User Intermediate/12th details saved successfully');
+                    displayMessage('User Intermediate/12th details saved successfully', 'success');
                     openUserInterModel(userId)
                 }
                 else {
@@ -1031,8 +1037,8 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                             userInterEnd: userInterEndDateEdit,
                             userInterPercentage: userInterPercentageEdit,
                         });
-                    console.log('user intermediate/12th details saved successfully');
-                    displayMessage('user intermediate/12th details saved successfully', 'success');
+                    console.log('User Intermediate/12th details saved successfully');
+                    displayMessage('User Intermediate/12th details saved successfully', 'success');
                     openUserInterModel(userId)
                 }
             })
@@ -1068,8 +1074,8 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
         }
     }
     else {
-        console.log('please fill all the details');
-        displayMessage('please fill all the details', 'danger');
+        console.log('Please fill all the details');
+        displayMessage('Please fill all the details', 'danger');
     }
 });
 //-------------------------------------------------------------------------------------------------------
@@ -1162,8 +1168,8 @@ async function openUserDegreeModel(userId) {
             }
         }
         else {
-            console.log('No graduation/degree details found for the user, please fill the details');
-            displayMessage('No graduation/degree details found for the user, please fill the details', 'danger');
+            console.log('No Graduation/Degree details found for the user, please fill the details');
+            displayMessage('No Graduation/Degree details found for the user, please fill the details', 'danger');
         }
     }
     else {
@@ -1185,13 +1191,16 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
     const userDegreeCertificateEdit = document.querySelector('#degree-education-cert')
     const userDegreeCertificateImageFileEdit = userDegreeCertificateEdit.files[0];
     const fileLink = document.getElementById('degree-cert-file-link');
+    const fileLinkContainer = document.getElementById('file-link-container');
 
     if (userDegreeCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userDegreeCertificateImageFileEdit);
         fileLink.textContent = `Selected File: ${userDegreeCertificateImageFileEdit.name}`;
         fileLink.style.display = 'inline-block'; // Display the link
+        fileLinkContainer.style.display = 'block';
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
+        fileLinkContainer.style.display = 'none';
     }
 
     if (userDegreeBoardEdit && userDegreeEducationNameEdit && userDegreeCityEdit && userDegreeStartDateEdit
@@ -1236,8 +1245,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                             userDegreePercentage: userDegreePercentageEdit,
                             degreeCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user graduation/degree details saved successfully');
-                    displayMessage('user graduation/degree details saved successfully', 'success');
+                    console.log('User Graduation/Degree details saved successfully');
+                    displayMessage('User Graduation/Degree details saved successfully', 'success');
                     openUserDegreeModel(userId)
                     await userDegreeDisplayMsg();
                 }
@@ -1255,8 +1264,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                             userDegreeEnd: userDegreeEndDateEdit,
                             userDegreePercentage: userDegreePercentageEdit,
                         });
-                    console.log('user graduation/degree details saved successfully');
-                    displayMessage('user graduation/degree details saved successfully', 'success');
+                    console.log('User Graduation/Degree details saved successfully');
+                    displayMessage('User Graduation/Degree details saved successfully', 'success');
                     openUserDegreeModel(userId)
                     await userDegreeDisplayMsg();
                 }
@@ -1295,8 +1304,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
         }
     }
     else {
-        console.log('please fill all the details');
-        displayMessage('please fill all the details', 'danger');
+        console.log('Please fill all the details');
+        displayMessage('Please fill all the details', 'danger');
     }
 });
 //-------------------------------------------------------------------------------------------------
@@ -1388,8 +1397,8 @@ async function openMastersModel(userId) {
             }
         }
         else {
-            console.log('No post-graduation/masters details found for the user, please fill the details');
-            displayMessage('No post-graduation/masters details found for the user, please fill the details', 'danger');
+            console.log('No Post-Graduation/Masters details found for the user, please fill the details');
+            displayMessage('No Post-Graduation/Masters details found for the user, please fill the details', 'danger');
         }
     }
     else {
@@ -1414,13 +1423,16 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
     const userMastersCertificate = document.querySelector('#masters-education-cert');
     const userMastersCertificateImageFile = userMastersCertificate.files[0];
     const fileLink = document.getElementById('masters-cert-file-link');
+    const fileLinkContainer = document.getElementById('file-link-container');
 
     if (userMastersCertificate.files.length > 0) {
         fileLink.href = URL.createObjectURL(userMastersCertificateImageFile);
         fileLink.textContent = `Selected File: ${userMastersCertificateImageFile.name}`;
         fileLink.style.display = 'inline-block'; // Display the link
+        fileLinkContainer.style.display = 'block';
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
+        fileLinkContainer.style.display = 'none';
     }
 
     if (userMastersBoard && userMastersEducationName && userMastersEduSpeName && userMastersEducationCity && userMastersEducationState
@@ -1477,8 +1489,8 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                             userMastersPercentage: userMastersPercentage,
                             mastersCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user post-graduation/masters details updated successfully');
-                    displayMessage('user post-graduation/masters details updated successfully', 'success');
+                    console.log('User Post-Graduation/Masters details updated successfully');
+                    displayMessage('User Post-Graduation/Masters details updated successfully', 'success');
                     // document.getElementById('masters-edu-details-form').reset();
                     openMastersModel(userId)
                     await userMastersDisplayMsg();
@@ -1497,8 +1509,8 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                             userMastersEnd: userMastersEnd,
                             userMastersPercentage: userMastersPercentage,
                         });
-                    console.log('user post-graduation/masters details updated successfully');
-                    displayMessage('user post-graduation/masters details updated successfully', 'success');
+                    console.log('User Post-Graduation/Masters details updated successfully');
+                    displayMessage('User Post-Graduation/Masters details updated successfully', 'success');
                     openMastersModel(userId)
                     await userMastersDisplayMsg();
                 }
@@ -1535,8 +1547,8 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
         }
     }
     else {
-        console.log("please fill all the details");
-        displayMessage('please fill all the details', 'danger');
+        console.log("Please fill all the details");
+        displayMessage('Please fill all the details', 'danger');
     }
 })
 
@@ -1625,8 +1637,8 @@ async function openUserInternshipModel(userId) {
             }
         }
         else {
-            console.log('No internship/academic project details found for the user, please fill the details');
-            displayMessage('No internship/academic project details found for the user, please fill the details', 'danger');
+            console.log('No Internship/Academic Project details found for the user, please fill the details');
+            displayMessage('No Internship/Academic Project details found for the user, please fill the details', 'danger');
         }
     }
     else {
@@ -1646,13 +1658,16 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
     const userInternshipCertificateEdit = document.querySelector('#internship-cert')
     const userInternshipCertificateImageFileEdit = userInternshipCertificateEdit.files[0];
     const fileLink = document.getElementById('internship-cert-file-link');
+    const fileLinkContainer = document.getElementById('file-link-container');
 
     if (userInternshipCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userInternshipCertificateImageFileEdit);
         fileLink.textContent = `Selected File: ${userInternshipCertificateImageFileEdit.name}`;
         fileLink.style.display = 'inline-block'; // Display the link
+        fileLinkContainer.style.display = 'block'; // Display the container
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
+        fileLinkContainer.style.display = 'none'; // Hide the container
     }
 
 
@@ -1696,8 +1711,8 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                             userProjectDescription: userProjectDescriptionEdit,
                             internshipCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user internship/academic project details updated successfully');
-                    displayMessage('user internship/academic project details updated successfully', 'success');
+                    console.log('User Internship/Academic Project details updated successfully');
+                    displayMessage('User Internship/Academic Project details updated successfully', 'success');
                     openUserInternshipModel(userId)
                     await userInternshipDisplayMsg();
                 }
@@ -1713,8 +1728,8 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                             userInternshipEnd: userInternshipEndEdit,
                             userProjectDescription: userInternshipEndEdit,
                         });
-                    console.log('user internship/academic project details updated successfully');
-                    displayMessage('user internship/academic project details updated successfully', 'success');
+                    console.log('User Internship/Academic Project details updated successfully');
+                    displayMessage('User Internship/Academic Project details updated successfully', 'success');
                     openUserInternshipModel(userId)
                     await userInternshipDisplayMsg();
                 }
@@ -1750,8 +1765,8 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
         }
     }
     else {
-        console.log('please fill all the details');
-        displayMessage('please fill all the details', 'danger');
+        console.log('Please fill all the details');
+        displayMessage('Please fill all the details', 'danger');
     }
 });
 //--------------------------------------------------------------------------------------------------
@@ -1818,8 +1833,8 @@ async function openUserAdditionalModel(userId) {
             userAdditionalHobbiesEdit.value = userAdditionalData.userAdditionalHobbies || '';
         }
         else {
-            console.log('No additional details found for the user, please fill the details');
-            displayMessage('No additional details found for the user, please fill the details', 'danger');
+            console.log('No Additional Details found for the user, please fill the details');
+            displayMessage('No Additional Details found for the user, please fill the details', 'danger');
         }
     }
     else {
