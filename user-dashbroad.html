@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Profile</title>
+    <!-- Add Bootstrap CSS link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <!-- Add Bootstrap JS and Popper.js scripts (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Add your custom CSS styles here -->
+    <style>
+        /* Custom CSS styles for the user profile page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+            background: linear-gradient(9deg, #91a88f, #c7eacb)
+                /* position: relative; */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(81, 79, 79, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 5;
+        }
+
+        /* Additional styles for navbar */
+        .navbar {
+            /* background: #fff; */
+            background-color: whitesmoke;
+            border: 3px solid beige;
+            /* border-bottom: 1px solid #ccc; */
+        }
+
+
+
+        .navbar-brand.custom-brand {
+            color: #007bff;
+            font-size: 2rem;
+        }
+
+        .nav-link.custom-brand {
+            /* color: #ffffff; */
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        /* Responsive styles for small screens */
+        @media (max-width: 768px) {
+            nav ul {
+                text-align: center;
+            }
+
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .nav-item {
+                transition: all 0.3s linear;
+            }
+
+            .nav-item:hover {
+                transform: translate(-0.5px, -3px);
+                scale: 1.01;
+            }
+
+            .logo {
+                transition: all 0.3s linear;
+            }
+
+            .logo:hover {
+                scale: 1.1;
+            }
+        }
+
+        .sideContainer li {
+            border: 1px solid #ccc;
+            color: #ffffff;
+            margin-top: 10px;
+            padding: 10px 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            justify-content: center;
+            justify-items: center;
+            width: 200px;
+        }
+
+        /* Change background color on hover */
+        .sideContainer li:active {
+            background: linear-gradient(60deg, #ab47bc, #8e24aa);
+            box-shadow: gray;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            /* background: linear-gradient(0deg, #36dadc 0%, #64bcf3 100%); */
+            background-color: #565656;
+            font-weight: lighter;
+            color: white;
+            margin-bottom: 0;
+            bottom: 0 !important;
+            /* position:relative; */
+        }
+
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 95%;
+        }
+
+        #mainContainer {
+            /* max-width: 800px; */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 100%
+        }
+
+        #mainContainer h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #uploadForm {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #mainContainer #uploadForm input[type="file"] {
+            display: none;
+        }
+
+        #chooseVideoLabel {
+            background-color: #0074d9;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        #chooseVideoLabel:hover {
+            background-color: #0056b3;
+        }
+
+        #progressContainer {
+            display: none;
+        }
+
+        /* Progress bar styling */
+        .progress {
+            width: 100%;
+            height: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, #4caf50, #45a049);
+            transition: width 0.5s ease;
+        }
+
+        @keyframes fill {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+        /* Progress percentage text */
+        #uploadPercentage {
+            text-align: center;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        #chooseImageLabel {
+            background-color: #0074d9;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        #chooseImageLabel:hover {
+            background-color: #0056b3;
+        }
+
+
+        #videoUploadContainer {
+            display: none;
+        }
+
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media (min-width: 992px) {
+            .sideContainer ul {
+                overflow-x: unset !important;
+            }
+        }
+
+        /* Video Display and video list */
+
+        .mainVideoContainer {
+            display: none;
+        }
+
+        #videoPlaceholder {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            margin-left: 5px;
+            overflow: hidden;
+            display: grid;
+        }
+
+        .videoPlayerContainer {
+            margin-left: 0;
+            margin-top: 5px;
+            margin-left: 2rem;
+            width: 100%;
+            max-width: 100%;
+
+            @media (min-width: 768px) {
+                margin-left: 0rem;
+            }
+
+            @media (min-width: 992px) {
+                margin-left: 1rem;
+
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .videoPlayerContainer,
+            topicName {
+                width: 100%;
+                margin-bottom: 10px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .mainVideoContainer {
+                overflow-y: auto;
+                height: auto;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1220px) {
+            .mainVideoContainer {
+                width: auto;
+                height: auto;
+            }
+
+            .topicName {
+                width: auto;
+                height: auto;
+                max-height: 400px;
+                overflow: hidden;
+            }
+        }
+
+        .mainVideoContainer {
+            border: 1px solid black;
+            margin: 10px;
+            width: 98%;
+            height: auto;
+            background-color: black;
+            overflow: hidden;
+
+            @media (max-width:768px) {}
+        }
+
+        @media (max-width:1220px) {
+            .mainVideoContainer {
+                height: auto;
+                width: auto;
+            }
+
+            .videoSubTopic {
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        #video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .topicName {
+            margin: 10px;
+            padding: 10px;
+            height: auto;
+            background-color: grey;
+            width: 96%;
+            max-width: 100%;
+            overflow-y: auto;
+            height: 500px;
+        }
+
+        .topicName h4 {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            background-color: bisque;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            overflow: hidden;
+        }
+
+        .custom-header-class {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .videoItem {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .programatic-materials {
+            font-size: 1.2rem;
+        }
+
+        /* CSS Code */
+        .package-container {
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: black;
+            background-color: slategrey;
+        }
+
+        .package-container:hover {
+            border-color: #2980b9;
+            background-color: #2980b9;
+        }
+
+        /* Cumulative Exam */
+        /* #choose-question-label {} */
+
+        .cumulative-one-header {
+            background-color: darkgray;
+        }
+
+        .cumulative-one-body {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="overlay" id="overlay">
+        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div> -->
+    </div>
+    <div id="main" class="position-relative">
+        <!-- Navigation -->
+        <div class="p-2">
+            <nav class="navbar shadow-sm rounded-3 navbar-expand-lg" id="header">
+                <div class="container-fluid">
+                    <a href="home.html">
+                        <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home" width="150px"
+                            title="Home"></img>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                        <div class="d-flex justify-content-between w-100">
+                            <div class="">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="index.html">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Upcoming batch</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Today's Schedule</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Contact Us</a>
+                                    </li> -->
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand" aria-current="page"
+                                            href="user.html">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand" aria-current="page"
+                                            href="user.html">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                        <a class="nav-link custom-brand" aria-current="page"
+                                            href="user.html">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand active" href="#">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand active" href="#">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- Logout button with data-toggle and data-target attributes -->
+                                        <button class="nav-link custom-brand" data-bs-toggle="modal"
+                                            data-bs-target="#logoutConfirmationModal">
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="navbar-nav mb-2 mb-lg-0">
+                                    <li class="nav-item loggedOut">
+                                        <a class="nav-link custom-brand" href="signup.html">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item loggedOut">
+                                        <a class="nav-link custom-brand" href="login.html">Login</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <!-- Toast notifications will appear here -->
+        </div>
+
+        <div class="container" style="width: 100%; display: 'none';">
+            <div class="row d-flex flex-column flex-lg-row">
+                <div class="col col-lg-3">
+                    <div class="sideContainer text-center">
+                        <ul class="d-flex flex-row d-lg-block p-0 gap-2 overflow-x-scroll">
+
+                            <li class="active flex-shrink-0"><button class="nav-link totalEarnedPoints text-dark"
+                                    data-toggle="pill">
+                                    <i class="fa fa-tachometer"></i>&nbsp;&nbsp;Total Earned Points</button></li>
+                            <!-- <li><a  href="#prof" data-toggle="pill"><span class="fa fa-user-o s8 pd-r10"></span>My Profile</a></li>   -->
+                            <li class="active flex-shrink-0"><button class="nav-link myCourses text-dark"
+                                    data-toggle="pill"><i class="fa fa-book"></i>&nbsp;&nbsp;My Courses</button></li>
+                            <li class="active flex-shrink-0"><button class="nav-link liveClasses text-dark"
+                                    data-toggle="pill">
+                                    <i class="fa fa-book"></i>&nbsp;&nbsp;My Live classes</button></li>
+                            <li class="active flex-shrink-0"><button class="nav-link myNotifications text-dark"
+                                    data-toggle="pill">
+                                    <i class="fa fa-book"></i>&nbsp;&nbsp;My Notifications</button></li>
+                            <li class="active flex-shrink-0"><button class="nav-link my-cumulative-exams text-dark"
+                                    data-toggle="pill">
+                                    <i class="fa fa-hourglass-start"></i>&nbsp;&nbsp;Cumulative Exams</button></li>
+                            <li class="active flex-shrink-0"><button
+                                    class="nav-link my-cumulative-score-records text-dark" data-toggle="pill">
+                                    <i class="fa fa-life-ring "></i>&nbsp;&nbsp;Cumulative
+                                    Score</button></li>
+                            <li class="active flex-shrink-0"><button class="nav-link accountSettings text-dark"
+                                    data-toggle="pill">
+                                    <i class="fa fa-key s8"></i>&nbsp;&nbsp;Account Settings</a></li>
+                            <li class="active flex-shrink-0 uploadVideoContainerDisplay" style="display: none;"><button
+                                    class="nav-link text-dark" data-toggle="pill">
+                                    <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload
+                                    Video</button>
+                            </li>
+                            <li class="active flex-shrink-0 my-cumulative-question-upload" style="display: none;">
+                                <button class="nav-link text-dark" data-toggle="pill">
+                                    <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload Questions
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Topic ,subTopic of videos and image upload -->
+                <div class="col col-lg-9 d-flex align-items-center">
+                    <div id="mainContainer">
+                        <!-- Video Container -->
+                        <div id="videoUploadContainer">
+                            <h1>Upload Image, Videos with Topic & SubTopics</h1>
+
+                            <form id="uploadForm">
+                                <!-- Topic Section -->
+                                <div class="sm-3 mx-auto">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                            <label for="videoTopicDropdown" class="mb-2">Select Topic:</label>
+                                            <select class="form-control border-primary" id="videoTopicDropdown">
+                                                <!-- Topic options will be populated dynamically -->
+                                                <option value="">Please select</option>
+                                            </select>
+                                        </div>
+                                        <span id="videoAddTopicButton" class="btn btn-primary mt-1"
+                                            data-bs-toggle="modal" data-bs-target="#videoTopicModel">Add</span>
+                                    </div>
+                                </div>
+
+                                <!-- Subtopic Section -->
+                                <div class="sm-3 mx-auto">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                            <label for="videoSubTopicDropdown" class="mb-2">Select Subtopic:</label>
+                                            <select class="form-control border-primary" id="videoSubTopicDropdown">
+                                                <!-- Category options will be populated dynamically -->
+                                                <option value="">Please select</option>
+                                            </select>
+                                        </div>
+                                        <span id="videoAddSubTopiButton" class="btn btn-primary mt-1"
+                                            data-bs-toggle="modal" data-bs-target="#videoSubTopicModel">Add</span>
+                                    </div>
+                                </div>
+
+                                <div class="justify-content-center text-center">
+                                    <label for="imageInput" id="chooseImageLabel" class="mb-2">Choose an Image</label>
+                                    <input type="file" class="d-none" id="imageInput" accept="image/*">
+                                    <div id="imageName">No image selected</div><br>
+                                    <!-- <div id="imageURL"></div><br> -->
+                                </div>
+
+                                <div class="justify-content-center text-center">
+                                    <label for="videoInput" id="chooseVideoLabel" class="mb-2">Choose a Video</label>
+                                    <input type="file" class="d-none" id="videoInput" accept="video/*">
+                                    <div id="videoName">No video selected</div><br>
+                                    <!-- <div id="videoURL"></div><br> -->
+                                </div>
+
+                                <div class="justify-content-center text-center">
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </div>
+                            </form>
+
+                            <!-- Progress bar -->
+                            <div id="progressContainer">
+                                <div class="progress">
+                                    <div class="progress-bar" id="uploadProgressBar" role="progressbar"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <div id="uploadPercentage">0%</div>
+                            </div>
+                        </div>
+
+                        <!-- Questions File Upload-->
+                        <div class="question-upload-container" style="display: none;">
+                            <h2>Upload Questions File For SubTopics</h2>
+                            <form id="file-upload-form">
+                                <!-- Topic Section -->
+                                <div class="sm-3 mx-auto">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                            <label for="fileTopicDropdown" class="mb-2">Select Topic:</label>
+                                            <select class="form-control border-primary" id="fileTopicDropdown">
+                                                <!-- Topic options will be populated dynamically -->
+                                                <option value="">Please select</option>
+                                            </select>
+                                        </div>
+                                        <!-- <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                            data-bs-target="#videoTopicModel">Add</span> -->
+                                    </div>
+                                </div>
+
+                                <!-- Subtopic Section -->
+                                <div class="sm-3 mx-auto">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                            <label for="fileSubTopicDropdown" class="mb-2">Select Subtopic:</label>
+                                            <select class="form-control border-primary" id="fileSubTopicDropdown">
+                                                <!-- Category options will be populated dynamically -->
+                                                <option value="">Please select</option>
+                                            </select>
+                                        </div>
+                                        <!-- <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                            data-bs-target="#videoSubTopicModel">Add</span> -->
+                                    </div>
+                                </div>
+
+                                <div class="justify-content-center text-center">
+                                    <label for="file-input" id="chooseImageLabel" class="mb-2">Choose an File</label>
+                                    <input type="file" class="d-none" id="file-input" accept=".xlsx">
+                                    <div id="file-name">No file selected</div><br>
+                                    <!-- <div id="imageURL"></div><br> -->
+                                </div>
+
+                                <div class="justify-content-center text-center">
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Video Play Container  and display the Courses-->
+                        <div id="videoContainer" style="display:none">
+                            <!-- <div class="col-lg-10"> -->
+                            <div class="package-container">
+                                <h3>Course Package: Java Full stack project development</h3>
+                            </div><br>
+
+                            <h3 class="text-center">Avaliable Courses</h3>
+
+                            <div class="col-sm-9 col-md-10 col-lg-12">
+                                <div class="d-flex flex-wrap justify-content-center justify-content-md-start justify-content-lg-around gap-2"
+                                    id="topicsContainer">
+                                    <!-- Product cards will be dynamically added here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Change password -->
+                        <div class="changepassword-container" style="display:none">
+                            <form id="changePasswordForm">
+                                <h4 class="text-center">Change Password</h4>
+                                <!-- current password -->
+                                <div class="mb-3">
+                                    <!-- <label for="currentPassword" class="form-control">Current Password</label> -->
+                                    <div class="input-group">
+                                        <input type="password" class="form-control border-dark" id="currentPassword"
+                                            placeholder="Current Password">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            id="currentPasswordToggle"><i class="fas fa-eye"></i></button>
+                                    </div>
+                                </div>
+
+                                <!-- New password -->
+                                <div class="mb-3">
+                                    <!-- <label for="newPassword" class="form-control">New Password</label> -->
+                                    <div class="input-group">
+                                        <input type="password" class="form-control border-dark" id="newPassword"
+                                            placeholder="New Password">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            id="newPasswordToggle"><i class="fas fa-eye"></i></button>
+                                    </div>
+                                </div>
+
+                                <!-- Confirm password -->
+                                <div class="mb-3">
+                                    <!-- <label for="confirmNewPassword" class="form-control">Confirm Password</label> -->
+                                    <div class="input-group">
+                                        <input type="password" class="form-control border-dark" id="confirmNewPassword"
+                                            placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary" id="changePasswordBtn">Change
+                                        Password</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Cumulative Exam container -->
+                        <div class="cumulative-container-one" style="display: none;">
+                            <div>
+                                <h3 class="text-center bg-secondary">Cumulative Exam</h3>
+                                <div class="cumulative-one-header">
+                                    <div class=" cpg-det" style="padding-top:25px; padding-left:20px;">
+                                        <h5>This exam will be based on the subtopics that you have already covered
+                                            last
+                                            week.
+                                        </h5>
+                                        <p>You can also choose sub topics and number of questions as per your choice.
+                                        </p>
+                                    </div>
+                                </div><br>
+
+                                <div class="cumulative-one-body">
+
+                                    <form id="cum-question-details-form">
+                                        <!-- Topic Section -->
+                                        <div class="sm-3 mx-auto">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                                    <label for="cumTopicDropdown" class="mb-2">Select Topic:</label>
+                                                    <select class="form-control border-primary form-select"
+                                                        id="cumTopicDropdown">
+                                                        <!-- Topic options will be populated dynamically -->
+                                                        <option value="">Please select</option>
+                                                    </select>
+                                                </div>
+                                                <!-- <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                                    data-bs-target="#videoTopicModel">Add</span> -->
+                                            </div>
+                                        </div>
+
+                                        <!-- Subtopic Section -->
+                                        <div class="sm-3 mx-auto">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="form-group w-75 d-inline-block me-4 mb-4">
+
+                                                    <!-- <label for="cumSubTopicDropdown" class="mb-2">Select
+                                                        Subtopic:</label>
+                                                    <select class="form-control border-primary form-select"
+                                                        id="cumSubTopicDropdown">
+                    
+                                                        <option value="">Please select</option>
+                                                    </select> -->
+                                                    <div id="subtopicCheckboxes">
+
+                                                    </div>
+
+                                                </div>
+                                                <!-- <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                                    data-bs-target="#videoSubTopicModel">Add</span> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="justify-content-center text-center">
+                                            <label for="cum-details-input" id="cumQuestionDetailLabel"
+                                                class="mb-2">Choose an
+                                                Number Question : </label>
+                                            <input type="text" class="" id="cum-question-number" accept="">
+                                            <!-- <div id="imageURL"></div><br> -->
+                                        </div><br>
+
+                                        <div class="justify-content-center text-center">
+                                            <button type="submit" class="btn btn-primary">Take Exam</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Display Questions -->
+                        <div class="cumulative-container-two" style="display: none;">
+                            <div>
+                                <form id="cum-question-answer-form">
+                                    <div class="cum-question-title-container text-center">
+                                        <div class=" row"
+                                            style="background: linear-gradient(90deg, rgba(19,91,108,1) 5%, rgba(21,214,209,0.9809173669467787) 50%, rgba(0,255,201,1) 100%);">
+                                            <div class="col-lg-9 col-md-9 justify-content-center text-light"
+                                                style="padding-top: 40px;">
+                                                <h2>Simple Questions</h2>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <img src="images/bnr-title.png" class="rounded float-end" alt=""
+                                                    width="120px" height="120px">
+                                            </div>
+                                        </div>
+                                    </div><br>
+
+                                    <div class="cum-question-container">
+                                        <div class="question-display-container ms-4">
+
+                                        </div><br>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Exam Details -->
+                        <div class="cumulative-container-three" style="display: none;">
+                            <div class="">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class=" row"
+                                            style="background: linear-gradient(90deg, rgba(19,91,108,1) 5%, rgba(21,214,209,0.9809173669467787) 50%, rgba(0,255,201,1) 100%);">
+                                            <div class="col-lg-9 col-md-9 justify-content-center text-light"
+                                                style="padding-top: 40px;">
+                                                <h2>Culumutive Score</h2>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <img src="images/bnr-title.png" class="rounded float-end" alt=""
+                                                    width="120px" height="120px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text" id="cum-total-question-attend"></p>
+                                        <p class="card-text" id="cum-total-question-correct"> </p>
+                                        <p class="card-text" id="cum-exam-percentage"></p>
+                                        <div class="justify-content-center">
+                                            <button type="submit" class="btn btn-primary"
+                                                id="cum-exam-view-details">View Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cumulative-container-four" style="display: none;">
+                            <div>
+                                <div class=" row"
+                                    style="background: linear-gradient(90deg, rgba(19,91,108,1) 5%, rgba(21,214,209,0.9809173669467787) 50%, rgba(0,255,201,1) 100%);">
+                                    <div class="col-lg-9 col-md-9 justify-content-center text-light"
+                                        style="padding-top: 40px;">
+                                        <h2>Culumutive Exam Preview</h2>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <img src="images/bnr-title.png" class="rounded float-end" alt="" width="120px"
+                                            height="120px">
+                                    </div>
+                                </div><br>
+                                <div class="back-cum-exam-container-one">
+                                    <button type="button" class="btn btn-dark">Back</button>
+                                </div><br>
+                                <div class="" id="cum-exam-preview-container">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cumulative Exam Score Records -->
+
+                        <div class="cum-exam-score-container" style="display: none;">
+                            <div>
+                                <div class=" row"
+                                    style="background: linear-gradient(90deg, rgba(19,91,108,1) 5%, rgba(21,214,209,0.9809173669467787) 50%, rgba(0,255,201,1) 100%);">
+                                    <div class="col-lg-9 col-md-9 justify-content-center text-light"
+                                        style="padding-top: 40px;">
+                                        <h2>Culumutive Exam Score</h2>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <img src="images/bnr-title.png" class="rounded float-end" alt="" width="120px"
+                                            height="120px">
+                                    </div>
+                                </div><br>
+                                <div class="exam-score-title">
+                                    <!-- <h4>Cumulative Score</h4> -->
+                                </div>
+                                <div class="col-sm-9 col-md-10 col-lg-12">
+                                    <div class="d-flex flex-wrap justify-content-center  justify-content-md-start justify-content-lg-around gap-2"
+                                        id="cum-exam-score-display">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Topic Modal  -->
+            <div class="modal fade" id="videoTopicModel" tabindex="-1" role="dialog" aria-labelledby="topicModalLabel"
+                data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="topicModalLabel">Manage Topics</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Add Topics</h5>
+                            <form id="topicForm">
+                                <div class="sm-3 mx-auto">
+                                    <div class="form-group d-inline-block me-4 mb-3">
+                                        <label for="topicName" class="mb-1">Topic Name:</label>
+                                        <input type="text" class="form-control border-primary" id="topicName"
+                                            name="topicName">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="saveTopicButton">Save</button>
+                                </div>
+                            </form>
+                            <h5>Topics List</h5>
+                            <table class="container">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="topicList">
+                                    <!-- Topic names will be populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add SubTopic Modal -->
+            <div class="modal fade" id="videoSubTopicModel" tabindex="-1" role="dialog"
+                aria-labelledby="subTopicModalLabel" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="subTopicModalLabel">Manage Subtopics</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Add Subtopics</h5>
+                            <form id="subTopicForm">
+                                <div class="sm-3 mx-auto">
+                                    <!-- Topic Section -->
+                                    <div class="sm-3 mx-auto">
+                                        <div class="form-group w-75 d-inline-block me-4 mb-3">
+                                            <label for="topicSubTopic" class="mb-2">Select Topic:</label>
+                                            <select class="form-control border-primary" id="topicSubTopic">
+                                                <option value="">Please select</option>
+                                                <!-- Topic options will be populated dynamically -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-inline-block me-4 mb-3">
+                                        <label for="subTopicName" class="mb-1">Subtopic
+                                            Name:</label>
+                                        <input type="text" class="form-control border-primary" id="subTopicName"
+                                            name="subTopicName">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="saveSubTopicButton">Save</button>
+                                </div>
+                            </form>
+                            <h5>Subtopics List</h5>
+                            <table class="container">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="subTopicList">
+                                    <!-- Subtopic names will be populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--back to top-->
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12"> <a id="back-to-top" href="#"
+                                class="btn btn-info back-to-top" role="button" title="Click to return on the top page"
+                                data-toggle="tooltip" data-placement="left"><i class="material-icons">Back To
+                                    Top</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--back to top end-->
+
+
+        </div>
+
+        <!--Video Player Display and video list  -->
+
+        <div class="container-fluid d-flex mt-2">
+            <div class="col col-lg-12 col-md-12 col-sm-12 ">
+                <div class="text-start ms-4">
+                    <button class="btn btn-dark backToTopics" style="display: none;">back</button>
+                </div>
+                <div class="mainVideoContainer">
+                    <div class="row d-flex flex-column flex-lg-row flex-sm-row">
+                        <div class="col col-lg-8 col-md-8 col-sm-8 col-xsm-8">
+                            <div class="videoPlayerContainer">
+                                <img src="images/corporate.jpg" id="videoPlaceholder" alt="Video Placeholder">
+                                <video id="video" class="text-center" style="display: none;" autoplay></video>
+                            </div>
+
+                        </div>
+                        <div class="col col-lg-4 col-md-4 col-sm-4 col-xsm-4 ">
+                            <div class="topicName text-center">
+                                <h4></h4>
+                                <div class="accordion accordion-flush videoSubTopic me-2 mt-2 text-center"
+                                    id="accordionFlushExample">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="topicDescriptionContainer" style="display: none;">
+                    <div class="container-fluid cntfld-fw" *ngIf="courseId != 24">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 pd-b30">
+                                    <div class="row">
+                                        <div class="col-lg-11 col-md-11 col-sm-11 div-center">
+                                            <a href="#">
+                                                <button class="btn btn-primary bg-ff3547">View Course
+                                                    Content</button></a>&nbsp;&nbsp;
+                                            <a href="#"><button class="btn btn-primary bg-ff3547">My
+                                                    Courses</button></a>
+                                            <!-- <a [routerLink] = "['/coursedetails', coursePackageId]" *ngIf="!isSubscribed">
+                                    <button class="btn btn-primary bg-ff3547" >Go Back To Package</button></a> &nbsp;&nbsp;
+                                    <a [routerLink] = "['/coursedetails', coursePackageId]" *ngIf="!isSubscribed">
+                                      <button class="btn btn-primary bg-ff3547" >
+                                        You can play all the videos after subscribing to this package. Go to Buy
+                                      </button></a>    -->
+                                            <!-- <button class="btn btn-primary bg-ff3547" (click)="showCourseContent()">View Course Content</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Cumulative Exam -->
+
+
+                    <div class="container-fluid cntfld-fw">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 pd-b30">
+                                    <div class="row">
+                                        <div class="col-lg-11 col-md-11 col-sm-11 div-center">
+                                            <div class="vd-cnt-div">
+                                                <div class="pd-t10">
+                                                    <h3><u>Course Title:</u></h3>
+
+                                                    <p class="topicDescriptionName"></p>
+                                                </div>
+
+                                                <div class="pd-t10">
+                                                    <h3><u>Description:</u></h3>
+                                                    <p>We are covering right from the scratch. Any Graduate can able to
+                                                        understand. More practical way we have covered.
+                                                        Non computer student also can able to understand very easily.
+                                                        More
+                                                        dedication is required.
+                                                        Please go through all topics in the same specified order. Every
+                                                        example practice in the system while going through videos.
+                                                        Attempt
+                                                        test in all the topics. Wish you happy learning.</p>
+                                                </div>
+                                                <div class="pd-t10 req">
+                                                    <h3><u>Pre Requirements:</u></h3>
+                                                    <ul>
+                                                        <div *ngFor="let courseReq of courseDetails.courseRequirements">
+                                                            <li>No pre-requisites are required. No need of knowing any
+                                                                programming languages like a C or C++ to understand this
+                                                                course.</li>
+                                                        </div>
+                                                    </ul>
+                                                    <p></p>
+                                                </div>
+                                                <div class="pd-t10 req" *ngIf="courseId != 24">
+                                                    <h3><u> Programmatic Materials</u></h3>
+                                                    <h3 class="programatic-materials">Whatever programs developed while
+                                                        explaining the topics are
+                                                        available for download. You can download and play around all the
+                                                        programs. </h3>
+                                                    <h3>
+                                                        <button class="btn btn-primary bg-ff3547"
+                                                            (click)="downloadMaterial()">
+                                                            Download All the Source Progarms in the form of a ZIP file
+                                                        </button>
+                                                    </h3>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- video controls -->
+        <!-- <span class="videoControls">
+                            <button id="playPauseButton"><i class="fa-solid fa-play"></i></button>
+                            <progress id="videoPlayProgressBar" value="0" max="100"></progress>
+                            <button id="speed1x"><i class="fa-solid fa-play"></i>1x</button>
+                            <button id="speed1.5x"><i class="fa-solid fa-play"></i>1.5x</button>
+                            <button id="speed2x"><i class="fa-solid fa-play"></i>2x</button>
+                            <span id="currentTime">0:00</span>/<span id="duration">0:00</span>
+                            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+                            <button id="fullscreen_button"><i class="fa-solid fa-expand"></i></button>
+                        </span> -->
+        <!-- Footer -->
+        <footer class="text-center py-3 m-2 rounded-3 font-weight-light bottom-0">
+            <div class="container-fluid cntfld-fw" id="footer">
+                <div class="container-fluid ftr-bg">
+                    <div class="row">
+                        <div class="col-lg-11 col-md-12 col-sm-12 pd-t30 div-center">
+                            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                    <h5>About Us</h5>
+                                    <p>
+                                        Lara Technologies is best place to start your career since 2005.
+                                    </p>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                    <h5>Contact Us</h5>
+                                    <p>
+                                        Feel free to get in touch with us:<br>
+                                        Email: support@lara.co.in<br>
+                                        Phone: <i class="fa fa-phone"></i> +91 7975938871
+                                    </p>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
+                                    <h5>Stay Connected</h5>
+                                    <div class="text-bg-white">
+                                        <p>
+                                            Follow us on social media for updates and news:<br>
+                                            <a href="https://www.facebook.com/laratechnologiesforjava"
+                                                class="text-light"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;
+                                            <a href="https://twitter.com/Laratech2" class="text-light"><i
+                                                    class="fa-brands fa-twitter"></i></a>&nbsp;
+                                            <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
+                                                class="text-light"><i class="fa-brands fa-linkedin"></i></a>&nbsp;
+                                            <a href="https://www.instagram.com/lara_technologies/" class="text-light"><i
+                                                    class="fa-brands fa-instagram"></i></i></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
+                            <p>&copy; 2023 Laratechnology. All rights reserved. | <a
+                                    href="./assets/pdf/terms-and-conditions.pdf" target="_blank"
+                                    class="text-light">Terms &
+                                    Conditions</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutConfirmationModalLabel">
+                        Confirm Logout
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Are you sure you want to logout?</div>
+                <div class="modal-footer">
+                    <!-- Cancel button to close the modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <!-- Logout button to trigger the logout -->
+                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+        aria-atomic="true" id="toast-bg">
+        <div class="d-flex">
+            <div class="toast-body"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
+    </div>
+
+    <script type="module" src="./user-dashbroad.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Profile</title>
+    <!-- Add Bootstrap CSS link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="icon" href="assets/images/laralogo.png" sizes="32x32">
+    <!-- css Icon Font -->
+    <link rel="stylesheet" href="assets/css/vendor/gicons.css">
+
+    <!-- css All Plugins Files -->
+    <link rel="stylesheet" href="assets/css/plugins/animate.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/nouislider.css">
+
+    <!-- Main Style -->
+    <link rel="stylesheet" id="main_style" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/vendor/custom.css">
+
+    <!-- Add your custom CSS styles here -->
+    <style>
+        /* Custom CSS styles for the user profile page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+            background: linear-gradient(9deg, #91a88f, #c7eacb)
+                /* position: relative; */
+        }
+
+        /* main {
+            min-height: calc(100vh - (112px + 72px));
+        } */
+
+
+        .hidden {
+            display: none;
+        }
+
+        .overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(81, 79, 79, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 5;
+        }
+
+        /* Additional styles for navbar */
+        .navbar {
+            /* background: #fff; */
+            background-color: whitesmoke;
+            border: 3px solid beige;
+            /* border-bottom: 1px solid #ccc; */
+        }
+
+        .navbar-brand.custom-brand {
+            color: #007bff;
+            font-size: 2rem;
+        }
+
+        .nav-link.custom-brand {
+            /* color: #ffffff; */
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        /* Responsive styles for small screens */
+        @media (max-width: 768px) {
+            .container {
+                /* background-color: #ffffff; */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                border-radius: 10px;
+                margin-top: 20px;
+                background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+            }
+
+            nav ul {
+                text-align: center;
+            }
+
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .nav-item {
+                transition: all 0.3s linear;
+            }
+
+            .nav-item:hover {
+                transform: translate(-0.5px, -3px);
+                scale: 1.01;
+            }
+
+            .logo {
+                transition: all 0.3s linear;
+            }
+
+            .logo:hover {
+                scale: 1.1;
+            }
+        }
+
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .user-details {
+            text-align: center;
+        }
+
+        .change-password-btn {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Styles for centering the modal */
+        .modal-dialog {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+
+
+        .impressive-hr {
+            border-top: 4px solid #007BFF;
+            margin: 20px 0;
+        }
+
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #f6d365;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right bottom,
+                    rgba(246, 211, 101, 1),
+                    rgba(253, 160, 133, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right bottom,
+                    rgba(246, 211, 101, 1),
+                    rgba(253, 160, 133, 1));
+        }
+
+        #edit-profile {
+            transition: all 0.5s linear;
+        }
+
+        #edit-profile:hover {
+            transform: scale(1.2);
+        }
+
+        #newPassword,
+        #confirmNewPassword {
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Edge */
+            user-select: none;
+        }
+
+        #newPassword,
+        #confirmNewPassword::content {
+            pointer-events: none;
+        }
+
+        .change-password-btn {
+            background: linear-gradient(rgb(216, 216, 27, 0.8),
+                    rgb(248, 213, 38, 0.8));
+            color: black;
+            border: none;
+            transition: all 0.5s ease;
+        }
+
+        .change-password-btn:hover {
+            box-shadow: 1px 2px 2px 1px rgb(50, 49, 49, 0.2),
+                -1px 0 2px 0 rgb(50, 49, 49, 0.2);
+            background: linear-gradient(rgb(216, 216, 27, 0.8),
+                    rgb(248, 213, 38, 0.8));
+            color: black;
+            border: none;
+            transform: translateY(-2px);
+        }
+
+        #phoneError {
+            transform: scale(0);
+            transition: all 0.5s ease;
+            scale: 0;
+            transform: translateY(-100px);
+            transform-origin: left;
+        }
+
+        footer {
+            /* background: linear-gradient(0deg, #36dadc 0%, #64bcf3 100%); */
+            background-color: #565656;
+            font-weight: lighter;
+            color: white;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        input[type="password"]::-ms-reveal {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="overlay">
+        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <div id="main" class="hidden position-relative">
+        <!-- Navigation -->
+        <div class="p-2">
+            <nav class="navbar shadow-sm rounded-3 navbar-expand-lg" id="header">
+                <div class="container-fluid">
+                    <a href="home.html">
+                        <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
+                            width="150px" title="Home"></img>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                        <div class="d-flex justify-content-between w-100">
+                            <div class="">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="index.html">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Upcoming batch</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Today's Schedule</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Contact Us</a>
+                                    </li> -->
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand active" aria-current="page">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand active" aria-current="page">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                        <a class="nav-link custom-brand active" aria-current="page">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- Logout button with data-toggle and data-target attributes -->
+                                        <button class="nav-link custom-brand" data-bs-toggle="modal"
+                                            data-bs-target="#logoutConfirmationModal">
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="navbar-nav mb-2 mb-lg-0">
+                                    <li class="nav-item loggedOut">
+                                        <a class="nav-link custom-brand" href="signup.html">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item loggedOut">
+                                        <a class="nav-link custom-brand" href="login.html">Login</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <!-- Toast notifications will appear here -->
+        </div>
+
+        <section class="gi-register padding-tb-40">
+            <div class="container-xl mt-4 user-profile">
+                <div class="section-title-2">
+                    <h2 class="gi-title">User Profile<span></span></h2>
+                    <p>Best place to buy and sell digital products.</p>
+                </div>
+                <!-- Account page navigation-->
+                <hr class="mt-0 mb-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Profile picture card-->
+                        <div class="card mb-4 mb-xl-0">
+                            <div class="card-header">Profile Picture</div>
+                            <div class="card-body text-center ">
+                                <!-- Profile picture image-->
+                                <br>
+                                <img id="shown-profilePicture"
+                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="Avatar" class="img-fluid rounded-circle border border-gray shadow"
+                                    style="width:190px;height:190px">
+                                <br>
+                                <br>
+                                <div class="small font-italic text-muted">JPG or PNG no larger than 5 MB</div>
+                                <!-- <input type="file" id="profilePicture" accept="image/*"> -->
+                                <label for="profilePicture" id="profile-custom-button" class="gi-btn-1 mt-3">Select
+                                    Image</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+
+                        <!-- Account details card-->
+                        <div class="card-header">Account Details</div>
+                        <form>
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3 account-details">
+                                <!-- Name-->
+                                <span class="col-md-6 mb-3 mb-md-0">
+                                    <label class="small mb-1 form-label fonttext" for="displayName">Name</label>
+                                    <input class="form-control h-75 fonttext" id="displayName" type="text"
+                                        placeholder="Enter your name" required>
+                                    <small id="nameError" class="text-danger"></small>
+                                </span>
+
+                                <!-- Email -->
+                                <span class="col-md-6">
+                                    <label class="gi small mb-1 fonttext" for="email">Email</label>
+                                    <input class="form-control h-75 fonttext" id="email" type="email"
+                                        placeholder="Enter your email address" readonly>
+                                    <!-- <label class="small mb-1 fonttext" for="phone">Phone Number</label>
+                                    <input class="form-control h-75 fonttext" id="phone" type="tel"
+                                        placeholder="Enter your phone number" readonly>
+                                    <small id="phoneError" class="text-danger"></small> -->
+                                </span>
+                            </div>
+
+                            <!-- Form Row-->
+                            <!-- <div class="row gx-3 mb-3 account-details">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-12">
+                                    <label class="gi small mb-1 fonttext" for="email">Email</label>
+                                    <input class="form-control h-75 fonttext" id="email" type="email"
+                                        placeholder="Enter your email address" readonly>
+                                </div>
+                            </div> -->
+                        </form>
+                        <div class="modal-footer d-flex justify-content-between  ">
+                            <button type="button" class="gi-btn-1 bg-success mt-5" id="saveProfileChangesBtn">
+                                Save Changes
+                            </button>
+                            <button href="#" class="gi-btn-1 bg-gray mt-5" data-bs-toggle="modal"
+                                data-bs-target="#changePasswordModal" style="background:#4A412A;">Change
+                                Password</button>
+                        </div>
+
+                        <!-- Address Section start -->
+                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-info text-white"
+                                        id="address-accordion-btn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        Address Details
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <!-- Personal address Details -->
+                                        <div class="gi-register-wrapper">
+                                            <div class="gi-register-container">
+                                                <div class="address-message"></div>
+                                                <div class="gi-register-form">
+                                                    <form id="user-address-form">
+                                                        <!-- <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>HouseNo/StreetName*</label>
+                                                            <input type="text" name="house-no" id="house-no"
+                                                                placeholder="Enter your house-no" class="mb-0" required>
+                                                            <span id="hosuse-no-error" class="error-message" style="color: red"></span>
+                                                        </span> -->
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Address*</label>
+                                                            <input type="text" name="user-address" id="user-address"
+                                                                placeholder="Enter your address" class="mb-0" required>
+                                                            <span id="user-address-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Postal Code*</label>
+                                                            <input type="text" name="user-postcode" id="user-postcode"
+                                                                placeholder="Enter your postal code" class="mb-0" required>
+                                                            <span id="user-postcode-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>City*</label>
+                                                            <input type="text" name="user-city" id="user-city"
+                                                                placeholder="Enter your city" class="mb-0" required>
+                                                            <span id="user-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>State*</label>
+                                                            <input type="text" name="user-state" id="user-state"
+                                                                placeholder="Enter your state" class="mb-0" required>
+                                                            <span id="user-state-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Country*</label>
+                                                            <input type="text" name="user-country" id="user-country"
+                                                                placeholder="Enter your country" class="mb-0" required>
+                                                            <span id="user-country-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+                                                        <br>
+                                                        <!-- <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Profile Description*</label>
+                                                            <textarea name="pro-description" id="pro-description"
+                                                                placeholder="Enter the profile description" class="mb-0" rows="8"
+                                                                cols="100" required  style="width: 100%;"></textarea>
+                                                            <span id="pro-descriptionError" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span> -->
+                                                        <span id="authError" class="error-message"
+                                                            style="color: red"></span>
+                                                        <div class="modal-footer d-flex justify-content-end gap-2">
+                                                            <button type="button" class="gi-btn-1 bg-success mt-5"
+                                                                id="save-user-address-button">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                    <!-- <button href="#" class="gi-btn-1 bg-gray mt-5"
+                                                        data-bs-toggle="modal" data-bs-target="#changeAddressModal"
+                                                        id="edit-user-address-model"
+                                                        style="background:#4A412A; display: none;">Edit</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Address Section end -->
+
+                        <!-- School details Section start -->
+                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-info text-white" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                        id="user-school-accordion-btn" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                        School Education Details/10th
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="gi-register-wrapper">
+                                            <div class="gi-register-container">
+                                                <div class="user-school-message"></div>
+                                                <div class="gi-register-form">
+                                                    <form id="school-edu-details-form">
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Board*</label>
+                                                            <input type="text" name="school-board" id="school-board"
+                                                                placeholder="Enter the board name" class="mb-0"
+                                                                required>
+                                                            <span id="school-board-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>School Name*</label>
+                                                            <input type="text" name="school-name" id="school-name"
+                                                                placeholder="Enter your school name" class="mb-0"
+                                                                required>
+                                                            <span id="school-name-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>City*</label>
+                                                            <input type="text" name="school-education-city"
+                                                                id="school-education-city"
+                                                                placeholder="Enter the education City" class="mb-0"
+                                                                required>
+                                                            <span id="school-education-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>State*</label>
+                                                            <input type="text" name="school-education-state"
+                                                                id="school-education-state"
+                                                                placeholder="Enter the education State" class="mb-0"
+                                                                required>
+                                                            <span id="school-education-state-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Start Date*</label>
+                                                            <input type="text" name="school-education-sDate"
+                                                                id="school-education-sDate" placeholder="MM/YYYY"
+                                                                class="mb-0" required>
+                                                            <span id="school-education-sDate-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>End Date*</label>
+                                                            <input type="text" name="school-education-eDate"
+                                                                id="school-education-eDate" placeholder="MM/YYYY"
+                                                                class="mb-0" required>
+                                                            <span id="school-education-eDate-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Percentage*</label>
+                                                            <input type="text" name="school-education-percentage"
+                                                                id="school-education-percentage"
+                                                                placeholder="Please Enter Your Percentage" class="mb-0"
+                                                                required>
+                                                            <span id="school-education-percentage-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full">
+                                                            <label class="mt-3">Upload School/10th MarkCard
+                                                                Certificate</label>
+                                                            <input type="file" name="school-education-cert mt-3"
+                                                                id="school-education-cert">
+                                                            <span id="school-cert-file-display"></span>
+
+                                                            <!-- Add this container for the file link -->
+                                                            <div id="file-link-container">
+                                                                <a href="#" id="school-cert-file-link" target="_blank">Selected File: </a>
+                                                            </div>
+                                                        </span>
+
+                                                        <div class="modal-footer d-flex justify-content-end gap-2">
+                                                            <button type="button" class="gi-btn-1 bg-success mt-1"
+                                                                id="save-school-edu-button">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                    <button href="#" class="gi-btn-1 bg-gray mt-1"
+                                                        data-bs-toggle="modal" data-bs-target="#changeSchoolModal"
+                                                        id="edit-school-edu-details"
+                                                        style="background:#4A412A;display: none;">Edit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- School Details Section end -->
+
+                        <!-- 12th/Intermediate Details Section Start -->
+                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-info text-white" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                        aria-expanded="false" id="user-inter-accordion-btn"
+                                        aria-controls="flush-collapseThree">
+                                        Intermediate/12th Education Details
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="gi-register-wrapper">
+                                            <div class="gi-register-container">
+                                                <div class="gi-register-form">
+                                                    <form action="#" method="post" id="inter-edu-details-form">
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Board/University*</label>
+                                                            <input type="text" name="inter-board" id="inter-board"
+                                                                placeholder="Enter the board/university name"
+                                                                class="mb-0" required>
+                                                            <span id="inter-board-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Education Name*</label>
+                                                            <input type="text" name="inter-college-name"
+                                                                id="inter-college-name"
+                                                                placeholder="Enter the college name" class="mb-0"
+                                                                required>
+                                                            <span id="inter-college-name-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>City*</label>
+                                                            <input type="text" name="inter-education-city"
+                                                                id="inter-education-city"
+                                                                placeholder="Enter the Intermediate/12th Education City"
+                                                                class="mb-0" required>
+                                                            <span id="inter-education-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>State*</label>
+                                                            <input type="text" name="inter-education-state"
+                                                                id="inter-education-state"
+                                                                placeholder="Enter the Intermediate/12th Education State"
+                                                                class="mb-0" required>
+                                                            <span id="inter-education-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Start Date*</label>
+                                                            <input type="text" name="inter-education-sDate"
+                                                                id="inter-education-sDate" placeholder="MM/YYYY"
+                                                                class="mb-0" required>
+                                                            <span id="inter-education-sDate-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>End Date*</label>
+                                                            <input type="text" name="inter-education-eDate"
+                                                                id="inter-education-eDate" placeholder="MM/YYYY"
+                                                                class="mb-0" required>
+                                                            <span id="inter-education-eDate-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Percentage*</label>
+                                                            <input type="text" name="inter-education-percentage"
+                                                                id="inter-education-percentage"
+                                                                placeholder="Please Enter Your Percentage" class="mb-0"
+                                                                required>
+                                                            <span id="inter-education-percentage-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full">
+                                                            <label class="mt-3">Upload Intermediate/12th MarkCard
+                                                                Certificate</label>
+                                                            <input type="file" name="inter-education-cert mt-3"
+                                                                id="inter-education-cert">
+                                                            <span id="inter-cert-file-display"></span>
+
+                                                            <!-- Add this container for the file link -->
+                                                            <div id="file-link-container">
+                                                                <a href="#" id="inter-cert-file-link" target="_blank">Selected File: </a>
+                                                            </div>
+                                                        </span>
+
+                                                        <div class="modal-footer d-flex justify-content-end gap-2">
+
+                                                            <button type="button" class="gi-btn-1 bg-success mt-1"
+                                                                id="save-inter-edu-button">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 12th/Inter Details Section end -->
+
+                        <!-- Graduation Details Section Start -->
+                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-info text-white" type="button"
+                                        data-bs-toggle="collapse" id="user-degree-accordion-btn"
+                                        data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                        aria-controls="flush-collapseFour">
+                                        Graduation Education Details/Degree
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="gi-register-wrapper">
+                                            <div class="gi-register-container">
+                                                <div class="gi-register-form">
+                                                    <form action="#" method="post" id="degree-edu-details-form">
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Board/University*</label>
+                                                            <input type="text" name="degree-board" id="degree-board"
+                                                                placeholder="Enter the board/university name"
+                                                                class="mb-0" required>
+                                                            <span id="degree-board-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>College Name/Dept Name*</label>
+                                                            <input type="text" name="degree-education-name"
+                                                                id="degree-college-name"
+                                                                placeholder="Enter the Graduation/Degree college name"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-name-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>City*</label>
+                                                            <input type="text" name="degree-education-city"
+                                                                id="degree-education-city"
+                                                                placeholder="Enter the graduation/degree city"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>State*</label>
+                                                            <input type="text" name="degree-education-state"
+                                                                id="degree-education-state"
+                                                                placeholder="Enter the graduation/degree state"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Start Date*</label>
+                                                            <input type="text" name="degree-education-sDate"
+                                                                id="degree-education-sDate" placeholder="MM/YYYY"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-sDate-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>End Date*</label>
+                                                            <input type="text" name="degree-education-eDate"
+                                                                id="degree-education-eDate" placeholder="MM/YYYY"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-eDate-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Percentage*</label>
+                                                            <input type="text" name="degree-education-percentage"
+                                                                id="degree-education-percentage"
+                                                                placeholder="Please Enter Your Percentage" class="mb-0"
+                                                                required>
+                                                            <span id="degree-education-percentage-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full">
+                                                            <label class="mt-3">Upload Graduation/Degree MarkCard Certificate</label>
+                                                            <input type="file" name="degree-education-cert" id="degree-education-cert">
+                                                            <span id="degree-cert-file-display"></span>
+                                                        
+                                                            <!-- Add this container for the file link -->
+                                                            <div id="file-link-container">
+                                                                <a href="#" id="degree-cert-file-link" target="_blank">Selected File: </a>
+                                                            </div>
+                                                        </span>
+
+                                                        <div class="modal-footer d-flex justify-content-end gap-2">
+                                                            <button type="button" class="gi-btn-1 bg-success mt-1"
+                                                                id="save-degree-edu-button">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Graduation Details Section End -->
+
+                        <!-- Internship/Academic Project Details Start -->
+                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-info text-white" type="button"
+                                        data-bs-toggle="collapse" id="user-internship-accordion-btn"
+                                        data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                        aria-controls="flush-collapseFive">
+                                        Internship/Academic Project Details
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="gi-register-wrapper">
+                                            <div class="gi-register-container">
+                                                <div class="gi-register-form">
+                                                    <form action="#" method="post" id="employee-details-form">
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Project Name*</label>
+                                                            <input type="text" name="internship-project-name"
+                                                                id="internship-project-name"
+                                                                placeholder="Enter Your project name" class="mb-0"
+                                                                required>
+                                                            <span id="employee-position-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Technologies*</label>
+                                                            <input type="text" name="internship-technologies"
+                                                                id="internship-technologies"
+                                                                placeholder="Enter Your Technologies" class="mb-0"
+                                                                required>
+                                                            <span id="employee-technologies-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>City*</label>
+                                                            <input type="text" name="internship-city"
+                                                                id="internship-city"
+                                                                placeholder="Enter the Employment City" class="mb-0"
+                                                                required>
+                                                            <span id="employee-city-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>Start Date*</label>
+                                                            <input type="text" name="internship-sDate"
+                                                                id="internship-sDate" placeholder="MM/YYYY" class="mb-0"
+                                                                required>
+                                                            <span id="employee-sDate-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>End Date*</label>
+                                                            <input type="text" name="internship-eDate"
+                                                                id="internship-eDate" placeholder="MM/YYYY" class="mb-0"
+                                                                required>
+                                                            <span id="employee-eDate-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <!-- <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>End Date*</label>
+                                                            <input type="text" name="internship-project"
+                                                                id="employee-project"
+                                                                placeholder="Please Enter Your Project Name"
+                                                                class="mb-0" required>
+                                                            <span id="employee-project-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span> -->
+
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Profile Description*</label>
+                                                            <textarea name="internship-project-description"
+                                                                id="internship-project-description"
+                                                                placeholder="Please the Project Description...."
+                                                                class="mb-0" rows="8" cols="100" required
+                                                                style="width: 100%;"></textarea>
+                                                            <span id="employee-project-description-error"
+                                                                class="error-message" style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full">
+                                                            <label class="mt-3">Upload Internship
+                                                                Certificate(optional)</label>
+                                                            <input type="file" name="internship-cert mt-3"
+                                                                id="internship-cert">
+                                                            <span id="internship-cert-file-display"></span>
+
+                                                            <!-- Add this container for the file link -->
+                                                            <div id="file-link-container">
+                                                                <a href="#" id="internship-cert-file-link" target="_blank">Selected File: </a>
+                                                            </div>
+                                                        </span>
+
+                                                        <div class="modal-footer d-flex justify-content-end gap-2">
+                                                            <!-- <button href="#" class="gi-btn-1 bg-gray mt-1"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#changeInternshipModal"
+                                                                id="edit-internship-model"
+                                                                style="background:#4A412A;">Edit</button> -->
+                                                            <button type="button" class="gi-btn-1 bg-success mt-1"
+                                                                id="save-internship-button">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Internship/Employment Details End -->
+
+                        <!-- Other Personal Details/Skills Start-->
+                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-info text-white" type="button"
+                                        data-bs-toggle="collapse" id="user-additional-accordion-btn"
+                                        data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                        aria-controls="flush-collapseSix">
+                                        Other Details/Skills, Languages and Hobbies
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseSix" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="gi-register-wrapper">
+                                            <div class="gi-register-container">
+                                                <div class="gi-register-form">
+                                                    <form action="#" method="post" id="user-additional-details-form">
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Skills (comma-separated)*</label>
+                                                            <input type="text" name="user-skills" id="user-skills"
+                                                                placeholder="Enter your skills" class="mb-0" required>
+                                                            <span id="user-skills-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Languages (comma-separated)*</label>
+                                                            <input type="text" name="user-languages" id="user-languages"
+                                                                placeholder="Enter languages you know" class="mb-0"
+                                                                required>
+                                                            <span id="user-languages-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-full mt-3">
+                                                            <label>Hobbies (comma-separated)*</label>
+                                                            <input type="text" name="user-hobbies" id="user-hobbies"
+                                                                placeholder="Enter your hobbies" class="mb-0" required>
+                                                            <span id="user-hobbies-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+                                                        <div class="modal-footer d-flex justify-content-end gap-2">
+                                                            <button type="button" class="gi-btn-1 bg-success mt-1"
+                                                                id="save-user-additional-button">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Other Personal Details/Skills End-->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Address Model Details  Start -->
+    <div class="modal fade" id="changeAddressModal" tabindex="-1" aria-labelledby="changeAddressModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeAddressModalLabel"> Address Details </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="gi-register-wrapper">
+                    <div class="gi-register-container">
+                        <div class="gi-register-form">
+                            <form action="#" method="post" id="user-model-details-form">
+                                <!-- <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>HouseNo/StreetName*</label>
+                                    <input type="text" name="house-no" id="house-no"
+                                        placeholder="Enter your house-no" class="mb-0" required>
+                                    <span id="hosuse-no-error" class="error-message" style="color: red"></span>
+                                </span> -->
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Address*</label>
+                                    <input type="text" name="user-address" id="user-model-address"
+                                        placeholder="Enter your address" class="mb-0" required>
+                                    <span id="user-model-address-error" class="error-message" style="color: red"></span>
+                                </span>
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Postal Code*</label>
+                                    <input type="text" name="user-postcode" id="user-model-postcode"
+                                        placeholder="Enter your postal code" class="mb-0" required>
+                                    <span id="user-model-postcode-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>City*</label>
+                                    <input type="text" name="user-city" id="user-model-city"
+                                        placeholder="Enter your city" class="mb-0" required>
+                                    <span id="user-model-city-error" class="error-message" style="color: red"></span>
+                                </span>
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>State*</label>
+                                    <input type="text" name="user-state" id="user-model-state"
+                                        placeholder="Enter your state" class="mb-0" required>
+                                    <span id="user-model-state-error" class="error-message" style="color: red"></span>
+                                </span>
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Country*</label>
+                                    <input type="text" name="user-country" id="user-model-country"
+                                        placeholder="Enter your country" class="mb-0" required>
+                                    <span id="user-model-country-error" class="error-message" style="color: red"></span>
+                                </span>
+                                <br>
+                                <!-- <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Profile Description*</label>
+                                    <textarea name="pro-description" id="pro-description"
+                                        placeholder="Enter the profile description" class="mb-0" rows="8"
+                                        cols="100" required  style="width: 100%;"></textarea>
+                                    <span id="pro-descriptionError" class="error-message"
+                                        style="color: red"></span>
+                                </span> -->
+                                <span id="authError" class="error-message" style="color: red"></span>
+                                <div class="modal-footer d-flex justify-content-end gap-2">
+                                    <button type="button" class="gi-btn-1 bg-success"
+                                        id="save-user-model-address-button">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-secondary gi-btn-1" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Address Model Details End -->
+
+    <!-- School Model details Section start -->
+    <div class="modal fade" id="changeSchoolModal" tabindex="-1" aria-labelledby="changeSchoolModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeSchoolModalLabel">School details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="gi-register-wrapper">
+                    <div class="gi-register-container">
+                        <div class="gi-register-form">
+                            <form action="#" method="post" id="school-edu-details-model-form">
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Board/University*</label>
+                                    <input type="text" name="school-board" id="school-board-model"
+                                        placeholder="Enter the board/university name" class="mb-0" required>
+                                    <span id="school-board-model-error" class="error-message" style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Education Name*</label>
+                                    <input type="text" name="school-model-name" id="school-model-name"
+                                        placeholder="Enter the school name" class="mb-0" required>
+                                    <span id="school-education-model-name-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>City*</label>
+                                    <input type="text" name="school-education-model-city"
+                                        id="school-education-model-city" placeholder="Enter the education city"
+                                        class="mb-0" required>
+                                    <span id="school-education-model-city-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>State*</label>
+                                    <input type="text" name="school-education-model-state"
+                                        id="school-education-model-state" placeholder="Enter the education state"
+                                        class="mb-0" required>
+                                    <span id="school-education-model-state-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Start Date*</label>
+                                    <input type="text" name="school-education-model-sDate"
+                                        id="school-education-model-sDate" placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="school-education-model-sDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>End Date*</label>
+                                    <input type="text" name="school-education-model-eDate"
+                                        id="school-education-model-eDate" placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="school-education-model-eDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Percentage*</label>
+                                    <input type="text" name="school-education-model-percentage"
+                                        id="school-education-model-percentage"
+                                        placeholder="Please Enter Your Percentage" class="mb-0" required>
+                                    <span id="school-education-model-percentage-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full">
+                                    <label class="mt-3">Upload School/10th MarkCard
+                                        Certificate</label>
+                                    <input type="file" name="school-education-model-cert mt-3"
+                                        id="school-education-model-cert">
+                                </span>
+
+                                <div class="modal-footer d-flex justify-content-end">
+
+                                    <button type="button" class="gi-btn-1 bg-success" id="save-school-edu-model-button">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-secondary gi-btn-1" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- School Model details Section  end -->
+
+    <!-- 12th/Inter Model Details Section Start -->
+    <div class="modal fade" id="changeInterModal" tabindex="-1" aria-labelledby="changeInterModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeInterModalLabel">Inter Education Details/12th</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="gi-register-wrapper">
+                    <div class="gi-register-container">
+                        <div class="gi-register-form">
+                            <form action="#" method="post" id="inter-edu-model-details-form">
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Board/University*</label>
+                                    <input type="text" name="inter-board" id="inter-board-model"
+                                        placeholder="Enter the board/university name" class="mb-0" required>
+                                    <span id="inter-board-model-error" class="error-message" style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>College Name*</label>
+                                    <input type="text" name="inter-college-model-name" id="inter-college-model-name"
+                                        placeholder="Enter the college name" class="mb-0" required>
+                                    <span id="inter-education-model-name-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>City*</label>
+                                    <input type="text" name="inter-education-model-city" id="inter-education-model-city"
+                                        placeholder="Enter the intermediate/12th college city" class="mb-0" required>
+                                    <span id="inter-education-model-city-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>State*</label>
+                                    <input type="text" name="inter-education-model-state"
+                                        id="inter-education-model-state" placeholder="Enter the intermediate/12th college state"
+                                        class="mb-0" required>
+                                    <span id="inter-education-model-city-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Start Date*</label>
+                                    <input type="text" name="inter-education-model-sDate"
+                                        id="inter-education-model-sDate" placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="inter-education-model-sDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>End Date*</label>
+                                    <input type="text" name="inter-education-model-eDate"
+                                        id="inter-education-model-eDate" placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="inter-education-model-eDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Percentage*</label>
+                                    <input type="text" name="inter-education-model-percentage"
+                                        id="inter-education-model-percentage" placeholder="Please Enter Your Percentage"
+                                        class="mb-0" required>
+                                    <span id="inter-education-model-percentage-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full">
+                                    <label class="mt-3">Upload Intermediate/12th MarkCard
+                                        Certificate</label>
+                                    <input type="file" name="inter-education.model-cert mt-3"
+                                        id="inter-education-model-cert">
+                                </span>
+                                <div class="modal-footer d-flex justify-content-end gap-2">
+                                    <button type="button" class="gi-btn-1 bg-success " id="save-inter-edu-model-button">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-secondary gi-btn-1" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 12th/Inter Details Model Section  End -->
+
+    <!--Graduation Details Model Section Start -->
+    <div class="modal fade" id="changeGraduationModal" tabindex="-1" aria-labelledby="changeGraduationModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeGraduationModalLabel"> Graduation Education Details/Degree</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="gi-register-wrapper">
+                    <div class="gi-register-container">
+                        <div class="gi-register-form">
+                            <form action="#" method="post" id="degree-edu-details-model-form">
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Board/University*</label>
+                                    <input type="text" name="degree-board-model" id="degree-board-model"
+                                        placeholder="Enter the board/university name" class="mb-0" required>
+                                    <span id="degree-board-model-error" class="error-message" style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>College Name*</label>
+                                    <input type="text" name="degree-college-model-name" id="degree-college-model-name"
+                                        placeholder="Enter the college name" class="mb-0" required>
+                                    <span id="degree-education-model-name-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>City*</label>
+                                    <input type="text" name="degree-education-model-city"
+                                        id="degree-education-model-city" placeholder="Enter the college city"
+                                        class="mb-0" required>
+                                    <span id="degree-education-model-city-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>State*</label>
+                                    <input type="text" name="degree-education-model-state"
+                                        id="degree-education-model-state" placeholder="Enter the college State"
+                                        class="mb-0" required>
+                                    <span id="degree-education-model-city-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Start Date*</label>
+                                    <input type="text" name="degree-education-model-sDate"
+                                        id="degree-education--model-sDate" placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="degree-education-model-sDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>End Date*</label>
+                                    <input type="text" name="degree-education-model-eDate"
+                                        id="degree-education-model-eDate" placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="degree-education-model-eDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Percentage</label>
+                                    <input type="text" name="degree-education-model-percentage"
+                                        id="degree-education-model-percentage"
+                                        placeholder="Please Enter Your Percentage" class="mb-0" required>
+                                    <span id="degree-education-model-percentage-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full">
+                                    <label class="mt-3">Upload Graduation/Degree MarkCard
+                                        Certificate</label>
+                                    <input type="file" name="degree-education-cert mt-3"
+                                        id="degree-education-model-cert">
+                                </span>
+
+                                <div class="modal-footer d-flex justify-content-end gap-2">
+                                    <button type="button" class="gi-btn-1 bg-success mt-1"
+                                        id="save-degree-edu-model-button">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Graduation Details Model Section End -->
+
+    <!-- Internship/Employment Model Details  Start -->
+    <div class="modal fade" id="changeInternshipModal" tabindex="-1" aria-labelledby="changeEmploymentModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header mt-5">
+                    <h5 class="modal-title" id="changeEmploymentModalLabel"> Internship/Employment Details </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="gi-register-wrapper">
+                    <div class="gi-register-container">
+                        <div class="gi-register-form">
+                            <form action="#" method="post" id="employee-model-details-form">
+                                <!-- <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Position*</label>
+                                    <input type="text" name="employee-position" id="employee-position-model"
+                                        placeholder="Enter Your Position" class="mb-0" required>
+                                    <span id="employee-position-model-error" class="error-message"
+                                        style="color: red"></span>
+                                </span> -->
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>End Date*</label>
+                                    <input type="text" name="internship-project-name-model"
+                                        id="internship-project-name-model" placeholder="Please Enter Your Project Name"
+                                        class="mb-0" required>
+                                    <span id="employee-model-project-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Technologies*</label>
+                                    <input type="text" name="internship-project-technologies-model"
+                                        id="internship-project-technologies-model" placeholder="Enter Your Technologies"
+                                        class="mb-0" required>
+                                    <span id="employee-technologies-model-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>City*</label>
+                                    <input type="text" name="internship-city" id="internship-city-model"
+                                        placeholder="Enter the Employment City" class="mb-0" required>
+                                    <span id="employee-model-city-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>Start Date*</label>
+                                    <input type="text" name="internship-sDate-model" id="internship-sDate-model"
+                                        placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="employee-model-sDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-half mt-3">
+                                    <label>End Date*</label>
+                                    <input type="text" name="internship-eDate-model" id="internship-eDate-model"
+                                        placeholder="MM/YYYY" class="mb-0" required>
+                                    <span id="employee-model-eDate-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Profile Description*</label>
+                                    <textarea name="internship-project-description"
+                                        id="internship-project-description-model"
+                                        placeholder="Please the Project Description...." class="mb-0" rows="8"
+                                        cols="100" required style="width: 100%;"></textarea>
+                                    <span id="employee-model-project-description-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full">
+                                    <label class="mt-3">Upload Internship
+                                        Certificate(optional)</label>
+                                    <input type="file" name="internship-cert-model mt-3" id="internship-cert-model">
+                                </span>
+
+                                <div class="modal-footer d-flex justify-content-end gap-2">
+
+                                    <button type="button" class="gi-btn-1 bg-success mt-1"
+                                        id="save-internship-model-button">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Internship/Employment Model Details Start -->
+
+    <!-- Other Personal Model Details/Skills Start-->
+    <div class="modal fade" id="changePersonalModal" tabindex="-1" aria-labelledby="changePersonalModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePersonalModalLabel"> Other Details/Skills,Languages and Hobbies
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="gi-register-wrapper">
+                    <div class="gi-register-container">
+                        <div class="gi-register-form">
+                            <form action="#" method="post" id="user-additional-model-details-form">
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Skills (comma-separated)*</label>
+                                    <input type="text" name="user-skills" id="user-skills-model"
+                                        placeholder="Enter your skills" class="mb-0" required>
+                                    <span id="user-skills-model-error" class="error-message" style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Languages (comma-separated)*</label>
+                                    <input type="text" name="user-languages" id="user-languages-model"
+                                        placeholder="Enter languages you know" class="mb-0" required>
+                                    <span id="user-languages-model-error" class="error-message"
+                                        style="color: red"></span>
+                                </span>
+
+                                <span class="gi-register-wrap gi-register-full mt-3">
+                                    <label>Hobbies (comma-separated)*</label>
+                                    <input type="text" name="user-hobbies" id="user-hobbies-model"
+                                        placeholder="Enter your hobbies" class="mb-0" required>
+                                    <span id="user-hobbies-model-error" class="error-message" style="color: red"></span>
+                                </span>
+                                <div class="modal-footer d-flex justify-content-end gap-2">
+                                    <button type="button" class="gi-btn-1 bg-success mt-1"
+                                        id="save-user-additional-model-button">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Other Personal Model Details/Skills End -->
+
+
+
+    <!-- Footer -->
+    <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
+        <div class="container-fluid cntfld-fw" id="footer">
+            <div class="container-fluid ftr-bg">
+                <div class="row">
+                    <div class="col-lg-11 col-md-12 col-sm-12 pd-t30 div-center">
+                        <div class="row text-center text-xs-center text-sm-left text-md-left">
+                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                <h5>About Us</h5>
+                                <p>
+                                    Lara Technologies is best place to start your career since 2005.
+                                </p>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                <h5>Contact Us</h5>
+                                <p>
+                                    Feel free to get in touch with us:<br>
+                                    Email: support@lara.co.in<br>
+                                    Phone: <i class="fa fa-phone"></i> +91 7975938871
+                                </p>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
+                                <h5>Stay Connected</h5>
+                                <div class="text-bg-white">
+                                    <p>
+                                        Follow us on social media for updates and news:<br>
+                                        <a href="https://www.facebook.com/laratechnologiesforjava" class="text-light"><i
+                                                class="fa-brands fa-facebook-f"></i></a>&nbsp;
+                                        <a href="https://twitter.com/Laratech2" class="text-light"><i
+                                                class="fa-brands fa-twitter"></i></a>&nbsp;
+                                        <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
+                                            class="text-light"><i class="fa-brands fa-linkedin"></i></a>&nbsp;
+                                        <a href="https://www.instagram.com/lara_technologies/" class="text-light"><i
+                                                class="fa-brands fa-instagram"></i></i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
+                        <p>&copy; 2023 Laratechnology. All rights reserved. | <a
+                                href="./assets/pdf/terms-and-conditions.pdf" target="_blank" class="text-light">Terms &
+                                Conditions</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">
+                        Edit Profile
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <!-- Profile Picture Upload -->
+                        <div class="mb-3">
+                            <label for="profilePicture" class="form-label">Profile Picture</label>
+                            <input type="file" class="form-control border-primary" id="profilePicture"
+                                accept="image/*" />
+                        </div>
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="displayName" class="form-label">Name</label>
+                            <input type="text" class="form-control border-primary" id="displayName" />
+                            <small id="nameError" class="text-danger"></small>
+                        </div>
+
+                        <!-- Email (readonly) -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control border-primary" id="email" readonly />
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control border-primary" id="phone" />
+                            <small id="phoneError" class="text-danger"></small>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="saveProfileChangesBtn">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">
+                        Change Password
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <!-- Current Password -->
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control border-primary" id="currentPassword" />
+                                <button class="btn btn-outline-secondary" type="button" id="currentPasswordToggle">
+                                    <i class="fi-rr-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- New Password -->
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control border-primary" id="newPassword"
+                                    oncopy="return false;" />
+                                <button class="btn btn-outline-secondary" type="button" id="newPasswordToggle">
+                                    <i class="fi-rr-eye"></i>
+                                </button>
+                            </div>
+                            <small id="passwordError" class="text-danger"></small>
+                        </div>
+
+                        <!-- Confirm New Password -->
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control border-primary" id="confirmNewPassword"
+                                oncopy="return false;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="changePasswordBtn">
+                        Change Password
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutConfirmationModalLabel">
+                        Confirm Logout
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Are you sure you want to logout?</div>
+                <div class="modal-footer">
+                    <!-- Cancel button to close the modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <!-- Logout button to trigger the logout -->
+                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true" id="toast-bg">
+        <div class="notify d-flex justify-content-between">
+            <span class="compare-note d-inline"></span>
+            <button type="button" class="btn-close d-inline" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <!-- Plugins JS -->
+    <script src="assets/js/plugins/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/plugins/popper.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/bootstrap-select.min.js"></script>
+    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="assets/js/plugins/fontawesome.js"></script>
+    <script src="assets/js/plugins/owl.carousel.min.js"></script>
+    <script src="assets/js/plugins/infiniteslidev2.js"></script>
+    <script src="assets/js/plugins/jquery.zoom.min.js"></script>
+    <script src="assets/js/plugins/slick.min.js"></script>
+    <script src="assets/js/plugins/nouislider.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+
+    <!-- Main Js -->
+    <script src="assets/js/main.js"></script>
+
+    <script type="module" src="user.js"></script>
+
+</body>
+
+</html>
