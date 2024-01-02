@@ -1155,6 +1155,162 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
     }
 })
 
+document.querySelector("#user-masters-accordion-btn").addEventListener('click', async () => {
+    console.log('1')
+    const userId = auth.currentUser.uid;
+    openMastersModel(userId);
+})
+
+var userMastersDocId = null;
+async function openMastersModel(userId) {
+    console.log("3")
+    const userMastersBoardEdit = document.querySelector("#masters-board");
+    const userMastersEducationNameEdit = document.querySelector("#masters-education-name");
+    const userMastersEduSpeNameEdit = document.querySelector('#masters-education-spec-name')
+    const userMastersEducationCityEdit = document.querySelector("#masters-education-city");
+    const userMastersEducationStateEdit = document.querySelector("#masters-education-state");
+    const userMastersStartEdit = document.querySelector("#masters-education-sDate");
+    const userMastersEndEdit = document.querySelector("#masters-education-eDate");
+    const userMastersPercentageEdit = document.querySelector("#masters-education-percentage");
+
+
+    if (userId) {
+        const userMastersCollectionRef = collection(firestore, 'learners', userId, 'usermasters');
+        const userMastersSnapshot = await getDocs(userMastersCollectionRef);
+
+        if (!userMastersSnapshot.empty) {
+            userMastersDocId = userMastersSnapshot.docs[0].id
+            console.log(userMastersDocId);
+            const userMastersData = userMastersSnapshot.docs[0].data();
+            const fileName = getFileNameFromUrl(userMastersData.mastersCertificateImageUrl);
+            console.log(userMastersData)
+            userMastersBoardEdit.value = userMastersData.userMastersBoard || '';
+            userMastersEducationNameEdit.value = userMastersData.userMastersEducationName || '';
+            userMastersEduSpeNameEdit.value = userMastersData.userMastersSpecialization || '';
+            userMastersEducationCityEdit.value = userMastersData.userMastersEducationCity || '';
+            userMastersEducationStateEdit.value = userMastersData.userMastersEducationState || '';
+            userMastersStartEdit.value = userMastersData.userMastersStart || '';
+            userMastersEndEdit.value = userMastersData.userMastersEnd || '';
+            userMastersPercentageEdit.value = userMastersData.userMastersPercentage || '';
+            document.getElementById('masters-cert-file-display').textContent = `Selected File: ${fileName }`;
+        }
+        else {
+            console.log('No user degree data found for the user please the address first');
+            displayMessage('No user degree data found for the user please the address first', 'danger');
+        }
+    }
+    else {
+        console.log('User ID is required');
+        displayMessage('User ID is required', 'danger')
+    }
+}
+/**
+* save the user post-graduation/masters details 
+* @author mydev 
+*/
+document.querySelector('#save-masters-edu-button').addEventListener('click', async (e) => {
+    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userMastersBoard = document.querySelector("#masters-board").value;
+    const userMastersEducationName = document.querySelector("#masters-education-name").value;
+    const userMastersEduSpeName = document.querySelector('#masters-education-spec-name').value
+    const userMastersEducationCity = document.querySelector("#masters-education-city").value;
+    const userMastersEducationState = document.querySelector("#masters-education-state").value;
+    const userMastersStart = document.querySelector("#masters-education-sDate").value;
+    const userMastersEnd = document.querySelector("#masters-education-eDate").value;
+    const userMastersPercentage = document.querySelector("#masters-education-percentage").value;
+    const userMastersCertificate = document.querySelector('#masters-education-cert');
+    const userMastersCertificateImageFile = userMastersCertificate.files[0];
+
+    if (userMastersBoard && userMastersEducationName && userMastersEduSpeName && userMastersEducationCity && userMastersEducationState
+        && userMastersStart && userMastersEnd && userMastersPercentage) {
+
+        if (!userId) {
+            console.log('User is not authenticated');
+            displayMessage('User is not authenticated', 'danger')
+            return;
+        }
+
+        // const userDegreeCollectionRef = collection(firestore, 'learners',userId,'userdegree');
+        // const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
+        // if(userDegreeSnapshot.empty){
+        //     console.log('Please fill the your graduation education details');
+        //     displayMessage('Please fill the your  graduation education  details','success');
+        //     return;
+        // }
+
+        const userMastersCollectionRef = collection(firestore, 'learners', userId, 'usermasters');
+        const userMastersSnapshot = await getDocs(userMastersCollectionRef);
+        if (!userMastersSnapshot.empty) {
+            console.log("if")
+            userMastersSnapshot.forEach(async (document) => {
+                const userMastersData = document.data();
+                console.log(userMastersData.mastersCertificateImageUrl)
+
+                if (userMastersCertificate.files.length > 0) {
+
+                    if (userMastersData.mastersCertificateImageUrl) {
+                        const fileName = getFileNameFromUrl(userMastersData.mastersCertificateImageUrl);
+                        console.log(fileName)
+                        if (fileName) {
+                            const storageRef = ref(storage, 'masters_certificate_images/' + fileName);
+                            await deleteObject(storageRef);
+                        }
+                    }
+                    console.log("1")
+
+                    const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificateImageFile.name);
+                    await uploadBytes(storageRef, userMastersCertificateImageFile);
+                    const certificateImageUrl = await getDownloadURL(storageRef);
+
+                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', document.id)
+                    await updateDoc(userMastersDocRef,
+                        {
+                            userMastersBoard: userMastersBoard,
+                            userMastersEducationName: userMastersEducationName,
+                            userMastersSpecialization: userMastersEduSpeName,
+                            userMastersEducationCity: userMastersEducationCity,
+                            userMastersEducationState: userMastersEducationState,
+                            userMastersStart: userMastersStart,
+                            userMastersEnd: userMastersEnd,
+                            userMastersPercentage: userMastersPercentage,
+                            mastersCertificateImageUrl: certificateImageUrl
+                        });
+                    console.log('user post-graduation/masters details updated successfully');
+                    displayMessage('user post-graduation/masters updated successfully', 'success');
+                    // document.getElementById('masters-edu-details-form').reset();
+                    openMastersModel(userId)
+                }
+                else {
+                    console.log("else")
+                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', document.id)
+                    await updateDoc(userMastersDocRef,
+                        {
+                            userMastersBoard: userMastersBoard,
+                            userMastersEducationName: userMastersEducationName,
+                            userMastersSpecialization: userMastersEduSpeName,
+                            userMastersEducationCity: userMastersEducationCity,
+                            userMastersEducationState: userMastersEducationState,
+                            userMastersStart: userMastersStart,
+                            userMastersEnd: userMastersEnd,
+                            userMastersPercentage: userMastersPercentage,
+                        });
+                    console.log('user post-graduation/masters updated successfully');
+                    displayMessage('user post-graduation/masters updated successfully', 'success');
+                    openMastersModel(userId)
+                }
+            })
+        }
+        else {
+            console.log('user graduation details not exist please save user school details first');
+            displayMessage('user graduation details not exist please save user school details first', 'success');
+        }
+    }
+    else {
+        console.log("please the fill the details");
+        displayMessage('please the fill the details', 'danger');
+    }
+})
+
 /**
  * edit or update the internship details;
  * @author mydev
