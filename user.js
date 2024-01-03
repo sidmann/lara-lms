@@ -592,7 +592,7 @@ document.getElementById('save-user-address-button').addEventListener('click', as
                 userAddressSnapshot.forEach(async(document)=>{
                     const userAddressData = document.data();
 
-                    const userAdditionalDocRef = collection(firestore, 'learners', userId, 'useraddress')
+                    const userAdditionalDocRef = doc(firestore, 'learners', userId, 'useraddress',document.id)
                     await updateDoc(userAdditionalDocRef,{
                         address:userAddressEdit,
                         postcode:userPostcodeEdit,
