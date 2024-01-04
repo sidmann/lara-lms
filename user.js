@@ -709,6 +709,7 @@ async function openUserSchoolModel(userId) {
             userSchoolDocId = userSchoolSnapshot.docs[0].id
             console.log(userSchoolDocId);
             const userSchoolData = userSchoolSnapshot.docs[0].data();
+            // console.log(userSchoolData)
             const fileName = getFileNameFromUrl(userSchoolData.schoolCertificateImageUrl);
             userSchoolBoardEdit.value = userSchoolData.userSchoolBoard || '';
             userSchoolNameEdit.value = userSchoolData.userSchoolEducationName || '';
