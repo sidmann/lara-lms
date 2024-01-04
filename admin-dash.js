@@ -241,7 +241,6 @@ uploadVideoContainerDisplay.addEventListener('click', () => {
 
 // -------------------------------Crud Of Topic ---------------------------------
 
-
 /**
  * 
  * Add a click event listener to open the topic modal
@@ -956,6 +955,231 @@ async function uploadVideosWithoutImage(topicName, videoFile, subTopicName) {
     }
 }
 //------------------------------------------------------------------------------------------------------
+
+// ----------------------------- Question Upload ---------------------------------------------
+
+const questionUploadContainer = document.querySelector(".question-upload-container");
+const questionFileSubmit = document.getElementById('question-file-submit');
+const fileUploadForm = document.getElementById('file-upload-form');
+const fileInput = document.getElementById('file-input')
+const fileName = document.getElementById("file-name");
+
+
+document.querySelector('#fileTopicDropdown').addEventListener('click', loadTopicsForFile);
+document.querySelector('#fileTopicDropdown').addEventListener('change', () => {
+    console.log("inside topic and subtopic eventlistenser");
+    document.querySelector('#fileSubTopicDropdown').addEventListener('click', loadSubtopicsForFile);
+    console.log("end topic and subtopic eventlistenser")
+});
+document.querySelector('#fileSubTopicDropdown').addEventListener('click', loadSubtopicsForFile);
+//After submit the subtopic it call 
+document.querySelector('#topicSubTopic').addEventListener('change', populateSubTopicList);
+
+myCumulativeQuestionUpload.addEventListener('click', function (event) {
+    if (questionUploadContainer) {
+        questionUploadContainer.style.display = 'block';
+        videoUploadContainer.style.display = 'none';
+        videoContainer.style.display = 'none';
+    }
+    else {
+        questionUploadContainer.style.display = 'none';
+        videoUploadContainer.style.display = 'none';
+        videoContainer.style.display = 'none';
+    }
+})
+
+/**
+ * Function to load topics from Firestore and populate the topic dropdown
+ */
+async function loadTopicsForFile() {
+    console.log("inside the load topic")
+    const fileTopicDropdown = document.querySelector("#fileTopicDropdown");
+    // Clear existing options
+    fileTopicDropdown.innerHTML = `<option value="">
+                    Loading ...
+                </option>`;
+
+
+    const querySnapshot = await getDocs(collection(firestore, 'courses'))
+    if (!querySnapshot.empty) {
+        // console.log(querySnapshot.docs)
+        fileTopicDropdown.removeEventListener('click', loadTopicsForFile)
+        fileTopicDropdown.innerHTML = ``;
+        const option = document.createElement('option')
+        option.innerHTML = `Please select`
+        fileTopicDropdown.appendChild(option)
+        querySnapshot.forEach(doc => {
+            const option = document.createElement("option");
+            // option.setAttribute('value', doc.data().name);
+            option.setAttribute('value', doc.id)
+            option.innerHTML = `${doc.id}`;
+            fileTopicDropdown.appendChild(option);
+        });
+    } else {
+        fileTopicDropdown.innerHTML = `<option value="">Please select</option>`
+        displayMessage('No topics loaded!', 'danger')
+    }
+}
+
+/**
+ * Function to load subtopics based on the selected topic
+ * @returns 
+ */
+async function loadSubtopicsForFile() {
+    // console.log("inside the subTopics")
+    const course = document.querySelector('#fileTopicDropdown').options[document.querySelector('#fileTopicDropdown').selectedIndex].value;
+    console.log("inside load subTopic");
+    console.log(course);
+    if (!course) {
+        displayMessage('Please select a topic!', 'danger')
+        return
+    }
+    // console.log(course);
+    const fileSubTopicDropdown = document.querySelector("#fileSubTopicDropdown");
+    fileSubTopicDropdown.innerHTML = `<option value="">
+        Loading ...
+    </option>`;
+    const courseDoc = await getDoc(doc(firestore, 'courses', `${course}`));
+    if (courseDoc.exists()) {
+        const topics = courseDoc.data().subCollection
+        // console.log(topics)
+        fileSubTopicDropdown.removeEventListener('click', loadSubtopicsForFile);
+        fileSubTopicDropdown.innerHTML = '';
+        const option = document.createElement('option');
+        option.innerHTML = 'Please select';
+        fileSubTopicDropdown.appendChild(option);
+        topics.forEach(topic => {
+            // console.log(topic);
+            const option = document.createElement("option");
+            option.setAttribute('value', topic);
+            option.innerHTML = `${topic}`;
+            fileSubTopicDropdown.appendChild(option);
+            console.log("end of the dropdown sub topic")
+        });
+    } else {
+        fileSubTopicDropdown.innerHTML = `<option value="">Please select</option>`;
+        displayMessage('No subtopic added to this topic!', 'danger');
+    }
+}
+
+/**
+ * questions file upload 
+ * 
+ */
+fileUploadForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const file = fileInput.files[0];
+    let topicName = null;
+    let subTopicName = null;
+    if (fileTopicDropdown.value) {
+        topicName = fileTopicDropdown.value;
+    }
+
+    if (fileSubTopicDropdown.value) {
+        subTopicName = fileSubTopicDropdown.value;
+    } else if (fileSubTopicDropdown.value === "custom" && fileTopicNameInput.value) {
+        subTopicName = subTopicNameInput.value;
+    }
+
+    console.log(fileName)
+    console.log(topicName)
+    console.log(subTopicName)
+    if (topicName && subTopicName) {
+        if (file) {
+            // Data with image
+            console.log("Data with image");
+            await uploadQuestionFile(file, topicName, subTopicName);
+        }
+        // displayMessage("Please selected the questionFile", "danger")
+        return;
+    } else {
+        // Error case
+        console.log("Please enter topic, subtopic name, and select a video");
+        displayMessage('Please enter topic, subtopic name, and select a video', 'danger');
+    }
+});
+
+
+/**
+ * upload question file 
+ * @param {*} file 
+ * @param {*} topicName 
+ * @param {*} subTopicName 
+ */
+async function uploadQuestionFile(file, topicName, subTopicName) {
+    console.log(file);
+    console.log("inside the upload question file ")
+
+    try {
+        if (file) {
+            const reader = new FileReader();
+            const questionsArray = [];
+            const batch = writeBatch(firestore);
+
+            reader.onload = function (event) {
+                const data = event.target.result;
+                const workbook = XLSX.read(data, { type: 'binary' });
+
+                // const sheetName = workbook.SheetNames[0];
+                workbook.SheetNames.forEach(sheetName => {
+                    const worksheet = workbook.Sheets[sheetName];
+                    const questions = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                    // 'questions' is an array of arrays where each inner array represents a row from the Excel file
+                    questions.forEach(questionData => {
+                        const [serialNumber, question, option1, option2, option3, option4, option5, correctAnswers] = questionData;
+                        if (!serialNumber && !question || !correctAnswers) {
+                            console.log('Invalid data found in the Excel sheet. Skipping this row.');
+                            return true; // Stop processing further rows
+                        }
+
+                        const options = [option1, option2, option3, option4].filter(option => option);
+                        if (option5) {
+                            options.push(option5);
+                        }
+
+                        let correctAnswersArray = [];
+                        if (correctAnswers !== undefined) {
+                            if (correctAnswers.includes(',')) {
+                                correctAnswersArray = correctAnswers.split(',').map(answer => answer.trim());
+                            } else {
+                                correctAnswersArray = [correctAnswers.trim()];
+                            }
+                        }
+
+                        console.log(questionData)
+                        questionsArray.push({
+                            questionText: question,
+                            options: [option1, option2, option3, option4, option5],
+                            correctAnswers: correctAnswersArray // Split correct answers into an array   
+                        });
+                        return false;
+                    });
+
+                    console.log(questionsArray)
+                    const questionRef = doc(collection(firestore, 'courses', `${topicName}`, `${subTopicName}`), 'LearningCumQuestions');
+                    batch.set(questionRef, {
+                        questionArrayGroup: questionsArray
+                    });
+                })
+
+                // Commit the batch operation to Firestore
+                batch.commit().then(() => {
+                    console.log('Questions uploaded successfully.');
+                    displayMessage("questionFile Uploaded successfully", "success")
+                }).catch(error => {
+                    console.error('Error uploading questions: ', error);
+                    displayMessage("Error uploading questionFile", "danger")
+                });
+            };
+            reader.readAsBinaryString(file)
+        }
+    } catch (error) {
+        console.error("Error uploading: ", error);
+        alert("Error uploading files. Please try again.");
+    }
+}
+//--------------------------------------------------------------------------------------------
 
 
 //-------------------------------------- display message function ------------------------------
