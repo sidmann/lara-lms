@@ -8,7 +8,9 @@
     <!-- Add Bootstrap CSS link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <link rel="icon" href="assets/images/laralogo.png" sizes="32x32">
     <!-- css Icon Font -->
@@ -65,65 +67,8 @@
             z-index: 5;
         }
 
-        /* Additional styles for navbar */
-        .navbar {
-            /* background: #fff; */
-            background-color: whitesmoke;
-            border: 3px solid beige;
-            /* border-bottom: 1px solid #ccc; */
-        }
-
-        .navbar-brand.custom-brand {
-            color: #007bff;
-            font-size: 2rem;
-        }
-
-        .nav-link.custom-brand {
-            /* color: #ffffff; */
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-right: 20px;
-        }
-
-        /* Responsive styles for small screens */
-        @media (max-width: 768px) {
-            .container {
-                /* background-color: #ffffff; */
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                border-radius: 10px;
-                margin-top: 20px;
-                background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
-            }
-
-            nav ul {
-                text-align: center;
-            }
-
-            nav ul li {
-                display: block;
-                margin-bottom: 10px;
-            }
-        }
-
-        @media (min-width: 576px) {
-            .nav-item {
-                transition: all 0.3s linear;
-            }
-
-            .nav-item:hover {
-                transform: translate(-0.5px, -3px);
-                scale: 1.01;
-            }
-
-            .logo {
-                transition: all 0.3s linear;
-            }
-
-            .logo:hover {
-                scale: 1.1;
-            }
-        }
+    /* Additional styles for navbar */
+        
 
         .container {
             background-color: #ffffff;
@@ -248,6 +193,11 @@
         input[type="password"]::-ms-reveal {
             display: none;
         }
+        .navbar .container-fluid{
+            
+            max-width: 100%;
+            width: 1700px;
+        }
     </style>
 </head>
 
@@ -261,29 +211,34 @@
     </div>
     <div id="main" class="hidden position-relative">
         <!-- Navigation -->
-        <div class="p-2">
-            <nav class="navbar shadow-sm rounded-3 navbar-expand-lg" id="header">
-                <div class="container-fluid">
-                    <a href="home.html">
-                        <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
-                            width="150px" title="Home"></img>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="">
+            <nav class="navbar  navbar-expand-lg" id="header">
+                <div class="container-fluid shadow">
+                    <div class="logo">
+                        <!-- <img src="./assets/img/logo/laralogo.png" alt="Logo"> -->
+                        <a href="index.html">
+                            <img src="./assets/img/logo/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
+                                title="Home"></img>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-icon">
 
-                        <div class="d-flex justify-content-between w-100">
-                            <div class="">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link custom-brand" href="index.html">Home</a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link custom-brand" href="#">Upcoming batch</a>
-                                    </li> -->
+                        <button class="navbar-toggler logb text-white border-0" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
+                            </button>
+    
+                    </div>
+                
+    
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="d-flex flex-column-reverse flex-lg-row justify-content-between w-100 me-5">
+                            <ul class="navbar-nav nav-long me-auto mb-2 mb-lg-0 p-0">
+                    
+                                    
+                                    
                                     <!-- <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">Today's Schedule</a>
                                     </li> -->
@@ -293,31 +248,34 @@
                                     <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">Contact Us</a>
                                     </li> -->
-                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
-                                        <a class="nav-link custom-brand active" aria-current="page">Profile</a>
-                                    </li>
-                                    <li class="nav-item d-none loggedIn" id="userAppbar">
-                                        <a class="nav-link custom-brand active" aria-current="page">Profile</a>
-                                    </li>
-                                    <li class="nav-item d-none loggedIn" id="tpoAppbar">
-                                        <a class="nav-link custom-brand active" aria-current="page">Profile</a>
-                                    </li>
-                                    <li class="nav-item d-none loggedIn" id="userAppbar">
-                                        <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <button class="nav-link custom-brand" data-bs-toggle="modal"
-                                            data-bs-target="#logoutConfirmationModal">
-                                            Logout
-                                        </button>
-                                    </li> -->
+                                    
+                                    
+                                    
                                 </ul>
                             </div>
                             <div>
-                                <ul class="navbar-nav mb-2 mb-lg-0">
+                                <ul class="navbar-nav mb-2 mb-lg-0 me-5">
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand  text-black fw-bold" href="index.html">Home</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand  text-black fw-bold active" aria-current="page">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand  text-black fw-bold active" aria-current="page">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                        <a class="nav-link custom-brand  text-black fw-bold active" aria-current="page">Profile</a>
+                                    </li>
+                                    <!-- <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand  text-black fw-bold" href="user-dashbroad.html">Dashboard</a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link custom-brand  text-black fw-bold" href="#">Upcoming batch</a>
+                                    </li> -->
                                     <li class="nav-item">
                                         <!-- Logout button with data-toggle and data-target attributes -->
-                                        <button class="nav-link custom-brand" data-bs-toggle="modal"
+                                        <button class="nav-link custom-brand  text-black fw-bold" data-bs-toggle="modal"
                                             data-bs-target="#logoutConfirmationModal">
                                             Logout
                                         </button>
@@ -345,7 +303,7 @@
                     <h2 class="gi-title">User Profile<span></span></h2>
                 </div>
                 <!-- Account page navigation-->
-                <hr class="mt-0 mb-4">
+                <!-- <hr class="mt-0 mb-4"> -->
                 <div class="row">
                     <div class="col-md-4">
                         <!-- Profile picture card-->
@@ -601,12 +559,12 @@
                                                         <span class="gi-register-wrap gi-register-full">
                                                             <label class="mt-3">Upload School/10th Marks Card
                                                                 Certificate</label>
-                                                            <input type="file" name="school-education-cert mt-3"
+                                                            <input type="file" name="school-education-cert"
                                                                 id="school-education-cert" style="height: auto;">
                                                             <span id="school-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container" style="display: none;">
+                                                            <div id="file-school-link-container" style="display: none;">
                                                                 <a href="#" id="school-cert-file-link"
                                                                     target="_blank">Selected File: </a>
                                                             </div>
@@ -731,12 +689,12 @@
                                                         <span class="gi-register-wrap gi-register-full">
                                                             <label class="mt-3">Upload Intermediate/12th Marks Card
                                                                 Certificate</label>
-                                                            <input type="file" name="inter-education-cert mt-3"
+                                                            <input type="file" name="inter-education-cert"
                                                                 id="inter-education-cert" style="height: auto;">
                                                             <span id="inter-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container" style="display: none;">
+                                                            <div id="file-inter-link-container" style="display: none;">
                                                                 <a href="#" id="inter-cert-file-link"
                                                                     target="_blank">Selected File: </a>
                                                             </div>
@@ -809,10 +767,10 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>College Name/Dept Name*</label>
+                                                            <label>Graduation Specialization*</label>
                                                             <input type="text" name="degree-specialization-name"
                                                                 id="degree-specialization-name"
-                                                                placeholder="Enter the Graduation Specialization name"
+                                                                placeholder="Enter Graduation Specialization name"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-name-error" class="error-message"
                                                                 style="color: red"></span>
@@ -874,7 +832,7 @@
                                                             <span id="degree-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container" style="display: none;">
+                                                            <div id="file-degree-link-container" style="display: none;">
                                                                 <a href="#" id="degree-cert-file-link"
                                                                     target="_blank">Selected File: </a>
                                                             </div>
@@ -1005,12 +963,12 @@
                                                             <label class="mt-3">Upload Post-Graduation/Masters Marks
                                                                 Card
                                                                 Certificate</label>
-                                                            <input type="file" name="masters-education-cert mt-3"
+                                                            <input type="file" name="masters-education-cert"
                                                                 id="masters-education-cert" style="height: auto;">
                                                             <span id="masters-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container" style="display: none;">
+                                                            <div id="file-masters-link-container" style="display: none;">
                                                                 <a href="#" id="masters-cert-file-link"
                                                                     target="_blank">Selected File: </a>
                                                             </div>
@@ -1138,12 +1096,12 @@
                                                         <span class="gi-register-wrap gi-register-full">
                                                             <label class="mt-3">Upload Internship
                                                                 Certificate(Optional)</label>
-                                                            <input type="file" name="internship-cert mt-3"
+                                                            <input type="file" name="internship-cert"
                                                                 id="internship-cert" style="height: auto;">
                                                             <span id="internship-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container" style="display: none;">
+                                                            <div id="file-internship-link-container" style="display: none;">
                                                                 <a href="#" id="internship-cert-file-link"
                                                                     target="_blank">Selected File: </a>
                                                             </div>
@@ -1772,7 +1730,7 @@
         <div class="container-fluid cntfld-fw" id="footer">
             <div class="container-fluid ftr-bg">
                 <div class="row">
-                    <div class="col-lg-11 col-md-12 col-sm-12 pd-t30 div-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
                         <div class="row text-center text-xs-center text-sm-left text-md-left">
                             <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
                                 <h5>About Us</h5>
@@ -1985,6 +1943,8 @@
     <script src="assets/js/main.js"></script>
 
     <script type="module" src="user.js"></script>
+    <script src="assets/js/script.js"></script>
+
 
 </body>
 

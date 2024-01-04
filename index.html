@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    <!-- Bootstrap CSS -->
+
     <title>LARA</title>
 
     <!-- site Favicon -->
@@ -35,24 +38,36 @@
     <link rel="stylesheet" id="main_style" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/vendor/custom.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- GSAP -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+        integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+        integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollToPlugin.min.js"
+        integrity="sha512-gXXZigEOXAVnGZ2otmK1DqTFK/vF87A+x6Owjf5CN+zVxcg9bLg3F6J1s9yGnFFT08QLt7G0vI3XNWJVue260w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
-        body {
-            min-height: 100vh;
-            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
-            background: linear-gradient(9deg, #91a88f, #c7eacb)
-        }
+        /* body {
+            min-height: 100vh; */
+        /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+        /* background: linear-gradient(9deg, #91a88f, #c7eacb)
+        } */
 
         /* Additional styles for navbar */
-        .navbar {
+        /* .navbar {
             background-color: whitesmoke;
-            border: 3px solid beige;
-            /* background-color: #f8e624; */
-            /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
-            /* border-bottom: 1px solid #ccc; */
-        }
+            border: 3px solid beige; */
+        /* background-color: #f8e624; */
+        /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
+        /* border-bottom: 1px solid #ccc; */
+        /* }
 
         .navbar-brand.custom-brand {
             color: #007bff;
@@ -89,16 +104,16 @@
         }
 
         footer {
-            background-color: black;
-            /* border: 3px solid wheat; */
-            /* background: rgb(49, 216, 219); */
-        }
+            background-color: black; */
+        /* border: 3px solid wheat; */
+        /* background: rgb(49, 216, 219); */
+        /* }
 
         .misc {
             display: grid;
-            grid-template-columns: repeat(auto-fit, 1fr);
-            /* gap: 10px 20px; */
-        }
+            grid-template-columns: repeat(auto-fit, 1fr); */
+        /* gap: 10px 20px; */
+        /* }
 
         .img-cap {
             width: auto;
@@ -125,13 +140,14 @@
             transform: translateY(-2px);
             border: 1px solid black;
             box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.7) !important;
-        }
+        /* } */
 
         footer {
             /* background: linear-gradient(0deg, #36dadc 0%, #64bcf3 100%); */
             background-color: #565656;
             font-weight: lighter;
             color: white;
+
         }
 
         .hover-scale {
@@ -149,7 +165,7 @@
         }
 
         /* Responsive styles for small screens */
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .container {
                 padding: 10px;
             }
@@ -166,11 +182,7 @@
 
         @media (min-width: 992px) {
 
-            /* .navbar-nav:hover .products:hover .products-container {
-                display: block;
-                transform-origin: top;
-                animation: opacityEffect 0.5s linear forwards;
-            } */
+           
 
             .nav-subitem {
                 position: relative;
@@ -247,10 +259,10 @@
                 scale: 1.2;
             }
 
-        }
+        } */
 
         /* Body Styling sholud be */
-        h2 {
+        /* h2 {
             position: relative;
             font-weight: bold;
             width: 100%;
@@ -306,7 +318,6 @@
             border-radius: 5px;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             margin-right: 15px;
-            /* display: flex; */
 
         }
 
@@ -553,7 +564,7 @@
             background: linear-gradient(45deg, #6001, transparent);
             width: 33rem;
             padding: 14px;
-        }
+        } */
 
         /* body {
   margin: 0;
@@ -566,7 +577,7 @@
   overflow: hidden;
 } */
 
-        .main-tag-pts {
+        /* .main-tag-pts {
             text-align: center;
         }
 
@@ -609,13 +620,12 @@
 
             #package {
                 width: 100%;
-                /* Adjust width as needed */
                 margin: 22px auto;
             }
-        }
+        } */
 
         /* Add your global styles here */
-        .main-tg-pts {
+        /* .main-tg-pts {
             text-align: center;
             font-size: x-large;
             justify-content: center;
@@ -635,10 +645,10 @@
             flex: 1;
             padding: 10px;
             text-align: center;
-        }
+        } */
 
         /* Media query for smaller screens */
-        @media (min-width: 1040px) {
+        /* @media (min-width: 1040px) {
             .video-container {
                 max-width: 100%;
             }
@@ -670,10 +680,10 @@
             iframe {
                 scale: 0.8;
             }
-        }
+        } */
 
         /* Keep span content on a single line */
-        .left-div span,
+        /* .left-div span,
         .right-div span {
             white-space: nowrap;
         }
@@ -737,9 +747,7 @@
 
         .video-container {
             min-width: fit-content;
-            /* Ensure video doesn't exceed container width */
             height: auto;
-            /* Maintain aspect ratio */
         }
 
         .right-container {
@@ -747,10 +755,10 @@
             flex-direction: column;
             justify-content: flex-end;
             align-items: flex-end;
-        }
+        } */
 
         /* Add gap between the two divs */
-        .softskill {
+        /* .softskill {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -786,7 +794,6 @@
         .container-one .carousel-item img {
             height: 150px;
             max-width: 100%;
-            /* width: 100%; */
             object-fit: contain;
         }
 
@@ -804,14 +811,13 @@
             max-width: 100%;
             max-height: 80px;
             object-fit: contain;
-            /* Increase the height */
             font-weight: bold;
             padding: 20px 10px;
         }
-
+ */
 
         /* Styles for elements inside the .container-two class */
-        .container-two .card {
+        /* .container-two .card {
             background-color: white;
             border: none;
             width: 100%;
@@ -819,7 +825,6 @@
             margin: 0 auto;
             height: 300px;
             box-sizing: border-box;
-            /* Include padding and border in the element's total width and height */
         }
 
         .container-two .user-content {
@@ -840,38 +845,715 @@
         .container-two {
             position: relative;
             background: white;
+        /* } */
+
+
+        /* .program-top {
+            margin-top: 1rem;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url(assets/img/background/background3.jpg);  */
+        /* background: linear-gradient(275deg,#ffa556,#ff7700); */
+        /* background-size: cover;
+            background-repeat: no-repeat;
+            background-position:bottom;
+            object-fit: cover;
+            height:30vh;
+            display: flex;
+            justify-content: flex-end;
+            
+            
         }
+        h1:hover, h6:hover {
+            color: #000000; 
+        }
+        .program-top {
+            padding-top:1px;
+            padding-left: 50px;
+            flex-direction: column;
+            justify-items: end;
+        }
+
+        h1, h6, p {
+            margin: 10px 0;
+        }
+        .cont-fluid {
+            max-width: 100%;
+            width: 1800px;
+        }
+        .program-top h1{
+            color:#00192e;
+            margin-top: 100px;
+        }
+        .program-top p{
+            color:white;
+            font-weight: 500;
+        }
+        .program-top-1 h6{
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+
+        }
+        .col-sm-2{
+            font-size: 20px;
+            color:#00192e
+        }
+        .col-sm-1{
+            font-size: 20px;
+        }
+        .col-sm-9{
+            color:rgb(62, 62, 62);
+            font-size: 1.1rem;
+        }
+        @media (max-width: 1000px) {
+            .col{
+                box-shadow: 0px 0px 5px rgb(175, 175, 175);
+                
+            }
+        } */
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            /* height: 100%; */
+            width: 100%;
+            background: linear-gradient(45deg, #0262b0, #0285f1);
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* font-family: 'Roboto'; */
+
+
+        }
+
+        #main {
+            position: relative;
+            overflow: hidden;
+
+        }
+
+        .one {
+            height: 70vh;
+            width: 100vw;
+            /* background:linear-gradient(45deg,#002848, #00192e); */
+            margin: 0;
+            border-color: transparent;
+            /* background-color: #00192e; */
+
+            position: relative;
+            /* background-image: url(assets/img/background/background1.png); */
+            /* background-repeat: no-repeat; */
+
+        }
+
+        .one .container-fluid {
+            max-width: 100%;
+            width: 1700px;
+        }
+
+
+        .down-arrow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+
+        .program-top {
+            max-height: 100vh;
+            /* position: absolute; */
+            bottom: 10%;
+            left: 5%;
+            width: 60%;
+            /* background-color: #ffa556; */
+        }
+
+        .program-top h1 {
+            /* font-size: 5.5rem; */
+            font-weight: 500;
+            /* font-family: 'Roboto'; */
+            /* font-family: 'Open+Sans'; */
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+            ;
+            /* font-family: 'Poppins,sans-serif'; */
+            line-height: 1.5;
+            color: white;
+            margin-bottom: 1rem;
+            margin-top: 5rem;
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+        }
+
+        .program-top p {
+            font-weight: 100;
+            color: white;
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+            color: #ffa556;
+            font-size: 2rem;
+            font-weight: 500;
+
+        }
+
+        .program-top-img {
+            /* position: absolute; */
+            /* right: 5%;
+            bottom:15%; */
+            margin-top: 1%;
+            width: 40%;
+        }
+
+        .program-top-img img {
+            width: 750px;
+            height: 600px;
+        }
+
+        .program-top-1 {
+            /* max-height: 100vh; */
+            width: 100vw;
+            /* background-color: #00192e; */
+            border-color: transparent;
+            /* position: relative; */
+            display: flex;
+            margin: 0;
+            /* justify-content: center; */
+            align-items: center;
+            flex-direction: column;
+            padding: 0% 5%;
+            /* width:40vw; */
+            /* color: rgba(0, 0, 0, 0); */
+            color: white;
+            margin-top: 3%;
+        }
+
+        .program-top-1 h6 {
+            /* font-size: 2.5rem; */
+            /* font-size:40px; */
+            font-weight: 200;
+            width: 100%;
+            line-height: 2;
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+            ;
+
+        }
+        
+
+        .program-top-1>h6>i {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .program-top-1 img,
+        .program-top-1 .card-body {
+            /* transform: scale(0.9); */
+            transition-delay: 0.3s;
+            transition: transform 0.5s ease;
+        }
+
+
+        .program {
+            max-height: 100vh;
+            width: 100vw;
+            /* background-color: #00192e; */
+            /* background:linear-gradient(45deg,#002848, #00192e); */
+            border-color: transparent;
+            margin: 0;
+            position: relative;
+            padding: 0% 5%;
+            display: flex;
+        }
+
+        .program h6 {
+            font-size: 2rem;
+            font-weight: 200;
+            width: 100%;
+            line-height: 1.2;
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+
+
+        }
+
+        .program h5 {
+            font-size: 2rem;
+            font-weight: 200;
+            width: 100%;
+            line-height: 1.2;
+            color: rgba(0, 0, 0, 0);
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+            ;
+
+        }
+
+        .simple-text h2 {
+            color: #ffa556;
+            font-size: 4rem;
+            font-weight: 100;
+            width: 100%;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 2rem;
+            font-family: Cambria, Cochin, Georgia, Times, serif;
+            ;
+            margin-left: 6.5rem;
+            margin-top: 5rem;
+
+        }
+
+        .enroll-button {
+            background-color: #00192e;
+            margin-left: 6rem;
+            margin-bottom: 2rem;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: white;
+            transition: background-color 0.3s ease;
+
+        }
+
+        .enroll-button:hover {
+            background-color: #ff8c00;
+        }
+
+        @keyframes blinkColorChange {
+            0% {
+                color: #0FFFFF;
+            }
+
+            50% {
+                color: #00ffaa;
+            }
+
+            100% {
+                color: #00bd74;
+            }
+        }
+
+        .blink {
+            animation: blinkColorChange 0.5s infinite;
+        }
+
+        @keyframes blinkColorChange {
+            0% {
+                color: #ffa556;
+            }
+
+            50% {
+                color: #00ff00;
+            }
+
+            100% {
+                color: #ffa556;
+            }
+        }
+
+        .blinking-question-mark {
+            animation: blinkColorChange 1s infinite;
+            color: #00192e;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(0);
+            }
+
+            25% {
+                transform: rotate(5deg);
+            }
+
+            /* 50% { transform: rotate(-5deg); } */
+            75% {
+                transform: rotate(5deg);
+            }
+
+            100% {
+                transform: rotate(0);
+            }
+        }
+
+        .shake {
+            animation: shake 0.8s ease-in-out;
+        }
+
+        @keyframes waveColorChange {
+            0% {
+                color: #B2FFFF;
+            }
+
+            50% {
+                color: #FFEF00;
+            }
+
+            100% {
+                color: #00FFBF;
+            }
+        }
+
+        /* Apply the wave effect to the high-light class */
+        .high-light {
+            display: inline-block;
+            animation: waveColorChange 2s infinite;
+        }
+
+
+
+        /* @media (max-width: 370px) {
+            .display-2 {}
+
+        } */
+
+        @media (max-width: 576px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .bottom-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .program-top,
+            .program-top-img {
+                width: 100%;
+                text-align: center;
+            }
+
+            .program-top h1 {
+                margin-top: 2rem;
+            }
+
+            .program-top-img img {
+                margin-top: -3rem;
+                width: 400px;
+                height: 350px;
+            }
+
+            .program-top-1 {
+                margin-top: 2rem;
+            }
+
+            .program-top p {
+                color: #ffa556;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+
+            .simple-text h2 {
+                font-size: 1.9rem;
+                margin-left: 2.5rem;
+                width: 100%;
+            }
+
+            .program h5 {
+                font-size: 1.3rem;
+
+            }
+
+            .program h6 {
+                font-size: 1.3rem;
+            }
+
+
+
+
+
+
+        }
+
+        @media (min-width: 577px) and (max-width: 768px) {
+            .display-2 {
+                font-size: 3rem;
+            }
+
+            .program-top h1 {
+                margin-top: 3rem;
+            }
+
+            .program-top-img img {
+                margin-top: 1rem;
+                width: 450px;
+                height: 350px;
+            }
+
+            .program-top-1 {
+                margin-top: -30%;
+            }
+
+            .program-top {
+                margin-left: 5%;
+            }
+
+            .program-top p {
+                color: #ffa556;
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+
+            .simple-text h2 {
+                font-size: 2rem;
+                margin-left: 3rem;
+                width: 100%;
+            }
+
+            .program h5 {
+                font-size: 1.4rem;
+
+            }
+
+            .program h6 {
+                font-size: 1.4rem;
+            }
+
+            /* .simple-text h2 {
+            font-size: 2.2rem;
+            margin-left: 3.8rem;
+            width: 100%;
+            }
+            .course-details-img img{
+                width:1080px;
+                height:480px"
+            }
+            .program h5{
+                font-size: 1.4rem;
+                
+            }
+            .program h6{
+                font-size: 1.4rem;
+            } */
+        }
+
+
+        @media (min-width: 769px) and (max-width: 992px) {
+            .display-2 {
+                font-size: 4rem;
+            }
+
+            .program-top h1 {
+                margin-top: 4rem;
+            }
+
+            .program-top-img img {
+                margin-top: 1rem;
+                width: 500px;
+                height: 400px;
+            }
+
+            .program-top-1 {
+                margin-top: -15%;
+            }
+
+            .program-top {
+                margin-left: 5%;
+            }
+
+            .program-top p {
+                color: #ffa556;
+                font-size: 1.5rem;
+                font-weight: 500;
+            }
+
+            .simple-text h2 {
+                font-size: 2.2rem;
+                margin-left: 3.8rem;
+                width: 100%;
+            }
+
+            .course-details-img img {
+                width: 1080px;
+                height: 480px"
+
+            }
+
+            .program h5 {
+                font-size: 1.4rem;
+
+            }
+
+            .program h6 {
+                font-size: 1.4rem;
+            }
+
+
+        }
+
+        @media (min-width: 993px) and (max-width: 1200px) {
+            .display-2 {
+                font-size: 5rem;
+            }
+
+
+            .program-top-1 {
+                margin-top: -5%;
+            }
+
+
+            .program-top h1 {
+                font-weight: 500;
+                font-family: Cambria, Cochin, Georgia, Times, serif;
+                width: 90%;
+                /* font-family: 'Poppins,sans-serif'; */
+                line-height: 1.1;
+                color: white;
+                margin-bottom: 1rem;
+
+                font-family: Cambria, Cochin, Georgia, Times, serif;
+            }
+
+            .program-top-img img {
+                width: 600px;
+                height: 480px;
+            }
+
+            .program-top p {
+                color: #ffa556;
+                font-size: 1.6rem;
+                font-weight: 500;
+            }
+
+            .program-top {
+                margin-left: 5%;
+            }
+
+            .simple-text h2 {
+                font-size: 3rem;
+                margin-left: 5rem;
+                width: 100%;
+            }
+
+            .course-details-img img {
+                width: 1080px;
+                height: 480px"
+
+            }
+
+            .program h5 {
+                font-size: 1.6rem;
+
+            }
+
+            .program h6 {
+                font-size: 1.6rem;
+            }
+
+
+
+        }
+
+        @media (min-width: 1201px) and (max-width: 1700px) {
+            .program-top {
+                margin-left: 5%;
+            }
+            .program-top-1 {
+                margin-top: 3%;
+            }
+
+            .program-top p {
+                color: #ffa556;
+                font-size: 1.8rem;
+                font-weight: 500;
+            }
+
+            .simple-text h2 {
+                font-size: 4rem;
+                margin-left: 5.5rem;
+                width: 100%;
+            }
+
+            .course-details-img img {
+                width: 1180px;
+                height: 500px"
+
+            }
+
+            .program h5 {
+                font-size: 1.8rem;
+
+            }
+
+            .program h6 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width:992px) {
+            .program .course-details {
+                display: block;
+            }
+
+            .program .course-details-img {
+                display: none;
+            }
+            .enroll{
+            text-align: center;
+            }
+            .enroll-button {
+            margin-left: 0rem;
+            margin-bottom: 2rem;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: white;
+            transition: background-color 0.3s ease;
+
+        }
+        }
+        
     </style>
 </head>
 
 <body class="position-relative">
-    <div class="overlay" id="overlay">
+    
+    <div id="targetSection">
+        <div class="overlay" id="overlay">
         <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
     </div>
-    <!-- Navigation -->
-    <div id="main">
-        <nav class="navbar m-2 mt-2 shadow-lg rounded-3 navbar-expand-lg pt-0 mt-0 position-relative" id="header">
-            <div class="container-fluid">
-                <a href="index.html">
-                    <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home" width="150px"
-                        title="Home"></img>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="d-flex justify-content-between w-100">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-0">
-                            <li class="nav-item">
-                                <a class="nav-link custom-brand active" href="#">Home</a>
-                            </li>
-                            <!-- <li class="nav-item p-0">
+        <!-- Navigation -->
+        <div id="main">
+            <div class="one">
+
+                <nav class="navbar shadow-lg  navbar-expand-lg  position-relative" id="header">
+                    <div class="container-fluid">
+                        <div class="logo">
+                            <!-- <img src="./assets/img/logo/laralogo.png" alt="Logo"> -->
+                            <a href="index.html">
+                                <img src="./assets/img/logo/laralogo.png" class="navbar-brand custom-brand logo"
+                                    alt="Home" title="Home"></img>
+                            </a>
+                        </div>
+                        <div class="menu-icon">
+
+                            <button class="navbar-toggler logb text-white border-0" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
+                            </button>
+
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="d-flex flex-column-reverse flex-lg-row justify-content-between w-100 me-5">
+                                <ul class="navbar-nav nav-long me-auto mb-2 mb-lg-0 p-0">
+
+                                    <!-- <li><a href="#">Home</a></li> -->
+
+                                    <!-- <li class="nav-item p-0">
                                 <a class="nav-link custom-brand" href="#">Upcoming Batches</a>
                                 <div class="products-container p-2 bg-white position-absolute d-none"
                                     style="z-index: 1;">
@@ -885,46 +1567,46 @@
                                     </ul>
                                 </div>
                             </li> -->
-                            <!-- <li class="nav-item p-0">
+                                    <!-- <li class="nav-item p-0">
                                 <a class="nav-link custom-brand" href="products.html">Today's Schedule</a>
                                 <div class="products-container p-2 bg-white position-absolute d-none"
                                     style="z-index: 1;">
                                 </div>
                             </li> -->
-                            <!-- <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                 <a class="nav-link custom-brand" href="aboutus.html">About Us</a>
                             </li> -->
-                            <!-- <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                 <a class="nav-link custom-brand" href="contactus.html">Contact Us</a>
                             </li> -->
-                            <li class="nav-item d-none loggedIn active" id="adminAppbar">
-                                <a class="nav-link custom-brand" href="#">Profile</a>
-                            </li>
-                            <li class="nav-item d-none loggedIn" id="learnerAppbar">
-                                <a class="nav-link custom-brand" href="user.html">Profile</a>
-                            </li>
-                            <li class="nav-item d-none loggedIn" id="tpoAppbar">
-                                <a class="nav-link custom-brand" href="#">Profile</a>
-                            </li>
-                            <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                                    <!-- <li class="nav-item d-none loggedIn active" id="adminAppbar">
+                                    <a class="nav-link custom-brand" href="#">Profile</a>
+                                </li>
+                                <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                                    <a class="nav-link custom-brand" href="user.html">Profile</a>
+                                </li>
+                                <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                    <a class="nav-link custom-brand " href="#">Profile</a>
+                                </li> -->
+                                    <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                 <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
                             </li> -->
-                            <!-- <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                    <!-- <li class="nav-item d-none loggedIn" id="tpoAppbar">
                                 <a class="nav-link custom-brand" href="#">Tpo Dashboard</a>
                             </li> -->
-                            <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                                    <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                 <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
                             </li> -->
-                            <!-- <li class="nav-item loggedIn">
-                                <button class="nav-link custom-brand" data-bs-toggle="modal"
-                                    data-bs-target="#logoutConfirmationModal">
-                                    Logout
-                                </button>
-                            </li> -->
-                        </ul>
-                        <div>
-                            <ul class="navbar-nav mb-2 mb-lg-0">
-                                <!-- <li class="nav-item">
+                                    <li class="nav-item loggedIn d-none">
+                                        <button class="nav-link custom-brand text-white fw-bold" data-bs-toggle="modal"
+                                            data-bs-target="#logoutConfirmationModal">
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <ul class="navbar-nav nav-short mb-2  mb-lg-0 text">
+                                        <!-- <li class="nav-item">
                                     <a class="nav-link custom-brand position-relative" href="cart.html">
                                         <i class="fa-solid fa-cart-shopping me-0"></i>
                                         <span class="position-absolute badge rounded-pill bg-danger p-1 px-2"
@@ -932,27 +1614,248 @@
                                         <span class="ps-0 ms-0">Cart</span>
                                     </a>
                                 </li> -->
-                                <li class="nav-item loggedIn">
-                                    <button class="nav-link custom-brand" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal">
-                                        Logout
-                                    </button>
-                                </li>
-                                <li class="nav-item loggedOut">
-                                    <a class="nav-link custom-brand" href="signup.html">Sign Up</a>
-                                </li>
-                                <li class="nav-item loggedOut">
-                                    <a class="nav-link custom-brand" href="login.html">Login</a>
-                                </li>
-                            </ul>
+                                        <li class="nav-item">
+                                            <a class="nav-link custom-brand active  text-black fw-bold"
+                                                href="#">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link custom-brand  text-black fw-bold" href="signup.html">Sign
+                                                Up</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link custom-brand text-black fw-bold"
+                                                href="login.html">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- <div data-scroll data-scroll-speed="-3" class="program-top"> -->
+                <div class="bottom-nav container-fluid  d-flex justify-content-between">
+                    <div class="program-top">
+                        <h1 class="display-2 fs-md-4 fs-lg-5 fs-xl-6" style="white-space: nowrap;">Lara Technologies
+                            <br> DSA (LeetCode) <br> Program
+                        </h1>
+                        <p>Since 2005, with more than 60,000
+                            alumni
+                        </p>
+                    </div>
+                    <div class="program-top-img">
+                        <img class="img-fluid" src="assets/img/background/background1.jpg.png" alt="">
+                    </div>
+
+                </div>
+                <!-- <div class="down-arrow" id="downArrow">
+                <i class="fas fa-chevron-down"></i>
+            </div> -->
+            </div>
+
+
+            <div class="program-top-1">
+                <!-- <h6><i class="fa-solid fa-circle-question fa-sm"></i> Are you aiming for FAANG-type companies <span
+                    class="question-mark">❓</span></h6> -->
+                <!-- <h6> Do you aspire to make a mark in the IT industry
+                        through your coding prowess ❓</h6>
+                    <h6> Are you looking for a minimum package of 10 LPA as a
+                        fresher ❓</h6>
+                    <h6> Do you desire a salary jump of 5X ❓</h6>
+                    <h6> Do you want to learn LeetCode and HackerRank
+                        challenges absolutely free ❓</h6>
+                    <h6 class="mb-4"> Do you wish to tackle LeetCode and
+                        HackerRank challenges after your college hours or office hours ❓</h6>
+                    <h6>If so, you've come to the right place!</h6>
+                    <h6>We are pleased to inform you about the Advanced Training Program and placements offered to the toppers
+                        of all branches.</h6> -->
+                <div class="row justify-content-between w-100" data-aos="slide-up" data-aos-delay="50"
+                    data-aos-duration="1000">
+                    <div class="col-sm-7 order-sm-1 order-2 qu text-left align-items-center d-flex">
+                        <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6"> Are you aiming for <span class="high-light">
+                                FAANG</span>-type companies
+                            <span><i class="fa-solid fa-question" style="color:#ffa556"></i></span>
+                        </h6>
+                    </div>
+                    <div class="col-sm-4  twist order-sm-2 order-1">
+                        <div class="card card-body mt-4" style="border-radius:50%;">
+                            <img class="image-fluid" style="border-radius:50%;max-width:600px;"
+                                src="assets/img/logo/faang.png" alt="">
                         </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </div>
+                <div class="row justify-content-between w-100">
+                    <div class="col-sm-4 twist">
+                        <div class="card card-body mt-4 " style="border-radius:50%;">
+                            <img class="image-fluid" style="border-radius:50%;max-width:500px;"
+                                src="assets/img/logo/aspire.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-7 qu text-left align-items-center d-flex ">
+                        <h6 class="fs-2 fs-md-4 fs-lg-5 fs-xl-6"> Do you aspire to make a mark in the <span
+                                class="high-light"> IT industry</span>
+                            through your coding prowess <span><i class="fa-solid fa-question"
+                                    style="color:#ffa556"></i></span></h6>
+                    </div>
+                </div>
+                <div class="row justify-content-between w-100">
+                    <div class="col-sm-7 order-sm-1 order-2 qu text-left align-items-center d-flex">
+                        <h6 class="fs-2 fs-md-4 fs-lg-5 fs-xl-6"> Are you looking for a minimum package of <span
+                                class="high-light">10 LPA as a fresher</span>
+                            <span><i class="fa-solid fa-question" style="color:#ffa556"></i></span>
+                        </h6>
+                    </div>
+                    <div class="col-sm-4 twist order-sm-2 order-1">
+                        <div class="card card-body mt-4 " style="border-radius:50%;">
+                            <img class="image-fluid" style="border-radius:50%;max-width:500px;"
+                                src="assets/img/logo/software-salaryintro.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between w-100">
+                    <div class="col-sm-4 twist">
+                        <div class="card card-body mt-4 " style="border-radius:50%;">
+                            <img class="image-fluid" style="border-radius:50%;max-width: 500px;"
+                                src="assets/img/logo/salary-increase.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-7 qu text-left align-items-center d-flex ">
+                        <h6 class="fs-2 fs-md-4 fs-lg-5 fs-xl-6"> Do you desire a <span class="high-light">salary jump
+                                of 5X</span> <span><i class="fa-solid fa-question" style="color:#ffa556"></i></span>
+                        </h6>
+                    </div>
+                </div>
 
-    <!-- Main Body Content -->
-    <div id="mainDiv">
+                <div class="row justify-content-between w-100">
+                    <div class="col-sm-7 order-sm-1 order-2 qu text-left align-items-center d-flex">
+                        <h6 class="fs-2 fs-md-4 fs-lg-5 fs-xl-6"> Do you want to learn LeetCode and HackerRank
+                            challenges absolutely <span class="high-light">free</span>
+                            <span><i class="fa-solid fa-question" style="color:#ffa556"></i></span>
+                        </h6>
+                    </div>
+                    <div class="col-sm-4 twist order-sm-2 order-1">
+                        <div class="card card-body mt-4 " style="border-radius:50%;">
+                            <img class="image-fluid" style="border-radius:50%;max-width:500px;"
+                                src="assets/img/logo/leetcode and hacker rank.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between w-100 mb-5">
+                    <div class="col-sm-4 twist">
+                        <div class="card card-body mt-4 " style="border-radius:50%;">
+                            <img class="image-fluid" style="border-radius:50%;max-width:430px;"
+                                src="assets/img/logo/challenges.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-7 qu text-left align-items-center d-flex ">
+                        <h6 class="fs-2 fs-md-4 fs-lg-5 fs-xl-6"> Do you wish to <span class="high-light">tackle
+                                LeetCode and
+                                HackerRank</span> challenges after your college hours or office hours <span><i
+                                    class="fa-solid fa-question" style="color:#ffa556"></i></span></h6>
+                    </div>
+                </div>
+                <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6">If so, you've come to the right place!</h6>
+                <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6">We are pleased to inform you about the Advanced
+                    Training Program and placements offered to the
+                    toppers
+                    of all branches.</h6>
+
+            </div>
+            
+            <div class="simple-text">
+                <h2>Details :</h2>
+            </div>
+
+
+
+            <div class="program">
+                <div class="course-details">
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <h6 class="">Course Content:</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <h5 class="">
+                                LeetCode and HackerRank challenges in DSA.
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <h6>Class timings:</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <h5>7:00 PM to 9:00 PM from Monday to Saturday and 4:00 PM to 7:00 PM on Sundays.</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <h6>Duration in hours:</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <h5>200 hours (over 3 months).</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <h6>Class type:</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <h5>Online live.</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <h6>Fee:</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <h5>No fee in the beginning. Once the student/employee gets placed, then only he/she
+                                should pay 10% of the annual CTC</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <h6>Expected Salary:</h6>
+                        </div>
+                        <div class="col-sm-8 blink">
+                            <h5>10 LPA to 25 LPA.</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-sm-4">
+                            <h6>Start Date:</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <h5>Very soon.</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-details-img">
+                    <div class="card card-body rounded ms-5">
+                        <img class="img-fluid" src="assets/img/logo/time.png" style="width:1280px;height:500px" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="enroll">
+                <a href="signup.html">
+                    <button class="btn btn-warning enroll-button px-3 text-white">Enroll Now</button>
+                </a>
+            </div>
+
+
+
+            <!-- <div class="container-fluid cont-fluid "> -->
+
+
+
+            <!-- </div> -->
+
+
+
+
+
+            <!-- Main Body Content -->
+            <!-- <div id="mainDiv">
         <div class="container-main pd-l0 pd-r0">
             <div class="row gradient-light-pink" style="width: 102%;">
                 <div class="col-lg-12">
@@ -977,10 +1880,10 @@
                                 <div class="flex-container d-sm-flex" style="background: linear-gradient(-186deg, lightblue, white);
                                         border-radius: 7px;
                                         box-shadow: 2px 6px 12px #172024;
-                                        color: white;">
+                                        color: white;"> -->
 
-                                    <!-- Left side content -->
-                                    <div class="left-container" style="margin-left: 5%; font-family: Righteous;">
+            <!-- Left side content -->
+            <!-- <div class="left-container" style="margin-left: 5%; font-family: Righteous;">
                                         <div class="left-corner">
                                             <span class="main-tag-pts" style="color: darkblue; font-size: xx-large;">
                                                 <i class="fa-solid fa-cubes"></i> 4 PILLORS TO EVERY LEARNER
@@ -1004,9 +1907,9 @@
                                                 </span>
                                             </li>
                                         </ul>
-                                    </div>
-                                    <!-- Right side content -->
-                                    <div class="right-container" style=" font-family: Righteous;">
+                                    </div> -->
+            <!-- Right side content -->
+            <!-- <div class="right-container" style=" font-family: Righteous;">
                                         <div class="right-corner">
                                             <span class="main-tag-pts" style="color: darkblue; font-size: xx-large;">
                                                 <i class="fa-solid fa-globe"></i> LARA'S VISION AND MISION
@@ -1014,9 +1917,9 @@
                                         </div>
                                         <hr style="background-color: darkblue;
                                                   width: 90%;">
-                                        <div class="video-container">
-                                            <!-- Embed your YouTube video here -->
-                                            <iframe height="200"
+                                        <div class="video-container"> -->
+            <!-- Embed your YouTube video here -->
+            <!-- <iframe height="200"
                                                 src="https://www.youtube.com/embed/fwWcB9OpBQs?si=4jYubX8Se58zB-NV"
                                                 title="YouTube video player" frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1239,10 +2142,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- Company show carousel -->
-    <div class="container-one mt-2 mb-2">
+            <!-- Company show carousel -->
+            <!-- <div class="container-one mt-2 mb-2">
         <div id="companyCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="companytitle mb-3">
                 <h2>COMPANIES WHERE LARAITES ARE WORKING</h2>
@@ -1257,12 +2160,12 @@
                         <div class="col-md-2 text-center">
                             <img src="https://www.narayanahealth.org/sites/all/themes/nh_default_theme/logo.svg"
                                 class="img-fluid" alt="Company 2">
-                        </div>
-                        <!-- <div class="col-md-2 text-center">
+                        </div> -->
+            <!-- <div class="col-md-2 text-center">
                             <img src="https://cognissolutions.com/assets/img/logo.png" class="img-fluid"
                                 alt="Company 3">
                         </div> -->
-                        <div class="col-md-2 text-center">
+            <!-- <div class="col-md-2 text-center">
                             <img src="https://www.bonbloc.com/images/bonbloc_logo_c.svg" class="img-fluid"
                                 alt="Company 4">
                         </div>
@@ -1344,7 +2247,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <a class="carousel-control-prev" href="#companyCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -1353,11 +2256,11 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </a> -->
-        </div>
-    </div>
+            <!-- </div>
+    </div> -->
 
-    <!-- Company Reviews -->
-    <div class="container-two mt-1 mb-1" style="background: linen;">
+            <!-- Company Reviews -->
+            <!-- <div class="container-two mt-1 mb-1" style="background: linen;">
         <div id="userCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -1637,9 +2540,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Add more carousel items here for additional sets of reviews -->
-            </div>
+                </div> -->
+            <!-- Add more carousel items here for additional sets of reviews -->
+            <!-- </div> -->
             <!-- <a class="carousel-control-prev" href="#userCarousel" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -1648,8 +2551,8 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </a> -->
-        </div>
-    </div>
+            <!-- </div>
+    </div> -->
 
 
     <!-- Logout Confirmation Modal -->
@@ -1675,15 +2578,14 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Footer -->
+            <!-- Footer -->
+            
     <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
         <div class="container-fluid cntfld-fw" id="footer">
             <div class="container-fluid ftr-bg">
                 <div class="row">
-                    <div class="col-lg-11 col-md-12 col-sm-12 pd-t30 div-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
                         <div class="row text-center text-xs-center text-sm-left text-md-left">
                             <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
                                 <h5>About Us</h5>
@@ -1731,8 +2633,145 @@
             </div>
         </div>
     </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script type="module" src="./index.js"></script>
+        <script src="assets/css/plugins/bootstrap.css"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+            integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+            integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+        <script src="assets/js/script.js"></script>
 
-    <script type="module" src="./index.js"></script>
+        <script>
+            gsap.from('.program-top h1', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+            gsap.from('.program-top p', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+            gsap.from('.program-top-img img', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+
+            setTimeout(function () {
+                document.getElementById('targetSection').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 2000);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const observer = new IntersectionObserver(handleIntersection, {
+                    root: null,
+                    rootMargin: '0px',
+                });
+
+                document.querySelectorAll('.twist').forEach(element => {
+                    observer.observe(element);
+                });
+
+                function handleIntersection(entries, observer) {
+                    entries.forEach(entry => {
+                        const target = entry.target;
+                        if (entry.isIntersecting) {
+                            target.classList.add('shake');
+                        } else {
+                            target.classList.remove('shake');
+                        }
+                    });
+                }
+            });
+            // document.getElementById('downArrow').addEventListener('click', function () {
+            //     const contentElement = document.getElementById('content');
+
+            //     contentElement.scrollIntoView({
+            //         behavior: 'smooth',
+            //         block: 'start',
+            //     });
+            // });
+            // // GSAP ScrollTo Plugin
+            // gsap.registerPlugin(ScrollToPlugin);
+
+            // // Add a click event listener to the down arrow for smooth scrolling
+            // document.getElementById('downArrow').addEventListener('click', function () {
+            //     gsap.to(window, { duration: 1, scrollTo: { y: window.innerHeight, autoKill: false } });
+            // });
+
+
+
+            // Function to handle the intersection observer callback
+            // function handleIntersection(entries, observer) {
+            //     entries.forEach(entry => {
+            //         if (entry.isIntersecting) {
+            //             // Element is in view, apply the scaling
+            //             entry.target.style.transform = 'scale(1)';
+            //         } else {
+            //             // Element is out of view, reset the scaling
+            //             entry.target.style.transform = 'scale(0.5)';
+            //         }
+            //     });
+            // }
+
+            // // Create an intersection observer
+            // const observer = new IntersectionObserver(handleIntersection, {
+            //     root: null, // Use the viewport as the root
+            //     rootMargin: '0px',
+            //     threshold: 0.5, // Trigger the callback when 50% of the element is visible
+            // });
+
+            // // Get all images in the .program-top-1 container
+            // document.querySelectorAll('.program-top-1 img').forEach(img => {
+            //     // Initial styling
+            //     img.style.transform = 'scale(0.5)';
+            //     // Observe each image
+            //     observer.observe(img);
+            // });
+
+            function handleIntersection(entries, observer) {
+                entries.forEach(entry => {
+                    const target = entry.target;
+                    if (entry.isIntersecting) {
+                        target.style.transform = 'scale(1)';
+                    } else {
+                        target.style.transform = 'scale(0.8)';
+                    }
+                });
+            }
+
+            const observer = new IntersectionObserver(handleIntersection, {
+                root: null,
+                rootMargin: '0px',
+                // threshold: 0.9,
+            });
+
+            document.querySelectorAll('.program-top-1 img, .program-top-1 .card-body').forEach(element => {
+                element.style.transform = 'scale(0.8)';
+                observer.observe(element);
+            });
+
+
+
+            // gsap.registerPlugin(ScrollTrigger);
+
+            // // Loop through each image in the program-top-1 container
+            // gsap.utils.toArray('.program-top-1 img').forEach((img) => {
+            //     console.log(img);
+            //     gsap.to(img, {
+            //         scale: 1, // Final scale when scrolled to
+            //         scrollTrigger: {
+            //             trigger: img,
+            //             start: 'top center', // Adjust as needed
+            //             end: 'bottom center', // Adjust as needed
+            //             scrub: 1, // Adjust as needed for smoothness
+            //         },
+            //     });
+            // });
+
+
+        </script>
 </body>
 
 </html>
