@@ -461,10 +461,10 @@
                                             href="user.html">Profile</a>
                                     </li>
                                     <li class="nav-item d-none loggedIn" id="userAppbar">
-                                        <a class="nav-link custom-brand active" href="#">Dashboard</a>
+                                        <a class="nav-link custom-brand active" href="user-dashbroad.html">Dashboard</a>
                                     </li>
                                     <li class="nav-item d-none loggedIn" id="adminAppbar">
-                                        <a class="nav-link custom-brand active" href="#">Dashboard</a>
+                                        <a class="nav-link custom-brand active" href="user-dashbroad.html">Dashboard</a>
                                     </li>
                                     <li class="nav-item">
                                         <!-- Logout button with data-toggle and data-target attributes -->
@@ -774,11 +774,13 @@
             </div>
         </div>
 
-        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true"
-            id="toast-bg">
-            <div class="notify d-flex justify-content-between">
-                <span class="compare-note d-inline"></span>
-                <button type="button" class="btn-close d-inline" data-bs-dismiss="toast" aria-label="Close"></button>
+        <!-- toast message body -->
+        <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+            aria-atomic="true" id="toast-bg">
+            <div class="d-flex">
+                <div class="toast-body"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
             </div>
         </div>
     </div>
