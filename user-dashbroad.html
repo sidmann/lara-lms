@@ -24,6 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+
     <!-- Add your custom CSS styles here -->
     <style>
         /* Custom CSS styles for the user profile page */
@@ -34,10 +35,9 @@
         }
 
         body {
+            top: 0;
             min-height: 100vh;
-            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
-            background: linear-gradient(9deg, #91a88f, #c7eacb)
-                /* position: relative; */
+            position: relative;
         }
 
         .hidden {
@@ -57,13 +57,13 @@
 
         /* Additional styles for navbar */
         .navbar {
+            width: 100%;
+            top: 0;
+            right: 0;
             /* background: #fff; */
             background-color: whitesmoke;
-            border: 3px solid beige;
-            /* border-bottom: 1px solid #ccc; */
+
         }
-
-
 
         .navbar-brand.custom-brand {
             color: #007bff;
@@ -79,10 +79,6 @@
 
         /* Responsive styles for small screens */
         @media (max-width: 768px) {
-            nav ul {
-                text-align: center;
-            }
-
             nav ul li {
                 display: block;
                 margin-bottom: 10px;
@@ -109,23 +105,19 @@
         }
 
         .sideContainer li {
-            border: 1px solid #ccc;
-            color: #ffffff;
             margin-top: 10px;
             padding: 10px 25px;
             white-space: nowrap;
             overflow: hidden;
             justify-content: center;
             justify-items: center;
-            width: 200px;
+            border-radius: 20px;
         }
 
         /* Change background color on hover */
-        .sideContainer li:active {
+        .sideContainer li:hover {
             background: linear-gradient(60deg, #ab47bc, #8e24aa);
-            box-shadow: gray;
             color: white;
-            cursor: pointer;
         }
 
         footer {
@@ -148,11 +140,13 @@
         }
 
         #mainContainer {
-            /* max-width: 800px; */
+            max-width: 100%;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            width: 100%
+            border: 1px solid rgb(219, 217, 217);
+            /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3); */
+            width: 100%;
+            color: white;
+
         }
 
         #mainContainer h1 {
@@ -402,21 +396,14 @@
 
         /* CSS Code */
         .package-container {
-            border: 1px solid black;
-            border-radius: 10px;
+            border: 1px solid rgb(202, 201, 201);
+            /* border-radius: 10px; */
             padding: 20px;
             text-align: center;
-            color: black;
-            background-color: slategrey;
-        }
-
-        .package-container:hover {
-            border-color: #2980b9;
+            color: white;
+            /* background-color: rgb(226, 227, 229); */
             background-color: #2980b9;
         }
-
-        /* Cumulative Exam */
-        /* #choose-question-label {} */
 
         .cumulative-one-header {
             background-color: darkgray;
@@ -442,8 +429,8 @@
             <nav class="navbar shadow-sm rounded-3 navbar-expand-lg" id="header">
                 <div class="container-fluid">
                     <a href="home.html">
-                        <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home" width="150px"
-                            title="Home"></img>
+                        <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
+                            width="150px" title="Home"></img>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -516,166 +503,167 @@
             <!-- Toast notifications will appear here -->
         </div>
 
-        <div class="container" style="width: 100%; display: 'none';">
-            <div class="row d-flex flex-column flex-lg-row">
-                <div class="col col-lg-3">
-                    <div class="sideContainer text-center">
-                        <ul class="d-flex flex-row d-lg-block p-0 gap-2 overflow-x-scroll">
-
-                            <li class="active flex-shrink-0"><button class="nav-link totalEarnedPoints text-dark"
-                                    data-toggle="pill">
-                                    <i class="fa fa-tachometer"></i>&nbsp;&nbsp;Total Earned Points</button></li>
-                            <!-- <li><a  href="#prof" data-toggle="pill"><span class="fa fa-user-o s8 pd-r10"></span>My Profile</a></li>   -->
-                            <li class="active flex-shrink-0"><button class="nav-link myCourses text-dark"
-                                    data-toggle="pill"><i class="fa fa-book"></i>&nbsp;&nbsp;My Courses</button></li>
-                            <li class="active flex-shrink-0"><button class="nav-link liveClasses text-dark"
-                                    data-toggle="pill">
-                                    <i class="fa fa-book"></i>&nbsp;&nbsp;My Live classes</button></li>
-                            <li class="active flex-shrink-0"><button class="nav-link myNotifications text-dark"
-                                    data-toggle="pill">
-                                    <i class="fa fa-book"></i>&nbsp;&nbsp;My Notifications</button></li>
-                            <li class="active flex-shrink-0"><button class="nav-link my-cumulative-exams text-dark"
-                                    data-toggle="pill">
-                                    <i class="fa fa-hourglass-start"></i>&nbsp;&nbsp;Cumulative Exams</button></li>
-                            <li class="active flex-shrink-0"><button
-                                    class="nav-link my-cumulative-score-records text-dark" data-toggle="pill">
-                                    <i class="fa fa-life-ring "></i>&nbsp;&nbsp;Cumulative
-                                    Score</button></li>
-                            <li class="active flex-shrink-0"><button class="nav-link accountSettings text-dark"
-                                    data-toggle="pill">
-                                    <i class="fa fa-key s8"></i>&nbsp;&nbsp;Account Settings</a></li>
-                            <li class="active flex-shrink-0 uploadVideoContainerDisplay" style="display: none;"><button
-                                    class="nav-link text-dark" data-toggle="pill">
-                                    <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload
-                                    Video</button>
-                            </li>
-                            <li class="active flex-shrink-0 my-cumulative-question-upload" style="display: none;">
-                                <button class="nav-link text-dark" data-toggle="pill">
-                                    <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload Questions
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+        <!-- <div class="container" style="width: 100%; display: 'none';"> -->
+        <div class="row d-flex flex-column flex-lg-row">
+            <div class="col col-lg-2">
+                <div class="sideContainer text-center">
+                    <ul class="d-flex flex-column align-items-center d-lg-block p-0 gap-2 overflow-x-scroll">
+<!-- 
+                        <li class="active flex-shrink-0"><button class="nav-link totalEarnedPoints" data-toggle="pill">
+                                <i class="fa fa-tachometer"></i>&nbsp;&nbsp;Total Earned Points</button></li> -->
+                        <!-- <li><a  href="#prof" data-toggle="pill"><span class="fa fa-user-o s8 pd-r10"></span>My Profile</a></li>   -->
+                        <li class="active flex-shrink-0"><button class="nav-link myCourses" data-toggle="pill"><i
+                                    class="fa fa-book"></i>&nbsp;&nbsp;My Courses</button></li>
+                        <!-- <li class="active flex-shrink-0"><button class="nav-link liveClasses" data-toggle="pill">
+                                <i class="fa fa-book"></i>&nbsp;&nbsp;My Live classes</button></li> -->
+                        <!-- <li class="active flex-shrink-0"><button class="nav-link myNotifications" data-toggle="pill">
+                                <i class="fa fa-book"></i>&nbsp;&nbsp;My Notifications</button></li> -->
+                        <li class="active flex-shrink-0"><button class="nav-link my-cumulative-exams"
+                                data-toggle="pill">
+                                <i class="fa fa-hourglass-start"></i>&nbsp;&nbsp;Cumulative Exams</button></li>
+                        <li class="active flex-shrink-0"><button class="nav-link my-cumulative-score-records"
+                                data-toggle="pill">
+                                <i class="fa fa-life-ring "></i>&nbsp;&nbsp;Cumulative
+                                Score</button></li>
+                        <li class="active flex-shrink-0"><button class="nav-link accountSettings" data-toggle="pill">
+                                <i class="fa fa-key s8"></i>&nbsp;&nbsp;Account Settings</a></li>
+                        <li class="active flex-shrink-0 uploadVideoContainerDisplay" style="display: none;"><button
+                                class="nav-link" data-toggle="pill">
+                                <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload
+                                Video</button>
+                        </li>
+                        <li class="active flex-shrink-0 my-cumulative-question-upload" style="display: none;">
+                            <button class="nav-link" data-toggle="pill">
+                                <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload Questions
+                            </button>
+                        </li>
+                        <li class="active flex-shrink-0 my-admin-panel">
+                            <a type="button" href="admin-dash.html" class="nav-link" data-toggle="pill">
+                                <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Admin Panel
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
 
-                <!-- Topic ,subTopic of videos and image upload -->
-                <div class="col col-lg-9 d-flex align-items-center">
-                    <div id="mainContainer">
-                        <!-- Video Container -->
-                        <div id="videoUploadContainer">
-                            <h1>Upload Image, Videos with Topic & SubTopics</h1>
+            <!-- Topic ,subTopic of videos and image upload -->
+            <div class="col col-lg-10 d-flex align-items-center">
+                <div id="mainContainer">
+                    <!-- Video Container -->
+                    <div id="videoUploadContainer">
+                        <h1>Upload Image, Videos with Topic & SubTopics</h1>
 
-                            <form id="uploadForm">
-                                <!-- Topic Section -->
-                                <div class="sm-3 mx-auto">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
-                                            <label for="videoTopicDropdown" class="mb-2">Select Topic:</label>
-                                            <select class="form-control border-primary" id="videoTopicDropdown">
-                                                <!-- Topic options will be populated dynamically -->
-                                                <option value="">Please select</option>
-                                            </select>
-                                        </div>
-                                        <span id="videoAddTopicButton" class="btn btn-primary mt-1"
-                                            data-bs-toggle="modal" data-bs-target="#videoTopicModel">Add</span>
+                        <form id="uploadForm">
+                            <!-- Topic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="videoTopicDropdown" class="mb-2">Select Topic:</label>
+                                        <select class="form-control border-primary" id="videoTopicDropdown">
+                                            <!-- Topic options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
                                     </div>
+                                    <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#videoTopicModel">Add</span>
                                 </div>
-
-                                <!-- Subtopic Section -->
-                                <div class="sm-3 mx-auto">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
-                                            <label for="videoSubTopicDropdown" class="mb-2">Select Subtopic:</label>
-                                            <select class="form-control border-primary" id="videoSubTopicDropdown">
-                                                <!-- Category options will be populated dynamically -->
-                                                <option value="">Please select</option>
-                                            </select>
-                                        </div>
-                                        <span id="videoAddSubTopiButton" class="btn btn-primary mt-1"
-                                            data-bs-toggle="modal" data-bs-target="#videoSubTopicModel">Add</span>
-                                    </div>
-                                </div>
-
-                                <div class="justify-content-center text-center">
-                                    <label for="imageInput" id="chooseImageLabel" class="mb-2">Choose an Image</label>
-                                    <input type="file" class="d-none" id="imageInput" accept="image/*">
-                                    <div id="imageName">No image selected</div><br>
-                                    <!-- <div id="imageURL"></div><br> -->
-                                </div>
-
-                                <div class="justify-content-center text-center">
-                                    <label for="videoInput" id="chooseVideoLabel" class="mb-2">Choose a Video</label>
-                                    <input type="file" class="d-none" id="videoInput" accept="video/*">
-                                    <div id="videoName">No video selected</div><br>
-                                    <!-- <div id="videoURL"></div><br> -->
-                                </div>
-
-                                <div class="justify-content-center text-center">
-                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                </div>
-                            </form>
-
-                            <!-- Progress bar -->
-                            <div id="progressContainer">
-                                <div class="progress">
-                                    <div class="progress-bar" id="uploadProgressBar" role="progressbar"
-                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
-                                <div id="uploadPercentage">0%</div>
                             </div>
-                        </div>
 
-                        <!-- Questions File Upload-->
-                        <div class="question-upload-container" style="display: none;">
-                            <h2>Upload Questions File For SubTopics</h2>
-                            <form id="file-upload-form">
-                                <!-- Topic Section -->
-                                <div class="sm-3 mx-auto">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
-                                            <label for="fileTopicDropdown" class="mb-2">Select Topic:</label>
-                                            <select class="form-control border-primary" id="fileTopicDropdown">
-                                                <!-- Topic options will be populated dynamically -->
-                                                <option value="">Please select</option>
-                                            </select>
-                                        </div>
-                                        <!-- <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                            <!-- Subtopic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="videoSubTopicDropdown" class="mb-2">Select Subtopic:</label>
+                                        <select class="form-control border-primary" id="videoSubTopicDropdown">
+                                            <!-- Category options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#videoSubTopicModel">Add</span>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <label for="imageInput" id="chooseImageLabel" class="mb-2">Choose an Image</label>
+                                <input type="file" class="d-none" id="imageInput" accept="image/*">
+                                <div id="imageName">No image selected</div><br>
+                                <!-- <div id="imageURL"></div><br> -->
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <label for="videoInput" id="chooseVideoLabel" class="mb-2">Choose a Video</label>
+                                <input type="file" class="d-none" id="videoInput" accept="video/*">
+                                <div id="videoName">No video selected</div><br>
+                                <!-- <div id="videoURL"></div><br> -->
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+
+                        <!-- Progress bar -->
+                        <div id="progressContainer">
+                            <div class="progress">
+                                <div class="progress-bar" id="uploadProgressBar" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <div id="uploadPercentage">0%</div>
+                        </div>
+                    </div>
+
+                    <!-- Questions File Upload-->
+                    <div class="question-upload-container" style="display: none;">
+                        <h2>Upload Questions File For SubTopics</h2>
+                        <form id="file-upload-form">
+                            <!-- Topic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="fileTopicDropdown" class="mb-2">Select Topic:</label>
+                                        <select class="form-control border-primary" id="fileTopicDropdown">
+                                            <!-- Topic options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <!-- <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
                                             data-bs-target="#videoTopicModel">Add</span> -->
-                                    </div>
                                 </div>
+                            </div>
 
-                                <!-- Subtopic Section -->
-                                <div class="sm-3 mx-auto">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <div class="form-group w-75 d-inline-block me-4 mb-4">
-                                            <label for="fileSubTopicDropdown" class="mb-2">Select Subtopic:</label>
-                                            <select class="form-control border-primary" id="fileSubTopicDropdown">
-                                                <!-- Category options will be populated dynamically -->
-                                                <option value="">Please select</option>
-                                            </select>
-                                        </div>
-                                        <!-- <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                            <!-- Subtopic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="fileSubTopicDropdown" class="mb-2">Select Subtopic:</label>
+                                        <select class="form-control border-primary" id="fileSubTopicDropdown">
+                                            <!-- Category options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <!-- <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
                                             data-bs-target="#videoSubTopicModel">Add</span> -->
-                                    </div>
                                 </div>
+                            </div>
 
-                                <div class="justify-content-center text-center">
-                                    <label for="file-input" id="chooseImageLabel" class="mb-2">Choose an File</label>
-                                    <input type="file" class="d-none" id="file-input" accept=".xlsx">
-                                    <div id="file-name">No file selected</div><br>
-                                    <!-- <div id="imageURL"></div><br> -->
-                                </div>
+                            <div class="justify-content-center text-center">
+                                <label for="file-input" id="chooseImageLabel" class="mb-2">Choose an File</label>
+                                <input type="file" class="d-none" id="file-input" accept=".xlsx">
+                                <div id="file-name">No file selected</div><br>
+                                <!-- <div id="imageURL"></div><br> -->
+                            </div>
 
-                                <div class="justify-content-center text-center">
-                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="justify-content-center text-center">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+                    </div>
 
-                        <!-- Video Play Container  and display the Courses-->
-                        <div id="videoContainer" style="display:none">
-                            <!-- <div class="col-lg-10"> -->
+                    <!-- Video Play Container  and display the Courses-->
+                    <div id="videoContainer" style="display:none">
+                        <div class="col-lg-12">
                             <div class="package-container">
                                 <h3>Course Package: Java Full stack project development</h3>
                             </div><br>
@@ -789,7 +777,8 @@
 
                                         <div class="justify-content-center text-center">
                                             <label for="cum-details-input" id="cumQuestionDetailLabel"
-                                                class="mb-2">Choose an
+                                                class="mb-2">Choose
+                                                an
                                                 Number Question : </label>
                                             <input type="text" class="" id="cum-question-number" accept="">
                                             <!-- <div id="imageURL"></div><br> -->
@@ -815,7 +804,7 @@
                                                 <h2>Simple Questions</h2>
                                             </div>
                                             <div class="col-lg-3 col-md-3">
-                                                <img src="images/bnr-title.png" class="rounded float-end" alt=""
+                                                <img src="./assets/images/bnr-title.png" class="rounded float-end" alt=""
                                                     width="120px" height="120px">
                                             </div>
                                         </div>
@@ -845,7 +834,7 @@
                                                 <h2>Culumutive Score</h2>
                                             </div>
                                             <div class="col-lg-3 col-md-3">
-                                                <img src="images/bnr-title.png" class="rounded float-end" alt=""
+                                                <img src="./assets/images/bnr-title.png" class="rounded float-end" alt=""
                                                     width="120px" height="120px">
                                             </div>
                                         </div>
@@ -857,7 +846,8 @@
                                         <p class="card-text" id="cum-exam-percentage"></p>
                                         <div class="justify-content-center">
                                             <button type="submit" class="btn btn-primary"
-                                                id="cum-exam-view-details">View Details</button>
+                                                id="cum-exam-view-details">View
+                                                Details</button>
                                         </div>
                                     </div>
                                 </div>
@@ -873,7 +863,7 @@
                                         <h2>Culumutive Exam Preview</h2>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
-                                        <img src="images/bnr-title.png" class="rounded float-end" alt="" width="120px"
+                                        <img src="./assets/images/bnr-title.png" class="rounded float-end" alt="" width="120px"
                                             height="120px">
                                     </div>
                                 </div><br>
@@ -897,7 +887,7 @@
                                         <h2>Culumutive Exam Score</h2>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
-                                        <img src="images/bnr-title.png" class="rounded float-end" alt="" width="120px"
+                                        <img src="./assets/images/bnr-title.png" class="rounded float-end" alt="" width="120px"
                                             height="120px">
                                     </div>
                                 </div><br>
@@ -912,7 +902,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -1013,7 +1002,7 @@
             </div>
 
             <!--back to top-->
-            <div class="container-fluid">
+            <!-- <div class="container-fluid">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12"> <a id="back-to-top" href="#"
@@ -1023,118 +1012,125 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!--back to top end-->
 
+            <!--Video Player Display and video list  -->
 
-        </div>
-
-        <!--Video Player Display and video list  -->
-
-        <div class="container-fluid d-flex mt-2">
-            <div class="col col-lg-12 col-md-12 col-sm-12 ">
-                <div class="text-start ms-4">
-                    <button class="btn btn-dark backToTopics" style="display: none;">back</button>
-                </div>
-                <div class="mainVideoContainer">
-                    <div class="row d-flex flex-column flex-lg-row flex-sm-row">
-                        <div class="col col-lg-8 col-md-8 col-sm-8 col-xsm-8">
-                            <div class="videoPlayerContainer">
-                                <img src="images/corporate.jpg" id="videoPlaceholder" alt="Video Placeholder">
-                                <video id="video" class="text-center" style="display: none;" autoplay></video>
-                            </div>
-
-                        </div>
-                        <div class="col col-lg-4 col-md-4 col-sm-4 col-xsm-4 ">
-                            <div class="topicName text-center">
-                                <h4></h4>
-                                <div class="accordion accordion-flush videoSubTopic me-2 mt-2 text-center"
-                                    id="accordionFlushExample">
-
-                                </div>
-                            </div>
-                        </div>
+            <div class="container-fluid d-flex mt-2">
+                <div class="col col-lg-12 col-md-12 col-sm-12 ">
+                    <div class="text-start ms-4">
+                        <button class="btn btn-dark backToTopics" style="display: none;">back</button>
                     </div>
-                </div>
-                <div class="topicDescriptionContainer" style="display: none;">
-                    <div class="container-fluid cntfld-fw" *ngIf="courseId != 24">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 pd-b30">
-                                    <div class="row">
-                                        <div class="col-lg-11 col-md-11 col-sm-11 div-center">
-                                            <a href="#">
-                                                <button class="btn btn-primary bg-ff3547">View Course
-                                                    Content</button></a>&nbsp;&nbsp;
-                                            <a href="#"><button class="btn btn-primary bg-ff3547">My
-                                                    Courses</button></a>
-                                            <!-- <a [routerLink] = "['/coursedetails', coursePackageId]" *ngIf="!isSubscribed">
-                                    <button class="btn btn-primary bg-ff3547" >Go Back To Package</button></a> &nbsp;&nbsp;
-                                    <a [routerLink] = "['/coursedetails', coursePackageId]" *ngIf="!isSubscribed">
-                                      <button class="btn btn-primary bg-ff3547" >
-                                        You can play all the videos after subscribing to this package. Go to Buy
-                                      </button></a>    -->
-                                            <!-- <button class="btn btn-primary bg-ff3547" (click)="showCourseContent()">View Course Content</button> -->
-                                        </div>
+                    <div class="mainVideoContainer">
+                        <div class="row d-flex flex-column flex-lg-row flex-sm-row">
+                            <div class="col col-lg-8 col-md-8 col-sm-8 col-xsm-8">
+                                <div class="videoPlayerContainer">
+                                    <img src="images/corporate.jpg" id="videoPlaceholder" alt="Video Placeholder">
+                                    <video id="video" class="text-center" style="display: none;" autoplay></video>
+                                </div>
+
+                            </div>
+                            <div class="col col-lg-4 col-md-4 col-sm-4 col-xsm-4 ">
+                                <div class="topicName text-center">
+                                    <h4></h4>
+                                    <div class="accordion accordion-flush videoSubTopic me-2 mt-2 text-center"
+                                        id="accordionFlushExample">
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="topicDescriptionContainer" style="display: none;">
+                        <div class="container-fluid cntfld-fw" *ngIf="courseId != 24">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 pd-b30">
+                                        <div class="row">
+                                            <div class="col-lg-11 col-md-11 col-sm-11 div-center">
+                                                <a href="#">
+                                                    <button class="btn btn-primary bg-ff3547">View Course
+                                                        Content</button></a>&nbsp;&nbsp;
+                                                <a href="#"><button class="btn btn-primary bg-ff3547">My
+                                                        Courses</button></a>
+                                                <!-- <a [routerLink] = "['/coursedetails', coursePackageId]" *ngIf="!isSubscribed">
+                                    <button class="btn btn-primary bg-ff3547" >Go Back To Package</button></a> &nbsp;&nbsp;
+                                    <a [routerLink] = "['/coursedetails', coursePackageId]" *ngIf="!isSubscribed">
+                                      <button class="btn btn-primary bg-ff3547" >
+                                        You can play all the videos after subscribing to this package. Go to Buy
+                                      </button></a>    -->
+                                                <!-- <button class="btn btn-primary bg-ff3547" (click)="showCourseContent()">View Course Content</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
-                    <!-- Cumulative Exam -->
+                        <!-- Cumulative Exam -->
 
 
-                    <div class="container-fluid cntfld-fw">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 pd-b30">
-                                    <div class="row">
-                                        <div class="col-lg-11 col-md-11 col-sm-11 div-center">
-                                            <div class="vd-cnt-div">
-                                                <div class="pd-t10">
-                                                    <h3><u>Course Title:</u></h3>
+                        <div class="container-fluid cntfld-fw">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 pd-b30">
+                                        <div class="row">
+                                            <div class="col-lg-11 col-md-11 col-sm-11 div-center">
+                                                <div class="vd-cnt-div">
+                                                    <div class="pd-t10">
+                                                        <h3><u>Course Title:</u></h3>
 
-                                                    <p class="topicDescriptionName"></p>
-                                                </div>
+                                                        <p class="topicDescriptionName"></p>
+                                                    </div>
 
-                                                <div class="pd-t10">
-                                                    <h3><u>Description:</u></h3>
-                                                    <p>We are covering right from the scratch. Any Graduate can able to
-                                                        understand. More practical way we have covered.
-                                                        Non computer student also can able to understand very easily.
-                                                        More
-                                                        dedication is required.
-                                                        Please go through all topics in the same specified order. Every
-                                                        example practice in the system while going through videos.
-                                                        Attempt
-                                                        test in all the topics. Wish you happy learning.</p>
-                                                </div>
-                                                <div class="pd-t10 req">
-                                                    <h3><u>Pre Requirements:</u></h3>
-                                                    <ul>
-                                                        <div *ngFor="let courseReq of courseDetails.courseRequirements">
-                                                            <li>No pre-requisites are required. No need of knowing any
-                                                                programming languages like a C or C++ to understand this
-                                                                course.</li>
-                                                        </div>
-                                                    </ul>
-                                                    <p></p>
-                                                </div>
-                                                <div class="pd-t10 req" *ngIf="courseId != 24">
-                                                    <h3><u> Programmatic Materials</u></h3>
-                                                    <h3 class="programatic-materials">Whatever programs developed while
-                                                        explaining the topics are
-                                                        available for download. You can download and play around all the
-                                                        programs. </h3>
-                                                    <h3>
-                                                        <button class="btn btn-primary bg-ff3547"
-                                                            (click)="downloadMaterial()">
-                                                            Download All the Source Progarms in the form of a ZIP file
-                                                        </button>
-                                                    </h3>
-                                                    <p></p>
+                                                    <div class="pd-t10">
+                                                        <h3><u>Description:</u></h3>
+                                                        <p>We are covering right from the scratch. Any Graduate can able
+                                                            to
+                                                            understand. More practical way we have covered.
+                                                            Non computer student also can able to understand very
+                                                            easily.
+                                                            More
+                                                            dedication is required.
+                                                            Please go through all topics in the same specified order.
+                                                            Every
+                                                            example practice in the system while going through videos.
+                                                            Attempt
+                                                            test in all the topics. Wish you happy learning.</p>
+                                                    </div>
+                                                    <div class="pd-t10 req">
+                                                        <h3><u>Pre Requirements:</u></h3>
+                                                        <ul>
+                                                            <div
+                                                                *ngFor="let courseReq of courseDetails.courseRequirements">
+                                                                <li>No pre-requisites are required. No need of knowing
+                                                                    any
+                                                                    programming languages like a C or C++ to understand
+                                                                    this
+                                                                    course.</li>
+                                                            </div>
+                                                        </ul>
+                                                        <p></p>
+                                                    </div>
+                                                    <div class="pd-t10 req" *ngIf="courseId != 24">
+                                                        <h3><u> Programmatic Materials</u></h3>
+                                                        <h3 class="programatic-materials">Whatever programs developed
+                                                            while
+                                                            explaining the topics are
+                                                            available for download. You can download and play around all
+                                                            the
+                                                            programs. </h3>
+                                                        <h3>
+                                                            <button class="btn btn-primary bg-ff3547"
+                                                                (click)="downloadMaterial()">
+                                                                Download All the Source Progarms in the form of a ZIP
+                                                                file
+                                                            </button>
+                                                        </h3>
+                                                        <p></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1144,13 +1140,12 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
 
-
-        <!-- video controls -->
-        <!-- <span class="videoControls">
+            <!-- video controls -->
+            <!-- <span class="videoControls">
                             <button id="playPauseButton"><i class="fa-solid fa-play"></i></button>
                             <progress id="videoPlayProgressBar" value="0" max="100"></progress>
                             <button id="speed1x"><i class="fa-solid fa-play"></i>1x</button>
@@ -1160,98 +1155,98 @@
                             <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
                             <button id="fullscreen_button"><i class="fa-solid fa-expand"></i></button>
                         </span> -->
-        <!-- Footer -->
-        <footer class="text-center py-3 m-2 rounded-3 font-weight-light bottom-0">
-            <div class="container-fluid cntfld-fw" id="footer">
-                <div class="container-fluid ftr-bg">
-                    <div class="row">
-                        <div class="col-lg-11 col-md-12 col-sm-12 pd-t30 div-center">
-                            <div class="row text-center text-xs-center text-sm-left text-md-left">
-                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                    <h5>About Us</h5>
-                                    <p>
-                                        Lara Technologies is best place to start your career since 2005.
-                                    </p>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                    <h5>Contact Us</h5>
-                                    <p>
-                                        Feel free to get in touch with us:<br>
-                                        Email: support@lara.co.in<br>
-                                        Phone: <i class="fa fa-phone"></i> +91 7975938871
-                                    </p>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
-                                    <h5>Stay Connected</h5>
-                                    <div class="text-bg-white">
+            <!-- Footer -->
+            <footer class="text-center py-3 m-2 rounded-3 font-weight-light bottom-0">
+                <div class="container-fluid cntfld-fw" id="footer">
+                    <div class="container-fluid ftr-bg">
+                        <div class="row">
+                            <div class="col-lg-11 col-md-12 col-sm-12 pd-t30 div-center">
+                                <div class="row text-center text-xs-center text-sm-left text-md-left">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                        <h5>About Us</h5>
                                         <p>
-                                            Follow us on social media for updates and news:<br>
-                                            <a href="https://www.facebook.com/laratechnologiesforjava"
-                                                class="text-light"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;
-                                            <a href="https://twitter.com/Laratech2" class="text-light"><i
-                                                    class="fa-brands fa-twitter"></i></a>&nbsp;
-                                            <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
-                                                class="text-light"><i class="fa-brands fa-linkedin"></i></a>&nbsp;
-                                            <a href="https://www.instagram.com/lara_technologies/" class="text-light"><i
-                                                    class="fa-brands fa-instagram"></i></i></a>
+                                            Lara Technologies is best place to start your career since 2005.
                                         </p>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                        <h5>Contact Us</h5>
+                                        <p>
+                                            Feel free to get in touch with us:<br>
+                                            Email: support@lara.co.in<br>
+                                            Phone: <i class="fa fa-phone"></i> +91 7975938871
+                                        </p>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
+                                        <h5>Stay Connected</h5>
+                                        <div class="text-bg-white">
+                                            <p>
+                                                Follow us on social media for updates and news:<br>
+                                                <a href="https://www.facebook.com/laratechnologiesforjava"
+                                                    class="text-light"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;
+                                                <a href="https://twitter.com/Laratech2" class="text-light"><i
+                                                        class="fa-brands fa-twitter"></i></a>&nbsp;
+                                                <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
+                                                    class="text-light"><i class="fa-brands fa-linkedin"></i></a>&nbsp;
+                                                <a href="https://www.instagram.com/lara_technologies/"
+                                                    class="text-light"><i class="fa-brands fa-instagram"></i></i></a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
-                            <p>&copy; 2023 Laratechnology. All rights reserved. | <a
-                                    href="./assets/pdf/terms-and-conditions.pdf" target="_blank"
-                                    class="text-light">Terms &
-                                    Conditions</a>
-                            </p>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
+                                <p>&copy; 2023 Laratechnology. All rights reserved. | <a
+                                        href="./assets/pdf/terms-and-conditions.pdf" target="_blank"
+                                        class="text-light">Terms &
+                                        Conditions</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </footer>
+        </div>
 
-    <!-- Logout Confirmation Modal -->
-    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
-        data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logoutConfirmationModalLabel">
-                        Confirm Logout
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">Are you sure you want to logout?</div>
-                <div class="modal-footer">
-                    <!-- Cancel button to close the modal -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
-                    </button>
-                    <!-- Logout button to trigger the logout -->
-                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
-                        Logout
-                    </button>
+        <!-- Logout Confirmation Modal -->
+        <div class="modal fade" id="logoutConfirmationModal" tabindex="-1"
+            aria-labelledby="logoutConfirmationModalLabel" data-bs-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutConfirmationModalLabel">
+                            Confirm Logout
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to logout?</div>
+                    <div class="modal-footer">
+                        <!-- Cancel button to close the modal -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <!-- Logout button to trigger the logout -->
+                        <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
-        aria-atomic="true" id="toast-bg">
-        <div class="d-flex">
-            <div class="toast-body"></div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
+        <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+            aria-atomic="true" id="toast-bg">
+            <div class="d-flex">
+                <div class="toast-body"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
         </div>
-    </div>
 
-    <script type="module" src="./user-dashbroad.js"></script>
+        <script type="module" src="./user-dashbroad.js"></script>
 </body>
 
 </html>
