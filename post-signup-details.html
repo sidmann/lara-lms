@@ -311,7 +311,26 @@
                                     Logout
                                 </button>
                             </li>
+
                         </ul>
+                        <div>
+                            <ul class="navbar-nav mb-2 mb-lg-0">
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link custom-brand position-relative" href="cart.html">
+                                        <i class="fa-solid fa-cart-shopping me-0"></i>
+                                        <span class="position-absolute badge rounded-pill bg-danger p-1 px-2"
+                                            id="shown-cart"></span>
+                                        <span class="ps-0 ms-0">Cart</span>
+                                    </a>
+                                </li> -->
+                                <li class="nav-item loggedOut">
+                                    <a class="nav-link custom-brand active" href="post-signup-details.html">Sign Up</a>
+                                </li>
+                                <li class="nav-item loggedOut">
+                                    <a class="nav-link custom-brand " href="login.html">Login</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -361,7 +380,8 @@
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Postal Code*</label>
                                                             <input type="text" name="user-postcode" id="user-postcode"
-                                                                placeholder="Enter your postal code" class="mb-0" required>
+                                                                placeholder="Enter your postal code" class="mb-0"
+                                                                required>
                                                             <span id="user-postcode-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -418,13 +438,14 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                        data-bs-target="#flush-collapseTwo" data-bs-toggle="collapse"
                                         id="user-school-accordion-btn" aria-expanded="false"
                                         aria-controls="flush-collapseTwo">
                                         School Education Details/10th
                                     </button>
                                 </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                <div id="flush-collapseTwo"
+                                    class="accordion-collapse collapse accordion-collapse-two d-none"
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <div class="gi-register-wrapper">
@@ -471,18 +492,18 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="school-education-sDate"
-                                                                id="school-education-sDate" placeholder="MM/YYYY"
+                                                                id="school-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="school-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="school-education-eDate"
-                                                                id="school-education-eDate" placeholder="MM/YYYY"
+                                                                id="school-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="school-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -531,18 +552,20 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                        aria-expanded="false" aria-controls="flush-collapseThree">
+                                        data-bs-toggle="collapse" id="user-inter-accordion-btn"
+                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
                                         Intermediate Education Details/12th
                                     </button>
                                 </h2>
-                                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                <div id="flush-collapseThree"
+                                    class="accordion-collapse collapse accordion-collapse-three d-none"
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <div class="gi-register-wrapper">
                                             <div class="gi-register-container">
                                                 <div class="gi-register-form">
-                                                    <form  id="inter-edu-details-form" class="">
+                                                    <form id="inter-edu-details-form" class="">
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="inter-board" id="inter-board"
@@ -583,18 +606,18 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="inter-education-sDate"
-                                                                id="inter-education-sDate" placeholder="MM/YYYY"
+                                                                id="inter-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="inter-education-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="inter-education-eDate"
-                                                                id="inter-education-eDate" placeholder="MM/YYYY"
+                                                                id="inter-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="inter-education-eDate-error" class="error-message"
                                                                 style="color: red"></span>
@@ -643,12 +666,14 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
-                                        aria-expanded="false" aria-controls="flush-collapseFour">
+                                        data-bs-toggle="collapse" id="user-degree-accordion-btn"
+                                        data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                        aria-controls="flush-collapseFour">
                                         Graduation Education Details/Degree
                                     </button>
                                 </h2>
-                                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                <div id="flush-collapseFour"
+                                    class="accordion-collapse collapse accordion-collapse-four d-none"
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <div class="gi-register-wrapper">
@@ -658,8 +683,8 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="degree-board" id="degree-board"
-                                                                placeholder="Enter the university name"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter the university name" class="mb-0"
+                                                                required>
                                                             <span id="degree-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -705,18 +730,18 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="degree-education-sDate"
-                                                                id="degree-education-sDate" placeholder="MM/YYYY"
+                                                                id="degree-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="degree-education-eDate"
-                                                                id="degree-education-eDate" placeholder="MM/YYYY"
+                                                                id="degree-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -765,12 +790,14 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven"
-                                        aria-expanded="false" aria-controls="flush-collapseSeven">
-                                        Post-graduation Education Details/Master
+                                        data-bs-toggle="collapse" id="user-masters-accordion-btn"
+                                        data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                                        aria-controls="flush-collapseSeven">
+                                        Post-graduation Education Details/Master&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
-                                <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                                <div id="flush-collapseSeven"
+                                    class="accordion-collapse collapse accordion-collapse-seven d-none"
                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <div class="gi-register-wrapper">
@@ -780,8 +807,8 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="masters-board" id="masters-board"
-                                                                placeholder="Enter the university name"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter the university name" class="mb-0"
+                                                                required>
                                                             <span id="degree-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -802,8 +829,8 @@
                                                                 id="masters-education-spec-name"
                                                                 placeholder="Enter the Post-graduation/masters Specialization name"
                                                                 class="mb-0" required>
-                                                            <span id="masters-education-name-error" class="error-message"
-                                                                style="color: red"></span>
+                                                            <span id="masters-education-name-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
@@ -812,8 +839,8 @@
                                                                 id="masters-education-city"
                                                                 placeholder="Enter the post-graduation/masters city"
                                                                 class="mb-0" required>
-                                                            <span id="masters-education-city-error" class="error-message"
-                                                                style="color: red"></span>
+                                                            <span id="masters-education-city-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
@@ -822,23 +849,23 @@
                                                                 id="masters-education-state"
                                                                 placeholder="Enter the post-graduation/masters state"
                                                                 class="mb-0" required>
-                                                            <span id="masters-education-city-error" class="error-message"
-                                                                style="color: red"></span>
+                                                            <span id="masters-education-city-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="masters-education-sDate"
-                                                                id="masters-education-sDate" placeholder="MM/YYYY"
+                                                                id="masters-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="masters-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="masters-education-eDate"
-                                                                id="masters-education-eDate" placeholder="MM/YYYY"
+                                                                id="masters-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -889,7 +916,7 @@
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#flush-collapseFive"
                                         aria-expanded="false" aria-controls="flush-collapseFive">
-                                        Internship/Academic Project Details
+                                        Internship/Academic Project Details&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseFive" class="accordion-collapse collapse"
@@ -898,7 +925,7 @@
                                         <div class="gi-register-wrapper">
                                             <div class="gi-register-container">
                                                 <div class="gi-register-form">
-                                                    <form  id="internship-project-details-form" class="">
+                                                    <form id="internship-project-details-form" class="">
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Project Name*</label>
                                                             <input type="text" name="internship-project-name"
@@ -921,7 +948,8 @@
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
-                                                            <input type="text" name="internship-city" id="internship-city"
+                                                            <input type="text" name="internship-city"
+                                                                id="internship-city"
                                                                 placeholder="Enter the Employment City" class="mb-0"
                                                                 required>
                                                             <span id="employee-city-error" class="error-message"
@@ -1002,7 +1030,7 @@
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#flush-collapseSix"
                                         aria-expanded="false" aria-controls="flush-collapseSix">
-                                        Other Details/Skills,Languages and Hobbies
+                                        Other Details/Skills,Languages and Hobbies&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseSix" class="accordion-collapse collapse"
@@ -1056,6 +1084,10 @@
                             </div>
                         </div>
                         <!-- Other Personal Details/Skills End-->
+
+                        <button type="button" class="gi-btn-1 bg-success mt-4 d-none user-login-continue-btn">
+                            Continue to login
+                        </button>
                     </div>
                 </div>
             </div>

@@ -299,10 +299,9 @@
 
         <section class="gi-register padding-tb-40">
             <div class="container-xl mt-4 user-profile">
-                <!-- <div class="section-title-2">
+                <div class="section-title-2">
                     <h2 class="gi-title">User Profile<span></span></h2>
-                    <p>Best place to buy and sell digital products.</p>
-                </div> -->
+                </div>
                 <!-- Account page navigation-->
                 <!-- <hr class="mt-0 mb-4"> -->
                 <div class="row">
@@ -372,8 +371,12 @@
                                 Password</button>
                         </div>
 
+                        <!-- address message  -->
+                        <span class="user-address-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Address Section start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white"
@@ -401,35 +404,36 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Address*</label>
                                                             <input type="text" name="user-address" id="user-address"
-                                                                placeholder="Enter your address" class="mb-0" required>
+                                                                placeholder="Enter Your Address" class="mb-0" required>
                                                             <span id="user-address-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Postal Code*</label>
                                                             <input type="text" name="user-postcode" id="user-postcode"
-                                                                placeholder="Enter your postal code" class="mb-0" required>
+                                                                placeholder="Enter Your Postal Code" class="mb-0"
+                                                                required>
                                                             <span id="user-postcode-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
                                                             <input type="text" name="user-city" id="user-city"
-                                                                placeholder="Enter your city" class="mb-0" required>
+                                                                placeholder="Enter Your City" class="mb-0" required>
                                                             <span id="user-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>State*</label>
                                                             <input type="text" name="user-state" id="user-state"
-                                                                placeholder="Enter your state" class="mb-0" required>
+                                                                placeholder="Enter Your State" class="mb-0" required>
                                                             <span id="user-state-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Country*</label>
                                                             <input type="text" name="user-country" id="user-country"
-                                                                placeholder="Enter your country" class="mb-0" required>
+                                                                placeholder="Enter Your Country" class="mb-0" required>
                                                             <span id="user-country-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -464,15 +468,19 @@
                         </div>
                         <!-- Address Section end -->
 
+                         <!-- school message  -->
+                         <span class="user-school-display-message badge text-bg-danger d-none mt-4">
+
+                         </span>
                         <!-- School details Section start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
                                         id="user-school-accordion-btn" aria-expanded="false"
                                         aria-controls="flush-collapseTwo">
-                                        School Education Details/10th
+                                        School/10th Education Details
                                     </button>
                                 </h2>
                                 <div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -486,8 +494,7 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board*</label>
                                                             <input type="text" name="school-board" id="school-board"
-                                                                placeholder="Enter the board name" class="mb-0"
-                                                                required>
+                                                                placeholder="Enter Board Name" class="mb-0" required>
                                                             <span id="school-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -495,7 +502,7 @@
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>School Name*</label>
                                                             <input type="text" name="school-name" id="school-name"
-                                                                placeholder="Enter your school name" class="mb-0"
+                                                                placeholder="Enter Your School Name" class="mb-0"
                                                                 required>
                                                             <span id="school-name-error" class="error-message"
                                                                 style="color: red"></span>
@@ -505,7 +512,7 @@
                                                             <label>City*</label>
                                                             <input type="text" name="school-education-city"
                                                                 id="school-education-city"
-                                                                placeholder="Enter the education City" class="mb-0"
+                                                                placeholder="Enter Education City" class="mb-0"
                                                                 required>
                                                             <span id="school-education-city-error" class="error-message"
                                                                 style="color: red"></span>
@@ -515,25 +522,25 @@
                                                             <label>State*</label>
                                                             <input type="text" name="school-education-state"
                                                                 id="school-education-state"
-                                                                placeholder="Enter the education State" class="mb-0"
+                                                                placeholder="Enter Education State" class="mb-0"
                                                                 required>
                                                             <span id="school-education-state-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="school-education-sDate"
-                                                                id="school-education-sDate" placeholder="MM/YYYY"
+                                                                id="school-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="school-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="school-education-eDate"
-                                                                id="school-education-eDate" placeholder="MM/YYYY"
+                                                                id="school-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="school-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -550,16 +557,25 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full">
-                                                            <label class="mt-3">Upload School/10th MarkCard
+                                                            <label class="mt-3">Upload School/10th Marks Card
                                                                 Certificate</label>
                                                             <input type="file" name="school-education-cert mt-3"
-                                                                id="school-education-cert">
+                                                                id="school-education-cert" style="height: auto;">
                                                             <span id="school-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container">
-                                                                <a href="#" id="school-cert-file-link" target="_blank">Selected File: </a>
+                                                            <div id="file-link-container" style="display: none;">
+                                                                <a href="#" id="school-cert-file-link"
+                                                                    target="_blank">Selected File: </a>
                                                             </div>
+
+                                                            <!-- Short message for the user -->
+                                                            <p class="text-muted mt-2">
+                                                                Note: You can upload only one document. If you have
+                                                                multiple documents, please compile them into a single
+                                                                file and
+                                                                then upload.
+                                                            </p>
                                                         </span>
 
                                                         <div class="modal-footer d-flex justify-content-end gap-2">
@@ -582,8 +598,12 @@
                         </div>
                         <!-- School Details Section end -->
 
+                        <!-- inter/12th class message  -->
+                        <span class="user-inter-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- 12th/Intermediate Details Section Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
@@ -603,8 +623,7 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="inter-board" id="inter-board"
-                                                                placeholder="Enter the board/university name"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter Board Name" class="mb-0" required>
                                                             <span id="inter-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -613,7 +632,7 @@
                                                             <label>Education Name*</label>
                                                             <input type="text" name="inter-college-name"
                                                                 id="inter-college-name"
-                                                                placeholder="Enter the college name" class="mb-0"
+                                                                placeholder="Enter Your School Name" class="mb-0"
                                                                 required>
                                                             <span id="inter-college-name-error" class="error-message"
                                                                 style="color: red"></span>
@@ -623,8 +642,8 @@
                                                             <label>City*</label>
                                                             <input type="text" name="inter-education-city"
                                                                 id="inter-education-city"
-                                                                placeholder="Enter the Intermediate/12th Education City"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter Your Education City" class="mb-0"
+                                                                required>
                                                             <span id="inter-education-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -633,25 +652,25 @@
                                                             <label>State*</label>
                                                             <input type="text" name="inter-education-state"
                                                                 id="inter-education-state"
-                                                                placeholder="Enter the Intermediate/12th Education State"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter Your Education State" class="mb-0"
+                                                                required>
                                                             <span id="inter-education-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="inter-education-sDate"
-                                                                id="inter-education-sDate" placeholder="MM/YYYY"
+                                                                id="inter-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="inter-education-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="inter-education-eDate"
-                                                                id="inter-education-eDate" placeholder="MM/YYYY"
+                                                                id="inter-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="inter-education-eDate-error" class="error-message"
                                                                 style="color: red"></span>
@@ -668,16 +687,25 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full">
-                                                            <label class="mt-3">Upload Intermediate/12th MarkCard
+                                                            <label class="mt-3">Upload Intermediate/12th Marks Card
                                                                 Certificate</label>
                                                             <input type="file" name="inter-education-cert mt-3"
-                                                                id="inter-education-cert">
+                                                                id="inter-education-cert" style="height: auto;">
                                                             <span id="inter-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container">
-                                                                <a href="#" id="inter-cert-file-link" target="_blank">Selected File: </a>
+                                                            <div id="file-link-container" style="display: none;">
+                                                                <a href="#" id="inter-cert-file-link"
+                                                                    target="_blank">Selected File: </a>
                                                             </div>
+
+                                                            <!-- Short message for the user -->
+                                                            <p class="text-muted mt-2">
+                                                                Note: You can upload only one document. If you have
+                                                                multiple documents, please compile them into a single
+                                                                file and
+                                                                then upload.
+                                                            </p>
                                                         </span>
 
                                                         <div class="modal-footer d-flex justify-content-end gap-2">
@@ -697,15 +725,19 @@
                         </div>
                         <!-- 12th/Inter Details Section end -->
 
+                        <!-- graduation message  -->
+                        <span class="user-degree-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Graduation Details Section Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" id="user-degree-accordion-btn"
                                         data-bs-target="#flush-collapseFour" aria-expanded="false"
                                         aria-controls="flush-collapseFour">
-                                        Graduation Education Details/Degree
+                                        Graduation/Degree Education Details
                                     </button>
                                 </h2>
                                 <div id="flush-collapseFour" class="accordion-collapse collapse"
@@ -718,8 +750,8 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="degree-board" id="degree-board"
-                                                                placeholder="Enter the board/university name"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter University Name" class="mb-0"
+                                                                required>
                                                             <span id="degree-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -728,7 +760,17 @@
                                                             <label>College Name/Dept Name*</label>
                                                             <input type="text" name="degree-education-name"
                                                                 id="degree-college-name"
-                                                                placeholder="Enter the Graduation/Degree college name"
+                                                                placeholder="Enter Your Graduation College Name"
+                                                                class="mb-0" required>
+                                                            <span id="degree-education-name-error" class="error-message"
+                                                                style="color: red"></span>
+                                                        </span>
+
+                                                        <span class="gi-register-wrap gi-register-half mt-3">
+                                                            <label>College Name/Dept Name*</label>
+                                                            <input type="text" name="degree-specialization-name"
+                                                                id="degree-specialization-name"
+                                                                placeholder="Enter the Graduation Specialization name"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-name-error" class="error-message"
                                                                 style="color: red"></span>
@@ -738,7 +780,7 @@
                                                             <label>City*</label>
                                                             <input type="text" name="degree-education-city"
                                                                 id="degree-education-city"
-                                                                placeholder="Enter the graduation/degree city"
+                                                                placeholder="Enter Your Graduation/Degree city"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-city-error" class="error-message"
                                                                 style="color: red"></span>
@@ -748,25 +790,25 @@
                                                             <label>State*</label>
                                                             <input type="text" name="degree-education-state"
                                                                 id="degree-education-state"
-                                                                placeholder="Enter the graduation/degree state"
+                                                                placeholder="Enter Your Graduation/Degree State"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="degree-education-sDate"
-                                                                id="degree-education-sDate" placeholder="MM/YYYY"
+                                                                id="degree-education-sDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="degree-education-eDate"
-                                                                id="degree-education-eDate" placeholder="MM/YYYY"
+                                                                id="degree-education-eDate" placeholder="YYYY"
                                                                 class="mb-0" required>
                                                             <span id="degree-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
@@ -783,14 +825,25 @@
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full">
-                                                            <label class="mt-3">Upload Graduation/Degree MarkCard Certificate</label>
-                                                            <input type="file" name="degree-education-cert" id="degree-education-cert">
+                                                            <label class="mt-3">Upload Graduation/Degree Marks Card
+                                                                Certificate</label>
+                                                            <input type="file" name="degree-education-cert"
+                                                                id="degree-education-cert" style="height: auto;">
                                                             <span id="degree-cert-file-display"></span>
-                                                        
+
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container">
-                                                                <a href="#" id="degree-cert-file-link" target="_blank">Selected File: </a>
+                                                            <div id="file-link-container" style="display: none;">
+                                                                <a href="#" id="degree-cert-file-link"
+                                                                    target="_blank">Selected File: </a>
                                                             </div>
+
+                                                            <!-- Short message for the user -->
+                                                            <p class="text-muted mt-2">
+                                                                Note: You can upload only one document. If you have
+                                                                multiple documents, please compile them into a single
+                                                                file and
+                                                                then upload.
+                                                            </p>
                                                         </span>
 
                                                         <div class="modal-footer d-flex justify-content-end gap-2">
@@ -809,17 +862,23 @@
                         </div>
                         <!-- Graduation Details Section End -->
 
+                        <!-- post graduation message  -->
+                        <span class="user-masters-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!--Post Graduation/Master Details Section Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed bg-info text-white" type="button" data-bs-toggle="collapse"
-                                        id="user-masters-accordion-btn" data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                                    <button class="accordion-button collapsed bg-info text-white" type="button"
+                                        data-bs-toggle="collapse" id="user-masters-accordion-btn"
+                                        data-bs-target="#flush-collapseSeven" aria-expanded="false"
                                         aria-controls="flush-collapseSeven">
-                                        Post-graduation Education Details/Master
+                                        Post-Graduation/Masters Education Details &nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
-                                <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <div class="gi-register-wrapper">
                                             <div class="gi-register-container">
@@ -828,83 +887,109 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="masters-board" id="masters-board"
-                                                                placeholder="Enter the university name" class="mb-0" required>
-                                                            <span id="degree-board-error" class="error-message" style="color: red"></span>
+                                                                placeholder="Enter University Name" class="mb-0"
+                                                                required>
+                                                            <span id="degree-board-error" class="error-message"
+                                                                style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>College Name/Dept Name*</label>
-                                                            <input type="text" name="masters-education-name" id="masters-education-name"
-                                                                placeholder="Enter the Post-graduation/masters dept name" class="mb-0" required>
+                                                            <input type="text" name="masters-education-name"
+                                                                id="masters-education-name"
+                                                                placeholder="Enter Your Post-Graduation Dept Name"
+                                                                class="mb-0" style="font-size: small;" required>
                                                             <span id="master-education-name-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Post-graduation Specialization*</label>
+                                                            <label>Post-Graduation Specialization*</label>
                                                             <input type="text" name="masters-education-spec-name"
                                                                 id="masters-education-spec-name"
-                                                                placeholder="Enter the Post-graduation/masters Specialization name" class="mb-0"
-                                                                required>
-                                                            <span id="masters-education-name-error" class="error-message"
-                                                                style="color: red"></span>
+                                                                placeholder="Enter Your Field Specialization"
+                                                                class="mb-0" style="font-size: small;" required>
+                                                            <span id="masters-education-name-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
-                                                            <input type="text" name="masters-education-city" id="masters-education-city"
-                                                                placeholder="Enter the post-graduation/masters city" class="mb-0" required>
-                                                            <span id="masters-education-city-error" class="error-message"
-                                                                style="color: red"></span>
+                                                            <input type="text" name="masters-education-city"
+                                                                id="masters-education-city"
+                                                                placeholder="Enter Your Post-Graduation City"
+                                                                class="mb-0" style="font-size: small;" required>
+                                                            <span id="masters-education-city-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>State*</label>
-                                                            <input type="text" name="masters-education-state" id="masters-education-state"
-                                                                placeholder="Enter the post-graduation/masters state" class="mb-0" required>
-                                                            <span id="masters-education-city-error" class="error-message"
-                                                                style="color: red"></span>
+                                                            <input type="text" name="masters-education-state"
+                                                                id="masters-education-state"
+                                                                placeholder="Enter Your Post-Graduation State"
+                                                                class="mb-0" style="font-size: small;" required>
+                                                            <span id="masters-education-city-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="masters-education-sDate" id="masters-education-sDate"
-                                                                placeholder="MM/YYYY" class="mb-0" required>
+                                                                placeholder="YYYY" class="mb-0" required>
                                                             <span id="masters-education-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="masters-education-eDate" id="masters-education-eDate"
-                                                                placeholder="MM/YYYY" class="mb-0" required>
+                                                                placeholder="YYYY" class="mb-0" required>
                                                             <span id="degree-education-eDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Percentage*</label>
                                                             <input type="text" name="masters-education-percentage"
-                                                                id="masters-education-percentage" placeholder="Please Enter Your Percentage"
-                                                                class="mb-0" required>
-                                                            <span id="degree-education-percentage-error" class="error-message"
-                                                                style="color: red"></span>
+                                                                id="masters-education-percentage"
+                                                                placeholder="Please Enter Your Percentage" class="mb-0"
+                                                                required>
+                                                            <span id="degree-education-percentage-error"
+                                                                class="error-message" style="color: red"></span>
                                                         </span>
-                        
+
                                                         <span class="gi-register-wrap gi-register-full">
-                                                            <label class="mt-3">Upload Graduation/Degree MarkCard
+                                                            <label class="mt-3">Upload Post-Graduation/Masters Marks
+                                                                Card
                                                                 Certificate</label>
-                                                            <input type="file" name="masters-education-cert mt-3" id="masters-education-cert">
+                                                            <input type="file" name="masters-education-cert mt-3"
+                                                                id="masters-education-cert" style="height: auto;">
                                                             <span id="masters-cert-file-display"></span>
+
+                                                            <!-- Add this container for the file link -->
+                                                            <div id="file-link-container" style="display: none;">
+                                                                <a href="#" id="masters-cert-file-link"
+                                                                    target="_blank">Selected File: </a>
+                                                            </div>
+
+                                                            <!-- Short message for the user -->
+                                                            <p class="text-muted mt-2">
+                                                                Note: You can upload only one document. If you have
+                                                                multiple documents, please compile them into a single
+                                                                file and
+                                                                then upload.
+                                                            </p>
                                                         </span>
-                        
+
                                                         <div class="modal-footer d-flex justify-content-end gap-2">
                                                             <!-- <button href="#" class="gi-btn-1 bg-gray mt-1"
                                                                                         data-bs-toggle="modal"
                                                                                         data-bs-target="#changeGraduationModal"
                                                                                         id="edit-degree-edu-model"
                                                                                         style="background:#4A412A;">Edit</button> -->
-                                                            <button type="button" class="gi-btn-1 bg-success mt-1" id="save-masters-edu-button">
+                                                            <button type="button" class="gi-btn-1 bg-success mt-1"
+                                                                id="save-masters-edu-button">
                                                                 Submit
                                                             </button>
                                                         </div>
@@ -918,15 +1003,19 @@
                         </div>
                         <!-- post-graduation/masters Details Section End -->
 
+                        <!-- post graduation message  -->
+                        <span class="user-internship-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Internship/Academic Project Details Start -->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" id="user-internship-accordion-btn"
                                         data-bs-target="#flush-collapseFive" aria-expanded="false"
                                         aria-controls="flush-collapseFive">
-                                        Internship/Academic Project Details
+                                        Internship/Academic Project Details&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseFive" class="accordion-collapse collapse"
@@ -940,7 +1029,7 @@
                                                             <label>Project Name*</label>
                                                             <input type="text" name="internship-project-name"
                                                                 id="internship-project-name"
-                                                                placeholder="Enter Your project name" class="mb-0"
+                                                                placeholder="Enter Your Project Name" class="mb-0"
                                                                 required>
                                                             <span id="employee-position-error" class="error-message"
                                                                 style="color: red"></span>
@@ -950,8 +1039,8 @@
                                                             <label>Technologies*</label>
                                                             <input type="text" name="internship-technologies"
                                                                 id="internship-technologies"
-                                                                placeholder="Enter Your Technologies" class="mb-0"
-                                                                required>
+                                                                placeholder="Enter Technologies Used In The Project"
+                                                                class="mb-0" required>
                                                             <span id="employee-technologies-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -959,26 +1048,25 @@
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
                                                             <input type="text" name="internship-city"
-                                                                id="internship-city"
-                                                                placeholder="Enter the Employment City" class="mb-0"
-                                                                required>
+                                                                id="internship-city" placeholder="Enter City"
+                                                                class="mb-0" required>
                                                             <span id="employee-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>Start Date*</label>
+                                                            <label>Start Year*</label>
                                                             <input type="text" name="internship-sDate"
-                                                                id="internship-sDate" placeholder="MM/YYYY" class="mb-0"
+                                                                id="internship-sDate" placeholder="YYYY" class="mb-0"
                                                                 required>
                                                             <span id="employee-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
-                                                            <label>End Date*</label>
+                                                            <label>End Year*</label>
                                                             <input type="text" name="internship-eDate"
-                                                                id="internship-eDate" placeholder="MM/YYYY" class="mb-0"
+                                                                id="internship-eDate" placeholder="YYYY" class="mb-0"
                                                                 required>
                                                             <span id="employee-eDate-error" class="error-message"
                                                                 style="color: red"></span>
@@ -998,7 +1086,7 @@
                                                             <label>Profile Description*</label>
                                                             <textarea name="internship-project-description"
                                                                 id="internship-project-description"
-                                                                placeholder="Please the Project Description...."
+                                                                placeholder="Please Explain Your Project Here...."
                                                                 class="mb-0" rows="8" cols="100" required
                                                                 style="width: 100%;"></textarea>
                                                             <span id="employee-project-description-error"
@@ -1007,15 +1095,24 @@
 
                                                         <span class="gi-register-wrap gi-register-full">
                                                             <label class="mt-3">Upload Internship
-                                                                Certificate(optional)</label>
+                                                                Certificate(Optional)</label>
                                                             <input type="file" name="internship-cert mt-3"
-                                                                id="internship-cert">
+                                                                id="internship-cert" style="height: auto;">
                                                             <span id="internship-cert-file-display"></span>
 
                                                             <!-- Add this container for the file link -->
-                                                            <div id="file-link-container">
-                                                                <a href="#" id="internship-cert-file-link" target="_blank">Selected File: </a>
+                                                            <div id="file-link-container" style="display: none;">
+                                                                <a href="#" id="internship-cert-file-link"
+                                                                    target="_blank">Selected File: </a>
                                                             </div>
+
+                                                            <!-- Short message for the user -->
+                                                            <p class="text-muted mt-2">
+                                                                Note: You can upload only one document. If you have
+                                                                multiple documents, please compile them into a single
+                                                                file and
+                                                                then upload.
+                                                            </p>
                                                         </span>
 
                                                         <div class="modal-footer d-flex justify-content-end gap-2">
@@ -1039,15 +1136,20 @@
                         </div>
                         <!-- Internship/Employment Details End -->
 
+
+                        <!-- post graduation message  -->
+                        <span class="user-additional-details-display-message badge text-bg-danger d-none mt-4">
+
+                        </span>
                         <!-- Other Personal Details/Skills Start-->
-                        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed bg-info text-white" type="button"
                                         data-bs-toggle="collapse" id="user-additional-accordion-btn"
                                         data-bs-target="#flush-collapseSix" aria-expanded="false"
                                         aria-controls="flush-collapseSix">
-                                        Other Details/Skills, Languages and Hobbies
+                                        Other Details/Skills, Languages and Hobbies&nbsp; &nbsp; <span class="text-bg-secondary rounded-3">(optional)</span>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseSix" class="accordion-collapse collapse"
@@ -1058,26 +1160,26 @@
                                                 <div class="gi-register-form">
                                                     <form action="#" method="post" id="user-additional-details-form">
                                                         <span class="gi-register-wrap gi-register-full mt-3">
-                                                            <label>Skills (comma-separated)*</label>
+                                                            <label>Skills (Comma-Separated)*</label>
                                                             <input type="text" name="user-skills" id="user-skills"
-                                                                placeholder="Enter your skills" class="mb-0" required>
+                                                                placeholder="Enter Your Skills" class="mb-0" required>
                                                             <span id="user-skills-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full mt-3">
-                                                            <label>Languages (comma-separated)*</label>
+                                                            <label>Languages (Comma-Separated)*</label>
                                                             <input type="text" name="user-languages" id="user-languages"
-                                                                placeholder="Enter languages you know" class="mb-0"
+                                                                placeholder="Enter Languages You Know" class="mb-0"
                                                                 required>
                                                             <span id="user-languages-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full mt-3">
-                                                            <label>Hobbies (comma-separated)*</label>
+                                                            <label>Hobbies (Comma-Separated)*</label>
                                                             <input type="text" name="user-hobbies" id="user-hobbies"
-                                                                placeholder="Enter your hobbies" class="mb-0" required>
+                                                                placeholder="Enter Your Hobbies" class="mb-0" required>
                                                             <span id="user-hobbies-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -1317,8 +1419,8 @@
                                 <span class="gi-register-wrap gi-register-half mt-3">
                                     <label>State*</label>
                                     <input type="text" name="inter-education-model-state"
-                                        id="inter-education-model-state" placeholder="Enter the intermediate/12th college state"
-                                        class="mb-0" required>
+                                        id="inter-education-model-state"
+                                        placeholder="Enter the intermediate/12th college state" class="mb-0" required>
                                     <span id="inter-education-model-city-error" class="error-message"
                                         style="color: red"></span>
                                 </span>
@@ -1736,7 +1838,7 @@
     <!-- Change Password Modal -->
     <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog w-sm-50">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="changePasswordModalLabel">
@@ -1793,7 +1895,7 @@
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog w-sm-50">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="logoutConfirmationModalLabel">

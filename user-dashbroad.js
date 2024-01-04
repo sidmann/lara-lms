@@ -90,7 +90,8 @@ function getUserSnapshot(uid) {
     })
 }
 
-//*****************************loading and role access************************************
+//---------------------------------loading and role access----------------------------------
+
 var container = document.querySelector('.container');
 // Use onAuthStateChanged to control access to admin dashboard
 var userId = null;
@@ -184,7 +185,8 @@ function stopLoader() {
     document.querySelector("#main").classList.remove("hidden");
 }
 
-//******************************** Question upload Ids and Classes ************************** 
+//----------------------------- Question upload Ids and Classes------------------------------------
+ 
 const questionUploadContainer = document.querySelector(".question-upload-container");
 const questionFileSubmit = document.getElementById('question-file-submit');
 const fileUploadForm = document.getElementById('file-upload-form');

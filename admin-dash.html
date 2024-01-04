@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Panel</title>
+<!-- Add Bootstrap CSS link -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+<!-- Add Bootstrap JS and Popper.js scripts (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+<!-- Add your custom CSS styles here -->
+<style>
+    /* Custom CSS styles for the user profile page */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        top: 0;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(81, 79, 79, 0.5);
+        backdrop-filter: blur(3px);
+        z-index: 5;
+    }
+
+    /* Additional styles for navbar */
+    .navbar {
+        width: 100%;
+        top: 0;
+        right: 0;
+        /* background: #fff; */
+        background-color: whitesmoke;
+
+    }
+
+    .navbar-brand.custom-brand {
+        color: #007bff;
+        font-size: 2rem;
+    }
+
+    .nav-link.custom-brand {
+        /* color: #ffffff; */
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    /* Responsive styles for small screens */
+    @media (max-width: 768px) {
+        nav ul li {
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .nav-item {
+            transition: all 0.3s linear;
+        }
+
+        .nav-item:hover {
+            transform: translate(-0.5px, -3px);
+            scale: 1.01;
+        }
+
+        .logo {
+            transition: all 0.3s linear;
+        }
+
+        .logo:hover {
+            scale: 1.1;
+        }
+    }
+
+    .sideContainer li {
+        margin-top: 10px;
+        padding: 10px 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        justify-content: center;
+        justify-items: center;
+        border-radius: 20px;
+    }
+
+    /* Change background color on hover */
+    .sideContainer li:hover {
+        background: linear-gradient(60deg, #ab47bc, #8e24aa);
+        color: white;
+    }
+
+    footer {
+        /* background: linear-gradient(0deg, #36dadc 0%, #64bcf3 100%); */
+        background-color: #565656;
+        font-weight: lighter;
+        color: white;
+        margin-bottom: 0;
+        bottom: 0 !important;
+        /* position:relative; */
+    }
+
+    .container {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        max-width: 95%;
+    }
+
+    #mainContainer {
+        max-width: 100%;
+        padding: 20px;
+        border: 1px solid rgb(219, 217, 217);
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3); */
+        width: 100%;
+        color: white;
+
+    }
+
+    #mainContainer h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #uploadForm {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    #mainContainer #uploadForm input[type="file"] {
+        display: none;
+    }
+
+    #chooseVideoLabel {
+        background-color: #0074d9;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    #chooseVideoLabel:hover {
+        background-color: #0056b3;
+    }
+
+    #progressContainer {
+        display: none;
+    }
+
+    /* Progress bar styling */
+    .progress {
+        width: 100%;
+        height: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+    }
+
+    .progress-bar {
+        width: 0;
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(to right, #4caf50, #45a049);
+        transition: width 0.5s ease;
+    }
+
+    @keyframes fill {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 100% 0;
+        }
+    }
+
+    /* Progress percentage text */
+    #uploadPercentage {
+        text-align: center;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    #chooseImageLabel {
+        background-color: #0074d9;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    #chooseImageLabel:hover {
+        background-color: #0056b3;
+    }
+
+
+    #videoUploadContainer {
+        display: none;
+    }
+
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    @media (min-width: 992px) {
+        .sideContainer ul {
+            overflow-x: unset !important;
+        }
+    }
+
+    /* Video Display and video list */
+
+    .mainVideoContainer {
+        display: none;
+    }
+
+    #videoPlaceholder {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        margin-left: 5px;
+        overflow: hidden;
+        display: grid;
+    }
+
+    .videoPlayerContainer {
+        margin-left: 0;
+        margin-top: 5px;
+        margin-left: 2rem;
+        width: 100%;
+        max-width: 100%;
+
+        @media (min-width: 768px) {
+            margin-left: 0rem;
+        }
+
+        @media (min-width: 992px) {
+            margin-left: 1rem;
+
+        }
+    }
+
+    @media (max-width: 576px) {
+
+        .videoPlayerContainer,
+        topicName {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .mainVideoContainer {
+            overflow-y: auto;
+            height: auto;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1220px) {
+        .mainVideoContainer {
+            width: auto;
+            height: auto;
+        }
+
+        .topicName {
+            width: auto;
+            height: auto;
+            max-height: 400px;
+            overflow: hidden;
+        }
+    }
+
+    .mainVideoContainer {
+        border: 1px solid black;
+        margin: 10px;
+        width: 98%;
+        height: auto;
+        background-color: black;
+        overflow: hidden;
+
+        @media (max-width:768px) {}
+    }
+
+    @media (max-width:1220px) {
+        .mainVideoContainer {
+            height: auto;
+            width: auto;
+        }
+
+        .videoSubTopic {
+            height: auto;
+            width: 100%;
+        }
+    }
+
+    #video {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .topicName {
+        margin: 10px;
+        padding: 10px;
+        height: auto;
+        background-color: grey;
+        width: 96%;
+        max-width: 100%;
+        overflow-y: auto;
+        height: 500px;
+    }
+
+    .topicName h4 {
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        background-color: bisque;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        overflow: hidden;
+    }
+
+    .custom-header-class {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .videoItem {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .programatic-materials {
+        font-size: 1.2rem;
+    }
+
+    /* CSS Code */
+    .package-container {
+        border: 1px solid rgb(202, 201, 201);
+        /* border-radius: 10px; */
+        padding: 20px;
+        text-align: center;
+        color: white;
+        /* background-color: rgb(226, 227, 229); */
+        background-color: #2980b9;
+    }
+
+    .cumulative-one-header {
+        background-color: darkgray;
+    }
+
+    .cumulative-one-body {
+        background-color: #ccc;
+    }
+</style>
+
+
+<body>
+
+    <div id="main" class="position-relative">
+        <!-- Navigation -->
+        <div class="p-2">
+            <nav class="navbar shadow-sm rounded-3 navbar-expand-lg" id="header">
+                <div class="container-fluid">
+                    <a href="home.html">
+                        <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
+                            width="150px" title="Home"></img>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                        <div class="d-flex justify-content-between w-100">
+                            <div class="">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="index.html">Home</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Upcoming batch</a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Today's Schedule</a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand" href="#">Contact Us</a>
+                                    </li> -->
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand" aria-current="page"
+                                            href="user.html">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand" aria-current="page"
+                                            href="user.html">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                        <a class="nav-link custom-brand" aria-current="page"
+                                            href="user.html">Profile</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="userAppbar">
+                                        <a class="nav-link custom-brand active" href="#">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand active" href="#">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- Logout button with data-toggle and data-target attributes -->
+                                        <button class="nav-link custom-brand" data-bs-toggle="modal"
+                                            data-bs-target="#logoutConfirmationModal">
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="navbar-nav mb-2 mb-lg-0">
+                                    <li class="nav-item loggedOut">
+                                        <a class="nav-link custom-brand" href="signup.html">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item loggedOut">
+                                        <a class="nav-link custom-brand" href="login.html">Login</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <!-- Toast notifications will appear here -->
+        </div>
+
+        <!-- <div class="container" style="width: 100%; display: 'none';"> -->
+        <div class="row d-flex flex-column flex-lg-row">
+            <div class="col col-lg-2 mt-4">
+                <div class="sideContainer text-center">
+                    <ul class="d-flex flex-column align-items-center d-lg-block p-0 gap-2 overflow-x-scroll">
+                        <!-- 
+                        <li class="active flex-shrink-0"><button class="nav-link totalEarnedPoints" data-toggle="pill">
+                                <i class="fa fa-tachometer"></i>&nbsp;&nbsp;Total Earned Points</button></li> -->
+
+                        <li class="active flex-shrink-0 upload-video-container-display" style="display: none;"><button
+                                class="nav-link" data-toggle="pill">
+                                <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload
+                                Video</button>
+                        </li>
+                        <li class="active flex-shrink-0 my-cumulative-question-upload" style="display: none;">
+                            <button class="nav-link" data-toggle="pill">
+                                <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload Questions
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Topic ,subTopic of videos and image upload -->
+            <div class="col col-lg-10 d-flex align-items-center">
+                <div id="mainContainer">
+                    <!-- Video Container -->
+                    <div id="videoUploadContainer">
+                        <h1>Upload Image, Videos with Topic & SubTopics</h1>
+
+                        <form id="uploadForm">
+                            <!-- Topic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="videoTopicDropdown" class="mb-2">Select Topic:</label>
+                                        <select class="form-control border-primary" id="videoTopicDropdown">
+                                            <!-- Topic options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#videoTopicModel">Add</span>
+                                </div>
+                            </div>
+
+                            <!-- Subtopic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="videoSubTopicDropdown" class="mb-2">Select Subtopic:</label>
+                                        <select class="form-control border-primary" id="videoSubTopicDropdown">
+                                            <!-- Category options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#videoSubTopicModel">Add</span>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <label for="imageInput" id="chooseImageLabel" class="mb-2">Choose an Image</label>
+                                <input type="file" class="d-none" id="imageInput" accept="image/*">
+                                <div id="imageName">No image selected</div><br>
+                                <!-- <div id="imageURL"></div><br> -->
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <label for="videoInput" id="chooseVideoLabel" class="mb-2">Choose a Video</label>
+                                <input type="file" class="d-none" id="videoInput" accept="video/*">
+                                <div id="videoName">No video selected</div><br>
+                                <!-- <div id="videoURL"></div><br> -->
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+
+                        <!-- Progress bar -->
+                        <div id="progressContainer">
+                            <div class="progress">
+                                <div class="progress-bar" id="uploadProgressBar" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <div id="uploadPercentage">0%</div>
+                        </div>
+                    </div>
+
+                    <!-- Questions File Upload-->
+                    <div class="question-upload-container" style="display: none;">
+                        <h2>Upload Questions File For SubTopics</h2>
+                        <form id="file-upload-form">
+                            <!-- Topic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="fileTopicDropdown" class="mb-2">Select Topic:</label>
+                                        <select class="form-control border-primary" id="fileTopicDropdown">
+                                            <!-- Topic options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <!-- <span id="videoAddTopicButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                            data-bs-target="#videoTopicModel">Add</span> -->
+                                </div>
+                            </div>
+
+                            <!-- Subtopic Section -->
+                            <div class="sm-3 mx-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-4">
+                                        <label for="fileSubTopicDropdown" class="mb-2">Select Subtopic:</label>
+                                        <select class="form-control border-primary" id="fileSubTopicDropdown">
+                                            <!-- Category options will be populated dynamically -->
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <!-- <span id="videoAddSubTopiButton" class="btn btn-primary mt-1" data-bs-toggle="modal"
+                                            data-bs-target="#videoSubTopicModel">Add</span> -->
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <label for="file-input" id="chooseImageLabel" class="mb-2">Choose an File</label>
+                                <input type="file" class="d-none" id="file-input" accept=".xlsx">
+                                <div id="file-name">No file selected</div><br>
+                                <!-- <div id="imageURL"></div><br> -->
+                            </div>
+
+                            <div class="justify-content-center text-center">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Video Play Container  and display the Courses-->
+                    <div id="videoContainer" style="display:none">
+                        <div class="col-lg-12">
+                            <div class="package-container">
+                                <h3>Course Package: Java Full stack project development</h3>
+                            </div><br>
+
+                            <h3 class="text-center">Avaliable Courses</h3>
+
+                            <div class="col-sm-9 col-md-10 col-lg-12">
+                                <div class="d-flex flex-wrap justify-content-center justify-content-md-start justify-content-lg-around gap-2"
+                                    id="topicsContainer">
+                                    <!-- Product cards will be dynamically added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Topic Modal  -->
+        <div class="modal fade" id="videoTopicModel" tabindex="-1" role="dialog" aria-labelledby="topicModalLabel"
+            data-bs-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="topicModalLabel">Manage Topics</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Add Topics</h5>
+                        <form id="topicForm">
+                            <div class="sm-3 mx-auto">
+                                <div class="form-group d-inline-block me-4 mb-3">
+                                    <label for="topicName" class="mb-1">Topic Name:</label>
+                                    <input type="text" class="form-control border-primary" id="topicName"
+                                        name="topicName">
+                                </div>
+                                <button type="button" class="btn btn-primary" id="saveTopicButton">Save</button>
+                            </div>
+                        </form>
+                        <h5>Topics List</h5>
+                        <table class="container">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topicList">
+                                <!-- Topic names will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add SubTopic Modal -->
+        <div class="modal fade" id="videoSubTopicModel" tabindex="-1" role="dialog" aria-labelledby="subTopicModalLabel"
+            data-bs-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="subTopicModalLabel">Manage Subtopics</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Add Subtopics</h5>
+                        <form id="subTopicForm">
+                            <div class="sm-3 mx-auto">
+                                <!-- Topic Section -->
+                                <div class="sm-3 mx-auto">
+                                    <div class="form-group w-75 d-inline-block me-4 mb-3">
+                                        <label for="topicSubTopic" class="mb-2">Select Topic:</label>
+                                        <select class="form-control border-primary" id="topicSubTopic">
+                                            <option value="">Please select</option>
+                                            <!-- Topic options will be populated dynamically -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group d-inline-block me-4 mb-3">
+                                    <label for="subTopicName" class="mb-1">Subtopic
+                                        Name:</label>
+                                    <input type="text" class="form-control border-primary" id="subTopicName"
+                                        name="subTopicName">
+                                </div>
+                                <button type="button" class="btn btn-primary" id="saveSubTopicButton">Save</button>
+                            </div>
+                        </form>
+                        <h5>Subtopics List</h5>
+                        <table class="container">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subTopicList">
+                                <!-- Subtopic names will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Confirmation Modal -->
+        <div class="modal fade" id="logoutConfirmationModal" tabindex="-1"
+            aria-labelledby="logoutConfirmationModalLabel" data-bs-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog w-sm-50">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutConfirmationModalLabel">
+                            Confirm Logout
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to logout?</div>
+                    <div class="modal-footer">
+                        <!-- Cancel button to close the modal -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <!-- Logout button to trigger the logout -->
+                        <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true"
+            id="toast-bg">
+            <div class="notify d-flex justify-content-between">
+                <span class="compare-note d-inline"></span>
+                <button type="button" class="btn-close d-inline" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- script file -->
+    <script type="module" src="./admin-dash.js"></script>
+</body>
+
+</html>
