@@ -119,7 +119,7 @@ function stopLoader() {
 }
 
 // Add an event listener to the confirmation logout button
-confirmLogoutBtn.addEventListener("click", () => {
+document.querySelector('#confirmLogoutBtn').addEventListener("click", () => {
     signOut(auth)
         .then(() => {
             // Redirect to the login page or perform any other actions
