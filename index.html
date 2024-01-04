@@ -943,16 +943,15 @@
         }
 
         .one {
-            height: 70vh;
+            /* height: 100vh; */
             width: 100vw;
             /* background:linear-gradient(45deg,#002848, #00192e); */
             margin: 0;
+            /* margin-bottom: 5%; */
             border-color: transparent;
             /* background-color: #00192e; */
-
             position: relative;
-            /* background-image: url(assets/img/background/background1.png); */
-            /* background-repeat: no-repeat; */
+            
 
         }
 
@@ -962,21 +961,10 @@
         }
 
 
-        .down-arrow {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            cursor: pointer;
-            color: #ffffff;
-            font-size: 30px;
-            cursor: pointer;
-        }
-
 
         .program-top {
             max-height: 100vh;
-            /* position: absolute; */
+            /* position: relative; */
             bottom: 10%;
             left: 5%;
             width: 60%;
@@ -1024,9 +1012,10 @@
         .program-top-1 {
             /* max-height: 100vh; */
             width: 100vw;
+            /* position:relative; */
             /* background-color: #00192e; */
             border-color: transparent;
-            /* position: relative; */
+            position: relative;
             display: flex;
             margin: 0;
             /* justify-content: center; */
@@ -1036,7 +1025,7 @@
             /* width:40vw; */
             /* color: rgba(0, 0, 0, 0); */
             color: white;
-            margin-top: 3%;
+            /* margin-top: 3%; */
         }
 
         .program-top-1 h6 {
@@ -1092,7 +1081,6 @@
             line-height: 1.2;
             color: rgba(0, 0, 0, 0);
             font-family: Cambria, Cochin, Georgia, Times, serif;
-            ;
 
         }
 
@@ -1105,7 +1093,6 @@
             text-align: left;
             margin-bottom: 2rem;
             font-family: Cambria, Cochin, Georgia, Times, serif;
-            ;
             margin-left: 6.5rem;
             margin-top: 5rem;
 
@@ -1508,23 +1495,21 @@
             font-weight: 500;
             color: white;
             transition: background-color 0.3s ease;
-
         }
         }
-        
     </style>
 </head>
 
 <body class="position-relative">
     
-    <div id="targetSection">
+    <!-- <div id="targetSection">
         <div class="overlay" id="overlay">
         <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-    </div>
+    </div> -->
         <!-- Navigation -->
         <div id="main">
             <div class="one">
@@ -1579,53 +1564,55 @@
                                     <!-- <li class="nav-item">
                                 <a class="nav-link custom-brand" href="contactus.html">Contact Us</a>
                             </li> -->
-                                    <!-- <li class="nav-item d-none loggedIn active" id="adminAppbar">
-                                    <a class="nav-link custom-brand" href="#">Profile</a>
-                                </li>
-                                <li class="nav-item d-none loggedIn" id="learnerAppbar">
-                                    <a class="nav-link custom-brand" href="user.html">Profile</a>
-                                </li>
-                                <li class="nav-item d-none loggedIn" id="tpoAppbar">
-                                    <a class="nav-link custom-brand " href="#">Profile</a>
-                                </li> -->
-                                    <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                            <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                 <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
                             </li> -->
                                     <!-- <li class="nav-item d-none loggedIn" id="tpoAppbar">
-                                <a class="nav-link custom-brand" href="#">Tpo Dashboard</a>
+                                        <a class="nav-link custom-brand" href="#">Tpo Dashboard</a>
                             </li> -->
-                                    <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                            <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                 <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
                             </li> -->
-                                    <li class="nav-item loggedIn d-none">
-                                        <button class="nav-link custom-brand text-white fw-bold" data-bs-toggle="modal"
+                            
+                        </ul>
+                        <div>
+                            <ul class="navbar-nav nav-short mb-2  mb-lg-0 text">
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link custom-brand position-relative" href="cart.html">
+                                        <i class="fa-solid fa-cart-shopping me-0"></i>
+                                        <span class="position-absolute badge rounded-pill bg-danger p-1 px-2"
+                                        id="shown-cart"></span>
+                                        <span class="ps-0 ms-0">Cart</span>
+                                    </a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link custom-brand active  text-black fw-bold"
+                                    href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link custom-brand  text-black fw-bold" href="signup.html">Sign
+                                        Up</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn active" id="adminAppbar">
+                                    <a class="nav-link custom-brand text-black fw-bold" href="#">Profile</a>
+                                </li>
+                                <li class="nav-item d-none loggedIn" id="learnerAppbar">
+                                    <a class="nav-link custom-brand text-black fw-bold" href="user.html">Profile</a>
+                                </li>
+                                <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                    <a class="nav-link custom-brand text-black fw-bold " href="#">Profile</a>
+                                </li>
+                                        <li class="nav-item  d-none">
+                                            <a class="nav-link custom-brand text-black fw-bold"
+                                                href="login.html">Login</a>
+                                        </li>
+                                        <li class="nav-item">
+                                        <!-- Logout button with data-toggle and data-target attributes -->
+                                        <button class="nav-link custom-brand  text-black fw-bold" data-bs-toggle="modal"
                                             data-bs-target="#logoutConfirmationModal">
                                             Logout
                                         </button>
                                     </li>
-                                </ul>
-                                <div>
-                                    <ul class="navbar-nav nav-short mb-2  mb-lg-0 text">
-                                        <!-- <li class="nav-item">
-                                    <a class="nav-link custom-brand position-relative" href="cart.html">
-                                        <i class="fa-solid fa-cart-shopping me-0"></i>
-                                        <span class="position-absolute badge rounded-pill bg-danger p-1 px-2"
-                                            id="shown-cart"></span>
-                                        <span class="ps-0 ms-0">Cart</span>
-                                    </a>
-                                </li> -->
-                                        <li class="nav-item">
-                                            <a class="nav-link custom-brand active  text-black fw-bold"
-                                                href="#">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link custom-brand  text-black fw-bold" href="signup.html">Sign
-                                                Up</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link custom-brand text-black fw-bold"
-                                                href="login.html">Login</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1648,29 +1635,13 @@
                     </div>
 
                 </div>
-                <!-- <div class="down-arrow" id="downArrow">
-                <i class="fas fa-chevron-down"></i>
-            </div> -->
+                
             </div>
 
 
-            <div class="program-top-1">
-                <!-- <h6><i class="fa-solid fa-circle-question fa-sm"></i> Are you aiming for FAANG-type companies <span
-                    class="question-mark">❓</span></h6> -->
-                <!-- <h6> Do you aspire to make a mark in the IT industry
-                        through your coding prowess ❓</h6>
-                    <h6> Are you looking for a minimum package of 10 LPA as a
-                        fresher ❓</h6>
-                    <h6> Do you desire a salary jump of 5X ❓</h6>
-                    <h6> Do you want to learn LeetCode and HackerRank
-                        challenges absolutely free ❓</h6>
-                    <h6 class="mb-4"> Do you wish to tackle LeetCode and
-                        HackerRank challenges after your college hours or office hours ❓</h6>
-                    <h6>If so, you've come to the right place!</h6>
-                    <h6>We are pleased to inform you about the Advanced Training Program and placements offered to the toppers
-                        of all branches.</h6> -->
+            <div class="program-top-1 ">
                 <div class="row justify-content-between w-100" data-aos="slide-up" data-aos-delay="50"
-                    data-aos-duration="1000">
+                    data-aos-duration="1000" >
                     <div class="col-sm-7 order-sm-1 order-2 qu text-left align-items-center d-flex">
                         <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6"> Are you aiming for <span class="high-light">
                                 FAANG</span>-type companies
@@ -2556,9 +2527,10 @@
 
 
     <!-- Logout Confirmation Modal -->
+    
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered w-sm-50">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="logoutConfirmationModalLabel">
@@ -2578,6 +2550,8 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
 
             <!-- Footer -->
             
