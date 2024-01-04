@@ -116,15 +116,15 @@ document.querySelector("#newPassword").addEventListener("keyup", () => {
  */
 onAuthStateChanged(auth, (user) => {
 
-    console.log("auth")
+    // console.log("auth")
     if (user) {
-        console.log("if")
+        // console.log("if")
         loggedIn = true
         onLoggedIn();
 
         userDisplayMessage();
         const docRef = doc(firestore, "learners", user.uid);
-        console.log(user.uid)
+        // console.log(user.uid)
         const docSnap = getDoc(docRef);
         docSnap.then((docSnapshot) => {
             if (docSnapshot.exists()) {
@@ -138,7 +138,7 @@ onAuthStateChanged(auth, (user) => {
         });
     }
     else {
-        console.log("else")
+        // console.log("else")
         window.location.href = "login.html";
     }
 });
@@ -486,13 +486,13 @@ async function showOrHideUserAddressForm() {
         const addressExists = await checkAddressDocumentExists(userId);
 
         if (addressExists) {
-            console.log("if")
+            // console.log("if")
             document.getElementById('user-address-form').style.display = 'none';
             document.querySelector('.address-message').style.display = 'block'
             document.getElementById('edit-user-address').style.display = 'block';
             document.querySelector('.address-message').textContent = 'Address Details Already Exists, Please Update the Address Details';
         } else {
-            console.log("else")
+            // console.log("else")
             document.getElementById('user-address-form').style.display = 'block';
             document.querySelector('.address-message').style.display = 'block'
             document.getElementById('edit-user-address').style.display = 'none';
@@ -680,7 +680,7 @@ async function userSchoolDisplayMsg() {
  */
 const accordionSchoolBtn = document.querySelector("#user-school-accordion-btn");
 accordionSchoolBtn.addEventListener('click', async () => {
-    console.log('1')
+    // console.log('1')
     // Check if the accordion is currently collapsing (closing)
     if (!accordionSchoolBtn.classList.contains('collapsed')) {
         const userId = auth.currentUser.uid;
@@ -690,7 +690,7 @@ accordionSchoolBtn.addEventListener('click', async () => {
 
 var userSchoolDocId = null;
 async function openUserSchoolModel(userId) {
-    console.log("3")
+    // console.log("3")
     const userSchoolBoardEdit = document.querySelector('#school-board');
     const userSchoolNameEdit = document.querySelector('#school-name');
     const userSchoolCityEdit = document.querySelector('#school-education-city');
@@ -707,7 +707,7 @@ async function openUserSchoolModel(userId) {
 
         if (!userSchoolSnapshot.empty) {
             userSchoolDocId = userSchoolSnapshot.docs[0].id
-            console.log(userSchoolDocId);
+            // console.log(userSchoolDocId);
             const userSchoolData = userSchoolSnapshot.docs[0].data();
             // console.log(userSchoolData)
             const fileName = getFileNameFromUrl(userSchoolData.schoolCertificateImageUrl);
@@ -786,10 +786,10 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                 const userData = docu.data();
                 if (userSchoolCertificateEdit.files.length > 0) {
 
-                    console.log("if")
+                    // console.log("if")
                     if (userData.certificateImageUrl) {
                         const fileName = getFileNameFromUrl(userData.schoolCertificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -821,7 +821,7 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                     await userSchoolDisplayMsg();
                 }
                 else {
-                    console.log("else")
+                    // console.log("else")
                     const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', docu.id)
                     await updateDoc(userSchoolDocRef,
                         {
@@ -922,7 +922,7 @@ async function userInterDisplayMsg() {
  */
 const accordionInterBtn = document.querySelector("#user-inter-accordion-btn");
 accordionInterBtn.addEventListener('click', async () => {
-    console.log('1')
+    // console.log('1')
     // Check if the accordion is currently collapsing (closing)
     if (!accordionInterBtn.classList.contains('collapsed')) {
         const userId = auth.currentUser.uid;
@@ -932,7 +932,7 @@ accordionInterBtn.addEventListener('click', async () => {
 
 var userInterDocId = null;
 async function openUserInterModel(userId) {
-    console.log("3")
+    // console.log("3")
     const userInterBoardEdit = document.querySelector('#inter-board');
     const userInterNameEdit = document.querySelector('#inter-college-name');
     const userInterCityEdit = document.querySelector('#inter-education-city');
@@ -948,7 +948,7 @@ async function openUserInterModel(userId) {
 
         if (!userInterSnapshot.empty) {
             userInterDocId = userInterSnapshot.docs[0].id
-            console.log(userInterDocId);
+            // console.log(userInterDocId);
             const userInterData = userInterSnapshot.docs[0].data();
             const fileName = getFileNameFromUrl(userInterData.interCertificateImageUrl);
             userInterBoardEdit.value = userInterData.userInterBoard || '';
@@ -1025,10 +1025,10 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                 const userInterData = docu.data();
                 if (userInterCertificateEdit.files.length > 0) {
 
-                    console.log("if")
+                    // console.log("if")
                     if (userData.interCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userInterData.interCertificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'inter_certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -1058,7 +1058,7 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                     openUserInterModel(userId)
                 }
                 else {
-                    console.log("else")
+                    // console.log("else")
                     const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', docu.id)
                     await updateDoc(userInterDocRef,
                         {
@@ -1158,7 +1158,7 @@ async function userDegreeDisplayMsg() {
  */
 const accordionDegreeBtn = document.querySelector("#user-degree-accordion-btn");
 accordionDegreeBtn.addEventListener('click', async () => {
-    console.log('1')
+    // console.log('1')
     // Check if the accordion is currently collapsing (closing)
     if (!accordionDegreeBtn.classList.contains('collapsed')) {
         const userId = auth.currentUser.uid;
@@ -1168,7 +1168,7 @@ accordionDegreeBtn.addEventListener('click', async () => {
 
 var userDegreeDocId = null;
 async function openUserDegreeModel(userId) {
-    console.log("3")
+    // console.log("3")
     const userDegreeBoardEdit = document.querySelector('#degree-board');
     const userDegreeEducationNameEdit = document.querySelector('#degree-college-name');
     const userDegreeSpeEdit = document.querySelector('#degree-specialization-name');
@@ -1185,10 +1185,10 @@ async function openUserDegreeModel(userId) {
 
         if (!userDegreeSnapshot.empty) {
             userDegreeDocId = userDegreeSnapshot.docs[0].id
-            console.log(userDegreeDocId);
+            // console.log(userDegreeDocId);
             const userDegreeData = userDegreeSnapshot.docs[0].data();
             const fileName = getFileNameFromUrl(userDegreeData.degreeCertificateImageUrl);
-            console.log(userDegreeData)
+            // console.log(userDegreeData)
             userDegreeBoardEdit.value = userDegreeData.userDegreeBoard || '';
             userDegreeEducationNameEdit.value = userDegreeData.userDegreeEducationName || '';
             userDegreeSpeEdit.value = userDegreeData.userDegreeSpecialization || ''
@@ -1265,7 +1265,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                 const userDegreeData = docu.data();
                 if (userDegreeCertificateEdit.files.length > 0) {
 
-                    console.log("if")
+                    // console.log("if")
                     if (userDegreeData.degreeCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userDegreeData.degreeCertificateImageUrl);
                         if (fileName) {
@@ -1299,7 +1299,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                     await userDegreeDisplayMsg();
                 }
                 else {
-                    console.log("else")
+                    // console.log("else")
                     const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', docu.id)
                     await updateDoc(userDegreeDocRef,
                         {
@@ -1402,7 +1402,7 @@ async function userMastersDisplayMsg() {
  */
 const accordionMastersBtn = document.querySelector("#user-masters-accordion-btn");
 accordionMastersBtn.addEventListener('click', async () => {
-    console.log('1')
+    // console.log('1')
     // Check if the accordion is currently collapsing (closing)
     if (!accordionMastersBtn.classList.contains('collapsed')) {
         const userId = auth.currentUser.uid;
@@ -1412,7 +1412,7 @@ accordionMastersBtn.addEventListener('click', async () => {
 
 var userMastersDocId = null;
 async function openMastersModel(userId) {
-    console.log("3")
+    // console.log("3")
     const userMastersBoardEdit = document.querySelector("#masters-board");
     const userMastersEducationNameEdit = document.querySelector("#masters-education-name");
     const userMastersEduSpeNameEdit = document.querySelector('#masters-education-spec-name')
@@ -1429,10 +1429,10 @@ async function openMastersModel(userId) {
 
         if (!userMastersSnapshot.empty) {
             userMastersDocId = userMastersSnapshot.docs[0].id
-            console.log(userMastersDocId);
+            // console.log(userMastersDocId);
             const userMastersData = userMastersSnapshot.docs[0].data();
             const fileName = getFileNameFromUrl(userMastersData.mastersCertificateImageUrl);
-            console.log(userMastersData)
+            // console.log(userMastersData)
             userMastersBoardEdit.value = userMastersData.userMastersBoard || '';
             userMastersEducationNameEdit.value = userMastersData.userMastersEducationName || '';
             userMastersEduSpeNameEdit.value = userMastersData.userMastersSpecialization || '';
@@ -1516,22 +1516,22 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
         const userMastersCollectionRef = collection(firestore, 'learners', userId, 'usermasters');
         const userMastersSnapshot = await getDocs(userMastersCollectionRef);
         if (!userMastersSnapshot.empty) {
-            console.log("if")
+            // console.log("if")
             userMastersSnapshot.forEach(async (docu) => {
                 const userMastersData = docu.data();
-                console.log(userMastersData.mastersCertificateImageUrl)
+                // console.log(userMastersData.mastersCertificateImageUrl)
 
                 if (userMastersCertificate.files.length > 0) {
 
                     if (userMastersData.mastersCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userMastersData.mastersCertificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'masters_certificate_images/' + fileName);
                             await deleteObject(storageRef);
                         }
                     }
-                    console.log("1")
+                    // console.log("1")
 
                     const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificateImageFile.name);
                     await uploadBytes(storageRef, userMastersCertificateImageFile);
@@ -1559,7 +1559,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                     await userMastersDisplayMsg();
                 }
                 else {
-                    console.log("else")
+                    // console.log("else")
                     const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', docu.id)
                     await updateDoc(userMastersDocRef,
                         {
@@ -1661,7 +1661,7 @@ async function userInternshipDisplayMsg() {
  */
 const accordionInternshipBtn = document.querySelector("#user-internship-accordion-btn");
 accordionInternshipBtn.addEventListener('click', async () => {
-    console.log('1')
+    // console.log('1')
     // Check if the accordion is currently collapsing (closing)
     if (!accordionInternshipBtn.classList.contains('collapsed')) {
         const userId = auth.currentUser.uid;
@@ -1671,7 +1671,7 @@ accordionInternshipBtn.addEventListener('click', async () => {
 
 var userInternshipDocId = null;
 async function openUserInternshipModel(userId) {
-    console.log("3")
+    // console.log("3")
     const userProjectNameEdit = document.querySelector("#internship-project-name");
     const userProjectTechnologiesEdit = document.querySelector("#internship-technologies");
     const userInternshipCityEdit = document.querySelector("#internship-city");
@@ -1686,9 +1686,9 @@ async function openUserInternshipModel(userId) {
 
         if (!userInternshipSnapshot.empty) {
             userInternshipDocId = userInternshipSnapshot.docs[0].id
-            console.log(userInternshipDocId);
+            // console.log(userInternshipDocId);
             const userInternshipData = userInternshipSnapshot.docs[0].data();
-            console.log(userInternshipData);
+            // console.log(userInternshipData);
 
             const fileName = null;
             if (userInternshipData.internshipCertificateImageUrl) {
@@ -1767,7 +1767,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                 const userInternshipData = docu.data();
                 if (userInternshipCertificateEdit.files.length > 0) {
 
-                    console.log("if")
+                    // console.log("if")
                     if (userInternshipData.internshipCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userInternshipData.internshipCertificateImageUrl);
                         if (fileName) {
@@ -1799,7 +1799,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                     await userInternshipDisplayMsg();
                 }
                 else {
-                    console.log("else")
+                    // console.log("else")
                     const userInternshipDocRef = doc(firestore, 'learners', userId, 'userInternship', docu.id)
                     await updateDoc(userInternshipDocRef,
                         {
@@ -1911,7 +1911,7 @@ async function userAdditionalDisplayMsg() {
  */
 const accordionAdditionalBtn = document.querySelector("#user-additional-accordion-btn");
 accordionAdditionalBtn.addEventListener('click', async () => {
-    console.log("1")
+    // console.log("1")
     // Check if the accordion is currently collapsing (closing)
     if (!accordionAdditionalBtn.classList.contains('collapsed')) {
         const userId = auth.currentUser.uid;
