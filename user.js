@@ -435,8 +435,8 @@ togglePasswordVisibility("newPassword", "newPasswordToggle");
 /**
  * 
  */
-async function checkUserAddressSchoolDocumentExists(userId){
-    const userAddressCollectionRef = collection(firestore,'learners',userId,'useraddress');
+async function checkUserAddressSchoolDocumentExists(userId) {
+    const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress');
     const userAddressSnapshot = await getDocs(userAdditionalCollectionRef);
     return !userAddressSnapshot;
 }
@@ -460,15 +460,15 @@ async function checkUserSchoolDocumentExists(userId) {
 // ------------------------------------------------------------------------------------
 
 // ------------------ Display the message -------------------------------
-function userDisplayMessage(){
-     userAddressDisplayMsg();
-     userSchoolDisplayMsg();
-     userInterDisplayMsg();
-     userDegreeDisplayMsg();
-     userMastersDisplayMsg();
-     userInternshipDisplayMsg();
-     userAdditionalDisplayMsg()
-} 
+function userDisplayMessage() {
+    userAddressDisplayMsg();
+    userSchoolDisplayMsg();
+    userInterDisplayMsg();
+    userDegreeDisplayMsg();
+    userMastersDisplayMsg();
+    userInternshipDisplayMsg();
+    userAdditionalDisplayMsg()
+}
 
 //---------------------------------- user Add or update section------------------------
 
@@ -516,16 +516,16 @@ async function checkAddressDocumentExists(userId) {
  * 
  * to display address message
  */
- async function userAddressDisplayMsg(){
+async function userAddressDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userAddressDataExist = await checkAddressDocumentExists(userId);
 
-    if(!userAddressDataExist){
+    if (!userAddressDataExist) {
         document.querySelector('.user-address-display-message').classList.remove('d-none');
         document.querySelector('.user-address-display-message').textContent = "Please fill your address details"
     }
-    else{
-        document.querySelector('.user-address-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-address-display-message').classList.add('d-none');
     }
 }
 
@@ -575,6 +575,8 @@ async function openUserAddressModel(userId) {
 }
 
 document.getElementById('save-user-address-button').addEventListener('click', async function () {
+    document.querySelector('#save-user-address-button').disabled = true;
+    document.querySelector('#save-user-address-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userAddressEdit = document.querySelector('#user-address').value;
     const userPostcodeEdit = document.querySelector('#user-postcode').value;
@@ -582,53 +584,61 @@ document.getElementById('save-user-address-button').addEventListener('click', as
     const userStateEdit = document.querySelector('#user-state').value;
     const userCountryEdit = document.querySelector('#user-country').value;
 
-    if(userAddressEdit && userPostcodeEdit && userCityEdit && userStateEdit && userCountryEdit){
+    if (userAddressEdit && userPostcodeEdit && userCityEdit && userStateEdit && userCountryEdit) {
 
         if (userId) {
             const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress');
             const userAddressSnapshot = await getDocs(userAddressCollectionRef);
 
-            if(!userAddressSnapshot.empty){
-                userAddressSnapshot.forEach(async(document)=>{
-                    const userAddressData = document.data();
+            if (!userAddressSnapshot.empty) {
+                userAddressSnapshot.forEach(async (docu) => {
+                    const userAddressData = docu.data();
 
-                    const userAdditionalDocRef = collection(firestore, 'learners', userId, 'useraddress')
-                    await updateDoc(userAdditionalDocRef,{
-                        address:userAddressEdit,
-                        postcode:userPostcodeEdit,
+                    const userAdditionalDocRef = doc(firestore, 'learners', userId, 'useraddress', docu.id)
+                    await updateDoc(userAdditionalDocRef, {
+                        address: userAddressEdit,
+                        postcode: userPostcodeEdit,
                         city: userCityEdit,
                         state: userStateEdit,
-                        country:userCountryEdit
+                        country: userCountryEdit
                     })
                     console.log('User Address details updated successfully');
                     displayMessage('User Address details updated successfully', 'success');
-                    openUserAddressModel(userId)
-                    await userAddressDisplayMsg()
+                    document.querySelector('#save-user-address-button').disabled = false;
+                    document.querySelector('#save-user-address-button').textContent = 'Submit';
+                    openUserAddressModel(userId);
+                    await userAddressDisplayMsg();
                 })
             }
-            else{
-                const userAddressDocRef = await addDoc(userAddressCollectionRef,{
-                    address:userAddressEdit,
-                    postcode:userPostcodeEdit,
+            else {
+                const userAddressDocRef = await addDoc(userAddressCollectionRef, {
+                    address: userAddressEdit,
+                    postcode: userPostcodeEdit,
                     city: userCityEdit,
                     state: userStateEdit,
-                    country:userCountryEdit
+                    country: userCountryEdit
                 })
                 console.log('User Address details saved successfully');
                 displayMessage('User Address details saved successfully', 'success');
-                await updateDoc(userAddressDocRef,{userAddressId : userAddressDocRef.id});
+                await updateDoc(userAddressDocRef, { userAddressId: userAddressDocRef.id });
+                document.querySelector('#save-user-address-button').disabled = false;
+                document.querySelector('#save-user-address-button').textContent = 'Submit';
                 openUserAddressModel(userId);
-                await userAddressDisplayMsg()
+                await userAddressDisplayMsg();
             }
-    
+
         } else {
             console.log('User is not authenticated');
             displayMessage('User is not authenticated', 'danger');
+            document.querySelector('#save-user-address-button').disabled = false;
+            document.querySelector('#save-user-address-button').textContent = 'Submit';
         }
     }
     else {
         console.log('please fill all the details');
         displayMessage('please fill all the details', 'danger');
+        document.querySelector('#save-user-address-button').disabled = false;
+        document.querySelector('#save-user-address-button').textContent = 'Submit';
     }
 });
 //---------------------------------------------------------------------------------------------------
@@ -650,16 +660,16 @@ async function checkSchoolDocumentExists(userId) {
  * 
  * to display school edu details message
  */
-async function userSchoolDisplayMsg(){
+async function userSchoolDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userSchoolDataExist = await checkSchoolDocumentExists(userId);
 
-    if(!userSchoolDataExist){
+    if (!userSchoolDataExist) {
         document.querySelector('.user-school-display-message').classList.remove('d-none');
-        document.querySelector('.user-school-display-message').textContent = "Please fill your school education details"
+        document.querySelector('.user-school-display-message').textContent = "Please fill your 10th class education details"
     }
-    else{
-        document.querySelector('.user-school-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-school-display-message').classList.add('d-none');
     }
 }
 
@@ -700,9 +710,8 @@ async function openUserSchoolModel(userId) {
             console.log(userSchoolDocId);
             const userSchoolData = userSchoolSnapshot.docs[0].data();
             const fileName = getFileNameFromUrl(userSchoolData.schoolCertificateImageUrl);
-            console.log(fileName);
             userSchoolBoardEdit.value = userSchoolData.userSchoolBoard || '';
-            userSchoolNameEdit.value = userSchoolData.userSchoolName || '';
+            userSchoolNameEdit.value = userSchoolData.userSchoolEducationName || '';
             userSchoolCityEdit.value = userSchoolData.userSchoolEducationCity || '';
             userSchoolStateEdit.value = userSchoolData.userSchoolEducationState || '';
             userSchoolStartDateEdit.value = userSchoolData.userSchoolStart || '';
@@ -710,13 +719,17 @@ async function openUserSchoolModel(userId) {
             userSchoolPercentageEdit.value = userSchoolData.userSchoolPercentage || '';
             // document.getElementById('school-cert-file-display').textContent = `Selected File: ${fileName}`;
             const fileLink = document.getElementById('school-cert-file-link');
+            const fileLinkContainer = document.getElementById('file-school-link-container');
 
             if (fileName) {
                 fileLink.href = userSchoolData.schoolCertificateImageUrl;
                 fileLink.textContent = `Selected File: ${fileName}`;
                 fileLink.style.display = 'inline-block'; // Display the link
+                fileLinkContainer.style.display = 'block';
+
             } else {
                 fileLink.style.display = 'none'; // Hide the link if there is no file
+                fileLinkContainer.style.display = 'none';
             }
         }
         else {
@@ -731,6 +744,8 @@ async function openUserSchoolModel(userId) {
 }
 
 document.getElementById('save-school-edu-button').addEventListener('click', async function () {
+    document.querySelector('#save-school-edu-button').disabled = true;
+    document.querySelector('#save-school-edu-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userSchoolBoardEdit = document.querySelector('#school-board').value;
     const userSchoolNameEdit = document.querySelector('#school-name').value;
@@ -742,7 +757,7 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
     const userSchoolCertificateEdit = document.querySelector('#school-education-cert')
     const userSchoolCertificateImageFileEdit = userSchoolCertificateEdit.files[0];
     const fileLink = document.getElementById('school-cert-file-link');
-    const fileLinkContainer = document.getElementById('file-link-container');
+    const fileLinkContainer = document.getElementById('file-school-link-container');
 
     if (userSchoolCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userSchoolCertificateImageFileEdit);
@@ -766,8 +781,8 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
         const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
 
         if (!userSchoolSnapshot.empty) {
-            userSchoolSnapshot.forEach(async (document) => {
-                const userData = document.data();
+            userSchoolSnapshot.forEach(async (docu) => {
+                const userData = docu.data();
                 if (userSchoolCertificateEdit.files.length > 0) {
 
                     console.log("if")
@@ -784,7 +799,7 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userSchoolCertificateImageFileEdit);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', document.id)
+                    const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', docu.id)
                     await updateDoc(userSchoolDocRef,
                         {
                             userSchoolBoard: userSchoolBoardEdit,
@@ -796,14 +811,17 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                             userSchoolPercentage: userSchoolPercentageEdit,
                             schoolCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User 10th Class details saved successfully');
-                    displayMessage('User 10th Class details saved successfully', 'success');
+                    console.log('User 10th Class details updated successfully');
+                    displayMessage('User 10th Class details updated successfully', 'success');
+                    document.querySelector('#save-school-edu-button').disabled = false;
+                    document.querySelector('#save-school-edu-button').textContent = 'Submit';
+
                     openUserSchoolModel(userId)
                     await userSchoolDisplayMsg();
                 }
                 else {
                     console.log("else")
-                    const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', document.id)
+                    const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', docu.id)
                     await updateDoc(userSchoolDocRef,
                         {
                             userSchoolBoard: userSchoolBoardEdit,
@@ -814,8 +832,10 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                             userSchoolEnd: userSchoolEndDateEdit,
                             userSchoolPercentage: userSchoolPercentageEdit,
                         });
-                    console.log('User 10th Class details saved successfully');
-                    displayMessage('User 10th Class details saved successfully', 'success');
+                    console.log('User 10th Class details updated successfully');
+                    displayMessage('User 10th Class details updated successfully', 'success');
+                    document.querySelector('#save-school-edu-button').disabled = false;
+                    document.querySelector('#save-school-edu-button').textContent = 'Submit';
                     openUserSchoolModel(userId)
                     await userSchoolDisplayMsg();
                 }
@@ -823,12 +843,12 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
 
         }
         else {
-            if(userSchoolCertificateEdit.files.length > 0){
+            if (userSchoolCertificateEdit.files.length > 0) {
                 const storageRef = ref(storage, 'certificate_images/' + userSchoolCertificateImageFileEdit.name);
                 await uploadBytes(storageRef, userSchoolCertificateImageFileEdit);
                 const certificateImageUrl = await getDownloadURL(storageRef);
-    
-                const userSchoolDocRef = await addDoc(userSchoolCollectionRef,{
+
+                const userSchoolDocRef = await addDoc(userSchoolCollectionRef, {
                     userSchoolBoard: userSchoolBoardEdit,
                     userSchoolEducationName: userSchoolNameEdit,
                     userSchoolEducationCity: userSchoolCityEdit,
@@ -838,22 +858,28 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                     userSchoolPercentage: userSchoolPercentageEdit,
                     schoolCertificateImageUrl: certificateImageUrl
                 })
-                console.log('user 10th class details saved successfully');
-                displayMessage('user 10th class details saved successfully', 'success');
-                
-                await updateDoc(userSchoolDocRef,{userSchoolId : userSchoolDocRef.id});
+                console.log('User 10th Class details saved successfully');
+                displayMessage('User 10th Class details saved successfully', 'success');
+                document.querySelector('#save-school-edu-button').disabled = false;
+                document.querySelector('#save-school-edu-button').textContent = 'Submit';
+
+                await updateDoc(userSchoolDocRef, { userSchoolId: userSchoolDocRef.id });
                 openUserSchoolModel(userId);
                 await userSchoolDisplayMsg();
             }
-            else{
-                console.log('Please fill the all fields');
-                displayMessage('Please fill the all fields', 'danger');
+            else {
+                console.log('Please fill all the details');
+                displayMessage('Please fill all the details', 'danger');
+                document.querySelector('#save-school-edu-button').disabled = false;
+                document.querySelector('#save-school-edu-button').textContent = 'Submit';
             }
         }
     }
     else {
         console.log('Please fill all the details');
         displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
     }
 });
 //--------------------------------------------------------------------------------------------------------
@@ -876,16 +902,16 @@ async function checkInterDocumentExists(userId) {
  * 
  * to display inter/12th class edu details message
  */
-async function userInterDisplayMsg(){
+async function userInterDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userInterDataExist = await checkInterDocumentExists(userId);
 
-    if(!userInterDataExist){
+    if (!userInterDataExist) {
         document.querySelector('.user-inter-display-message').classList.remove('d-none');
-        document.querySelector('.user-inter-display-message').textContent = "Please fill your inter/12th class education details"
+        document.querySelector('.user-inter-display-message').textContent = "Please fill your 12th class education details"
     }
-    else{
-        document.querySelector('.user-inter-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-inter-display-message').classList.add('d-none');
     }
 }
 
@@ -924,7 +950,6 @@ async function openUserInterModel(userId) {
             console.log(userInterDocId);
             const userInterData = userInterSnapshot.docs[0].data();
             const fileName = getFileNameFromUrl(userInterData.interCertificateImageUrl);
-            console.log(userInterData);
             userInterBoardEdit.value = userInterData.userInterBoard || '';
             userInterNameEdit.value = userInterData.userInterEducationName || '';
             userInterCityEdit.value = userInterData.userInterEducationCity || '';
@@ -934,13 +959,16 @@ async function openUserInterModel(userId) {
             userInterPercentageEdit.value = userInterData.userInterPercentage || '';
             // document.getElementById('inter-cert-file-display').textContent = `Selected File: ${fileName}`;
             const fileLink = document.getElementById('inter-cert-file-link');
+            const fileLinkContainer = document.getElementById('file-inter-link-container');
 
             if (fileName) {
                 fileLink.href = userInterData.interCertificateImageUrl;
                 fileLink.textContent = `Selected File: ${fileName}`;
                 fileLink.style.display = 'inline-block'; // Display the link
+                fileLinkContainer.style.display = 'block';
             } else {
                 fileLink.style.display = 'none'; // Hide the link if there is no file
+                fileLinkContainer.style.display = 'none';
             }
         }
         else {
@@ -955,6 +983,8 @@ async function openUserInterModel(userId) {
 }
 
 document.getElementById('save-inter-edu-button').addEventListener('click', async function () {
+    document.querySelector('#save-inter-edu-button').disabled = true;
+    document.querySelector('#save-inter-edu-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userInterBoardEdit = document.querySelector('#inter-board').value;
     const userInterEducationNameEdit = document.querySelector('#inter-college-name').value;
@@ -966,7 +996,7 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
     const userInterCertificateEdit = document.querySelector('#inter-education-cert')
     const userInterCertificateImageFileEdit = userInterCertificateEdit.files[0];
     const fileLink = document.getElementById('inter-cert-file-link');
-    const fileLinkContainer = document.getElementById('file-link-container');
+    const fileLinkContainer = document.getElementById('file-inter-link-container');
 
     if (userInterCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userInterCertificateImageFileEdit);
@@ -990,8 +1020,8 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
         const userInterSnapshot = await getDocs(userInterCollectionRef);
 
         if (!userInterSnapshot.empty) {
-            userInterSnapshot.forEach(async (document) => {
-                const userInterData = document.data();
+            userInterSnapshot.forEach(async (docu) => {
+                const userInterData = docu.data();
                 if (userInterCertificateEdit.files.length > 0) {
 
                     console.log("if")
@@ -1008,7 +1038,7 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                     await uploadBytes(storageRef, userInterCertificateImageFileEdit);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', document.id)
+                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', docu.id)
                     await updateDoc(userInterDocRef,
                         {
                             userInterBoard: userInterBoardEdit,
@@ -1020,13 +1050,15 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                             userInterPercentage: userInterPercentageEdit,
                             interCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User Intermediate/12th details saved successfully');
-                    displayMessage('User Intermediate/12th details saved successfully', 'success');
+                    console.log('User Intermediate/12th details updated successfully');
+                    displayMessage('User Intermediate/12th details updated successfully', 'success');
+                    document.querySelector('#save-inter-edu-button').disabled = false;
+                    document.querySelector('#save-inter-edu-button').textContent = 'Submit';
                     openUserInterModel(userId)
                 }
                 else {
                     console.log("else")
-                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', document.id)
+                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', docu.id)
                     await updateDoc(userInterDocRef,
                         {
                             userInterBoard: userInterBoardEdit,
@@ -1037,20 +1069,22 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                             userInterEnd: userInterEndDateEdit,
                             userInterPercentage: userInterPercentageEdit,
                         });
-                    console.log('User Intermediate/12th details saved successfully');
-                    displayMessage('User Intermediate/12th details saved successfully', 'success');
+                    console.log('User Intermediate/12th details updated successfully');
+                    displayMessage('User Intermediate/12th details updated successfully', 'success');
+                    document.querySelector('#save-inter-edu-button').disabled = false;
+                    document.querySelector('#save-inter-edu-button').textContent = 'Submit';
                     openUserInterModel(userId)
                 }
             })
 
         }
         else {
-            if(userInterCertificateEdit.files.length > 0){
+            if (userInterCertificateEdit.files.length > 0) {
                 const storageRef = ref(storage, 'inter_certificate_images/' + userInterCertificateImageFileEdit.name);
                 await uploadBytes(storageRef, userInterCertificateImageFileEdit);
                 const certificateImageUrl = await getDownloadURL(storageRef);
-    
-                const userInterDocRef = await addDoc(userInterCollectionRef,{
+
+                const userInterDocRef = await addDoc(userInterCollectionRef, {
                     userInterBoard: userInterBoardEdit,
                     userInterEducationName: userInterEducationNameEdit,
                     userInterEducationCity: userInterCityEdit,
@@ -1060,22 +1094,28 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
                     userInterPercentage: userInterPercentageEdit,
                     interCertificateImageUrl: certificateImageUrl
                 })
-                console.log('intermediate/12th details not exist for the user');
-                displayMessage('intermediate/12th details not exist for the user', 'success');
-                
-                await updateDoc(userInterDocRef,{userInterId : userInterDocRef.id});
+                console.log('User Intermediate/12th details saved successfully');
+                displayMessage('User Intermediate/12th details saved successfully', 'success');
+                document.querySelector('#save-inter-edu-button').disabled = false;
+                document.querySelector('#save-inter-edu-button').textContent = 'Submit';
+
+                await updateDoc(userInterDocRef, { userInterId: userInterDocRef.id });
                 openUserInterModel(userId);
                 await userInterDisplayMsg();
             }
-            else{
-                console.log('Please fill the all fields');
-                displayMessage('Please fill the all fields', 'danger');
-            }   
+            else {
+                console.log('Please fill all the details');
+                displayMessage('Please fill all the details', 'danger');
+                document.querySelector('#save-inter-edu-button').disabled = false;
+                document.querySelector('#save-inter-edu-button').textContent = 'Submit';
+            }
         }
     }
     else {
         console.log('Please fill all the details');
         displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-inter-edu-button').disabled = false;
+        document.querySelector('#save-inter-edu-button').textContent = 'Submit';
     }
 });
 //-------------------------------------------------------------------------------------------------------
@@ -1098,16 +1138,16 @@ async function checkDegreeDocumentExists(userId) {
  * 
  * to display graduation edu details message
  */
-async function userDegreeDisplayMsg(){
+async function userDegreeDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userDegreeDataExist = await checkDegreeDocumentExists(userId);
 
-    if(!userDegreeDataExist){
+    if (!userDegreeDataExist) {
         document.querySelector('.user-degree-display-message').classList.remove('d-none');
         document.querySelector('.user-degree-display-message').textContent = "Please fill your graduation details"
     }
-    else{
-        document.querySelector('.user-degree-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-degree-display-message').classList.add('d-none');
     }
 }
 
@@ -1130,7 +1170,7 @@ async function openUserDegreeModel(userId) {
     console.log("3")
     const userDegreeBoardEdit = document.querySelector('#degree-board');
     const userDegreeEducationNameEdit = document.querySelector('#degree-college-name');
-    const userDegreeSpeEdit =  document.querySelector('#degree-specialization-name');
+    const userDegreeSpeEdit = document.querySelector('#degree-specialization-name');
     const userDegreeCityEdit = document.querySelector('#degree-education-city');
     const userDegreeStateEdit = document.querySelector('#degree-education-state');
     const userDegreeStartDateEdit = document.querySelector('#degree-education-sDate');
@@ -1158,13 +1198,16 @@ async function openUserDegreeModel(userId) {
             userDegreePercentageEdit.value = userDegreeData.userDegreePercentage || '';
             //  document.getElementById('degree-cert-file-display').textContent = `Selected File: ${fileName}`;
             const fileLink = document.getElementById('degree-cert-file-link');
+            const fileLinkContainer = document.getElementById('file-degree-link-container');
 
             if (fileName) {
                 fileLink.href = userDegreeData.degreeCertificateImageUrl;
                 fileLink.textContent = `Selected File: ${fileName}`;
                 fileLink.style.display = 'inline-block'; // Display the link
+                fileLinkContainer.style.display = 'block';
             } else {
                 fileLink.style.display = 'none'; // Hide the link if there is no file
+                fileLinkContainer.style.display = 'none';
             }
         }
         else {
@@ -1179,10 +1222,12 @@ async function openUserDegreeModel(userId) {
 }
 
 document.getElementById('save-degree-edu-button').addEventListener('click', async function () {
+    document.querySelector('#save-degree-edu-button').disabled = true;
+    document.querySelector('#save-degree-edu-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userDegreeBoardEdit = document.querySelector('#degree-board').value;
     const userDegreeEducationNameEdit = document.querySelector('#degree-college-name').value;
-    const userDegreeSpeEdit =  document.querySelector('#degree-specialization-name').value
+    const userDegreeSpeEdit = document.querySelector('#degree-specialization-name').value
     const userDegreeCityEdit = document.querySelector('#degree-education-city').value;
     const userDegreeStateEdit = document.querySelector('#degree-education-state').value;
     const userDegreeStartDateEdit = document.querySelector('#degree-education-sDate').value;
@@ -1191,7 +1236,7 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
     const userDegreeCertificateEdit = document.querySelector('#degree-education-cert')
     const userDegreeCertificateImageFileEdit = userDegreeCertificateEdit.files[0];
     const fileLink = document.getElementById('degree-cert-file-link');
-    const fileLinkContainer = document.getElementById('file-link-container');
+    const fileLinkContainer = document.getElementById('file-degree-link-container');
 
     if (userDegreeCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userDegreeCertificateImageFileEdit);
@@ -1215,8 +1260,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
         const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
 
         if (!userDegreeSnapshot.empty) {
-            userDegreeSnapshot.forEach(async (document) => {
-                const userDegreeData = document.data();
+            userDegreeSnapshot.forEach(async (docu) => {
+                const userDegreeData = docu.data();
                 if (userDegreeCertificateEdit.files.length > 0) {
 
                     console.log("if")
@@ -1232,12 +1277,12 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userDegreeCertificateImageFileEdit);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', document.id)
+                    const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', docu.id)
                     await updateDoc(userDegreeDocRef,
                         {
                             userDegreeBoard: userDegreeBoardEdit,
                             userDegreeEducationName: userDegreeEducationNameEdit,
-                            userDegreeSpecialization : userDegreeSpeEdit,
+                            userDegreeSpecialization: userDegreeSpeEdit,
                             userDegreeEducationCity: userDegreeCityEdit,
                             userDegreeEducationState: userDegreeStateEdit,
                             userDegreeStart: userDegreeStartDateEdit,
@@ -1247,17 +1292,19 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                         });
                     console.log('User Graduation/Degree details saved successfully');
                     displayMessage('User Graduation/Degree details saved successfully', 'success');
+                    document.querySelector('#save-degree-edu-button').disabled = false;
+                    document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                     openUserDegreeModel(userId)
                     await userDegreeDisplayMsg();
                 }
                 else {
                     console.log("else")
-                    const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', document.id)
+                    const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', docu.id)
                     await updateDoc(userDegreeDocRef,
                         {
                             userDegreeBoard: userDegreeBoardEdit,
                             userDegreeEducationName: userDegreeEducationNameEdit,
-                            userDegreeSpecialization : userDegreeSpeEdit,
+                            userDegreeSpecialization: userDegreeSpeEdit,
                             userDegreeEducationCity: userDegreeCityEdit,
                             userDegreeEducationState: userDegreeStateEdit,
                             userDegreeStart: userDegreeStartDateEdit,
@@ -1266,6 +1313,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                         });
                     console.log('User Graduation/Degree details saved successfully');
                     displayMessage('User Graduation/Degree details saved successfully', 'success');
+                    document.querySelector('#save-degree-edu-button').disabled = false;
+                    document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                     openUserDegreeModel(userId)
                     await userDegreeDisplayMsg();
                 }
@@ -1273,15 +1322,15 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
 
         }
         else {
-            if(userDegreeCertificateEdit.files.length > 0){
-                const storageRef = ref(storage, 'degree_certificate_images/' + userDegreeCertificateEdit.name);
+            if (userDegreeCertificateEdit.files.length > 0) {
+                const storageRef = ref(storage, 'degree_certificate_images/' + userDegreeCertificateImageFileEdit.name);
                 await uploadBytes(storageRef, userDegreeCertificateImageFileEdit);
                 const certificateImageUrl = await getDownloadURL(storageRef);
-    
-                const userDegreeDocRef = await addDoc(userDegreeCollectionRef,{
+
+                const userDegreeDocRef = await addDoc(userDegreeCollectionRef, {
                     userDegreeBoard: userDegreeBoardEdit,
                     userDegreeEducationName: userDegreeEducationNameEdit,
-                    userDegreeSpecialization : userDegreeSpeEdit,
+                    userDegreeSpecialization: userDegreeSpeEdit,
                     userDegreeEducationCity: userDegreeCityEdit,
                     userDegreeEducationState: userDegreeStateEdit,
                     userDegreeStart: userDegreeStartDateEdit,
@@ -1289,23 +1338,29 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                     userDegreePercentage: userDegreePercentageEdit,
                     degreeCertificateImageUrl: certificateImageUrl
                 })
-                console.log('user graduation education details saved successfully');
-                displayMessage('user graduation education details saved successfully', 'success');
-                
-                await updateDoc(userDegreeDocRef,{userDegreeId : userDegreeDocRef.id});
+                console.log('User Graduation/Degree details saved successfully');
+                displayMessage('User Graduation/Degree details saved successfully', 'success');
+                document.querySelector('#save-degree-edu-button').disabled = false;
+                document.querySelector('#save-degree-edu-button').textContent = 'Submit';
+
+                await updateDoc(userDegreeDocRef, { userDegreeId: userDegreeDocRef.id });
                 openUserDegreeModel(userId);
                 await userDegreeDisplayMsg();
             }
-            else{
-                console.log('Please fill the all fields');
-                displayMessage('Please fill the all fields', 'danger');
-            }  
-            
+            else {
+                console.log('Please fill all the details');
+                displayMessage('Please fill all the details', 'danger');
+                document.querySelector('#save-degree-edu-button').disabled = false;
+                document.querySelector('#save-degree-edu-button').textContent = 'Submit';
+            }
+
         }
     }
     else {
         console.log('Please fill all the details');
         displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-degree-edu-button').disabled = false;
+        document.querySelector('#save-degree-edu-button').textContent = 'Submit';
     }
 });
 //-------------------------------------------------------------------------------------------------
@@ -1327,16 +1382,16 @@ async function checkMastersDocumentExists(userId) {
  * 
  * to display inter/12th class edu details message
  */
-async function userMastersDisplayMsg(){
+async function userMastersDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userMastersDataExist = await checkMastersDocumentExists(userId);
 
-    if(!userMastersDataExist){
+    if (!userMastersDataExist) {
         document.querySelector('.user-masters-display-message').classList.remove('d-none');
         document.querySelector('.user-masters-display-message').textContent = "Please fill your post-graduation details"
     }
-    else{
-        document.querySelector('.user-masters-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-masters-display-message').classList.add('d-none');
     }
 }
 
@@ -1387,13 +1442,16 @@ async function openMastersModel(userId) {
             userMastersPercentageEdit.value = userMastersData.userMastersPercentage || '';
             // document.getElementById('masters-cert-file-display').textContent = `Selected File: ${fileName}`;
             const fileLink = document.getElementById('masters-cert-file-link');
+            const fileLinkContainer = document.getElementById('file-masters-link-container');
 
             if (fileName) {
                 fileLink.href = userMastersData.mastersCertificateImageUrl;
                 fileLink.textContent = `Selected File: ${fileName}`;
                 fileLink.style.display = 'inline-block'; // Display the link
+                fileLinkContainer.style.display = 'block';
             } else {
                 fileLink.style.display = 'none'; // Hide the link if there is no file
+                fileLinkContainer.style.display = 'none';
             }
         }
         else {
@@ -1411,6 +1469,8 @@ async function openMastersModel(userId) {
 * @author mydev 
 */
 document.querySelector('#save-masters-edu-button').addEventListener('click', async (e) => {
+    document.querySelector('#save-masters-edu-button').disabled = true;
+    document.querySelector('#save-masters-edu-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userMastersBoard = document.querySelector("#masters-board").value;
     const userMastersEducationName = document.querySelector("#masters-education-name").value;
@@ -1423,7 +1483,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
     const userMastersCertificate = document.querySelector('#masters-education-cert');
     const userMastersCertificateImageFile = userMastersCertificate.files[0];
     const fileLink = document.getElementById('masters-cert-file-link');
-    const fileLinkContainer = document.getElementById('file-link-container');
+    const fileLinkContainer = document.getElementById('file-masters-link-container');
 
     if (userMastersCertificate.files.length > 0) {
         fileLink.href = URL.createObjectURL(userMastersCertificateImageFile);
@@ -1456,8 +1516,8 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
         const userMastersSnapshot = await getDocs(userMastersCollectionRef);
         if (!userMastersSnapshot.empty) {
             console.log("if")
-            userMastersSnapshot.forEach(async (document) => {
-                const userMastersData = document.data();
+            userMastersSnapshot.forEach(async (docu) => {
+                const userMastersData = docu.data();
                 console.log(userMastersData.mastersCertificateImageUrl)
 
                 if (userMastersCertificate.files.length > 0) {
@@ -1476,7 +1536,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                     await uploadBytes(storageRef, userMastersCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', document.id)
+                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', docu.id)
                     await updateDoc(userMastersDocRef,
                         {
                             userMastersBoard: userMastersBoard,
@@ -1491,13 +1551,15 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                         });
                     console.log('User Post-Graduation/Masters details updated successfully');
                     displayMessage('User Post-Graduation/Masters details updated successfully', 'success');
+                    document.querySelector('#save-masters-edu-button').disabled = false;
+                    document.querySelector('#save-masters-edu-button').textContent = 'Submit';
                     // document.getElementById('masters-edu-details-form').reset();
                     openMastersModel(userId)
                     await userMastersDisplayMsg();
                 }
                 else {
                     console.log("else")
-                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', document.id)
+                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', docu.id)
                     await updateDoc(userMastersDocRef,
                         {
                             userMastersBoard: userMastersBoard,
@@ -1511,18 +1573,20 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                         });
                     console.log('User Post-Graduation/Masters details updated successfully');
                     displayMessage('User Post-Graduation/Masters details updated successfully', 'success');
+                    document.querySelector('#save-masters-edu-button').disabled = false;
+                    document.querySelector('#save-masters-edu-button').textContent = 'Submit';
                     openMastersModel(userId)
                     await userMastersDisplayMsg();
                 }
             })
         }
         else {
-            if(userMastersCertificate.files.length > 0){
-                const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificate.name);
+            if (userMastersCertificate.files.length > 0) {
+                const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificateImageFile.name);
                 await uploadBytes(storageRef, userMastersCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
-    
-                const userMastersDocRef = await addDoc(userMastersCollectionRef,{
+
+                const userMastersDocRef = await addDoc(userMastersCollectionRef, {
                     userMastersBoard: userMastersBoard,
                     userMastersEducationName: userMastersEducationName,
                     userMastersSpecialization: userMastersEduSpeName,
@@ -1533,22 +1597,28 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                     userMastersPercentage: userMastersPercentage,
                     mastersCertificateImageUrl: certificateImageUrl
                 })
-                console.log('user post graduation education details saved successfully');
-                displayMessage('user post graduation education details saved successfully', 'success');
-                
-                await updateDoc(userMastersDocRef,{userMastersId : userMastersDocRef.id});
+                console.log('User Post-Graduation/Masters details saved successfully');
+                displayMessage('User Post-Graduation/Masters details saved successfully', 'success');
+                document.querySelector('#save-masters-edu-button').disabled = false;
+                document.querySelector('#save-masters-edu-button').textContent = 'Submit';
+
+                await updateDoc(userMastersDocRef, { userMastersId: userMastersDocRef.id });
                 openMastersModel(userId);
                 await userMastersDisplayMsg();
             }
-            else{
-                console.log('Please fill the all fields');
-                displayMessage('Please fill the all fields', 'danger');
+            else {
+                console.log('Please fill all the details');
+                displayMessage('Please fill all the details', 'danger');
+                document.querySelector('#save-masters-edu-button').disabled = false;
+                document.querySelector('#save-masters-edu-button').textContent = 'Submit';
             }
         }
     }
     else {
         console.log("Please fill all the details");
         displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-masters-edu-button').disabled = false;
+        document.querySelector('#save-masters-edu-button').textContent = 'Submit';
     }
 })
 
@@ -1571,16 +1641,16 @@ async function checkInternshipDocumentExists(userId) {
  * 
  * to display inter/12th class edu details message
  */
-async function userInternshipDisplayMsg(){
+async function userInternshipDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userMastersDataExist = await checkInternshipDocumentExists(userId);
 
-    if(!userMastersDataExist){
+    if (!userMastersDataExist) {
         document.querySelector('.user-internship-display-message').classList.remove('d-none');
         document.querySelector('.user-internship-display-message').textContent = "Please fill your internship details"
     }
-    else{
-        document.querySelector('.user-internship-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-internship-display-message').classList.add('d-none');
     }
 }
 
@@ -1617,8 +1687,12 @@ async function openUserInternshipModel(userId) {
             userInternshipDocId = userInternshipSnapshot.docs[0].id
             console.log(userInternshipDocId);
             const userInternshipData = userInternshipSnapshot.docs[0].data();
-            const fileName = getFileNameFromUrl(userInternshipData.internshipCertificateImageUrl);
-            console.log(userInternshipData)
+            console.log(userInternshipData);
+
+            const fileName = null;
+            if (userInternshipData.internshipCertificateImageUrl) {
+                fileName = getFileNameFromUrl(userInternshipData.internshipCertificateImageUrl);
+            }
             userProjectNameEdit.value = userInternshipData.userProjectName || '';
             userProjectTechnologiesEdit.value = userInternshipData.userProjectTechnologies || '';
             userInternshipCityEdit.value = userInternshipData.userInternshipCity || '';
@@ -1627,13 +1701,16 @@ async function openUserInternshipModel(userId) {
             userProjectDescriptionEdit.value = userInternshipData.userProjectDescription || '';
             // document.getElementById('internship-cert-file-display').textContent = `Selected File: ${fileName}`;
             const fileLink = document.getElementById('internship-cert-file-link');
+            const fileLinkContainer = document.getElementById('file-internship-link-container');
 
             if (fileName) {
                 fileLink.href = userInternshipData.internshipCertificateImageUrl;
                 fileLink.textContent = `Selected File: ${fileName}`;
                 fileLink.style.display = 'inline-block'; // Display the link
+                fileLinkContainer.style.display = 'block';
             } else {
                 fileLink.style.display = 'none'; // Hide the link if there is no file
+                fileLinkContainer.style.display = 'none';
             }
         }
         else {
@@ -1648,6 +1725,8 @@ async function openUserInternshipModel(userId) {
 }
 
 document.getElementById('save-internship-button').addEventListener('click', async function () {
+    document.querySelector('#save-internship-button').disabled = true;
+    document.querySelector('#save-internship-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userProjectNameEdit = document.querySelector("#internship-project-name").value;
     const userProjectTechnologiesEdit = document.querySelector("#internship-technologies").value;
@@ -1658,7 +1737,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
     const userInternshipCertificateEdit = document.querySelector('#internship-cert')
     const userInternshipCertificateImageFileEdit = userInternshipCertificateEdit.files[0];
     const fileLink = document.getElementById('internship-cert-file-link');
-    const fileLinkContainer = document.getElementById('file-link-container');
+    const fileLinkContainer = document.getElementById('file-internship-link-container');
 
     if (userInternshipCertificateEdit.files.length > 0) {
         fileLink.href = URL.createObjectURL(userInternshipCertificateImageFileEdit);
@@ -1683,8 +1762,8 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
         const userInternshipSnapshot = await getDocs(userInternshipCollectionRef);
 
         if (!userInternshipSnapshot.empty) {
-            userInternshipSnapshot.forEach(async (document) => {
-                const userInternshipData = document.data();
+            userInternshipSnapshot.forEach(async (docu) => {
+                const userInternshipData = docu.data();
                 if (userInternshipCertificateEdit.files.length > 0) {
 
                     console.log("if")
@@ -1700,7 +1779,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userInternshipCertificateImageFileEdit);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userinternship', document.id)
+                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userinternship', docu.id)
                     await updateDoc(userInternshipDocRef,
                         {
                             userProjectName: userProjectNameEdit,
@@ -1713,12 +1792,14 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                         });
                     console.log('User Internship/Academic Project details updated successfully');
                     displayMessage('User Internship/Academic Project details updated successfully', 'success');
+                    document.querySelector('#save-internship-button').disabled = false;
+                    document.querySelector('#save-internship-button').textContent = 'Submit';
                     openUserInternshipModel(userId)
                     await userInternshipDisplayMsg();
                 }
                 else {
                     console.log("else")
-                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userInternship', document.id)
+                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userInternship', docu.id)
                     await updateDoc(userInternshipDocRef,
                         {
                             userProjectName: userProjectNameEdit,
@@ -1730,6 +1811,8 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                         });
                     console.log('User Internship/Academic Project details updated successfully');
                     displayMessage('User Internship/Academic Project details updated successfully', 'success');
+                    document.querySelector('#save-internship-button').disabled = false;
+                    document.querySelector('#save-internship-button').textContent = 'Submit';
                     openUserInternshipModel(userId)
                     await userInternshipDisplayMsg();
                 }
@@ -1737,12 +1820,12 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
 
         }
         else {
-            if(userInternshipCertificateEdit.files.length > 0){
-                const storageRef = ref(storage, 'internship_certificate_images/' + userInternshipCertificateEdit.name);
+            if (userInternshipCertificateEdit.files.length > 0) {
+                const storageRef = ref(storage, 'internship_certificate_images/' + userInternshipCertificateImageFileEdit.name);
                 await uploadBytes(storageRef, userInternshipCertificateImageFileEdit);
                 const certificateImageUrl = await getDownloadURL(storageRef);
-    
-                const userInternshipDocRef = await addDoc(userInternshipCollectionRef,{
+
+                const userInternshipDocRef = await addDoc(userInternshipCollectionRef, {
                     userProjectName: userProjectNameEdit,
                     userProjectTechnologies: userProjectTechnologiesEdit,
                     userInternshipCity: userInternshipCityEdit,
@@ -1751,22 +1834,42 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                     userProjectDescription: userProjectDescriptionEdit,
                     internshipCertificateImageUrl: certificateImageUrl
                 })
-                console.log('user academic project/internship details saved successfully');
-                displayMessage('user academic project/internship details saved successfully', 'success');
-                
-                await updateDoc(userInternshipDocRef,{userinternshipId : userInternshipDocRef.id});
+                console.log('User Internship/Academic Project details saved successfully');
+                displayMessage('User Internship/Academic Project details saved successfully', 'success');
+                document.querySelector('#save-internship-button').disabled = false;
+                document.querySelector('#save-internship-button').textContent = 'Submit';
+
+                await updateDoc(userInternshipDocRef, { userinternshipId: userInternshipDocRef.id });
                 openUserInternshipModel(userId);
                 await userInternshipDisplayMsg();
             }
-            else{
-                console.log('Please fill the all fields');
-                displayMessage('Please fill the all fields', 'danger');
+            else {
+                // Save the details without an image URL
+                const userInternshipDocRef = await addDoc(userInternshipCollectionRef, {
+                    userProjectName: userProjectNameEdit,
+                    userProjectTechnologies: userProjectTechnologiesEdit,
+                    userInternshipCity: userInternshipCityEdit,
+                    userInternshipStart: userInternshipStartEdit,
+                    userInternshipEnd: userInternshipEndEdit,
+                    userProjectDescription: userProjectDescriptionEdit,
+                });
+
+                console.log('User Internship/Academic Project details saved successfully');
+                displayMessage('User Internship/Academic Project details saved successfully', 'success');
+                document.querySelector('#save-internship-button').disabled = false;
+                document.querySelector('#save-internship-button').textContent = 'Submit';
+
+                await updateDoc(userInternshipDocRef, { userinternshipId: userInternshipDocRef.id });
+                openUserInternshipModel(userId);
+                await userInternshipDisplayMsg();
             }
         }
     }
     else {
         console.log('Please fill all the details');
         displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-internship-button').disabled = false;
+        document.querySelector('#save-internship-button').textContent = 'Submit';
     }
 });
 //--------------------------------------------------------------------------------------------------
@@ -1788,16 +1891,16 @@ async function checkAdditionalDocumentExists(userId) {
  * 
  * to display inter/12th class edu details message
  */
-async function userAdditionalDisplayMsg(){
+async function userAdditionalDisplayMsg() {
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userAdditionalDataExist = await checkAdditionalDocumentExists(userId);
 
-    if(!userAdditionalDataExist){
+    if (!userAdditionalDataExist) {
         document.querySelector('.user-additional-details-display-message').classList.remove('d-none');
-        document.querySelector('.user-additional-details-display-message').textContent = "Please fill your internship details"
+        document.querySelector('.user-additional-details-display-message').textContent = "Please fill your additional details";
     }
-    else{
-        document.querySelector('.user-additional-details-display-message').classList.add('d-none'); 
+    else {
+        document.querySelector('.user-additional-details-display-message').classList.add('d-none');
     }
 }
 
@@ -1844,18 +1947,20 @@ async function openUserAdditionalModel(userId) {
 }
 
 document.getElementById('save-user-additional-button').addEventListener('click', async function () {
+    document.querySelector('#save-user-additional-button').disabled = true;
+    document.querySelector('#save-user-additional-button').textContent = 'Submitting...';
     const userId = auth.currentUser ? auth.currentUser.uid : null;
     const userAdditionalSkillsEdit = document.querySelector('#user-skills').value;
     const userAdditionalLanguagesEdit = document.querySelector('#user-languages').value;
     const userAdditionalHobbiesEdit = document.querySelector('#user-hobbies').value;
 
     if (userId) {
-        
+
         if (userAdditionalSkillsEdit && userAdditionalLanguagesEdit && userAdditionalHobbiesEdit) {
             const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'useradditional');
             const userAdditionalSnapshot = await getDocs(userAdditionalCollectionRef);
-            
-            if(!userAdditionalSnapshot.empty){
+
+            if (!userAdditionalSnapshot.empty) {
                 const userAdditionalData = {
                     userAdditionalSkills: userAdditionalSkillsEdit,
                     userAdditionalLanguages: userAdditionalLanguagesEdit,
@@ -1864,33 +1969,41 @@ document.getElementById('save-user-additional-button').addEventListener('click',
                 const userAdditionalDocRef = doc(userAdditionalCollectionRef, userAdditionalDocId)
                 await updateDoc(userAdditionalDocRef, userAdditionalData, { merge: true });
 
-                console.log('User additional details updated successfully');
-                displayMessage('User additional details updated successfully', 'success');
+                console.log('User Additional Details updated successfully');
+                displayMessage('User Additional Details updated successfully', 'success');
+                document.querySelector('#save-user-additional-button').disabled = false;
+                document.querySelector('#save-user-additional-button').textContent = 'Submit';
                 openUserAdditionalModel(userId);
                 await userAdditionalDisplayMsg();
             }
-            else{
-                const usserAdditionalDocRef = await addDoc(userAdditionalCollectionRef,{
+            else {
+                const usserAdditionalDocRef = await addDoc(userAdditionalCollectionRef, {
                     userAdditionalSkills: userAdditionalSkillsEdit,
                     userAdditionalLanguages: userAdditionalLanguagesEdit,
                     userAdditionalHobbies: userAdditionalHobbiesEdit
                 })
-                console.log('User additional details saved successfully');
-                displayMessage('User additional details saved successfully', 'success');
-                
-                await updateDoc(usserAdditionalDocRef,{userAdditionalId : usserAdditionalDocRef.id});
+                console.log('User Additional Details saved successfully');
+                displayMessage('User Additional Details saved successfully', 'success');
+                document.querySelector('#save-user-additional-button').disabled = false;
+                document.querySelector('#save-user-additional-button').textContent = 'Submit';
+
+                await updateDoc(usserAdditionalDocRef, { userAdditionalId: usserAdditionalDocRef.id });
                 openUserAdditionalModel(userId);
                 await userAdditionalDisplayMsg();
             }
         }
-        else{
-            console.log('Please fill the all fields');
-            displayMessage('Please fill the all fields', 'danger');
+        else {
+            console.log('Please fill all the details');
+            displayMessage('Please fill all the details', 'danger');
+            document.querySelector('#save-user-additional-button').disabled = false;
+            document.querySelector('#save-user-additional-button').textContent = 'Submit';
         }
     }
     else {
         console.log('User is not authenticated');
         displayMessage('User is not authenticated', 'danger');
+        document.querySelector('#save-user-additional-button').disabled = false;
+        document.querySelector('#save-user-additional-button').textContent = 'Submit';
     }
 });
 //--------------------------------------------------------------------------------------------------
