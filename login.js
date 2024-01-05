@@ -349,18 +349,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     getRememberedCredentials();
     async function detectUserRole(email) {
-        console.log(email);
+        // console.log(email);
         const usersRef = collection(firestore, "learners");
         try {
             const querySnapshot = await getDocs(query(usersRef, where("email", "==", email)));
 
-            console.log(querySnapshot.empty);
+            // console.log(querySnapshot.empty);
 
             if (!querySnapshot.empty) {
                 querySnapshot.forEach((doc) => {
-                    console.log(doc.data());
+                    // console.log(doc.data());
                     const role = doc.data().role;
-                    console.log(role);
+                    // console.log(role);
                     // Redirect the user based on their role
                     if (role === "ROLE_ADMIN") {
                         window.location.href = "user.html";
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loginUser(email, password) {
 
-        console.log(email, password)
+        // console.log(email, password)
         // const decryptedPassword = decPass(password);
         signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // User successfully signed in
                 rememberMe();
                 const user = userCredential.user;
-                console.log(user)
+                // console.log(user)
 
 
                 // Reset the form
@@ -449,9 +449,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
-        console.log("1")
+        // console.log("1")
         loginUser(email, password);
-        console.log("2")
+        // console.log("2")
     });
 
     function showForgotPasswordForm() {

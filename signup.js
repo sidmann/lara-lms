@@ -22,7 +22,7 @@ var loggedIn = null
 //get user snapshot cart(dependency)
 function getUserSnapshot(uid) {
     const userRef = doc(firestore, 'learners', uid)
-    console.log('3')
+    // console.log('3')
     return new Promise((resolve, reject) => {
         resolve(getDoc(userRef))
     })
@@ -138,16 +138,16 @@ async function submitForm(e) {
             }, 3000);
 
             const user = userCredential.user;
-            console.log(user);
+            // console.log(user);
             const uid = user.uid;
 
             // Save user data to Firestore
             const usersRef = collection(firestore, "learners");
             const userDocRef = doc(usersRef, uid);
             const encryptedPassword = encPass(password);
-            console.log(name)
+            // console.log(name)
             // console.log(lastName)
-            console.log(email)
+            // console.log(email)
             // console.log(phoneNumber)
             // console.log(password);
 

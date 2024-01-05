@@ -34,7 +34,7 @@ var loggedIn = false
 //get user snapshot cart(dependency)
 function getUserSnapshot(uid) {
     const userRef = doc(firestore, 'users', uid)
-    console.log('3')
+    // console.log('3')
     return new Promise((resolve, reject) => {
         resolve(getDoc(userRef))
     })
@@ -56,10 +56,10 @@ onAuthStateChanged(auth, async (user) => {
             // console.log(docSnapshot)
             if (docSnapshot.exists()) {
                 userData = docSnapshot.data();
-                console.log(userData)
+                // console.log(userData)
                 roleAccess(userData.role);
                 onLoggedIn();
-                // stopLoader();
+                stopLoader();
             }
         });
     } else {
@@ -67,7 +67,7 @@ onAuthStateChanged(auth, async (user) => {
         // Hide both appbars or handle the state as needed
         loggedIn = false
         onLoggedOut();
-        // stopLoader();
+        stopLoader();
     }
 });
 
@@ -113,10 +113,10 @@ function onLoggedOut() {
 }
 
 //stop the loader show the main body
-// function stopLoader() {
-//     document.querySelector("#overlay").classList.add("hidden");
-//     document.querySelector("#main").classList.remove("hidden");
-// }
+function stopLoader() {
+    document.querySelector("#overlay").classList.add("hidden");
+    document.querySelector("#main").classList.remove("hidden");
+}
 
 // Add an event listener to the confirmation logout button
 document.querySelector('#confirmLogoutBtn').addEventListener("click", () => {
