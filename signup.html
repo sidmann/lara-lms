@@ -60,9 +60,13 @@
 
         body {
             font-family: Arial, sans-serif;
-             min-height: 100vh;
+            min-height: 100vh;
             /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
-            background: linear-gradient(9deg, #91a88f, #c7eacb)
+            background: linear-gradient(9deg, #91a88f, #c7eacb) ;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
         }
 
 
@@ -76,6 +80,7 @@
         }
 
         .form-container {
+            flex: 1;
             background-color: rgb(235, 221, 221, 0.8);
             backdrop-filter: blur(10px);
             padding: 20px;
@@ -366,12 +371,20 @@
         <!-- Toast notifications will appear here -->
     </div>
 
+
+    <div class="container">
     <!-- Add this div for displaying verification message -->
     <div id="verificationMessage" class="alert" style="color: green; display: none">
         Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        Verification Email Sent! Please check your email and verify your account.
+        
     </div>
-
-    <div class="container">
         <div class="form-container">
             <form id="signupForm">
                 <h3>Sign Up</h3>
@@ -431,58 +444,61 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
-        <div class="container-fluid cntfld-fw" id="footer">
-            <div class="container-fluid ftr-bg">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
-                        <div class="row text-center text-xs-center text-sm-left text-md-left">
-                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                <h5>About Us</h5>
-                                <p>
-                                    Lara Technologies is best place to start your career since 2005.
-                                </p>
-                            </div>
 
-                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                <h5>Contact Us</h5>
-                                <p>
-                                    Feel free to get in touch with us:<br>
-                                    Email: support@lara.co.in<br>
-                                    Phone: <i class="fa fa-phone"></i> +91 7975938871
-                                </p>
-                            </div>
 
-                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
-                                <h5>Stay Connected</h5>
-                                <div class="text-bg-white">
+        <footer class="text-center py-3 rounded-3 font-weight-light">
+            <div class="container-fluid cntfld-fw" id="footer">
+                <div class="container-fluid ftr-bg">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
+                            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                    <h5>About Us</h5>
                                     <p>
-                                        Follow us on social media for updates and news:<br>
-                                        <a href="https://www.facebook.com/laratechnologiesforjava" class="text-light"><i
-                                                class="fa-brands fa-facebook-f"></i></a>&nbsp;
-                                        <a href="https://twitter.com/Laratech2" class="text-light"><i
-                                                class="fa-brands fa-twitter"></i></a>&nbsp;
-                                        <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
-                                            class="text-light"><i class="fa-brands fa-linkedin"></i></a>&nbsp;
-                                        <a href="https://www.instagram.com/lara_technologies/" class="text-light"><i
-                                                class="fa-brands fa-instagram"></i></i></a>
+                                        Lara Technologies is best place to start your career since 2005.
                                     </p>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                    <h5>Contact Us</h5>
+                                    <p>
+                                        Feel free to get in touch with us:<br>
+                                        Email: support@lara.co.in<br>
+                                        Phone: <i class="fa fa-phone"></i> +91 7975938871
+                                    </p>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
+                                    <h5>Stay Connected</h5>
+                                    <div class="text-bg-white">
+                                        <p>
+                                            Follow us on social media for updates and news:<br>
+                                            <a href="https://www.facebook.com/laratechnologiesforjava"
+                                                class="text-light"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;
+                                            <a href="https://twitter.com/Laratech2" class="text-light"><i
+                                                    class="fa-brands fa-twitter"></i></a>&nbsp;
+                                            <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
+                                                class="text-light"><i class="fa-brands fa-linkedin"></i></a>&nbsp;
+                                            <a href="https://www.instagram.com/lara_technologies/" class="text-light"><i
+                                                    class="fa-brands fa-instagram"></i></i></a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
-                        <p>&copy; 2023 Laratechnology. All rights reserved. | <a
-                                href="./assets/pdf/terms-and-conditions.pdf" target="_blank" class="text-light">Terms &
-                                Conditions</a>
-                        </p>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
+                            <p>&copy; 2023 Laratechnology. All rights reserved. | <a
+                                    href="./assets/pdf/terms-and-conditions.pdf" target="_blank"
+                                    class="text-light">Terms &
+                                    Conditions</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>  
 
 
     <!-- toast message body -->
