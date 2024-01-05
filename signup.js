@@ -69,7 +69,7 @@ if (passwordToggle) {
 async function sendVerificationEmail(email) {
     try {
         const actionCodeSettings = {
-            url: `http://127.0.0.1:5500/post-signup-details.html?userId=${auth.currentUser.uid}`,
+            url: `https://laragrooming.com/post-signup-details.html?userId=${auth.currentUser.uid}`,
             handleCodeInApp: true,
         };
 
@@ -131,11 +131,7 @@ async function submitForm(e) {
 
             // Display success message
             document.getElementById("verificationMessage").style.display = "block";
-
-            // Hide verification message after 3 seconds
-            setTimeout(() => {
-                document.getElementById("verificationMessage").style.display = "none";
-            }, 3000);
+            document.querySelector('.form-container').style.display = 'none';
 
             const user = userCredential.user;
             // console.log(user);

@@ -19,17 +19,17 @@
     <style>
         /* body {
             min-height: 100vh; */
-            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
-            /* background: linear-gradient(9deg, #91a88f, #c7eacb)
+        /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+        /* background: linear-gradient(9deg, #91a88f, #c7eacb)
         } */
 
         /* Additional styles for navbar */
         /* .navbar {
             background-color: whitesmoke;
             border: 3px solid beige; */
-            /* background-color: #f8e624; */
-            /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
-            /* border-bottom: 1px solid #ccc; */
+        /* background-color: #f8e624; */
+        /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
+        /* border-bottom: 1px solid #ccc; */
         /* } */
 
         /* .navbar-brand.custom-brand {
@@ -60,6 +60,9 @@
 
         body {
             font-family: Arial, sans-serif;
+             min-height: 100vh;
+            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+            background: linear-gradient(9deg, #91a88f, #c7eacb)
         }
 
 
@@ -78,7 +81,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 100%;
+            width: 450px;
         }
 
         .form-control {
@@ -142,7 +146,7 @@
             } */
 
             .form-container {
-                width: 100%;
+                max-width: 350px;
             }
         }
 
@@ -209,7 +213,7 @@
             margin-bottom: 30px;
         }
 
-        .form-container {
+        /* .form-container {
             background-color: rgb(235, 221, 221, 0.8);
             backdrop-filter: blur(10px);
             padding: 20px;
@@ -218,7 +222,7 @@
             width: 80%;
             max-width: 400px;
             text-align: center
-        }
+        } */
 
         .form-control {
             width: 100%;
@@ -266,7 +270,7 @@
                 </div>
                 <div class="menu-icon">
 
-                    <button class="navbar-toggler logb text-white border-0" type="button"  data-bs-toggle="collapse"
+                    <button class="navbar-toggler logb text-white border-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Toggle navigation">
                         <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
@@ -344,7 +348,8 @@
                                     <a class="nav-link custom-brand   text-black fw-bold" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item loggedOut">
-                                    <a class="nav-link custom-brand active text-black fw-bold" href="signup.html">Sign Up</a>
+                                    <a class="nav-link custom-brand active text-black fw-bold" href="signup.html">Sign
+                                        Up</a>
                                 </li>
                                 <li class="nav-item loggedOut">
                                     <a class="nav-link custom-brand text-black fw-bold" href="login.html">Login</a>
@@ -359,6 +364,11 @@
     </div>
     <div class="toast-container position-fixed top-0 end-0 p-3">
         <!-- Toast notifications will appear here -->
+    </div>
+
+    <!-- Add this div for displaying verification message -->
+    <div id="verificationMessage" class="alert" style="color: green; display: none">
+        Verification Email Sent! Please check your email and verify your account.
     </div>
 
     <div class="container">
@@ -401,10 +411,6 @@
                         <i class="fas fa-eye" id="passwordToggle"></i>
                     </div>
                     <span id="passWordError" class="error-message" style="color: red"></span>
-                </div>
-                <!-- Add this div for displaying verification message -->
-                <div id="verificationMessage" class="alert" style="color: green; display: none">
-                    Verification Email Sent! Please check your email and verify your account.
                 </div>
                 <div>
                     <button type="submit" id="sub_btn" class="btn btn-primary" style="width: 100%; padding: 10px">
