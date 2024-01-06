@@ -1690,7 +1690,7 @@ async function openUserInternshipModel(userId) {
             const userInternshipData = userInternshipSnapshot.docs[0].data();
             // console.log(userInternshipData);
 
-            const fileName = null;
+            let fileName = null;
             if (userInternshipData.internshipCertificateImageUrl) {
                 fileName = getFileNameFromUrl(userInternshipData.internshipCertificateImageUrl);
             }

@@ -55,7 +55,7 @@ var loggedIn = null;
  * @author mydev
  */
 const userId = new URLSearchParams(window.location.search).get('userId');
-// const userId = 'DEemXdf2sfOtzzkrUCisnLk60sC2'
+// const userId = '2ETrPGLGWvePC3xSLDgjEretaW93'
 if (userId) {
     await continueLoginBtnshowOrHide();
     displayMessage('Please continue with filling the remaining details', 'success');
@@ -101,8 +101,6 @@ onAuthStateChanged(auth, (user) => {
     }
     else {
         console.log("else")
-        window.history.replaceState({}, "", "login.html");
-        // window.location.href = "login.html";
         onLoggedOut()
     }
 });
@@ -401,7 +399,6 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
 })
 
 //  -------------------- Inter Education Details Section ---------------------------------
-
 /**
 * to check school education details
 * @param {*} userId 
@@ -667,7 +664,6 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
     }
 })
 
-
 // --------------- Post -graduation/Masters Education Details --------------------------
 
 /**
@@ -686,6 +682,7 @@ async function checkUserDegreeDocumentExists(userId) {
  * to show or hide the continue login button
  */
 async function continueLoginBtnshowOrHide() {
+    console.log("showorhidethe login button")
     const userDetailsExist = await checkUserDegreeDocumentExists(userId);
     if (userDetailsExist) {
         console.log("if")
@@ -696,6 +693,7 @@ async function continueLoginBtnshowOrHide() {
         document.querySelector('.user-login-continue-btn').classList.add('d-none');
     }
 }
+
 
 document.querySelector('#user-masters-accordion-btn').addEventListener('click', async (event) => {
     event.preventDefault();
@@ -716,6 +714,8 @@ document.querySelector('#user-masters-accordion-btn').addEventListener('click', 
         mastersAccordionContent.classList.remove('d-none');
     }
 })
+
+
 /**
  * save the user post-graduation/masters details 
  * @author mydev 
@@ -863,6 +863,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
 //         internsAccordionContent.classList.remove('d-none');
 //     }
 // })
+
 /**
  * save the user internship/academic project details 
  * @author mydev 
@@ -977,6 +978,7 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
         displayMessage('please the fill the details', 'danger');
     }
 })
+
 
 /**
 * save the user address 
