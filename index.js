@@ -34,7 +34,7 @@ var loggedIn = false
 //get user snapshot cart(dependency)
 function getUserSnapshot(uid) {
     const userRef = doc(firestore, 'users', uid)
-    console.log('3')
+    // console.log('3')
     return new Promise((resolve, reject) => {
         resolve(getDoc(userRef))
     })
@@ -56,7 +56,7 @@ onAuthStateChanged(auth, async (user) => {
             // console.log(docSnapshot)
             if (docSnapshot.exists()) {
                 userData = docSnapshot.data();
-                console.log(userData)
+                // console.log(userData)
                 roleAccess(userData.role);
                 onLoggedIn();
                 stopLoader();

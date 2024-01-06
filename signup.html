@@ -19,17 +19,17 @@
     <style>
         /* body {
             min-height: 100vh; */
-            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
-            /* background: linear-gradient(9deg, #91a88f, #c7eacb)
+        /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+        /* background: linear-gradient(9deg, #91a88f, #c7eacb)
         } */
 
         /* Additional styles for navbar */
         /* .navbar {
             background-color: whitesmoke;
             border: 3px solid beige; */
-            /* background-color: #f8e624; */
-            /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
-            /* border-bottom: 1px solid #ccc; */
+        /* background-color: #f8e624; */
+        /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
+        /* border-bottom: 1px solid #ccc; */
         /* } */
 
         /* .navbar-brand.custom-brand {
@@ -60,6 +60,13 @@
 
         body {
             font-family: Arial, sans-serif;
+            min-height: 100vh;
+            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+            background: linear-gradient(9deg, #91a88f, #c7eacb);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
         }
 
 
@@ -73,12 +80,14 @@
         }
 
         .form-container {
+            flex: 1;
             background-color: rgb(235, 221, 221, 0.8);
             backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 100%;
+            width: 450px;
         }
 
         .form-control {
@@ -142,7 +151,7 @@
             } */
 
             .form-container {
-                width: 100%;
+                max-width: 350px;
             }
         }
 
@@ -209,7 +218,7 @@
             margin-bottom: 30px;
         }
 
-        .form-container {
+        /* .form-container {
             background-color: rgb(235, 221, 221, 0.8);
             backdrop-filter: blur(10px);
             padding: 20px;
@@ -218,7 +227,7 @@
             width: 80%;
             max-width: 400px;
             text-align: center
-        }
+        } */
 
         .form-control {
             width: 100%;
@@ -266,7 +275,7 @@
                 </div>
                 <div class="menu-icon">
 
-                    <button class="navbar-toggler logb text-white border-0" type="button"  data-bs-toggle="collapse"
+                    <button class="navbar-toggler logb text-white border-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Toggle navigation">
                         <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
@@ -344,7 +353,8 @@
                                     <a class="nav-link custom-brand   text-black fw-bold" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item loggedOut">
-                                    <a class="nav-link custom-brand active text-black fw-bold" href="signup.html">Sign Up</a>
+                                    <a class="nav-link custom-brand active text-black fw-bold" href="signup.html">Sign
+                                        Up</a>
                                 </li>
                                 <li class="nav-item loggedOut">
                                     <a class="nav-link custom-brand text-black fw-bold" href="login.html">Login</a>
@@ -361,7 +371,80 @@
         <!-- Toast notifications will appear here -->
     </div>
 
+
     <div class="container">
+        <!-- Add this div for displaying verification message -->
+        <div id="verificationMessage" class="alert"
+            style="color: green; background-color: #d4edda; border-color: #c3e6cb; display: none; padding: 15px; border-radius: 5px; margin-top: 20px; text-align: left;">
+            <h4 style="color: #155724;">Verification Email Sent!</h4>
+
+            <p style="font-size: 16px; margin-bottom: 10px;">
+                Thank you for enrolling with laragrooming.com! We've sent a verification email to the address you
+                provided.
+                To successfully enroll in your course, please follow these steps:
+            </p>
+
+            <ol style="list-style: decimal; padding-left: 20px; margin-bottom: 20px;">
+                <li><strong>Check Your Email:</strong>
+                    Open your email inbox and look for a message from laragrooming.com. If you don't see it in your
+                    inbox,
+                    please check your spam or junk folder.
+                </li>
+
+                <li><strong>Open the Email:</strong>
+                    Find the email from laragrooming.com and open it. The subject will typically be "Verify Your
+                    laragrooming
+                    Enrollment."
+                </li>
+
+                <li><strong>Click the Verification Link:</strong>
+                    Inside the email, there's a verification link. Click on it to activate your course enrollment. This
+                    step is
+                    crucial for
+                    account security and course access.
+                </li>
+
+                <li><strong>Return to laragrooming.com:</strong>
+                    After clicking the verification link, a new tab will open for the verification process. Once your email is successfully
+                    verified, a message will confirm it, and you can simply click on the "Continue" button. This will seamlessly redirect
+                    you back to laragrooming.com, where you can proceed to fill out your essential details. Your journey towards academic
+                    enrichment continues here.
+                </li>
+
+                <li><strong>Complete Course Enrollment:</strong>
+                    Provide accurate and detailed information required for your course. This ensures a seamless learning
+                    experience tailored
+                    to your needs.
+                </li>
+
+                <li><strong>Review and Submit:</strong>
+                    Double-check your enrollment details for accuracy. Once satisfied, submit your information. If you ever need to fill in
+                    or update your details in the future, simply log in and navigate to the 'Profile' section. Your education journey with 
+                    laragrooming.com is designed to be flexible and convenient for you.
+                </li>
+
+                <li><strong>Congratulations!</strong>
+                    You've successfully completed the enrollment process for your course. Welcome to laragrooming.com's
+                    educational
+                    community!
+                </li>
+
+                <li><strong>Proceed to Login:</strong>
+                    Now, log in to your account using your registered email and password. Access your enrolled course
+                    and begin
+                    your
+                    learning journey.
+                </li>
+            </ol>
+
+            <p style="font-size: 16px; margin-top: 10px;">
+                Thank you for choosing laragrooming.com. If you encounter any issues or have questions, feel free to
+                reach out
+                to our
+                support team. We're here to assist you as you embark on your educational path!
+            </p>
+        </div>
+
         <div class="form-container">
             <form id="signupForm">
                 <h3>Sign Up</h3>
@@ -402,10 +485,6 @@
                     </div>
                     <span id="passWordError" class="error-message" style="color: red"></span>
                 </div>
-                <!-- Add this div for displaying verification message -->
-                <div id="verificationMessage" class="alert" style="color: green; display: none">
-                    Verification Email Sent! Please check your email and verify your account.
-                </div>
                 <div>
                     <button type="submit" id="sub_btn" class="btn btn-primary" style="width: 100%; padding: 10px">
                         Submit
@@ -425,6 +504,8 @@
     </div>
 
     <!-- Footer -->
+
+
     <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
         <div class="container-fluid cntfld-fw" id="footer">
             <div class="container-fluid ftr-bg">
@@ -432,28 +513,38 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
                         <div class="row text-center text-xs-center text-sm-left text-md-left">
                             <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                <h5>About Us</h5>
-                                <p>
-                                    Lara Technologies is best place to start your career since 2005.
+                                <h5><strong>About Us</strong></h5>
+                                <p style="color:rgb(222, 222, 222)">
+                                    <!-- Lara Technologies is best place to start your career since 2005. -->
+                                    Since 2005
+                                    More than 60,000 Alumni
+                                    Legendary trainer
                                 </p>
                             </div>
 
                             <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                <h5>Contact Us</h5>
-                                <p>
+                                <h5><strong>Contact Us</strong></h5>
+                                <p style="color:rgb(222, 222, 222)">
                                     Feel free to get in touch with us:<br>
-                                    Email: support@lara.co.in<br>
-                                    Phone: <i class="fa fa-phone"></i> +91 7975938871
+                                    <!-- Email: support@lara.co.in<br>
+                                    Phone: <i class="fa fa-phone"></i> +91 7975938871 -->
+                                    <strong>Email:</strong> info@laragrooming.com<br>
+                                    <strong>Phone:</strong> <i class="fa fa-phone"></i> +91 7348840266 <br>
+                                    BTM, Bangalore
+
+
+
+
                                 </p>
                             </div>
 
-                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
+                            <!-- <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
                                 <h5>Stay Connected</h5>
                                 <div class="text-bg-white">
                                     <p>
                                         Follow us on social media for updates and news:<br>
-                                        <a href="https://www.facebook.com/laratechnologiesforjava" class="text-light"><i
-                                                class="fa-brands fa-facebook-f"></i></a>&nbsp;
+                                        <a href="https://www.facebook.com/laratechnologiesforjava"
+                                            class="text-light"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;
                                         <a href="https://twitter.com/Laratech2" class="text-light"><i
                                                 class="fa-brands fa-twitter"></i></a>&nbsp;
                                         <a href="https://www.linkedin.com/company/lara-technologies-pvt-ltd/about/"
@@ -462,7 +553,7 @@
                                                 class="fa-brands fa-instagram"></i></i></a>
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

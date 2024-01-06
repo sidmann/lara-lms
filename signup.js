@@ -22,7 +22,7 @@ var loggedIn = null
 //get user snapshot cart(dependency)
 function getUserSnapshot(uid) {
     const userRef = doc(firestore, 'learners', uid)
-    console.log('3')
+    // console.log('3')
     return new Promise((resolve, reject) => {
         resolve(getDoc(userRef))
     })
@@ -69,7 +69,7 @@ if (passwordToggle) {
 async function sendVerificationEmail(email) {
     try {
         const actionCodeSettings = {
-            url: `http://127.0.0.1:5500/post-signup-details.html?userId=${auth.currentUser.uid}`,
+            url: `https://laragrooming.com/post-signup-details.html?userId=${auth.currentUser.uid}`,
             handleCodeInApp: true,
         };
 
@@ -131,23 +131,19 @@ async function submitForm(e) {
 
             // Display success message
             document.getElementById("verificationMessage").style.display = "block";
-
-            // Hide verification message after 3 seconds
-            setTimeout(() => {
-                document.getElementById("verificationMessage").style.display = "none";
-            }, 3000);
+            document.querySelector('.form-container').style.display = 'none';
 
             const user = userCredential.user;
-            console.log(user);
+            // console.log(user);
             const uid = user.uid;
 
             // Save user data to Firestore
             const usersRef = collection(firestore, "learners");
             const userDocRef = doc(usersRef, uid);
             const encryptedPassword = encPass(password);
-            console.log(name)
+            // console.log(name)
             // console.log(lastName)
-            console.log(email)
+            // console.log(email)
             // console.log(phoneNumber)
             // console.log(password);
 
