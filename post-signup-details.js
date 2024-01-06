@@ -54,8 +54,8 @@ var loggedIn = null;
  * fetch userId url params
  * @author mydev
  */
-// const userId = new URLSearchParams(window.location.search).get('userId');
-const userId = 'DEemXdf2sfOtzzkrUCisnLk60sC2'
+const userId = new URLSearchParams(window.location.search).get('userId');
+// const userId = 'DEemXdf2sfOtzzkrUCisnLk60sC2'
 if (userId) {
     await continueLoginBtnshowOrHide();
     displayMessage('Please continue with filling the remaining details', 'success');
@@ -175,7 +175,6 @@ function getUserRealTime() {
     })
 }
 
-
 /**
  * 
  * @param {*} message 
@@ -212,9 +211,6 @@ function displayMessage(message, type) {
 //    userSchoolEducationFormShowOrHide();
 
 // })
-
-
-
 /**
  * save the user address 
  * @author mydev
@@ -462,7 +458,6 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
             //     displayMessage('Please fill the your school details','success');
             //     return;
             //  }
-
             const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
             const userInterSnapshot = await getDocs(userInterCollectionRef);
             if (!userInterSnapshot.empty) {
@@ -740,7 +735,6 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
     if (userMastersBoard && userMastersEducationName && userMastersEduSpeName && userMastersEducationCity && userMastersEducationState
         && userMastersStart && userMastersEnd && userMastersPercentage && userMastersCertificate.files.length > 0) {
         try {
-
             // const userDegreeCollectionRef = collection(firestore, 'learners',userId,'userdegree');
             // const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
             // if(userDegreeSnapshot.empty){
