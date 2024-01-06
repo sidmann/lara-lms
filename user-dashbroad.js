@@ -1515,6 +1515,7 @@ async function uploadQuestionFile(file, topicName, subTopicName) {
 //*********************** Cumulative Exam *******************************************
 myCumulativeExams.addEventListener('click', function (event) {
     if (CumulativeContainerOne) {
+        console.log("1")
         CumulativeContainerOne.style.display = 'block';
         videoUploadContainer.style.display = 'none';
         videoContainer.style.display = 'none';

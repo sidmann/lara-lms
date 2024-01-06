@@ -27,7 +27,7 @@
 
     <!-- Add your custom CSS styles here -->
     <style>
-        /* Custom CSS styles for the user profile page */
+         /* Custom CSS styles for the user profile page */
         * {
             margin: 0;
             padding: 0;
@@ -35,9 +35,10 @@
         }
 
         body {
-            top: 0;
             min-height: 100vh;
-            position: relative;
+            /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+            /* background: linear-gradient(9deg, #91a88f, #c7eacb) */
+                /* position: relative; */
         }
 
         .hidden {
@@ -57,32 +58,81 @@
 
         /* Additional styles for navbar */
         .navbar {
-            width: 100%;
-            top: 0;
-            right: 0;
             /* background: #fff; */
             background-color: whitesmoke;
-
+            border: 3px solid beige;
+            /* border-bottom: 1px solid #ccc; */
         }
 
 
 
-        
+        .navbar-brand.custom-brand {
+            color: #007bff;
+            font-size: 2rem;
+        }
+
+        .nav-link.custom-brand {
+            /* color: #ffffff; */
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        /* Responsive styles for small screens */
+        @media (max-width: 768px) {
+            nav ul {
+                text-align: center;
+            }
+
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .nav-item {
+                transition: all 0.3s linear;
+            }
+
+            .nav-item:hover {
+                transform: translate(-0.5px, -3px);
+                scale: 1.01;
+            }
+
+            .logo {
+                transition: all 0.3s linear;
+            }
+
+            .logo:hover {
+                scale: 1.1;
+            }
+        }
 
         .sideContainer li {
+            /* border: 1px solid #ccc; */
+            /* color: #ffffff; */
             margin-top: 10px;
             padding: 10px 25px;
             white-space: nowrap;
             overflow: hidden;
             justify-content: center;
             justify-items: center;
-            border-radius: 20px;
+            width: 200px;
         }
 
-        /* Change background color on hover */
+       /* Change background color on hover */
         .sideContainer li:hover {
-            background: linear-gradient(60deg, #ab47bc, #8e24aa);
+            /* background: linear-gradient(60deg, #ab47bc, #8e24aa); */
+            /* box-shadow: gray; */
+            color: #000;
+            background:#eee;
+            /* cursor: pointer; */
+        }
+        .sideContainer li:active {
+            background-color:  #ab47bc;
             color: white;
+            /* cursor: pointer; */
         }
 
         footer {
@@ -95,23 +145,22 @@
             /* position:relative; */
         }
 
+   /* container Section  */
         .container {
             background-color: #ffffff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             border-radius: 10px;
-            margin-top: 20px;
-            max-width: 95%;
+            /* margin-top: 20px; */
+            max-width: 100%;
         }
 
         #mainContainer {
-            max-width: 100%;
+            /* max-width: 800px; */
             padding: 20px;
-            border: 1px solid rgb(219, 217, 217);
-            /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3); */
-            width: 100%;
-            color: white;
-
+            background-color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 100%
         }
 
         #mainContainer h1 {
@@ -146,7 +195,7 @@
             display: none;
         }
 
-        /* Progress bar styling */
+  /* Progress bar styling */
         .progress {
             width: 100%;
             height: 20px;
@@ -173,7 +222,8 @@
             }
         }
 
-        /* Progress percentage text */
+   /* Progress percentage text */
+
         #uploadPercentage {
             text-align: center;
             margin-top: 5px;
@@ -193,7 +243,6 @@
         #chooseImageLabel:hover {
             background-color: #0056b3;
         }
-
 
         #videoUploadContainer {
             display: none;
@@ -227,7 +276,7 @@
             }
         }
 
-        /* Video Display and video list */
+  /* Video Display and video list */
 
         .mainVideoContainer {
             display: none;
@@ -361,25 +410,44 @@
 
         /* CSS Code */
         .package-container {
-            border: 1px solid rgb(202, 201, 201);
-            /* border-radius: 10px; */
+            border: 1px solid #2980b9;
+            border-radius: 10px;
             padding: 20px;
             text-align: center;
-            color: white;
-            /* background-color: rgb(226, 227, 229); */
+            color: #fff;
             background-color: #2980b9;
         }
+/* 
+        .package-container:hover {
+            border-color: #2980b9;
+            background-color: #2980b9;
+        } */
+
+        /* Cumulative Exam */
+        
+        /* #choose-question-label {} */
 
         .cumulative-one-header {
             background-color: darkgray;
         }
 
         .cumulative-one-body {
-            background-color: #ccc;
+            background-color: #eee;
         }
-        .navbar .container-fluid{
-            max-width: 100%;
-            width: 1700px;
+
+    /* back to top */
+        .container-button{
+            margin-left: 94%;
+            position: fixed;
+        }
+        .container-section {
+            padding: 15px 20px;
+            text-align: center;
+            background-color: #007bff; 
+        }
+        .container-section a{
+            text-decoration: none;
+            color: white;
         }
     </style>
 </head>
@@ -494,21 +562,21 @@
                         <li class="active flex-shrink-0"><button class="nav-link totalEarnedPoints" data-toggle="pill">
                                 <i class="fa fa-tachometer"></i>&nbsp;&nbsp;Total Earned Points</button></li> -->
                         <!-- <li><a  href="#prof" data-toggle="pill"><span class="fa fa-user-o s8 pd-r10"></span>My Profile</a></li>   -->
-                        <li class="active flex-shrink-0"><button class="nav-link myCourses" data-toggle="pill"><i
-                                    class="fa fa-book"></i>&nbsp;&nbsp;My Courses</button></li>
-                        <!-- <li class="active flex-shrink-0"><button class="nav-link liveClasses" data-toggle="pill">
-                                <i class="fa fa-book"></i>&nbsp;&nbsp;My Live classes</button></li> -->
-                        <!-- <li class="active flex-shrink-0"><button class="nav-link myNotifications" data-toggle="pill">
-                                <i class="fa fa-book"></i>&nbsp;&nbsp;My Notifications</button></li> -->
+                        <li class="active flex-shrink-0"><button class="nav-link myCourses" data-toggle="pill">
+                                <i class="fa fa-book"></i>&nbsp;&nbsp;My Courses</button>
+                        </li>
                         <li class="active flex-shrink-0"><button class="nav-link my-cumulative-exams"
                                 data-toggle="pill">
-                                <i class="fa fa-hourglass-start"></i>&nbsp;&nbsp;Cumulative Exams</button></li>
+                                <i class="fa fa-hourglass-start"></i>&nbsp;&nbsp;Cumulative Exams</button>
+                        </li>
                         <li class="active flex-shrink-0"><button class="nav-link my-cumulative-score-records"
                                 data-toggle="pill">
                                 <i class="fa fa-life-ring "></i>&nbsp;&nbsp;Cumulative
-                                Score</button></li>
+                                Score</button>
+                        </li>
                         <li class="active flex-shrink-0"><button class="nav-link accountSettings" data-toggle="pill">
-                                <i class="fa fa-key s8"></i>&nbsp;&nbsp;Account Settings</a></li>
+                                <i class="fa fa-key s8"></i>&nbsp;&nbsp;Account Settings</a>
+                        </li>
                         <li class="active flex-shrink-0 uploadVideoContainerDisplay" style="display: none;"><button
                                 class="nav-link" data-toggle="pill">
                                 <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload
@@ -519,6 +587,7 @@
                                 <i class="fa-solid fa-upload"></i>&nbsp;&nbsp;Upload Questions
                             </button>
                         </li>
+                        
                         <li class="active flex-shrink-0 my-admin-panel">
                             <a  href="admin-dash.html" class="nav-link" data-toggle="pill">
                                 <i class="fa-solid fa-upload"></i>&nbsp;&nbsp; Admin Panel
