@@ -25,14 +25,14 @@
     <link rel="stylesheet" href="assets/css/vendor/gicons.css">
 
     <!-- css All Plugins Files -->
-    <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/plugins/animate.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/plugins/bootstrap.css"> -->
-    <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/nouislider.css">
+    <!-- <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/owl.theme.default.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/slick.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/nouislider.css"> -->
 
     <!-- Main Style -->
     <link rel="stylesheet" id="main_style" href="assets/css/style.css">
@@ -44,15 +44,34 @@
     <!-- GSAP -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+        integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+        integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollToPlugin.min.js"
+        integrity="sha512-gXXZigEOXAVnGZ2otmK1DqTFK/vF87A+x6Owjf5CN+zVxcg9bLg3F6J1s9yGnFFT08QLt7G0vI3XNWJVue260w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script type="module" src="./index.js"></script>
+    <script src="assets/css/plugins/bootstrap.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
         integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
         integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollToPlugin.min.js"
-        integrity="sha512-gXXZigEOXAVnGZ2otmK1DqTFK/vF87A+x6Owjf5CN+zVxcg9bLg3F6J1s9yGnFFT08QLt7G0vI3XNWJVue260w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+
+
     <style>
         /* body {
             min-height: 100vh; */
@@ -1635,7 +1654,7 @@
                                             <a class="nav-link custom-brand text-black fw-bold"
                                                 href="user.html">Profile</a>
                                         </li>
-                                        <li class="nav-item d-none loggedOut">
+                                        <li class="nav-item loggedOut">
                                             <a class="nav-link custom-brand  text-black fw-bold" href="signup.html">Sign
                                                 Up</a>
                                         </li>
@@ -1789,8 +1808,6 @@
                 <h2>Details :</h2>
             </div>
 
-
-
             <div class="program">
                 <div class="course-details">
                     <div class="row mb-1">
@@ -1865,719 +1882,6 @@
                 </a>
             </div>
 
-
-
-            <!-- <div class="container-fluid cont-fluid "> -->
-
-
-
-            <!-- </div> -->
-
-
-
-
-
-            <!-- Main Body Content -->
-            <!-- <div id="mainDiv">
-        <div class="container-main pd-l0 pd-r0">
-            <div class="row gradient-light-pink" style="width: 102%;">
-                <div class="col-lg-12">
-                    <div class="about">
-                        <h2 class="tittle-wthree mt-2 mb-3 main-tag text-center">About Lara Technologies</h2>
-                    </div>
-                    <div class="main-tag-cnt">
-                        <ul>
-                            <li style="background: linear-gradient(45deg, #2ec280, transparent);">
-                                <div class="main-tag-pts" style="font-size: xx-large;">
-                                    Its not just an Institute...
-                                    Its not just a placement agency...
-                                </div>
-                            </li>
-                            <li style="background: linear-gradient(45deg, #2ec280, transparent);">
-                                <div class="main-tag-pts" style="font-size: xx-large;">
-                                    Its more than a University...
-                                    Its more than a Company...
-                                </div>
-                            </li>
-                            <div class="container">
-                                <div class="flex-container d-sm-flex" style="background: linear-gradient(-186deg, lightblue, white);
-                                        border-radius: 7px;
-                                        box-shadow: 2px 6px 12px #172024;
-                                        color: white;"> -->
-
-            <!-- Left side content -->
-            <!-- <div class="left-container" style="margin-left: 5%; font-family: Righteous;">
-                                        <div class="left-corner">
-                                            <span class="main-tag-pts" style="color: darkblue; font-size: xx-large;">
-                                                <i class="fa-solid fa-cubes"></i> 4 PILLORS TO EVERY LEARNER
-                                            </span>
-                                        </div>
-                                        <hr style="background-color: darkblue;width: 96%;
-                                                margin-left: -2%;">
-                                        <ul>
-                                            <li>
-                                                <span style="color: darkblue; font-size: xx-large;">
-                                                    <i class="fa-solid fa-gears"></i> Technical Skills
-                                                </span><br>
-                                                <span style="color: darkblue;  font-size: xx-large;">
-                                                    <i class="fa fa-puzzle-piece"></i> Aptitude and Reasoning
-                                                </span><br>
-                                                <span style="color: darkblue; font-size: xx-large;">
-                                                    <i class="fa-solid fa-user-tie"></i> Soft Skills
-                                                </span><br>
-                                                <span style="color: darkblue; font-size: xx-large;">
-                                                    <i class="fa-solid fa-keyboard"></i> Internship
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div> -->
-            <!-- Right side content -->
-            <!-- <div class="right-container" style=" font-family: Righteous;">
-                                        <div class="right-corner">
-                                            <span class="main-tag-pts" style="color: darkblue; font-size: xx-large;">
-                                                <i class="fa-solid fa-globe"></i> LARA'S VISION AND MISION
-                                            </span>
-                                        </div>
-                                        <hr style="background-color: darkblue;
-                                                  width: 90%;">
-                                        <div class="video-container"> -->
-            <!-- Embed your YouTube video here -->
-            <!-- <iframe height="200"
-                                                src="https://www.youtube.com/embed/fwWcB9OpBQs?si=4jYubX8Se58zB-NV"
-                                                title="YouTube video player" frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                allowfullscreen></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <li style="background: linear-gradient(45deg, #2ec280, transparent);">
-                                <div class="main-tag-pts" style="font-size: xx-large;">
-                                    <i class="fa-brands fa-whatsapp"></i> For any queries: Please message us on
-                                    WhatsApp at
-                                    7975938871
-                                </div>
-                            </li>
-                            <div class="list">
-                                <div class="main-tag-pts" style="font-size: x-large;"></div>
-                                <h2 class="tittle-wthree mt-2 mb-3 main-tag text-center" id="package">Our Packages
-                                </h2>
-                                <div id="head" class="mb-2">
-                                    <h1>JAVA FULLSTACK DEVELOPMENT COURSE</h1>
-                                </div>
-                                <div id="cont">
-                                    <div id="cont-info">
-                                        <div>
-                                            <h2 id="h2">Course Name:</h2>
-                                            <p>Java Fullstack Development</p>
-                                        </div>
-                                        <div>
-                                            <h2 id="h2">Duration:</h2>
-                                            <p>6 months</p>
-                                        </div>
-                                        <div>
-                                            <h2 id="h2">Course Hours:</h2>
-                                            <p>1000</p>
-                                        </div>
-                                        <div>
-                                            <h2 id="h2">Prerequisites:</h2>
-                                            <p>No Prerequisites</p>
-                                        </div>
-                                    </div>
-                                    <div id="desc">
-                                        <h2 id="h2">Description:</h2>
-                                        <span>This comprehensive Java Fullstack Development course is designed to
-                                            equip you with the skills
-                                            and knowledge needed to become a proficient fullstack developer using
-                                            Java technologies.</span>
-                                    </div>
-                                    <div id="desc">
-                                        <h2 id="h2">Course Content:</h2>
-                                        <span>
-                                            <div class="detail">
-                                                <strong>Skills you will learn:</strong><br><br>
-                                                <div class="technical">
-                                                    <h3 class="skill" style="text-align: center;font-weight: bold;
-                                         color: green;text-decoration: underline;">
-                                                        TECHNICAL SKILLS
-                                                    </h3><br>
-                                                    <div
-                                                        style="display: flex; justify-content: space-between; padding-left: 5%;">
-                                                        <div style="flex: 1;">
-                                                            <h4 style="text-decoration: underline;font-size: large;">
-                                                                Back-End TECHNOLOGIES</h4>
-                                                            <ul style="list-style: disc;">
-                                                                <li style="list-style: disc;font-size: large;">CORE
-                                                                    JAVA</li>
-                                                                <li style="list-style: disc;font-size: large;">SQL
-                                                                </li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    SPRING</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    SPRING BOOT</li>
-                                                                <li style="list-style: disc;font-size: large;">REST
-                                                                    WEBSERVICES</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    SPRING MICROSERVICES</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    SPRING SECURITY</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div style="flex: 1;margin-left: 17%;">
-                                                            <h4 style="text-decoration: underline;font-size: large;">
-                                                                Front-End TECHNOLOGIES</h4>
-                                                            <ul style="list-style: disc;">
-                                                                <li style="list-style: disc;font-size: large;">HTML
-                                                                </li>
-                                                                <li style="list-style: disc;font-size: large;">CSS
-                                                                </li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    JAVASCRIPT</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    BOOTSTRAP</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    TYPESCRIPT</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    ANGULAR</li>
-                                                                <li style="list-style: disc;font-size: large;">REACT
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <hr style="background: black;">
-                                                    <h4
-                                                        style="text-decoration: underline;font-size: large;text-align:center;">
-                                                        Other Required
-                                                        Technologies</h4><br>
-                                                    <div
-                                                        style="display: flex; justify-content: space-between; padding-left: 9%;">
-                                                        <div style="flex: 1;">
-                                                            <ul style="list-style: disc;">
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    LOGICAL CODING</li>
-                                                                <li style="list-style: disc;font-size: large;">DATA
-                                                                    STRUCTURES</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    ALGORITHMS</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    DESIGN PATTERNS</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div style="flex: 1;margin-left: 22px;">
-                                                            <ul>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    LEETCODE AND HACKER RANK PROBLEMS</li>
-                                                                <li style="list-style: disc;font-size: large;">GIT
-                                                                </li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    APPTITUDE</li>
-                                                                <li style="list-style: disc;font-size: large;">
-                                                                    REASONING</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr style="background: black;">
-                                                <h3 class="skill" style="text-align: center;font-weight: bold;
-                                                         color: green;text-decoration: underline;">SOFT SKILLS</h3>
-                                                <div class="softskill" style="margin-left: 10%;">
-                                                    <div id="left">
-                                                        <ul>
-                                                            <li style="list-style: disc;">COMMUNICATION</li>
-                                                            <li style="list-style: disc;">PERSONALITY DEVELOPMENT
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div id="right" style="margin-left: 14%;">
-                                                        <ul>
-                                                            <li style="list-style: disc;">SPOKEN ENGLISH</li>
-                                                            <li style="list-style: disc;">RESUME BUILDING</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <hr style="background: black;">
-                                                <div class="internship">
-                                                    <h3 style="text-align: center;font-weight: bold;
-                                                           color: green;text-decoration: underline;">INTERNSHIP</h3>
-                                                    <br>
-                                                    <ul style="list-style: disc;padding-left: 18%;">
-                                                        <li style="list-style: disc;font-size: large;">ITS A LIVE
-                                                            PROJECT BY USING SPRINGBOOT AND
-                                                            ANGULAR SKILLS</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div style="text-align: center;">
-                                                <a href="assets\pdf\info\lara-java-fullstack-course-content.pdf"
-                                                    style="text-decoration: underline;font-size: large;">Detailed
-                                                    Course Content</a>
-                                            </div>
-                                        </span>
-                                    </div>
-
-                                    <hr style="background: black;">
-                                    <div>
-                                        <h2 id="h2" style="text-align: center;">Who Can Join The Course?</h2>
-                                        <br>
-                                        <div style="text-align: left;font-size: large;">
-                                            <p>Any Graduate Can Join The Course,There Is No Criteria Regarding
-                                                Passout year,
-                                                Percentage or Field Of Graduation,
-                                                We Are Starting All The Technologies Right From The Scratch</p>
-                                        </div>
-                                    </div>
-                                    <hr style="background: black;">
-                                    <div>
-                                        <h2 id="h2" style="text-align: center;">What We Are Providing?</h2>
-                                        <br>
-                                        <div style="text-align: left;font-size: large;">
-                                            <p>At Lara Technologies We Are Providing Deep knowledge Of 20 Skills,
-                                                We Have Our Premises Which is 24 hours open for students to practice
-                                                and gain knowledge,
-                                                Students Have to stay in Lara environment from morning 8:30 to
-                                                evening 8:30
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <hr style="background: black;">
-                                    <div>
-                                        <h2 id="h2" style="text-align: center;">What Is The Content Of Daily
-                                            Classes?</h2>
-                                        <br>
-                                        <div style="text-align: left;font-size: large;">
-                                            <p style="font-size: large;text-align: left;">1. 2 hours of soft skill
-                                                classes are there to improve
-                                                personality which will make you an industry-ready person</p>
-                                            <p>2. 2 hours of Aptitude class which is very important to improve
-                                                problem-solving ability and it is
-                                                also important to crack any interview</p>
-                                            <p>3. 2 hours of Technical classes in which we are learning our all
-                                                technologies with very deep
-                                                content</p>
-                                            <p>4. Internship classes to involve in real-time development and to gain
-                                                good industry knowledge</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-            <!-- Company show carousel -->
-            <!-- <div class="container-one mt-2 mb-2">
-        <div id="companyCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="companytitle mb-3">
-                <h2>COMPANIES WHERE LARAITES ARE WORKING</h2>
-            </div>
-            <div class="carousel-inner" style="align-items: center;" data-bs-interval="100">
-                <div class="carousel-item active">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://static.wixstatic.com/media/e0300d_a9623e157a3a42668393537d2ce7e670.png"
-                                class="img-fluid" alt="Company 1">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.narayanahealth.org/sites/all/themes/nh_default_theme/logo.svg"
-                                class="img-fluid" alt="Company 2">
-                        </div> -->
-            <!-- <div class="col-md-2 text-center">
-                            <img src="https://cognissolutions.com/assets/img/logo.png" class="img-fluid"
-                                alt="Company 3">
-                        </div> -->
-            <!-- <div class="col-md-2 text-center">
-                            <img src="https://www.bonbloc.com/images/bonbloc_logo_c.svg" class="img-fluid"
-                                alt="Company 4">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="http://www.cadesstudec.co.in/images/navigation/CSTI.jpg" class="img-fluid"
-                                alt="Company 5">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://nps.kfintech.com/Content/darktheme/nps-assets/images/logo/NPS_Trust_logo.svg"
-                                class="img-fluid" alt="Company 6">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.3ds.com/fileadmin/depositary/alliances/CRM_SITELOGO/20190800/200000000307045_1cadmaxx_logo.png"
-                                class="img-fluid" alt="Company 7">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://finonyx.com/wp-content/uploads/2022/07/Flat_Color_Logo-e1659078751592.jpg"
-                                class="img-fluid" alt="Company 8">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://4cecloudlabs.com/img/4ce-cloud-logo.svg" class="img-fluid"
-                                alt="Company 9">
-                        </div>
-                        <div class="col-md-2 text-center" style="background: black;width: 80px;">
-                            <img src="https://reactore.com/wp-content/uploads/2023/04/Reactore-Logo-Dark-Edition-w-Tagline-1.png"
-                                class="img-fluid" alt="Company 10">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.fime.com/web/image/website/1/logo/Fime?unique=eaa5484"
-                                class="img-fluid" alt="Company 11">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.amitysoftware.com/wp-content/uploads/2022/02/logo.png"
-                                class="img-fluid" alt="Company 12">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.gxgroup.eu/static/media/logo.7d25953d.svg" class="img-fluid"
-                                alt="Company 13">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://modefin.com/wp-content/uploads/2019/11/Modefin-Logo-1.png"
-                                class="img-fluid" alt="Company 14">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.xyramsoft.com/wp-content/uploads/2022/09/download-removebg-preview-e1664359998793.png"
-                                class="img-fluid" alt="Company 15">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.exaleap.ai/wp-content/uploads/ExaLeap-logo-grn-wht.svg"
-                                class="img-fluid" alt="Company 16">
-                        </div>
-                        <div class="col-md-2 text-center" style="background: black;">
-                            <img src="https://i0.wp.com/treosoftit.com/wp-content/uploads/2022/06/TSIT_white.png?fit=942%2C171&ssl=1"
-                                class="img-fluid" alt="Company 17">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.segurotechnologies.com/user/themes/seguro/images/logo/seguro-logo.png"
-                                class="img-fluid" alt="Company 18">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.tcs.com/content/dam/global-tcs/en/images/home/dark-theme.svg"
-                                class="img-fluid" alt="Company 19">
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <img src="https://www.tectoro.com/image/logo/tectoro.png" class="img-fluid"
-                                alt="Company 20">
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <a class="carousel-control-prev" href="#companyCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#companyCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </a> -->
-            <!-- </div>
-    </div> -->
-
-            <!-- Company Reviews -->
-            <!-- <div class="container-two mt-1 mb-1" style="background: linen;">
-        <div id="userCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D5603AQEL5tS7delIhQ/profile-displayphoto-shrink_100_100/0/1671954948981?e=1698883200&v=beta&t=mxStjlKdMsadHGUzahKIFeUlyCkv03ESNS2cKplSd8U"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Vipin Raj Bishnoi</h5>
-                                    <span>Software Developer At Hu-Tech Solutions</span>
-                                    <p>I had a great time doing this course and everyone involved in the LARA TECHNOLOGY
-                                        has made it a great
-                                        experience. I look forward to doing more courses with you guys in the future and
-                                        have been
-                                        recommending you to everyone I know. Thank you for all the assistance and
-                                        feedback, it has been
-                                        delightful and very gratifying.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D5603AQFZ4ZdYmoAhpQ/profile-displayphoto-shrink_400_400/0/1687484110425?e=1698883200&v=beta&t=P1beE8mQncpQK0BUTqR2sudQBraUwKPq0Hz_5at3Fb8"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content" style="min-width: 50%;">
-                                    <h5 class="mb-0" style="color: green;">Vinayak Banavi</h5>
-                                    <span>Software Developer At Predictive Analytics Solutions</span>
-                                    <p>I am immensely grateful for the support and assistance provided by Ramesh Sir and
-                                        the entire team at Lara Technologies. Their guidance has been instrumental in my
-                                        journey towards a career in IT.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D5603AQF-XIPFUvM_EA/profile-displayphoto-shrink_100_100/0/1673971564032?e=1698883200&v=beta&t=XfYk9teZysCoIAN44vgA_oXwcEVdJpDJ7BjuwPM0pGs"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Amit Kumar Srivastava</h5>
-                                    <span>Software Developer At Cognis Solutions Pvt Ltd.</span>
-                                    <p> If anyone is looking for a better place to become an IT professional, then I
-                                        suggested to Lara Technologies where you learn things slowly- slowly.Here clears
-                                        all the point and start from the scratch.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D5603AQFjhaAIz-Jnyg/profile-displayphoto-shrink_100_100/0/1676557310673?e=1698883200&v=beta&t=DXIelvxo9W2oedc4BaT5hi8Dxon3CxVqT1f5rA591aU"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Akmal Hussain</h5>
-                                    <span>Software Developer At GENXPLM-Technologies</span>
-                                    <p> Now I have enough confidence to face any interview as lara is a one stop
-                                        solution for overall 360 degree development of one And along with that daily
-                                        logical coding classes as well as practice are going on The sessions.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://lh3.googleusercontent.com/a-/AD_cMMRD1oCT8L_QQx9JPCXaoqGOJZq1R_gB0jBcub9ajePs5i8=w45-h45-p-rp-mo-br100"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Chandrahas G</h5>
-                                    <span>Software Developer At Predictive Analytics</span>
-                                    <p>Lara technologies is the good place to start your career as java full stack
-                                        developer. I should thank Ramesh sir for giving good guidance and encouragement.
-                                        I got job within 4 months</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://lh3.googleusercontent.com/a-/AD_cMMRJ5ow8B3Lb7jeyWICxdYCaW_BEA5CxGRRcSrDsG-AoxmzQ=w75-h75-p-rp-mo-br100"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Chakradhar Kaluvai</h5>
-                                    <span>Software Developer At Reactiveworks IT Solutions</span>
-                                    <p>With help of Ramesh sir (founder of Lara) i learnt from scratch and I got placed
-                                        in ReactiveWorks IT Solutions Pvt. Ltd with in 3.5months of course duration.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/C4D03AQFHZ67MCJ0Aog/profile-displayphoto-shrink_400_400/0/1658030919846?e=1698883200&v=beta&t=99pG6eB0SqOf71em8JMPyFx00CjG5zUiWVBV1jG-7kY"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Satish Raj</h5>
-                                    <span>Software Developer At Reactiveworks IT Solutions</span>
-                                    <p>Everything here becomes very easy and simple for me throughout the training
-                                        period just because of Ramesh Sir because the teaching style of the sir and the
-                                        subject knowledge he provided us is best in every aspects</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/C4E03AQHpzn_dPtyTNw/profile-displayphoto-shrink_100_100/0/1637503952355?e=1698883200&v=beta&t=dp78IJrgBJHkfzS3SIdD4EeKNfDZByHwR3AVcp5lS_k"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Kishan Jha</h5>
-                                    <span>Software Developer At Hu-Tech Solutions</span>
-                                    <p> I developed more than 1000 programs in these six months. I learned Core Java,
-                                        SQL, Logical Coding, Spring Boot, Rest Webservices, Spring Data JPA(Hibernate),
-                                        CSS,and all other skills in just Six Months.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://lh3.googleusercontent.com/a-/AD_cMMRt2sNPQNZqchT3l8Xm9R7a6pxKBCWpJcLn89xCWsoy1jO9=w75-h75-p-rp-mo-br100"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Umair Shaikh</h5>
-                                    <span>Software Developer At Reactiveworks IT Solutions </span>
-                                    <p>If someone looking or searching for best place to become an IT professional i
-                                        highly recommended to join Lara technology where you will learn things in very
-                                        proper way.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D5603AQH1ONMRTS_7Cw/profile-displayphoto-shrink_800_800/0/1692248397756?e=1698883200&v=beta&t=qgPOqlsRGJmA2RRPWiNdIZyO7HR72_K1VGrSZrHFQMg"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Gowtham Mani </h5>
-                                    <span>Software Developer At Bonbloc</span>
-                                    <p> I joined in the Lara 1st day itself I started learn java. Day by day my
-                                        confidence is increasing automatically by attending all classes daily at
-                                        offline. we will spend almost 15 hrs daily in lara.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D5603AQH1VvAoP1I1mg/profile-displayphoto-shrink_400_400/0/1672116616852?e=1698883200&v=beta&t=9vXwiy_rA9uU6G0aF6_uXENLCEveQ7jC2dhvg3cT8qc"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Sumanth</h5>
-                                    <span>Software Developer At Treosoft</span>
-                                    <p>I joined lara technology to upgrade my skills. Lara technology is the best place
-                                        to learn Java from core to advance. Ramesh sir, his way of teaching was
-                                        unmatchable, he will teach every concepts from scratch.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3 text-center px-4">
-                                <div class="user-image">
-                                    <img src="https://media.licdn.com/dms/image/D4D03AQFeGv2J9bW0AQ/profile-displayphoto-shrink_400_400/0/1672905559172?e=1698883200&v=beta&t=rtUG0KK6dyLlesTwR1rpim1D27MB5bVyL_GF5iObqU0"
-                                        class="rounded-circle" width="80">
-                                </div>
-                                <div class="user-content">
-                                    <h5 class="mb-0" style="color: green;">Surya Mudimukku</h5>
-                                    <span>Software Developer At Modefin</span>
-                                    <p>Lara Technologies is excellent institute to build your career in IT field. I
-                                        don't have that much knowledge on java before.Ramesh sir teaches every concept
-                                        clearly and everyone should understand.</p>
-                                </div>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-            <!-- Add more carousel items here for additional sets of reviews -->
-            <!-- </div> -->
-            <!-- <a class="carousel-control-prev" href="#userCarousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#userCarousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </a> -->
-            <!-- </div>
-    </div> -->
-
-
             <!-- Logout Confirmation Modal -->
             <div class="modal fade" id="logoutConfirmationModal" tabindex="-1"
                 aria-labelledby="logoutConfirmationModalLabel" data-bs-backdrop="static" aria-hidden="true">
@@ -2605,7 +1909,7 @@
             </div>
 
 
-                <!-- Footer -->
+            <!-- Footer -->
             <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
                 <div class="container-fluid cntfld-fw" id="footer">
                     <div class="container-fluid ftr-bg">
@@ -2659,24 +1963,8 @@
                     </div>
                 </div>
             </footer>
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-            <script>
-                AOS.init();
-            </script>
-            <script type="module" src="./index.js"></script>
-            <script src="assets/css/plugins/bootstrap.css"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
-                integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
-                integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
-            <script src="assets/js/script.js"></script>
 
+            <script src="assets/js/script.js"></script>
             <script>
                 gsap.from('.program-top h1', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
                 gsap.from('.program-top p', { opacity: 0, y: 50, duration: 1, delay: 0.5 });

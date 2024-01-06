@@ -8,18 +8,6 @@ const locoScroll = new LocomotiveScroll({
   smooth: true
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
 // tell ScrollTrigger to use these proxy methods for the "#main" element since Locomotive Scroll is hijacking things
 ScrollTrigger.scrollerProxy("#main", {
   scrollTop(value) {

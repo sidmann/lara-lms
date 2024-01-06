@@ -48,12 +48,8 @@ const storageRef = ref(storage);
 
 const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
 const myCumulativeQuestionUpload = document.querySelector('.my-cumulative-question-upload');
+const questionUploadContainer = document.querySelector(".question-upload-container");
 const topicDescriptionContainer = document.querySelector(".topicDescriptionContainer");
-
-const CumulativeContainerOne = document.querySelector('.cumulative-container-one');
-const CumulativeContainerTwo = document.querySelector('.cumulative-container-two');
-const CumulativeContainerThree = document.querySelector('.cumulative-container-three');
-const CumulativeContainerfour = document.querySelector('.cumulative-container-four');
 
 var userData = null;
 var loggedIn = null;
@@ -238,9 +234,10 @@ uploadVideoContainerDisplay.addEventListener('click', () => {
         changePasswordContainer.style.display = 'none'
     }
 });
+uploadVideoContainerDisplay.dispatchEvent(new Event('click'))
+
 
 // -------------------------------Crud Of Topic ---------------------------------
-
 /**
  * 
  * Add a click event listener to open the topic modal
@@ -954,11 +951,11 @@ async function uploadVideosWithoutImage(topicName, videoFile, subTopicName) {
         alert("Error uploading files. Please try again.");
     }
 }
-//------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------
 
 // ----------------------------- Question Upload ---------------------------------------------
 
-const questionUploadContainer = document.querySelector(".question-upload-container");
+
 const questionFileSubmit = document.getElementById('question-file-submit');
 const fileUploadForm = document.getElementById('file-upload-form');
 const fileInput = document.getElementById('file-input')
