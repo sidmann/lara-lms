@@ -38,8 +38,6 @@
     <link rel="stylesheet" id="main_style" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/vendor/custom.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- GSAP -->
 
@@ -57,12 +55,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
     <script type="module" src="./index.js"></script>
-    <script src="assets/css/plugins/bootstrap.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
         integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1132,7 +1125,7 @@
             margin-bottom: 2rem;
             font-family: Cambria, Cochin, Georgia, Times, serif;
             margin-left: 6.5rem;
-            margin-top: 5rem;
+            margin-top: 1.5rem;
 
         }
 
@@ -1365,6 +1358,7 @@
             .program h6 {
                 font-size: 1.4rem;
             }
+            
 
             /* .simple-text h2 {
             font-size: 2.2rem;
@@ -1437,6 +1431,7 @@
             .program h6 {
                 font-size: 1.4rem;
             }
+            
 
 
         }
@@ -1586,6 +1581,37 @@
         /* .animated-background {
         animation: backgroundAnimation 4s infinite; 
     } */
+    .div{
+        display:flex;
+        align-items: end;
+        flex-direction: column;
+    }
+    .h6-img {
+        order: 1;
+    }
+
+    .h6-text {
+        order: 2; 
+    }
+    .div .h6-img img{
+        width:350px;
+    }
+    @media (min-width: 768px) {
+        .h-text{
+            margin-bottom: -13%;
+        }
+        .div {
+            flex-direction: row;
+        }
+
+        .h6-img,
+        .h6-text {
+            order: initial;
+        }
+        /* .div .h6-img img{
+        width:;
+    } */
+    }
     </style>
 </head>
 
@@ -1686,6 +1712,9 @@
                                 </li> -->
                                     <li class="nav-item">
                                         <a class="nav-link custom-brand active  text-black fw-bold" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand   text-black fw-bold" href="details.html">Course Content</a>
                                     </li>
                                     <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                         <a class="nav-link custom-brand text-black fw-bold" href="user.html">Profile</a>
@@ -1815,14 +1844,19 @@
                                 class="fa-solid fa-question" style="color:#ffa556"></i></span></h6>
                 </div>
             </div>
-            <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="flip-left" data-aos-delay="50"
-                data-aos-duration="1000">If so, you've come to the right place!</h6>
-            <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="slide-right" data-aos-delay="100"
-                data-aos-easing="ease-in-out-back" data-aos-duration="1000">We are pleased to inform you about the
-                Advanced
-                Training Program and placements offered to the
-                toppers
-                of all branches.</h6>
+            <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow h-text" data-aos="flip-left" data-aos-delay="50"
+            data-aos-duration="1000">If so, you've come to the right place!</h6>
+            <div class="div">
+                <div class="h6-text">
+                    <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="slide-right" data-aos-delay="100"
+                        data-aos-easing="ease-in-out-back" data-aos-duration="1000">We are pleased to inform you about the
+                        Advanced Training Program and placements offered to the toppers of all branches.</h6>
+                </div>
+                <div class="h6-img">
+                    <img src="assets/img/logo/man-getting-award-writing-removebg.png" data-aos="slide-left" data-aos-delay="50"
+                    data-aos-duration="1000" alt="">
+                </div>
+            </div>
 
         </div>
 
@@ -1905,10 +1939,12 @@
             <a href="signup.html">
                 <button class="btn btn-warning enroll-button px-3 text-white">Enroll Now</button>
             </a>
-            <a href="details.html">
+            <!-- <a href="details.html">
                 <button class="btn btn-warning Course-Content-button px-3 text-white">Course Content</button>
-            </a>
+            </a> -->
         </div>
+
+    </div>
 
 
 
@@ -2713,13 +2749,12 @@
         </footer>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
-        <script type="module" src="./index.js"></script>
-        <script src="assets/css/plugins/bootstrap.css"></script>
+        <!-- <script src="assets/css/plugins/bootstrap.css"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
             integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
