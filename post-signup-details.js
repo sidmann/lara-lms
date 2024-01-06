@@ -54,7 +54,8 @@ var loggedIn = null;
  * fetch userId url params
  * @author mydev
  */
-const userId = new URLSearchParams(window.location.search).get('userId');
+// const userId = new URLSearchParams(window.location.search).get('userId');
+const userId = 'DEemXdf2sfOtzzkrUCisnLk60sC2'
 if (userId) {
     await continueLoginBtnshowOrHide();
     displayMessage('Please continue with filling the remaining details', 'success');
@@ -228,7 +229,6 @@ document.querySelector('#save-user-address-button').addEventListener('click', as
     const userCountry = document.querySelector('#user-country').value;
     console.log(userId)
     if (userAddress && userPostcode && userCity && userState && userCountry) {
-        console.log("2")
         const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
         if (!userAddressSnapshot.empty) {
@@ -286,6 +286,7 @@ async function checkUserAddressDocumentExists(userId) {
 
 
 document.querySelector('#user-school-accordion-btn').addEventListener('click', async (event) => {
+    console.log("1")
     event.preventDefault();
     const userAddressExists = await checkUserAddressDocumentExists(userId);
     console.log(userAddressExists);
@@ -630,6 +631,7 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
                     console.log('user graduation details saved successfully');
                     displayMessage('user graduation details saved successfully', 'success');
                     document.getElementById('degree-edu-details-form').reset();
+                   await continueLoginBtnshowOrHide()
 
                 })
             }
@@ -656,6 +658,7 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
                 console.log('user graduation details saved successfully')
                 displayMessage('user graduation details saved successfully', 'success')
                 document.getElementById('degree-edu-details-form').reset();
+                await continueLoginBtnshowOrHide();
             }
         }
         catch (error) {
@@ -690,9 +693,11 @@ async function checkUserDegreeDocumentExists(userId) {
 async function continueLoginBtnshowOrHide() {
     const userDetailsExist = await checkUserDegreeDocumentExists(userId);
     if (userDetailsExist) {
+        console.log("if")
         document.querySelector('.user-login-continue-btn').classList.remove('d-none');
     }
     else {
+        console.log("else");
         document.querySelector('.user-login-continue-btn').classList.add('d-none');
     }
 }
@@ -701,19 +706,19 @@ document.querySelector('#user-masters-accordion-btn').addEventListener('click', 
     event.preventDefault();
     const userDegreeExists = await checkUserDegreeDocumentExists(userId);
     console.log(userDegreeExists);
-    const schoolAccordionBtn = document.getElementById('user-masters-accordion-btn');
-    const schoolAccordionContent = document.querySelector('.accordion-collapse-seven');
+    const mastersAccordionBtn = document.getElementById('user-masters-accordion-btn');
+    const mastersAccordionContent = document.querySelector('.accordion-collapse-seven');
 
     if (!userDegreeExists) {
         console.log("if")
-        schoolAccordionContent.classList.add('d-none');
-        schoolAccordionBtn.classList.add('collapsed');
+        mastersAccordionContent.classList.add('d-none');
+        mastersAccordionBtn.classList.add('collapsed');
         displayMessage('Please fill the above graduation education details', 'danger');
     }
     else {
 
         console.log("else");
-        schoolAccordionContent.classList.remove('d-none');
+        mastersAccordionContent.classList.remove('d-none');
     }
 })
 /**
@@ -760,7 +765,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                         }
                     }
 
-                    const storageRef = ref(storage, 'degree_certificate_images/' + userMastersCertificateImageFile.name);
+                    const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificateImageFile.name);
                     await uploadBytes(storageRef, userMastersCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
@@ -784,7 +789,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
             }
             else {
                 console.log("else");
-                const storageRef = ref(storage, 'degree_certificate_images/' + userMastersCertificateImageFile.name);
+                const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificateImageFile.name);
                 await uploadBytes(storageRef, userMastersCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
 
@@ -818,6 +823,52 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
     }
 })
 
+
+// --------------------------- internship/project details --------------------------
+// document.querySelector('#user-internship-accordion-btn').addEventListener('click', async (event) => {
+//     event.preventDefault();
+
+//     const userAddressExists = await checkUserAddressDocumentExists(userId);
+//     const userSchoolExists = await checkUserSchoolDocumentExists(userId);
+//     const userInterExists = await checkUserInterDocumentExists(userId);
+//     const userDegreeExists = await checkUserDegreeDocumentExists(userId);
+//     console.log(userDegreeExists);
+//     const internshipAccordionBtn = document.getElementById('user-internship-accordion-btn');
+//     const internsAccordionContent = document.querySelector('.accordion-collapse-five');
+
+//     if(!userAddressExists){
+//         console.log("if")
+//         internshipAccordionBtn.classList.add('d-none');
+//         internsAccordionContent.classList.add('collapsed');
+//         displayMessage('Please fill the above graduation education details', 'danger');
+//     }
+
+//     if(!userSchoolExists){
+//         console.log("if")
+//         internshipAccordionBtn.classList.add('d-none');
+//         internsAccordionContent.classList.add('collapsed');
+//         displayMessage('Please fill the above graduation education details', 'danger');
+//     }
+
+//     if(!userInterExists){
+//         console.log("if")
+//         internshipAccordionBtn.classList.add('d-none');
+//         internsAccordionContent.classList.add('collapsed');
+//         displayMessage('Please fill the above graduation education details', 'danger');
+//     }
+
+//     if(!userDegreeExists){
+//         console.log("if")
+//         internshipAccordionBtn.classList.add('d-none');
+//         internsAccordionContent.classList.add('collapsed');
+//         displayMessage('Please fill the above graduation education details', 'danger');
+//     }
+//     else {
+
+//         console.log("else");
+//         internsAccordionContent.classList.remove('d-none');
+//     }
+// })
 /**
  * save the user internship/academic project details 
  * @author mydev 
@@ -834,7 +885,7 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
 
     if (userProjectName && userProjectTechnologies && userInternshipCity && userInternshipStart
         && userInternshipEnd && userProjectDescription && userInternshipCertificate.files.length > 0) {
-        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'address')
+        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
         if (userAddressSnapshot.empty) {
             displayMessage('Please the your address Details', 'danger')
@@ -945,7 +996,7 @@ document.querySelector('#save-user-additional-button').addEventListener('click',
     const userAdditionalHobbies = document.querySelector('#user-hobbies').value;
     if (userAdditionalSkills && userAdditionalLanguages && userAdditionalHobbies) {
         console.log("2")
-        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'address')
+        const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
         if (userAddressSnapshot.empty) {
             displayMessage('Please the your address Details', 'danger')
