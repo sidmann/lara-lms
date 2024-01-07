@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" id="main_style" href="assets/css/style.css">
-    
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/vendor/custom.css">
+
     <!-- <script src="assets/css/plugins/bootstrap.css"></script> -->
-    <title>Programming Resources</title>
-    
+    <title>Course Content</title>
+
     <style>
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(9deg, #91a88f, #c7eacb);
+            ;
         }
 
         .resource-container {
@@ -40,14 +47,32 @@
         .resource-container a:hover {
             text-decoration: underline;
         }
-        @media (max-width:786px){
-            h2{
+
+        @media (max-width:786px) {
+            h2 {
                 font-size: 20px;
             }
+
             .resource-container a {
                 font-size: 13px;
             }
         }
+
+        .hidden {
+            display: none;
+        }
+
+        .overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(81, 79, 79, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 5;
+        }
+
         footer {
             /* background: linear-gradient(0deg, #36dadc 0%, #64bcf3 100%); */
             background-color: #565656;
@@ -57,7 +82,17 @@
         }
     </style>
 </head>
-<body>
+
+<body class="position-relative">
+    <div id="targetSection">
+        <div class="overlay" id="overlay">
+            <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="main">
         <nav class="navbar shadow-lg  navbar-expand-lg  position-relative" id="header">
             <div class="container-fluid">
@@ -69,20 +104,20 @@
                     </a>
                 </div>
                 <div class="menu-icon">
-    
+
                     <button class="navbar-toggler logb text-white border-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
                         <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
                     </button>
-    
+
                 </div>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="d-flex flex-column-reverse flex-lg-row justify-content-between w-100 me-5">
                         <ul class="navbar-nav nav-long me-auto mb-2 mb-lg-0 p-0">
-    
+
                             <!-- <li><a href="#">Home</a></li> -->
-    
+
                             <!-- <li class="nav-item p-0">
                             <a class="nav-link custom-brand" href="#">Upcoming Batches</a>
                             <div class="products-container p-2 bg-white position-absolute d-none"
@@ -127,10 +162,10 @@
                             <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
                             <a class="nav-link custom-brand" href="user-dashbroad.html">Dashboard</a>
                         </li> -->
-    
+
                         </ul>
                         <div>
-                            <ul class="navbar-nav nav-short mb-2  mb-lg-0 text">
+                            <ul class="navbar-nav nav-short mb-2 mb-lg-0 text">
                                 <!-- <li class="nav-item">
                                 <a class="nav-link custom-brand position-relative" href="cart.html">
                                     <i class="fa-solid fa-cart-shopping me-0"></i>
@@ -139,17 +174,18 @@
                                     <span class="ps-0 ms-0">Cart</span>
                                 </a>
                             </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link custom-brand text-black fw-bold" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link custom-brand active text-black fw-bold" href="details.html">Course Content</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link custom-brand text-black fw-bold" href="index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link custom-brand active text-black fw-bold"
+                                        href="details.html">Course Content</a>
+                                </li>
                                 <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                     <a class="nav-link custom-brand text-black fw-bold" href="user.html">Profile</a>
                                 </li>
                                 <li class="nav-item loggedOut">
-                                    <a class="nav-link custom-brand  text-black fw-bold" href="signup.html">Sign
+                                    <a class="nav-link custom-brand text-black fw-bold" href="signup.html">Sign
                                         Up</a>
                                 </li>
                                 <li class="nav-item loggedOut">
@@ -161,190 +197,307 @@
                                         Logout
                                     </button>
                                 </li>
-    
+
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-    </div>
 
-    <div class="container-fluid">
-        <div class="resource-container">
-            <h2>Arrays :</h2>
-            
-                <a href="https://leetcode.com/problems/kth-largest-element-in-an-array/">https://leetcode.com/problems/kth-largest-element-in-an-array/</a>
-                <a href="https://leetcode.com/problems/neither-minimum-nor-maximum/">https://leetcode.com/problems/neither-minimum-nor-maximum/</a>
+
+        <div class="container-fluid">
+            <div class="resource-container">
+                <h2>Arrays :</h2>
+
+                <a
+                    href="https://leetcode.com/problems/kth-largest-element-in-an-array/">https://leetcode.com/problems/kth-largest-element-in-an-array/</a>
+                <a
+                    href="https://leetcode.com/problems/neither-minimum-nor-maximum/">https://leetcode.com/problems/neither-minimum-nor-maximum/</a>
                 <a href="https://leetcode.com/problems/sort-colors/">https://leetcode.com/problems/sort-colors/</a>
-                <a href="https://leetcode.com/problems/missing-number/">https://leetcode.com/problems/missing-number/</a>
-                <a href="https://leetcode.com/problems/maximum-product-of-three-numbers/">https://leetcode.com/problems/maximum-product-of-three-numbers/</a>
-                <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">https://leetcode.com/problems/remove-duplicates-from-sorted-array/</a>
-                <a href="https://takeuforward.org/data-structure/left-rotate-the-array-by-one/">https://takeuforward.org/data-structure/left-rotate-the-array-by-one/</a>
+                <a
+                    href="https://leetcode.com/problems/missing-number/">https://leetcode.com/problems/missing-number/</a>
+                <a
+                    href="https://leetcode.com/problems/maximum-product-of-three-numbers/">https://leetcode.com/problems/maximum-product-of-three-numbers/</a>
+                <a
+                    href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">https://leetcode.com/problems/remove-duplicates-from-sorted-array/</a>
+                <a
+                    href="https://takeuforward.org/data-structure/left-rotate-the-array-by-one/">https://takeuforward.org/data-structure/left-rotate-the-array-by-one/</a>
                 <a href="https://leetcode.com/problems/rotate-array/">https://leetcode.com/problems/rotate-array/</a>
                 <a href="https://leetcode.com/problems/move-zeroes/">https://leetcode.com/problems/move-zeroes/</a>
-                <a href="https://leetcode.com/problems/max-consecutive-ones/">https://leetcode.com/problems/max-consecutive-ones/</a>
+                <a
+                    href="https://leetcode.com/problems/max-consecutive-ones/">https://leetcode.com/problems/max-consecutive-ones/</a>
                 <a href="https://leetcode.com/problems/rotate-image/">https://leetcode.com/problems/rotate-image/</a>
                 <a href="https://leetcode.com/problems/spiral-matrix/">https://leetcode.com/problems/spiral-matrix/</a>
-                <a href="https://leetcode.com/problems/spiral-matrix-ii/">https://leetcode.com/problems/spiral-matrix-ii/</a>
-                <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">https://leetcode.com/problems/best-time-to-buy-and-sell-stock</a>
-            
-            
-        </div>
+                <a
+                    href="https://leetcode.com/problems/spiral-matrix-ii/">https://leetcode.com/problems/spiral-matrix-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">https://leetcode.com/problems/best-time-to-buy-and-sell-stock</a>
 
-        <div class="resource-container">
-            <h2>Strings :</h2>
-            <a href="https://leetcode.com/problems/valid-anagram/">https://leetcode.com/problems/valid-anagram/</a>
-            <a href="https://leetcode.com/problems/reverse-string/">https://leetcode.com/problems/reverse-string/</a>
-            <a href="https://leetcode.com/problems/reverse-words-in-a-string/">https://leetcode.com/problems/reverse-words-in-a-string/</a>
-            <a href="https://leetcode.com/problems/valid-palindrome/">https://leetcode.com/problems/valid-palindrome/</a>
-            <a href="https://leetcode.com/problems/valid-palindrome-ii/">https://leetcode.com/problems/valid-palindrome-ii/</a>
-            <a href="https://leetcode.com/problems/consecutive-characters/">https://leetcode.com/problems/consecutive-characters/</a>
-            <a href="https://leetcode.com/problems/longest-common-prefix/">https://leetcode.com/problems/longest-common-prefix/</a>
-        </div>
 
-        <div class="resource-container">
-            <h2>HashMap & Sliding window technique :</h2>
-            <a href="https://leetcode.com/problems/first-unique-character-in-a-string/">https://leetcode.com/problems/first-unique-character-in-a-string/</a>
-            <a href="https://leetcode.com/problems/first-letter-to-appear-twice/">https://leetcode.com/problems/first-letter-to-appear-twice/</a>
-            <a href="https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/">https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/</a>
-            <a href="https://leetcode.com/problems/sort-characters-by-frequency/">https://leetcode.com/problems/sort-characters-by-frequency/</a>
-            <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a>
-            <a href="https://www.geeksforgeeks.org/find-a-pair-with-the-given-difference/">https://www.geeksforgeeks.org/find-a-pair-with-the-given-difference/</a>
-            <a href="https://leetcode.com/problems/3sum/">https://leetcode.com/problems/3sum/</a>
-            <a href="https://leetcode.com/problems/intersection-of-two-arrays/">https://leetcode.com/problems/intersection-of-two-arrays/</a>
-            <a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/">https://leetcode.com/problems/intersection-of-two-arrays-ii/</a>
-            <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">https://leetcode.com/problems/longest-substring-without-repeating-characters/</a>
-            <a href="https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/">https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/</a>
-            <a href="https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/">https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/</a>
-            <a href="https://leetcode.com/problems/longest-repeating-character-replacement/">https://leetcode.com/problems/longest-repeating-character-replacement/</a>
-            <a href="https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/">https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/</a>
-            <a href="https://leetcode.com/problems/subarray-sum-equals-k/">https://leetcode.com/problems/subarray-sum-equals-k/</a>
-            <a href="https://leetcode.com/problems/subarray-sums-divisible-by-k/">https://leetcode.com/problems/subarray-sums-divisible-by-k/</a>
-            <a href="https://leetcode.com/problems/valid-anagram/">https://leetcode.com/problems/valid-anagram/</a>
-            <a href="https://leetcode.com/problems/group-anagrams/">https://leetcode.com/problems/group-anagrams/</a>
-            <a href="https://leetcode.com/problems/max-consecutive-ones/">https://leetcode.com/problems/max-consecutive-ones/</a>
-            <a href="https://www.lintcode.com/problem/883/">https://www.lintcode.com/problem/883/</a>
-            <a href="https://leetcode.com/problems/max-consecutive-ones-iii/">https://leetcode.com/problems/max-consecutive-ones-iii/</a>
-            <a href="https://leetcode.com/problems/lru-cache/">https://leetcode.com/problems/lru-cache/</a>
-            <a href="https://leetcode.com/problems/sliding-window-maximum/">https://leetcode.com/problems/sliding-window-maximum/</a>
-        </div>
-        <div class="resource-container">
-            <h2>Stacks and Queues :</h2>
-            <a href="https://www.geeksforgeeks.org/stack-data-structure/">https://www.geeksforgeeks.org/stack-data-structure/</a>
-            <a href="https://www.javatpoint.com/ds-array-implementation-of-stack">https://www.javatpoint.com/ds-array-implementation-of-stack</a>
-            <a href="https://leetcode.com/problems/valid-parentheses/">https://leetcode.com/problems/valid-parentheses/</a>
-            <a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/">https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/</a>
-            <a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/">https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/</a>
-            <a href="https://leetcode.com/problems/removing-stars-from-a-string/">https://leetcode.com/problems/removing-stars-from-a-string/</a>
-            <a href="https://leetcode.com/problems/next-greater-element-i/">https://leetcode.com/problems/next-greater-element-i/</a>
-            <a href="https://leetcode.com/problems/next-greater-element-ii/">https://leetcode.com/problems/next-greater-element-ii/</a>
-            <a href="https://leetcode.com/problems/daily-temperatures/">https://leetcode.com/problems/daily-temperatures/</a>
-            <a href="https://leetcode.com/problems/trapping-rain-water/">https://leetcode.com/problems/trapping-rain-water/</a>
-            <a href="https://leetcode.com/problems/top-k-frequent-elements/">https://leetcode.com/problems/top-k-frequent-elements/</a>
-            <a href="https://www.geeksforgeeks.org/queue-data-structure/">https://www.geeksforgeeks.org/queue-data-structure/</a>
-            <a href="https://www.geeksforgeeks.org/array-implementation-of-queue-simple/">https://www.geeksforgeeks.org/array-implementation-of-queue-simple/</a>
-            <a href="https://leetcode.com/problems/implement-queue-using-stacks">https://leetcode.com/problems/implement-queue-using-stacks</a>
-            <a href="https://leetcode.com/problems/implement-stack-using-queues">https://leetcode.com/problems/implement-stack-using-queues</a>
-            <a href="https://leetcode.com/problems/kth-largest-element-in-an-array/">https://leetcode.com/problems/kth-largest-element-in-an-array/</a>
-        </div>
-        <div class="resource-container">
-            <h2>Sum of K largest elements :</h2>
-            <a href="https://takeuforward.org/data-structure/kth-largest-smallest-element-in-an-array/">https://takeuforward.org/data-structure/kth-largest-smallest-element-in-an-array/</a>        </div>
+            </div>
 
-        <div class="resource-container">
-            <h2>Linked List :</h2>
-            <a href="https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-recursive/">https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-recursive/</a>
-            <a href="https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-recursive/">https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-recursive/</a>
-            <a href="https://leetcode.com/problems/middle-of-the-linked-list">https://leetcode.com/problems/middle-of-the-linked-list</a>
-            <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list">https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list</a>
-            <a href="https://leetcode.com/problems/merge-two-sorted-lists">https://leetcode.com/problems/merge-two-sorted-lists</a>
-            <a href="https://leetcode.com/problems/palindrome-linked-list">https://leetcode.com/problems/palindrome-linked-list</a>
-            <a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list">https://leetcode.com/problems/remove-nth-node-from-end-of-list</a>
-            <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list">https://leetcode.com/problems/remove-duplicates-from-sorted-list</a>
-            <a href="https://leetcode.com/problems/remove-linked-list-elements">https://leetcode.com/problems/remove-linked-list-elements</a>
-            <a href="https://leetcode.com/problems/delete-node-in-a-linked-list">https://leetcode.com/problems/delete-node-in-a-linked-list</a>
-            <a href="https://leetcode.com/problems/reverse-linked-list">https://leetcode.com/problems/reverse-linked-list</a>
-            <a href="https://leetcode.com/problems/swapping-nodes-in-a-linked-list">https://leetcode.com/problems/swapping-nodes-in-a-linked-list</a>
-            <a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list">https://leetcode.com/problems/flatten-binary-tree-to-linked-list</a>
-            <a href="https://leetcode.com/problems/odd-even-linked-list">https://leetcode.com/problems/odd-even-linked-list</a>
-        </div>
-        <div class="resource-container">
-            <h2>Recursion :</h2>
-            <a href="https://www.geeksforgeeks.org/introduction-to-recursion">https://www.geeksforgeeks.org/introduction-to-recursion</a>
-            <a href="https://www.geeksforgeeks.org/java-program-for-factorial-of-a-number">https://www.geeksforgeeks.org/java-program-for-factorial-of-a-number</a>
-            <a href="https://www.geeksforgeeks.org/java-program-to-display-numbers-and-sum-of-first-n-natural-numbers">https://www.geeksforgeeks.org/java-program-to-display-numbers-and-sum-of-first-n-natural-numbers</a>
-            <a href="https://leetcode.com/problems/fibonacci-number">https://leetcode.com/problems/fibonacci-number</a>
-            <a href="https://leetcode.com/problems/combination-sum">https://leetcode.com/problems/combination-sum</a>
-            <a href="https://leetcode.com/problems/combination-sum-ii">https://leetcode.com/problems/combination-sum-ii</a>
-            <a href="https://leetcode.com/problems/subsets">https://leetcode.com/problems/subsets</a>
-            <a href="https://leetcode.com/problems/subsets-ii">https://leetcode.com/problems/subsets-ii</a>
-        </div>
-        <div class="resource-container">
-            <h2>Trees - Binary tree :</h2>
-            <a href="https://takeuforward.org/data-structure/strivers-tree-series-tree-data-structure/#point_1">https://takeuforward.org/data-structure/strivers-tree-series-tree-data-structure/#point_1</a>
-            <a href="https://leetcode.com/problems/binary-tree-preorder-traversal/">https://leetcode.com/problems/binary-tree-preorder-traversal/</a>
-            <a href="https://leetcode.com/problems/binary-tree-inorder-traversal/">https://leetcode.com/problems/binary-tree-inorder-traversal/</a>
-            <a href="https://leetcode.com/problems/binary-tree-postorder-traversal/">https://leetcode.com/problems/binary-tree-postorder-traversal/</a>
-            <a href="https://www.geeksforgeeks.org/search-a-node-in-binary-tree/">https://www.geeksforgeeks.org/search-a-node-in-binary-tree/</a>
-            <a href="https://www.geeksforgeeks.org/sum-nodes-binary-tree/">https://www.geeksforgeeks.org/sum-nodes-binary-tree/</a>
-            <a href="https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/">https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/</a>
-            <a href="https://www.geeksforgeeks.org/find-maximum-or-minimum-in-binary-tree/">https://www.geeksforgeeks.org/find-maximum-or-minimum-in-binary-tree/</a>
-            <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">https://leetcode.com/problems/maximum-depth-of-binary-tree/</a>
-            <a href="https://leetcode.com/problems/balanced-binary-tree/">https://leetcode.com/problems/balanced-binary-tree/</a>
-            <a href="https://leetcode.com/problems/diameter-of-binary-tree/">https://leetcode.com/problems/diameter-of-binary-tree/</a>
-            <a href="https://leetcode.com/problems/same-tree/">https://leetcode.com/problems/same-tree/</a>
-            <a href="https://leetcode.com/problems/symmetric-tree/">https://leetcode.com/problems/symmetric-tree/</a>
-            <a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">https://leetcode.com/problems/binary-tree-maximum-path-sum/</a>
-            <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/</a>
-            <a href="https://leetcode.com/problems/binary-tree-right-side-view/">https://leetcode.com/problems/binary-tree-right-side-view/</a>
-            <a href="https://www.geeksforgeeks.org/print-left-view-binary-tree/">https://www.geeksforgeeks.org/print-left-view-binary-tree/</a>
-            <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/</a>
-            <a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a>
-            <a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a>
-            <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/">https://leetcode.com/problems/binary-tree-level-order-traversal/</a>
-            <a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/">https://leetcode.com/problems/binary-tree-level-order-traversal-ii/</a>
-            <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/</a>
-        </div>
-        <div class="resource-container">
-            <h2>Trees - Binary Search Tree :</h2>
-            <a href="https://leetcode.com/problems/search-in-a-binary-search-tree/">https://leetcode.com/problems/search-in-a-binary-search-tree/</a>
-            <a href="https://practice.geeksforgeeks.org/problems/minimum-element-in-bst/1">https://practice.geeksforgeeks.org/problems/minimum-element-in-bst/1</a>
-            <a href="https://leetcode.com/problems/insert-into-a-binary-search-tree/">https://leetcode.com/problems/insert-into-a-binary-search-tree/</a>
-            <a href="https://leetcode.com/problems/delete-node-in-a-bst/">https://leetcode.com/problems/delete-node-in-a-bst/</a>
-            <a href="https://leetcode.com/problems/range-sum-of-bst">https://leetcode.com/problems/range-sum-of-bst</a>
-            <a href="https://leetcode.com/problems/increasing-order-search-tree">https://leetcode.com/problems/increasing-order-search-tree</a>
-            <a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">https://leetcode.com/problems/kth-smallest-element-in-a-bst/</a>
-            <a href="https://leetcode.com/problems/validate-binary-search-tree/">https://leetcode.com/problems/validate-binary-search-tree/</a>
-            <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/</a>
-            <a href="https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/">https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/</a>
-            <a href="https://leetcode.com/problems/inorder-successor-in-bst/">https://leetcode.com/problems/inorder-successor-in-bst/</a>
-            <a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/">https://leetcode.com/problems/two-sum-iv-input-is-a-bst/</a>
-            <a href="https://leetcode.com/problems/balance-a-binary-search-tree">https://leetcode.com/problems/balance-a-binary-search-tree</a>
-        </div>
-        <div class="resource-container">
-            <h2>Dynamic Programming :</h2>
-            <a href="https://leetcode.com/problems/climbing-stairs/">https://leetcode.com/problems/climbing-stairs/</a>
-            <a href="https://leetcode.com/problems/min-cost-climbing-stairs/">https://leetcode.com/problems/min-cost-climbing-stairs/</a>
-            <a href="https://leetcode.com/problems/house-robber/">https://leetcode.com/problems/house-robber/</a>
-            <a href="https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/">https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/</a>
-            <a href="https://leetcode.com/problems/coin-change/">https://leetcode.com/problems/coin-change/</a>
-            <a href="https://leetcode.com/problems/coin-change-2/">https://leetcode.com/problems/coin-change-2/</a>
-            <a href="https://leetcode.com/problems/unique-paths/">https://leetcode.com/problems/unique-paths/</a>
-            <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock/</a>
-            <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/</a>
-            <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/</a>
-            <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/</a>
-        </div>
+            <div class="resource-container">
+                <h2>Strings :</h2>
+                <a href="https://leetcode.com/problems/valid-anagram/">https://leetcode.com/problems/valid-anagram/</a>
+                <a
+                    href="https://leetcode.com/problems/reverse-string/">https://leetcode.com/problems/reverse-string/</a>
+                <a
+                    href="https://leetcode.com/problems/reverse-words-in-a-string/">https://leetcode.com/problems/reverse-words-in-a-string/</a>
+                <a
+                    href="https://leetcode.com/problems/valid-palindrome/">https://leetcode.com/problems/valid-palindrome/</a>
+                <a
+                    href="https://leetcode.com/problems/valid-palindrome-ii/">https://leetcode.com/problems/valid-palindrome-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/consecutive-characters/">https://leetcode.com/problems/consecutive-characters/</a>
+                <a
+                    href="https://leetcode.com/problems/longest-common-prefix/">https://leetcode.com/problems/longest-common-prefix/</a>
+            </div>
 
-        <div class="resource-container">
-            <h2>Binary Search :</h2>
-            <a href="https://www.geeksforgeeks.org/binary-search/">https://www.geeksforgeeks.org/binary-search/</a>
-            <a href="https://leetcode.com/problems/binary-search/">https://leetcode.com/problems/binary-search/</a>
-            <a href="https://leetcode.com/problems/search-insert-position/">https://leetcode.com/problems/search-insert-position/</a>
-            <a href="https://leetcode.com/problems/search-a-2d-matrix/">https://leetcode.com/problems/search-a-2d-matrix/</a>
-            <a href="https://leetcode.com/problems/sqrtx/">https://leetcode.com/problems/sqrtx/</a>
-            <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a>
+            <div class="resource-container">
+                <h2>HashMap & Sliding window technique :</h2>
+                <a
+                    href="https://leetcode.com/problems/first-unique-character-in-a-string/">https://leetcode.com/problems/first-unique-character-in-a-string/</a>
+                <a
+                    href="https://leetcode.com/problems/first-letter-to-appear-twice/">https://leetcode.com/problems/first-letter-to-appear-twice/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/">https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/</a>
+                <a
+                    href="https://leetcode.com/problems/sort-characters-by-frequency/">https://leetcode.com/problems/sort-characters-by-frequency/</a>
+                <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/find-a-pair-with-the-given-difference/">https://www.geeksforgeeks.org/find-a-pair-with-the-given-difference/</a>
+                <a href="https://leetcode.com/problems/3sum/">https://leetcode.com/problems/3sum/</a>
+                <a
+                    href="https://leetcode.com/problems/intersection-of-two-arrays/">https://leetcode.com/problems/intersection-of-two-arrays/</a>
+                <a
+                    href="https://leetcode.com/problems/intersection-of-two-arrays-ii/">https://leetcode.com/problems/intersection-of-two-arrays-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">https://leetcode.com/problems/longest-substring-without-repeating-characters/</a>
+                <a
+                    href="https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/">https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/</a>
+                <a
+                    href="https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/">https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/</a>
+                <a
+                    href="https://leetcode.com/problems/longest-repeating-character-replacement/">https://leetcode.com/problems/longest-repeating-character-replacement/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/">https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/</a>
+                <a
+                    href="https://leetcode.com/problems/subarray-sum-equals-k/">https://leetcode.com/problems/subarray-sum-equals-k/</a>
+                <a
+                    href="https://leetcode.com/problems/subarray-sums-divisible-by-k/">https://leetcode.com/problems/subarray-sums-divisible-by-k/</a>
+                <a href="https://leetcode.com/problems/valid-anagram/">https://leetcode.com/problems/valid-anagram/</a>
+                <a
+                    href="https://leetcode.com/problems/group-anagrams/">https://leetcode.com/problems/group-anagrams/</a>
+                <a
+                    href="https://leetcode.com/problems/max-consecutive-ones/">https://leetcode.com/problems/max-consecutive-ones/</a>
+                <a href="https://www.lintcode.com/problem/883/">https://www.lintcode.com/problem/883/</a>
+                <a
+                    href="https://leetcode.com/problems/max-consecutive-ones-iii/">https://leetcode.com/problems/max-consecutive-ones-iii/</a>
+                <a href="https://leetcode.com/problems/lru-cache/">https://leetcode.com/problems/lru-cache/</a>
+                <a
+                    href="https://leetcode.com/problems/sliding-window-maximum/">https://leetcode.com/problems/sliding-window-maximum/</a>
+            </div>
+            <div class="resource-container">
+                <h2>Stacks and Queues :</h2>
+                <a
+                    href="https://www.geeksforgeeks.org/stack-data-structure/">https://www.geeksforgeeks.org/stack-data-structure/</a>
+                <a
+                    href="https://www.javatpoint.com/ds-array-implementation-of-stack">https://www.javatpoint.com/ds-array-implementation-of-stack</a>
+                <a
+                    href="https://leetcode.com/problems/valid-parentheses/">https://leetcode.com/problems/valid-parentheses/</a>
+                <a
+                    href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/">https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/</a>
+                <a
+                    href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/">https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/removing-stars-from-a-string/">https://leetcode.com/problems/removing-stars-from-a-string/</a>
+                <a
+                    href="https://leetcode.com/problems/next-greater-element-i/">https://leetcode.com/problems/next-greater-element-i/</a>
+                <a
+                    href="https://leetcode.com/problems/next-greater-element-ii/">https://leetcode.com/problems/next-greater-element-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/daily-temperatures/">https://leetcode.com/problems/daily-temperatures/</a>
+                <a
+                    href="https://leetcode.com/problems/trapping-rain-water/">https://leetcode.com/problems/trapping-rain-water/</a>
+                <a
+                    href="https://leetcode.com/problems/top-k-frequent-elements/">https://leetcode.com/problems/top-k-frequent-elements/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/queue-data-structure/">https://www.geeksforgeeks.org/queue-data-structure/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/array-implementation-of-queue-simple/">https://www.geeksforgeeks.org/array-implementation-of-queue-simple/</a>
+                <a
+                    href="https://leetcode.com/problems/implement-queue-using-stacks">https://leetcode.com/problems/implement-queue-using-stacks</a>
+                <a
+                    href="https://leetcode.com/problems/implement-stack-using-queues">https://leetcode.com/problems/implement-stack-using-queues</a>
+                <a
+                    href="https://leetcode.com/problems/kth-largest-element-in-an-array/">https://leetcode.com/problems/kth-largest-element-in-an-array/</a>
+            </div>
+            <div class="resource-container">
+                <h2>Sum of K largest elements :</h2>
+                <a
+                    href="https://takeuforward.org/data-structure/kth-largest-smallest-element-in-an-array/">https://takeuforward.org/data-structure/kth-largest-smallest-element-in-an-array/</a>
+            </div>
+
+            <div class="resource-container">
+                <h2>Linked List :</h2>
+                <a
+                    href="https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-recursive/">https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-recursive/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-recursive/">https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-recursive/</a>
+                <a
+                    href="https://leetcode.com/problems/middle-of-the-linked-list">https://leetcode.com/problems/middle-of-the-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list">https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/merge-two-sorted-lists">https://leetcode.com/problems/merge-two-sorted-lists</a>
+                <a
+                    href="https://leetcode.com/problems/palindrome-linked-list">https://leetcode.com/problems/palindrome-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/remove-nth-node-from-end-of-list">https://leetcode.com/problems/remove-nth-node-from-end-of-list</a>
+                <a
+                    href="https://leetcode.com/problems/remove-duplicates-from-sorted-list">https://leetcode.com/problems/remove-duplicates-from-sorted-list</a>
+                <a
+                    href="https://leetcode.com/problems/remove-linked-list-elements">https://leetcode.com/problems/remove-linked-list-elements</a>
+                <a
+                    href="https://leetcode.com/problems/delete-node-in-a-linked-list">https://leetcode.com/problems/delete-node-in-a-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/reverse-linked-list">https://leetcode.com/problems/reverse-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/swapping-nodes-in-a-linked-list">https://leetcode.com/problems/swapping-nodes-in-a-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list">https://leetcode.com/problems/flatten-binary-tree-to-linked-list</a>
+                <a
+                    href="https://leetcode.com/problems/odd-even-linked-list">https://leetcode.com/problems/odd-even-linked-list</a>
+            </div>
+            <div class="resource-container">
+                <h2>Recursion :</h2>
+                <a
+                    href="https://www.geeksforgeeks.org/introduction-to-recursion">https://www.geeksforgeeks.org/introduction-to-recursion</a>
+                <a
+                    href="https://www.geeksforgeeks.org/java-program-for-factorial-of-a-number">https://www.geeksforgeeks.org/java-program-for-factorial-of-a-number</a>
+                <a
+                    href="https://www.geeksforgeeks.org/java-program-to-display-numbers-and-sum-of-first-n-natural-numbers">https://www.geeksforgeeks.org/java-program-to-display-numbers-and-sum-of-first-n-natural-numbers</a>
+                <a
+                    href="https://leetcode.com/problems/fibonacci-number">https://leetcode.com/problems/fibonacci-number</a>
+                <a
+                    href="https://leetcode.com/problems/combination-sum">https://leetcode.com/problems/combination-sum</a>
+                <a
+                    href="https://leetcode.com/problems/combination-sum-ii">https://leetcode.com/problems/combination-sum-ii</a>
+                <a href="https://leetcode.com/problems/subsets">https://leetcode.com/problems/subsets</a>
+                <a href="https://leetcode.com/problems/subsets-ii">https://leetcode.com/problems/subsets-ii</a>
+            </div>
+            <div class="resource-container">
+                <h2>Trees - Binary tree :</h2>
+                <a
+                    href="https://takeuforward.org/data-structure/strivers-tree-series-tree-data-structure/#point_1">https://takeuforward.org/data-structure/strivers-tree-series-tree-data-structure/#point_1</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-preorder-traversal/">https://leetcode.com/problems/binary-tree-preorder-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-inorder-traversal/">https://leetcode.com/problems/binary-tree-inorder-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-postorder-traversal/">https://leetcode.com/problems/binary-tree-postorder-traversal/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/search-a-node-in-binary-tree/">https://www.geeksforgeeks.org/search-a-node-in-binary-tree/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/sum-nodes-binary-tree/">https://www.geeksforgeeks.org/sum-nodes-binary-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/">https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/find-maximum-or-minimum-in-binary-tree/">https://www.geeksforgeeks.org/find-maximum-or-minimum-in-binary-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">https://leetcode.com/problems/maximum-depth-of-binary-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/balanced-binary-tree/">https://leetcode.com/problems/balanced-binary-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/diameter-of-binary-tree/">https://leetcode.com/problems/diameter-of-binary-tree/</a>
+                <a href="https://leetcode.com/problems/same-tree/">https://leetcode.com/problems/same-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/symmetric-tree/">https://leetcode.com/problems/symmetric-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">https://leetcode.com/problems/binary-tree-maximum-path-sum/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-right-side-view/">https://leetcode.com/problems/binary-tree-right-side-view/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/print-left-view-binary-tree/">https://www.geeksforgeeks.org/print-left-view-binary-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-level-order-traversal/">https://leetcode.com/problems/binary-tree-level-order-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/">https://leetcode.com/problems/binary-tree-level-order-traversal-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/</a>
+            </div>
+            <div class="resource-container">
+                <h2>Trees - Binary Search Tree :</h2>
+                <a
+                    href="https://leetcode.com/problems/search-in-a-binary-search-tree/">https://leetcode.com/problems/search-in-a-binary-search-tree/</a>
+                <a
+                    href="https://practice.geeksforgeeks.org/problems/minimum-element-in-bst/1">https://practice.geeksforgeeks.org/problems/minimum-element-in-bst/1</a>
+                <a
+                    href="https://leetcode.com/problems/insert-into-a-binary-search-tree/">https://leetcode.com/problems/insert-into-a-binary-search-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/delete-node-in-a-bst/">https://leetcode.com/problems/delete-node-in-a-bst/</a>
+                <a
+                    href="https://leetcode.com/problems/range-sum-of-bst">https://leetcode.com/problems/range-sum-of-bst</a>
+                <a
+                    href="https://leetcode.com/problems/increasing-order-search-tree">https://leetcode.com/problems/increasing-order-search-tree</a>
+                <a
+                    href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">https://leetcode.com/problems/kth-smallest-element-in-a-bst/</a>
+                <a
+                    href="https://leetcode.com/problems/validate-binary-search-tree/">https://leetcode.com/problems/validate-binary-search-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/</a>
+                <a
+                    href="https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/">https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/</a>
+                <a
+                    href="https://leetcode.com/problems/inorder-successor-in-bst/">https://leetcode.com/problems/inorder-successor-in-bst/</a>
+                <a
+                    href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/">https://leetcode.com/problems/two-sum-iv-input-is-a-bst/</a>
+                <a
+                    href="https://leetcode.com/problems/balance-a-binary-search-tree">https://leetcode.com/problems/balance-a-binary-search-tree</a>
+            </div>
+            <div class="resource-container">
+                <h2>Dynamic Programming :</h2>
+                <a
+                    href="https://leetcode.com/problems/climbing-stairs/">https://leetcode.com/problems/climbing-stairs/</a>
+                <a
+                    href="https://leetcode.com/problems/min-cost-climbing-stairs/">https://leetcode.com/problems/min-cost-climbing-stairs/</a>
+                <a href="https://leetcode.com/problems/house-robber/">https://leetcode.com/problems/house-robber/</a>
+                <a
+                    href="https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/">https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/</a>
+                <a href="https://leetcode.com/problems/coin-change/">https://leetcode.com/problems/coin-change/</a>
+                <a href="https://leetcode.com/problems/coin-change-2/">https://leetcode.com/problems/coin-change-2/</a>
+                <a href="https://leetcode.com/problems/unique-paths/">https://leetcode.com/problems/unique-paths/</a>
+                <a
+                    href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock/</a>
+                <a
+                    href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/</a>
+                <a
+                    href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/</a>
+                <a
+                    href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/</a>
+            </div>
+
+            <div class="resource-container">
+                <h2>Binary Search :</h2>
+                <a href="https://www.geeksforgeeks.org/binary-search/">https://www.geeksforgeeks.org/binary-search/</a>
+                <a href="https://leetcode.com/problems/binary-search/">https://leetcode.com/problems/binary-search/</a>
+                <a
+                    href="https://leetcode.com/problems/search-insert-position/">https://leetcode.com/problems/search-insert-position/</a>
+                <a
+                    href="https://leetcode.com/problems/search-a-2d-matrix/">https://leetcode.com/problems/search-a-2d-matrix/</a>
+                <a href="https://leetcode.com/problems/sqrtx/">https://leetcode.com/problems/sqrtx/</a>
+                <a
+                    href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a>
+            </div>
         </div>
     </div>
 
@@ -402,8 +555,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
                         <p>&copy; 2023 Laratechnology. All rights reserved. | <a
-                                href="./assets/pdf/terms-and-conditions.pdf" target="_blank"
-                                class="text-light">Terms &
+                                href="./assets/pdf/terms-and-conditions.pdf" target="_blank" class="text-light">Terms &
                                 Conditions</a>
                         </p>
                     </div>
@@ -411,11 +563,37 @@
             </div>
         </div>
     </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
+    <!-- Logout Confirmation Modal -->
+
+    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutConfirmationModalLabel">
+                        Confirm Logout
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Are you sure you want to logout?</div>
+                <div class="modal-footer">
+                    <!-- Cancel button to close the modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <!-- Logout button to trigger the logout -->
+                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="./details.js"></script>
     <!-- <script src="assets/js/script.js"></script> -->
 
 </body>
+
 </html>
