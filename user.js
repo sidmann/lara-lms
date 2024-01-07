@@ -635,8 +635,8 @@ document.getElementById('save-user-address-button').addEventListener('click', as
         }
     }
     else {
-        console.log('please fill all the details');
-        displayMessage('please fill all the details', 'danger');
+        console.log('Please fill all the details');
+        displayMessage('Please fill all the details', 'danger');
         document.querySelector('#save-user-address-button').disabled = false;
         document.querySelector('#save-user-address-button').textContent = 'Submit';
     }
@@ -1291,8 +1291,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                             userDegreePercentage: userDegreePercentageEdit,
                             degreeCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User Graduation/Degree details saved successfully');
-                    displayMessage('User Graduation/Degree details saved successfully', 'success');
+                    console.log('User Graduation/Degree details updated successfully');
+                    displayMessage('User Graduation/Degree details updated successfully', 'success');
                     document.querySelector('#save-degree-edu-button').disabled = false;
                     document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                     openUserDegreeModel(userId)
@@ -1312,8 +1312,8 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
                             userDegreeEnd: userDegreeEndDateEdit,
                             userDegreePercentage: userDegreePercentageEdit,
                         });
-                    console.log('User Graduation/Degree details saved successfully');
-                    displayMessage('User Graduation/Degree details saved successfully', 'success');
+                    console.log('User Graduation/Degree details updated successfully');
+                    displayMessage('User Graduation/Degree details updated successfully', 'success');
                     document.querySelector('#save-degree-edu-button').disabled = false;
                     document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                     openUserDegreeModel(userId)

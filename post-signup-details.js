@@ -60,7 +60,7 @@ if (userId) {
     await continueLoginBtnshowOrHide();
     displayMessage('Please continue with filling the remaining details', 'success');
 }
-console.log(userId);
+// console.log(userId);
 
 
 /**
@@ -84,9 +84,9 @@ confirmLogoutBtn.addEventListener("click", () => {
  * @author mydev
  */
 onAuthStateChanged(auth, (user) => {
-    console.log("auth")
+    // console.log("auth")
     if (user) {
-        console.log("if")
+        // console.log("if")
         loggedIn = true
         onLoggedIn();
         const docRef = doc(firestore, "learners", user.uid);
@@ -100,10 +100,8 @@ onAuthStateChanged(auth, (user) => {
         });
     }
     else {
-        console.log("else")
-        window.history.replaceState({}, "", "login.html");
-        // window.location.href = "login.html";
-        onLoggedOut()
+        // console.log("else")
+        onLoggedOut();
     }
 });
 
@@ -217,20 +215,22 @@ function displayMessage(message, type) {
  */
 document.querySelector('#save-user-address-button').addEventListener('click', async (e) => {
     e.preventDefault()
-    console.log("1")
+    document.querySelector('#save-user-address-button').disabled = true;
+    document.querySelector('#save-user-address-button').textContent = 'Submitting...';
+    // console.log("1")
     const userAddress = document.querySelector('#user-address').value;
     const userPostcode = document.querySelector('#user-postcode').value;
     const userCity = document.querySelector('#user-city').value;
     const userState = document.querySelector('#user-state').value;
     const userCountry = document.querySelector('#user-country').value;
-    console.log(userId)
+    // console.log(userId)
     if (userAddress && userPostcode && userCity && userState && userCountry) {
         const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
         if (!userAddressSnapshot.empty) {
-            console.log('if');
-            userAddressSnapshot.forEach(async (document) => {
-                const AddressDocRef = doc(firestore, 'learners', userId, 'useraddress', document.id);
+            // console.log('if');
+            userAddressSnapshot.forEach(async (docu) => {
+                const AddressDocRef = doc(firestore, 'learners', userId, 'useraddress', docu.id);
 
                 await updateDoc(AddressDocRef, {
                     address: userAddress,
@@ -239,13 +239,15 @@ document.querySelector('#save-user-address-button').addEventListener('click', as
                     state: userState,
                     country: userCountry
                 });
-                console.log('Address details saved successfully');
-                displayMessage('Address details saved successfully', 'success');
+                console.log('User Address details saved successfully');
+                displayMessage('User Address details saved successfully', 'success');
+                document.querySelector('#save-user-address-button').disabled = false;
+                document.querySelector('#save-user-address-button').textContent = 'Submit';
                 document.getElementById('user-address-form').reset();
             })
         }
         else {
-            console.log("else")
+            // console.log("else")
             const userAddressData = {
                 address: userAddress,
                 postcode: userPostcode,
@@ -254,16 +256,20 @@ document.querySelector('#save-user-address-button').addEventListener('click', as
                 country: userCountry
             }
             const docRef = await addDoc(userAddressCollectionRef, userAddressData)
-            console.log(docRef.id)
+            // console.log(docRef.id)
             await updateDoc(docRef, { addressId: docRef.id })
-            console.log('Address details saved successfully')
-            displayMessage('Address details saved successfully', 'success')
+            console.log('User Address details saved successfully')
+            displayMessage('User Address details saved successfully', 'success')
+            document.querySelector('#save-user-address-button').disabled = false;
+            document.querySelector('#save-user-address-button').textContent = 'Submit';
             document.getElementById('user-address-form').reset();
         }
     }
     else {
-        console.log("Please enter all fields")
-        displayMessage('Please enter all fields', 'danger')
+        console.log("Please fill all the details")
+        displayMessage('Please fill all the details', 'danger')
+        document.querySelector('#save-user-address-button').disabled = false;
+        document.querySelector('#save-user-address-button').textContent = 'Submit';
     }
 })
 
@@ -282,21 +288,21 @@ async function checkUserAddressDocumentExists(userId) {
 
 
 document.querySelector('#user-school-accordion-btn').addEventListener('click', async (event) => {
-    console.log("1")
+    // console.log("1")
     event.preventDefault();
     const userAddressExists = await checkUserAddressDocumentExists(userId);
-    console.log(userAddressExists);
+    // console.log(userAddressExists);
     const schoolAccordionBtn = document.getElementById('user-school-accordion-btn');
     const schoolAccordionContent = document.querySelector('.accordion-collapse-two');
 
     if (!userAddressExists) {
-        console.log("if")
+        // console.log("if")
         schoolAccordionContent.classList.add('d-none');
         schoolAccordionBtn.classList.add('collapsed');
         displayMessage('Please fill the above address details', 'danger');
     }
     else {
-        console.log("else");
+        // console.log("else");
         schoolAccordionContent.classList.remove('d-none');
     }
 })
@@ -307,6 +313,8 @@ document.querySelector('#user-school-accordion-btn').addEventListener('click', a
  * @author mydev 
  */
 document.querySelector('#save-school-edu-button').addEventListener('click', async (e) => {
+    document.querySelector('#save-school-edu-button').disabled = true;
+    document.querySelector('#save-school-edu-button').textContent = 'Submitting...';
     const userSchoolBoard = document.querySelector("#school-board").value;
     const userSchoolName = document.querySelector("#school-name").value;
     const userSchoolEducationCity = document.querySelector("#school-education-city").value;
@@ -320,24 +328,24 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
     if (userSchoolBoard && userSchoolName && userSchoolEducationCity && userSchoolEducationState
         && userSchoolStart && userSchoolEnd && userSchoolCertificate.files.length > 0) {
         try {
-            const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
-            const userAddressSnapshot = await getDocs(userAddressCollectionRef);
-            if (userAddressSnapshot.empty) {
-                console.log('Please fill the address details first')
-                displayMessage('Please fill the address details first', 'danger');
-                return;
-            }
+            // const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
+            // const userAddressSnapshot = await getDocs(userAddressCollectionRef);
+            // if (userAddressSnapshot.empty) {
+            //     console.log('Please fill the address details first')
+            //     displayMessage('Please fill the address details first', 'danger');
+            //     return;
+            // }
 
             const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
             const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
             if (!userSchoolSnapshot.empty) {
-                console.log("if")
-                userSchoolSnapshot.forEach(async (document) => {
-                    const userDocId = document.data().userSchoolDocId;
-                    const userData = document.data();
+                // console.log("if")
+                userSchoolSnapshot.forEach(async (docu) => {
+                    // const userDocId = docu.data().userSchoolDocId;
+                    const userData = docu.data();
                     if (userData.certificateImageUrl) {
                         const fileName = getFileNameFromUrl(userData.certificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -348,7 +356,7 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', document.id)
+                    const userSchoolDocRef = doc(firestore, 'learners', userId, 'userschool', docu.id)
                     await updateDoc(userSchoolDocRef,
                         {
                             userSchoolBoard: userSchoolBoard,
@@ -360,13 +368,15 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
                             userSchoolPercentage: userSchoolPercentage,
                             schoolCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('school details saved successfully');
-                    displayMessage('school details saved successfully', 'success');
+                    console.log('User 10th Class details saved successfully');
+                    displayMessage('User 10th Class details saved successfully', 'success');
+                    document.querySelector('#save-school-edu-button').disabled = false;
+                    document.querySelector('#save-school-edu-button').textContent = 'Submit';
                     document.getElementById('school-edu-details-form').reset();
                 })
             }
             else {
-                console.log("else");
+                // console.log("else");
                 const storageRef = ref(storage, 'certificate_images/' + userCertificateImageFile.name);
                 await uploadBytes(storageRef, userCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
@@ -382,21 +392,27 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
                         userSchoolPercentage: userSchoolPercentage,
                         schoolCertificateImageUrl: certificateImageUrl
                     });
-                console.log(docRef.id)
+                // console.log(docRef.id)
                 await updateDoc(docRef, { userSchoolId: docRef.id })
-                console.log('school details saved successfully')
-                displayMessage('school details saved successfully', 'success')
+                console.log('User 10th Class details saved successfully')
+                displayMessage('User 10th Class details saved successfully', 'success')
+                document.querySelector('#save-school-edu-button').disabled = false;
+                document.querySelector('#save-school-edu-button').textContent = 'Submit';
                 document.getElementById('school-edu-details-form').reset();
             }
         }
         catch (error) {
             console.error('Error updating certificate image:', error);
             displayMessage('Something went wrong', 'danger');
+            document.querySelector('#save-school-edu-button').disabled = false;
+            document.querySelector('#save-school-edu-button').textContent = 'Submit';
         }
     }
     else {
-        console.log("please the fill the details");
-        displayMessage('please the fill the details', 'danger');
+        console.log("Please fill all the details");
+        displayMessage('Please fill all the detailss', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
     }
 })
 
@@ -417,18 +433,18 @@ async function checkUserSchoolDocumentExists(userId) {
 document.querySelector('#user-inter-accordion-btn').addEventListener('click', async (event) => {
     event.preventDefault();
     const userSchoolExists = await checkUserSchoolDocumentExists(userId);
-    console.log(userSchoolExists);
+    // console.log(userSchoolExists);
     const schoolAccordionBtn = document.getElementById('user-inter-accordion-btn');
     const schoolAccordionContent = document.querySelector('.accordion-collapse-three');
 
     if (!userSchoolExists) {
-        console.log("if")
+        // console.log("if")
         schoolAccordionContent.classList.add('d-none');
         schoolAccordionBtn.classList.add('collapsed');
-        displayMessage('Please fill the  above school education details', 'danger');
+        displayMessage('Please fill the above 10th education details', 'danger');
     }
     else {
-        console.log("else");
+        // console.log("else");
         schoolAccordionContent.classList.remove('d-none');
     }
 })
@@ -438,6 +454,8 @@ document.querySelector('#user-inter-accordion-btn').addEventListener('click', as
  * @author mydev 
  */
 document.querySelector('#save-inter-edu-button').addEventListener('click', async (e) => {
+    document.querySelector('#save-inter-edu-button').disabled = true;
+    document.querySelector('#save-inter-edu-button').textContent = 'Submitting...';
     const userInterBoard = document.querySelector("#inter-board").value;
     const userInterEducationName = document.querySelector("#inter-education-name").value;
     const userInterEducationCity = document.querySelector("#inter-education-city").value;
@@ -461,12 +479,12 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
             const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
             const userInterSnapshot = await getDocs(userInterCollectionRef);
             if (!userInterSnapshot.empty) {
-                console.log("if")
-                userInterSnapshot.forEach(async (document) => {
-                    const userInterData = document.data();
+                // console.log("if")
+                userInterSnapshot.forEach(async (docu) => {
+                    const userInterData = docu.data();
                     if (userInterData.certificateImageUrl) {
                         const fileName = getFileNameFromUrl(userInterData.certificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'inter_certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -477,7 +495,7 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
                     await uploadBytes(storageRef, userInterCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userInterDocRef = doc(firestore, 'learners', userId, 'userInter', document.id)
+                    const userInterDocRef = doc(firestore, 'learners', userId, 'userinter', docu.id)
                     await updateDoc(userInterDocRef,
                         {
                             userInterBoard: userInterBoard,
@@ -489,13 +507,15 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
                             userInterPercentage: userInterPercentage,
                             interCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('school details saved successfully');
-                    displayMessage('school details saved successfully', 'success');
+                    console.log('User Intermediate/12th details saved successfully');
+                    displayMessage('User Intermediate/12th details saved successfully', 'success');
+                    document.querySelector('#save-inter-edu-button').disabled = false;
+                    document.querySelector('#save-inter-edu-button').textContent = 'Submit';
                     document.getElementById('inter-edu-details-form').reset();
                 })
             }
             else {
-                console.log("else");
+                // console.log("else");
                 const storageRef = ref(storage, 'inter_certificate_images/' + userInterCertificateImageFile.name);
                 await uploadBytes(storageRef, userInterCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
@@ -511,21 +531,27 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
                         userInterPercentage: userInterPercentage,
                         interCertificateImageUrl: certificateImageUrl
                     });
-                console.log(docRef.id)
+                // console.log(docRef.id)
                 await updateDoc(docRef, { userInterId: docRef.id })
-                console.log('Inter/12th class education details saved successfully')
-                displayMessage('Inter/12th class education details saved successfully', 'success')
+                console.log('User Intermediate/12th details saved successfully')
+                displayMessage('User Intermediate/12th details saved successfully', 'success')
+                document.querySelector('#save-inter-edu-button').disabled = false;
+                document.querySelector('#save-inter-edu-button').textContent = 'Submit';
                 document.getElementById('inter-edu-details-form').reset();
             }
         }
         catch (error) {
             console.error('Error updating certificate image:', error);
             displayMessage('Something went wrong', 'danger');
+            document.querySelector('#save-inter-edu-button').disabled = false;
+            document.querySelector('#save-inter-edu-button').textContent = 'Submit';
         }
     }
     else {
-        console.log("please the fill the details");
-        displayMessage('please the fill the details', 'danger');
+        console.log("Please fill all the details");
+        displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-inter-edu-button').disabled = false;
+        document.querySelector('#save-inter-edu-button').textContent = 'Submit';
     }
 })
 
@@ -546,18 +572,18 @@ async function checkUserInterDocumentExists(userId) {
 document.querySelector('#user-degree-accordion-btn').addEventListener('click', async (event) => {
     event.preventDefault();
     const userInterExists = await checkUserInterDocumentExists(userId);
-    console.log(userInterExists);
+    // console.log(userInterExists);
     const schoolAccordionBtn = document.getElementById('user-degree-accordion-btn');
     const schoolAccordionContent = document.querySelector('.accordion-collapse-four');
 
     if (!userInterExists) {
-        console.log("if")
+        // console.log("if")
         schoolAccordionContent.classList.add('d-none');
         schoolAccordionBtn.classList.add('collapsed');
-        displayMessage('Please fill the above inter/12th class education details', 'danger');
+        displayMessage('Please fill the above Intermediate/12th education details', 'danger');
     }
     else {
-        console.log("else");
+        // console.log("else");
         schoolAccordionContent.classList.remove('d-none');
     }
 })
@@ -567,6 +593,8 @@ document.querySelector('#user-degree-accordion-btn').addEventListener('click', a
 * @author mydev 
 */
 document.querySelector('#save-degree-edu-button').addEventListener('click', async (e) => {
+    document.querySelector('#save-degree-edu-button').disabled = true;
+    document.querySelector('#save-degree-edu-button').textContent = 'Submitting...';
     const userDegreeBoard = document.querySelector("#degree-board").value;
     const userDegreeEducationName = document.querySelector("#degree-education-name").value;
     const userDegreeEduSpeName = document.querySelector('#degree-education-spec-name').value
@@ -593,13 +621,13 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
             const userDegreeCollectionRef = collection(firestore, 'learners', userId, 'userdegree');
             const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
             if (!userDegreeSnapshot.empty) {
-                console.log("if")
-                userDegreeSnapshot.forEach(async (document) => {
-                    const userDegreeData = document.data();
-                    console.log(userDegreeData.certificateImageUrl)
+                // console.log("if")
+                userDegreeSnapshot.forEach(async (docu) => {
+                    const userDegreeData = docu.data();
+                    // console.log(userDegreeData.certificateImageUrl)
                     if (userDegreeData.interCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userDegreeData.interCertificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'degree_certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -610,7 +638,7 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userDegreeCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', document.id)
+                    const userDegreeDocRef = doc(firestore, 'learners', userId, 'userdegree', docu.id)
                     await updateDoc(userDegreeDocRef,
                         {
                             userDegreeBoard: userDegreeBoard,
@@ -623,15 +651,17 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
                             userDegreePercentage: userDegreePercentage,
                             degreeCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user graduation details saved successfully');
-                    displayMessage('user graduation details saved successfully', 'success');
+                    console.log('User Graduation/Degree details saved successfully');
+                    displayMessage('User Graduation/Degree details saved successfully', 'success');
+                    document.querySelector('#save-degree-edu-button').disabled = false;
+                    document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                     document.getElementById('degree-edu-details-form').reset();
                    await continueLoginBtnshowOrHide()
 
                 })
             }
             else {
-                console.log("else");
+                // console.log("else");
                 const storageRef = ref(storage, 'degree_certificate_images/' + userDegreeCertificateImageFile.name);
                 await uploadBytes(storageRef, userDegreeCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
@@ -648,10 +678,12 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
                         userDegreePercentage: userDegreePercentage,
                         degreeCertificateImageUrl: certificateImageUrl
                     });
-                console.log(docRef.id)
+                // console.log(docRef.id)
                 await updateDoc(docRef, { userDegreeId: docRef.id })
-                console.log('user graduation details saved successfully')
-                displayMessage('user graduation details saved successfully', 'success')
+                console.log('User Graduation/Degree details saved successfully')
+                displayMessage('User Graduation/Degree details saved successfully', 'success')
+                document.querySelector('#save-degree-edu-button').disabled = false;
+                document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                 document.getElementById('degree-edu-details-form').reset();
                 await continueLoginBtnshowOrHide();
             }
@@ -659,11 +691,15 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
         catch (error) {
             console.error('Error updating certificate image:', error);
             displayMessage('Something went wrong', 'danger');
+            document.querySelector('#save-degree-edu-button').disabled = false;
+            document.querySelector('#save-degree-edu-button').textContent = 'Submit';
         }
     }
     else {
-        console.log("please the fill the details");
-        displayMessage('please the fill the details', 'danger');
+        console.log("Please fill all the details");
+        displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-degree-edu-button').disabled = false;
+        document.querySelector('#save-degree-edu-button').textContent = 'Submit';
     }
 })
 
@@ -688,11 +724,11 @@ async function checkUserDegreeDocumentExists(userId) {
 async function continueLoginBtnshowOrHide() {
     const userDetailsExist = await checkUserDegreeDocumentExists(userId);
     if (userDetailsExist) {
-        console.log("if")
+        // console.log("if")
         document.querySelector('.user-login-continue-btn').classList.remove('d-none');
     }
     else {
-        console.log("else");
+        // console.log("else");
         document.querySelector('.user-login-continue-btn').classList.add('d-none');
     }
 }
@@ -700,19 +736,19 @@ async function continueLoginBtnshowOrHide() {
 document.querySelector('#user-masters-accordion-btn').addEventListener('click', async (event) => {
     event.preventDefault();
     const userDegreeExists = await checkUserDegreeDocumentExists(userId);
-    console.log(userDegreeExists);
+    // console.log(userDegreeExists);
     const mastersAccordionBtn = document.getElementById('user-masters-accordion-btn');
     const mastersAccordionContent = document.querySelector('.accordion-collapse-seven');
 
     if (!userDegreeExists) {
-        console.log("if")
+        // console.log("if")
         mastersAccordionContent.classList.add('d-none');
         mastersAccordionBtn.classList.add('collapsed');
         displayMessage('Please fill the above graduation education details', 'danger');
     }
     else {
 
-        console.log("else");
+        // console.log("else");
         mastersAccordionContent.classList.remove('d-none');
     }
 })
@@ -721,6 +757,8 @@ document.querySelector('#user-masters-accordion-btn').addEventListener('click', 
  * @author mydev 
  */
 document.querySelector('#save-masters-edu-button').addEventListener('click', async (e) => {
+    document.querySelector('#save-masters-edu-button').disabled = true;
+    document.querySelector('#save-masters-edu-button').textContent = 'Submitting...';
     const userMastersBoard = document.querySelector("#masters-board").value;
     const userMastersEducationName = document.querySelector("#masters-education-name").value;
     const userMastersEduSpeName = document.querySelector('#masters-education-spec-name').value
@@ -746,13 +784,13 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
             const userMastersCollectionRef = collection(firestore, 'learners', userId, 'usermasters');
             const userMastersSnapshot = await getDocs(userMastersCollectionRef);
             if (!userMastersSnapshot.empty) {
-                console.log("if")
-                userMastersSnapshot.forEach(async (document) => {
-                    const userMastersData = document.data();
-                    console.log(userMastersData.mastersCertificateImageUrl)
+                // console.log("if")
+                userMastersSnapshot.forEach(async (docu) => {
+                    const userMastersData = docu.data();
+                    // console.log(userMastersData.mastersCertificateImageUrl)
                     if (userMastersData.mastersCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userMastersData.mastersCertificateImageUrl);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'masters_certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -763,7 +801,7 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                     await uploadBytes(storageRef, userMastersCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', document.id)
+                    const userMastersDocRef = doc(firestore, 'learners', userId, 'usermasters', docu.id)
                     await updateDoc(userMastersDocRef,
                         {
                             userMastersBoard: userMastersBoard,
@@ -776,13 +814,15 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                             userMastersPercentage: userMastersPercentage,
                             mastersCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user post-graduation/masters details saved successfully');
-                    displayMessage('user post-graduation/masters saved successfully', 'success');
+                    console.log('User Post-Graduation/Masters details saved successfully');
+                    displayMessage('User Post-Graduation/Masters details saved successfully', 'success');
+                    document.querySelector('#save-masters-edu-button').disabled = false;
+                    document.querySelector('#save-masters-edu-button').textContent = 'Submit';
                     document.getElementById('masters-edu-details-form').reset();
                 })
             }
             else {
-                console.log("else");
+                // console.log("else");
                 const storageRef = ref(storage, 'masters_certificate_images/' + userMastersCertificateImageFile.name);
                 await uploadBytes(storageRef, userMastersCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
@@ -799,21 +839,27 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                         userMastersPercentage: userMastersPercentage,
                         mastersCertificateImageUrl: certificateImageUrl
                     });
-                console.log(docRef.id)
+                // console.log(docRef.id)
                 await updateDoc(docRef, { userMastersId: docRef.id })
-                console.log('user post-graduation/masters details saved successfully')
-                displayMessage('user post-graduation/masters details saved successfully', 'success')
+                console.log('User Post-Graduation/Masters details saved successfully')
+                displayMessage('User Post-Graduation/Masters details saved successfully', 'success')
+                document.querySelector('#save-masters-edu-button').disabled = false;
+                document.querySelector('#save-masters-edu-button').textContent = 'Submit';
                 document.getElementById('masters-edu-details-form').reset();
             }
         }
         catch (error) {
             console.error('Error updating certificate image:', error);
             displayMessage('Something went wrong', 'danger');
+            document.querySelector('#save-masters-edu-button').disabled = false;
+            document.querySelector('#save-masters-edu-button').textContent = 'Submit';
         }
     }
     else {
-        console.log("please the fill the details");
-        displayMessage('please the fill the details', 'danger');
+        console.log("Please fill all the details");
+        displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-masters-edu-button').disabled = false;
+        document.querySelector('#save-masters-edu-button').textContent = 'Submit';
     }
 })
 
@@ -868,6 +914,8 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
  * @author mydev 
  */
 document.querySelector('#save-internship-button').addEventListener('click', async (e) => {
+    document.querySelector('#save-internship-button').disabled = true;
+    document.querySelector('#save-internship-button').textContent = 'Submitting...';
     const userProjectName = document.querySelector("#internship-project-name").value;
     const userProjectTechnologies = document.querySelector("#internship-technologies").value;
     const userInternshipCity = document.querySelector("#internship-city").value;
@@ -882,28 +930,28 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
         const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
         if (userAddressSnapshot.empty) {
-            displayMessage('Please the your address Details', 'danger')
+            displayMessage('Please fill your address Details', 'danger')
             return;
         }
 
         const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
         const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
         if (userSchoolSnapshot.empty) {
-            displayMessage('Please the school education Details', 'danger')
+            displayMessage('Please fill your 10th education Details', 'danger')
             return;
         }
 
         const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
         const userInterSnapshot = await getDocs(userInterCollectionRef);
         if (userInterSnapshot.empty) {
-            displayMessage('Please the inter/12th class education Details', 'danger')
+            displayMessage('Please fill your intermediate/12th education Details', 'danger')
             return;
         }
 
         const userDegreeCollectionRef = collection(firestore, 'learners', userId, 'userdegree');
         const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
         if (userDegreeSnapshot.empty) {
-            displayMessage('Please the graduation education Details', 'danger')
+            displayMessage('Please fill your graduation education Details', 'danger')
             return;
         }
 
@@ -911,13 +959,13 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
             const userInternshipCollectionRef = collection(firestore, 'learners', userId, 'userinternship');
             const userInternshipSnapshot = await getDocs(userInternshipCollectionRef);
             if (!userInternshipSnapshot.empty) {
-                console.log("if")
-                userInternshipSnapshot.forEach(async (document) => {
-                    const userInternshipData = document.data();
-                    console.log(userInternshipData.internshipCertificateImageUrl)
+                // console.log("if")
+                userInternshipSnapshot.forEach(async (docu) => {
+                    const userInternshipData = docu.data();
+                    // console.log(userInternshipData.internshipCertificateImageUrl)
                     if (userInternshipData.internshipCertificateImageUrl) {
                         const fileName = getFileNameFromUrl(userInternshipData.userInternshipCertificateImageFile);
-                        console.log(fileName)
+                        // console.log(fileName)
                         if (fileName) {
                             const storageRef = ref(storage, 'internship_certificate_images/' + fileName);
                             await deleteObject(storageRef);
@@ -928,7 +976,7 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
                     await uploadBytes(storageRef, userInternshipCertificateImageFile);
                     const certificateImageUrl = await getDownloadURL(storageRef);
 
-                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userinternship', document.id)
+                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userinternship', docu.id)
                     await updateDoc(userInternshipDocRef,
                         {
                             userProjectName: userProjectName,
@@ -939,13 +987,15 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
                             userProjectDescription: userProjectDescription,
                             internshipCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('user internship/academic project details saved successfully');
-                    displayMessage('user internship/academic project saved successfully', 'success');
+                    console.log('User Internship/Academic Project details saved successfully');
+                    displayMessage('User Internship/Academic Project details saved successfully', 'success');
+                    document.querySelector('#save-internship-button').disabled = false;
+                    document.querySelector('#save-internship-button').textContent = 'Submit';
                     document.getElementById('internship-project-details-form').reset();
                 })
             }
             else {
-                console.log("else");
+                // console.log("else");
                 const storageRef = ref(storage, 'internship_certificate_images/' + userInternshipCertificateImageFile.name);
                 await uploadBytes(storageRef, userInternshipCertificateImageFile);
                 const certificateImageUrl = await getDownloadURL(storageRef);
@@ -960,21 +1010,27 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
                         userProjectDescription: userProjectDescription,
                         internshipCertificateImageUrl: certificateImageUrl
                     });
-                console.log(docRef.id)
+                // console.log(docRef.id)
                 await updateDoc(docRef, { userInternshipId: docRef.id })
-                console.log('user internship/academic project saved successfully')
-                displayMessage('user internship/academic project saved successfully', 'success')
+                console.log('User Internship/Academic Project details saved successfully')
+                displayMessage('User Internship/Academic Project details saved successfully', 'success')
+                document.querySelector('#save-internship-button').disabled = false;
+                document.querySelector('#save-internship-button').textContent = 'Submit';
                 document.getElementById('internship-project-details-form').reset();
             }
         }
         catch (error) {
             console.error('Error updating certificate image:', error);
             displayMessage('Something went wrong', 'danger');
+            document.querySelector('#save-internship-button').disabled = false;
+            document.querySelector('#save-internship-button').textContent = 'Submit';
         }
     }
     else {
-        console.log("please the fill the details");
-        displayMessage('please the fill the details', 'danger');
+        console.log("Please fill all the details");
+        displayMessage('Please fill all the details', 'danger');
+        document.querySelector('#save-internship-button').disabled = false;
+        document.querySelector('#save-internship-button').textContent = 'Submit';
     }
 })
 
@@ -984,37 +1040,39 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
 */
 document.querySelector('#save-user-additional-button').addEventListener('click', async (e) => {
     e.preventDefault()
-    console.log("1")
+    document.querySelector('#save-user-additional-button').disabled = true;
+    document.querySelector('#save-user-additional-button').textContent = 'Submitting...';
+    // console.log("1")
     const userAdditionalSkills = document.querySelector('#user-skills').value;
     const userAdditionalLanguages = document.querySelector('#user-languages').value;
     const userAdditionalHobbies = document.querySelector('#user-hobbies').value;
     if (userAdditionalSkills && userAdditionalLanguages && userAdditionalHobbies) {
-        console.log("2")
+        // console.log("2")
         const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
         const userAddressSnapshot = await getDocs(userAddressCollectionRef);
         if (userAddressSnapshot.empty) {
-            displayMessage('Please the your address Details', 'danger')
+            displayMessage('Please fill your address Details', 'danger')
             return;
         }
 
         const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
         const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
         if (userSchoolSnapshot.empty) {
-            displayMessage('Please the school education Details', 'danger')
+            displayMessage('Please fill your 10th education Details', 'danger')
             return;
         }
 
         const userInterCollectionRef = collection(firestore, 'learners', userId, 'userinter');
         const userInterSnapshot = await getDocs(userInterCollectionRef);
         if (userInterSnapshot.empty) {
-            displayMessage('Please the inter/12th class education Details', 'danger')
+            displayMessage('Please fill your intermediate/12th education Details', 'danger')
             return;
         }
 
         const userDegreeCollectionRef = collection(firestore, 'learners', userId, 'userdegree');
         const userDegreeSnapshot = await getDocs(userDegreeCollectionRef);
         if (userDegreeSnapshot.empty) {
-            displayMessage('Please the graduation education Details', 'danger')
+            displayMessage('Please fill your graduation education Details', 'danger')
             return;
         }
 
@@ -1022,38 +1080,44 @@ document.querySelector('#save-user-additional-button').addEventListener('click',
         const userAdditionalCollectionRef = collection(firestore, 'learners', userId, 'useradditional')
         const userAdditionalSnapshot = await getDocs(userAdditionalCollectionRef);
         if (!userAdditionalSnapshot.empty) {
-            console.log('if');
-            userAdditionalSnapshot.forEach(async (document) => {
-                const userAdditionalDocRef = doc(firestore, 'learners', userId, 'useradditional', document.id);
+            // console.log('if');
+            userAdditionalSnapshot.forEach(async (docu) => {
+                const userAdditionalDocRef = doc(firestore, 'learners', userId, 'useradditional', docu.id);
 
                 await updateDoc(userAdditionalDocRef, {
                     userAdditionalSkills: userAdditionalSkills,
                     userAdditionalLanguages: userAdditionalLanguages,
                     userAdditionalHobbies: userAdditionalHobbies
                 });
-                console.log('user Additional details saved successfully');
-                displayMessage('user Additional details saved successfully', 'success');
+                console.log('User Additional Details saved successfully');
+                displayMessage('User Additional Details saved successfully', 'success');
+                document.querySelector('#save-user-additional-button').disabled = false;
+                document.querySelector('#save-user-additional-button').textContent = 'Submit';
                 document.getElementById('user-additional-details-form').reset();
             })
         }
         else {
-            console.log("else")
+            // console.log("else")
             const userAdditionalData = {
                 userAdditionalSkills: userAdditionalSkills,
                 userAdditionalLanguages: userAdditionalLanguages,
                 userAdditionalHobbies: userAdditionalHobbies
             }
             const docRef = await addDoc(userAdditionalCollectionRef, userAdditionalData)
-            console.log(docRef.id)
+            // console.log(docRef.id)
             await updateDoc(docRef, { userAdditionalId: docRef.id })
-            console.log('user Additional details saved successfully')
-            displayMessage('user Additional details saved successfully', 'success')
+            console.log('User Additional Details saved successfully')
+            displayMessage('User Additional Details saved successfully', 'success')
+            document.querySelector('#save-user-additional-button').disabled = false;
+            document.querySelector('#save-user-additional-button').textContent = 'Submit';
             document.getElementById('user-additional-details-form').reset();
         }
     }
     else {
-        console.log("Please enter all fields")
-        displayMessage('Please enter all fields', 'danger')
+        console.log("Please fill all the details")
+        displayMessage('Please fill all the details', 'danger')
+        document.querySelector('#save-user-additional-button').disabled = false;
+        document.querySelector('#save-user-additional-button').textContent = 'Submit';
     }
 
 })
@@ -1063,11 +1127,11 @@ document.querySelector('#save-user-additional-button').addEventListener('click',
  * 
  */
 document.querySelector('.user-login-continue-btn').addEventListener('click', (event) => {
-    console.log("1")
+    // console.log("1")
     if (event) {
         const confirmation = confirm('Do you want enter post-graduation, internship and other additional details?')
         if (!confirmation) {
-            console.log("if")
+            // console.log("if")
             window.location.href = 'login.html'
             window.history.replaceState({}, "", "login.html");
         }
