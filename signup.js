@@ -69,8 +69,8 @@ if (passwordToggle) {
 async function sendVerificationEmail(email) {
     try {
         const actionCodeSettings = {
-            // url: `https://laragrooming.com/post-signup-details.html?userId=${auth.currentUser.uid}`,
-            url: `http://127.0.0.1:5500/post-signup-details.html?userId=${auth.currentUser.uid}`,
+            url: `https://laragrooming.com/post-signup-details.html?userId=${auth.currentUser.uid}`,
+            // url: `http://127.0.0.1:5500/post-signup-details.html?userId=${auth.currentUser.uid}`,
             handleCodeInApp: true,
         };
 
