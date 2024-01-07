@@ -363,8 +363,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     // console.log(role);
                     // Redirect the user based on their role
                     if (role === "ROLE_ADMIN") {
-                        window.location.href = "user.html";
-                        window.history.replaceState({}, "", "user.html");
+                        window.location.href = "admin-dash.html";
+                        window.history.replaceState({}, "", "admin-dash.html");
                     } else if (role === "ROLE_LEARNER") {
                         window.location.href = "user.html";
                         window.history.replaceState({}, "", "user.html");

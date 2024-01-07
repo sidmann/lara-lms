@@ -42,9 +42,6 @@ function getUserSnapshot(uid) {
 //************************************************************************
 
 onAuthStateChanged(auth, async (user) => {
-    const adminAppbar = document.getElementById("adminAppbar");
-    const tpoAppbar = document.getElementById("tpoAppbar");
-    const learnerAppbar = document.getElementById("learnerAppbar");
 
     if (user) {
         // User is logged in
@@ -76,7 +73,7 @@ onAuthStateChanged(auth, async (user) => {
 function roleAccess(role) {
     // console.log('inside role')
     const roleMap = new Map([
-        ["ROLE_ADMIN", "learnerAppbar"],
+        ["ROLE_ADMIN", "adminAppbar"],
         ["ROLE_LEARNER", "learnerAppbar"],
         ["ROLE_TPO", "tpoAppbar"],
     ]);
