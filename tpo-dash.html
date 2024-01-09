@@ -495,17 +495,17 @@
                                         aria-current="page">Profile</a>
                                 </li> -->
                                 <li class="nav-item d-none loggedIn" id="adminAppbar">
-                                    <a class="nav-link custom-brand active text-black fw-bold"
+                                    <a class="nav-link custom-brand  text-black fw-bold"
                                         href="admin-dash.html">Dashboard</a>
                                 </li>
                                 <li class="nav-item d-none loggedIn" id="tpoAppbar">
-                                    <a class="nav-link custom-brand  text-black fw-bold"
+                                    <a class="nav-link custom-brand active  text-black fw-bold"
                                         href="tpo-dash.html">Dashboard</a>
                                 </li>
 
                                 <li class="nav-item d-none loggedIn" id="adminAppbar">
                                     <a class="nav-link custom-brand  text-black fw-bold"
-                                        href="tpo-list.html">TpoList</a>
+                                        href="admin-dash.html">Dashboard</a>
                                 </li>
 
                                 <!-- <li class="nav-item">  
@@ -535,11 +535,10 @@
         <!-- Toast notifications will appear here -->
     </div>
 
-    <div class-="mt-2">
-        <h3 style="text-align: center;background-color: rgb(211,209,209);height: 50px;" class="justify-content-center">
-            Welcome to Admin DashBoard
-        </h3>
+    <div>
+        <h3 style="text-align: center; background-color: rgb(211,209,209); height:50px">Welcome to Tpo DashBoard</h3>
     </div>
+
     <!-- learnerdetails -->
     <section class="gi-shop">
         <div class="container">
@@ -547,7 +546,7 @@
                 <div class="shop-pro-content">
                     <div class="shop-pro-inner">
                         <div class="text-center text-bg-secondary m-2">
-                            <h3 class="text-center">Learner Details List</h3>
+                            <h3 class="text-center">Learners Details List</h3>
                         </div>
                         <div class=" d-flex justify-content-between text-center mt-4 gap-2">
                             <input type="text" id="searchby-learner-name" placeholder="Search by Name " class="w-50">
@@ -563,7 +562,6 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="learners-details">
@@ -586,40 +584,6 @@
         </div>
     </section>
 
-    <!-- Button trigger modal for Update role -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Role</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="updateRoleForm">
-                        <div >
-                            <label for="email" class="mb-1 ">Email:</label><br>
-                            <input type="text" id="user-email" name="user-email" placeholder="Email"
-                                class="w-100"><br>
-                        </div><br>
-
-                        <div class="text-center row mt-2">
-                            <label for="newRole" class="col-4 text-start">Select New Role:</label>
-                            <select id="newRole" class="col-7 mx-auto" aria-label="Select Role"
-                                style="height: 40px;border-radius: 2%;">
-                                <option selected disabled>Select a Role</option>
-                                <option value="ROLE_TPO">ROLE_TPO</option>
-                            </select><br><br>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="form-submit-btn">Save changes</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
@@ -676,7 +640,7 @@
     <!-- Main Js -->
     <script src="assets/js/main.js"></script>
     <!-- script file -->
-    <script type="module" src="./admin-dash.js"></script>
+    <script type="module" src="./tpo-dash.js"></script>
 </body>
 
 </html>
