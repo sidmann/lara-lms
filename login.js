@@ -360,17 +360,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 querySnapshot.forEach((doc) => {
                     // console.log(doc.data());
                     const role = doc.data().role;
-                    // console.log(role);
+                    console.log(role);
                     // Redirect the user based on their role
                     if (role === "ROLE_ADMIN") {
-                        window.location.href = "user.html";
-                        window.history.replaceState({}, "", "user.html");
+                        window.location.href = "admin-dash.html";
+                        window.history.replaceState({}, "", "admin-dash.html");
                     } else if (role === "ROLE_LEARNER") {
                         window.location.href = "user.html";
                         window.history.replaceState({}, "", "user.html");
                     } else if (role === "ROLE_TPO") {
-                        window.location.href = "tpo.html";
-                        window.history.replaceState({}, "", "tpo.html");
+                        window.location.href = "tpo-dash.html";
+                        window.history.replaceState({}, "", "tpo-dash.html");
                     }
                 });
             }

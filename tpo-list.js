@@ -49,7 +49,6 @@ const storageRef = ref(storage);
 
 // ------------------------ global variables ----------------------------------------------
 const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
-const myCumulativeQuestionUpload = document.querySelector('.my-cumulative-question-upload');
 
 var userData = null;
 var loggedIn = null;
@@ -135,6 +134,13 @@ function roleAccess(role) {
     appbarList.forEach((appbar) => {
         appbar.classList.remove("d-none");
     })
+
+    if (role === "ROLE_ADMIN") {
+        console.log("only for admin")
+    }
+    else {
+        console.log("only for learners")
+    }
 }
 
 /**
@@ -244,10 +250,10 @@ document.querySelector('.search-learner-details').addEventListener('click',async
 
     if(searchByEmail || searchByName){
         if(searchByName){
-            queryRef = query(collection(firestore,'learners'),where('name','==',searchByName),where('role', '==', 'ROLE_LEARNER'));
+            queryRef = query(collection(firestore,'learners'),where('name','==',searchByName),where('role', '==', 'ROLE_TPO'));
         }
         if(searchByEmail){
-            queryRef = query(collection(firestore,'learners'),where('email','==',searchByEmail),where('role', '==', 'ROLE_LEARNER'));
+            queryRef = query(collection(firestore,'learners'),where('email','==',searchByEmail),where('role', '==', 'ROLE_TPO'));
         }
         // if(searchByRole){
         //     queryRef = query(collection(firestore,'learners'),where('role','==',searchByRole));
@@ -283,13 +289,13 @@ async function fetchAndDisplayLearnersDetails(queryRef = null){
         console.log("if")
         const lastVisible = pageNotebook[currentPage - 1];
         const snapshot = await getDocs(query(
-            queryRef || learnersDetailsRef, orderBy('name'), startAfter(lastVisible),where('role', '==', 'ROLE_LEARNER'), limit(learnersPerPage)
+            queryRef || learnersDetailsRef, orderBy('name'), startAfter(lastVisible),where('role', '==', 'ROLE_TPO'), limit(learnersPerPage)
             ));
         learnersDocs = snapshot.docs;
     } else {
         console.log("esle")
         const snapshot = await getDocs(
-            query(queryRef || learnersDetailsRef, orderBy('name'),where('role', '==', 'ROLE_LEARNER'),limit(learnersPerPage)
+            query(queryRef || learnersDetailsRef, orderBy('name'),where('role', '==', 'ROLE_TPO'),limit(learnersPerPage)
             ));
         learnersDocs = snapshot.docs;
     }
@@ -307,23 +313,8 @@ async function fetchAndDisplayLearnersDetails(queryRef = null){
                 <td>${learnerData.name}</td>
                 <td>${learnerData.email}</td>
                 <td>${learnerData.role}</td>
-                <td>
-                    <button class="btn btn-primary" id="update-role-btn" role="button" data-email="${learnerData.email}" 
-                    data-role="${learnerData.role}" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Role</button>
-                </td>
                 `
                 learnersDetail.appendChild(tableRow);
-
-                tableRow.querySelector('#update-role-btn').addEventListener('click',async(event)=>{
-                    console.log("1")
-                    event.preventDefault();
-                    if(event){
-                        const email = event.target.getAttribute('data-email');
-                        updateUserRole(email);
-                    }
-                })
-            
-
         })
     }
 
@@ -383,53 +374,9 @@ async function totalNopages(){
 
 async function totalNoLearnersDocs(){
     const learnersCollectionRef  = collection(firestore,'learners');
-    const learnersDocs = await getDocs(query(learnersCollectionRef,where('role','==','ROLE_LEARNER')))
+    const learnersDocs = await getDocs(query(learnersCollectionRef,where('role','==','ROLE_TPO')))
     return learnersDocs.docs.length;
 }
-
-/**
- * update role based on the email
- * @param {*} email 
- */
-async function updateUserRole(email) {
-    const userEmail = document.querySelector('#user-email');
-    userEmail.value = email;
-
-    const submitButton = document.querySelector('#form-submit-btn');
-    submitButton.addEventListener('click', async (event) => {
-        event.preventDefault();
-
-        const userRoleDropdown = document.querySelector('#newRole');
-        const selectedRole = userRoleDropdown.options[userRoleDropdown.selectedIndex].value;
-
-        if (!selectedRole || selectedRole === 'Select a Role') {
-            displayMessage('Please select a role.', 'error');
-            return;
-        }
-
-        if (userEmail.value && selectedRole) {
-            const learnerCollectionRef = collection(firestore, 'learners');
-            const querySnapshot = await getDocs(query(learnerCollectionRef, where('email', '==', userEmail.value)));
-            
-            if (!querySnapshot.empty) {
-                const docId = querySnapshot.docs[0].id;
-                await updateDoc(doc(learnerCollectionRef, docId), {
-                    role: selectedRole
-                });
-                console.log('Role updated successfully!');
-                displayMessage('Role updated successfully!','success')
-                await fetchAndDisplayLearnersDetails();
-            }
-            else {
-                console.log('User not found!');
-            }
-        }
-        else{
-          displayMessage('Please fill all fields');
-        }
-    });
-}
-
 
 function resetPageNotebook() {
     pageNotebook = []
