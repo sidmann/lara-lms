@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Profile</title>
+    <title>Student Profile</title>
     <!-- Add Bootstrap CSS link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
@@ -210,49 +210,48 @@
             </div>
         </div>
     </div>
-    <div id="main" class="hidden position-relative">
+    <div id="main">
         <!-- Navigation -->
-        <div class="">
-            <nav class="navbar  navbar-expand-lg" id="header">
-                <div class="container-fluid shadow">
-                    <div class="logo">
-                        <!-- <img src="./assets/img/logo/laralogo.png" alt="Logo"> -->
-                        <a href="index.html">
-                            <img src="./assets/img/logo/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
-                                title="Home"></img>
-                        </a>
-                    </div>
+        <nav class="navbar shadow-lg  navbar-expand-lg  position-relative" id="header">
+            <div class="container-fluid shadow">
+                <div class="logo">
+                    <!-- <img src="./assets/img/logo/laralogo.png" alt="Logo"> -->
+                    <a href="index.html">
+                        <img src="./assets/img/logo/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
+                            title="Home"></img>
+                    </a>
+                </div>
 
-                    <div class="menu-icon">
+                <div class="menu-icon">
 
-                        <button class="navbar-toggler logb text-white border-0" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
-                        </button>
-                    </div>
+                    <button class="navbar-toggler logb text-white border-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class=""><i class="fas fa-bars" id="menuIcon" style="color:#ffa556;"></i> </span>
+                    </button>
+                </div>
 
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="d-flex flex-column-reverse flex-lg-row justify-content-between w-100 me-5">
-                            <ul class="navbar-nav nav-long me-auto mb-2 mb-lg-0 p-0">
-                                <!-- <li class="nav-item">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="d-flex flex-column-reverse flex-lg-row justify-content-between w-100 me-5">
+                        <ul class="navbar-nav nav-long me-auto mb-2 mb-lg-0 p-0">
+                            <!-- <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">Today's Schedule</a>
                                     </li> -->
-                                <!-- <li class="nav-item">
+                            <!-- <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">About Us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link custom-brand" href="#">Contact Us</a>
                                     </li> -->
-                            </ul>
-                        </div>
+                        </ul>
                         <div>
-                            <ul class="navbar-nav mb-2 mb-lg-0 me-5">
+                            <ul class="navbar-nav nav-short mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link custom-brand  text-black fw-bold" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link custom-brand text-black fw-bold" href="details.html">Course Content</a>
+                                    <a class="nav-link custom-brand text-black fw-bold" href="details.html">Course
+                                        Content</a>
                                 </li>
                                 <li class="nav-item d-none loggedIn" id="adminAppbar">
                                     <a class="nav-link custom-brand  text-black fw-bold active"
@@ -267,12 +266,12 @@
                                         aria-current="page">Profile</a>
                                 </li>
                                 <!-- <li class="nav-item d-none loggedIn" id="learnerAppbar">
-                                    <a class="nav-link custom-brand  text-black fw-bold"
-                                        href="user-dashbroad.html">Dashboard</a>
-                                </li> -->
-                                <!-- <li class="nav-item">
-                                        <a class="nav-link custom-brand  text-black fw-bold" href="#">Upcoming batch</a>
+                                        <a class="nav-link custom-brand  text-black fw-bold"
+                                            href="user-dashbroad.html">Dashboard</a>
                                     </li> -->
+                                <!-- <li class="nav-item">
+                                            <a class="nav-link custom-brand  text-black fw-bold" href="#">Upcoming batch</a>
+                                        </li> -->
                                 <li class="nav-item loggedIn">
                                     <!-- Logout button with data-toggle and data-target attributes -->
                                     <button class="nav-link custom-brand  text-black fw-bold" data-bs-toggle="modal"
@@ -290,7 +289,7 @@
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
         </nav>
     </div>
     <div class="toast-container position-fixed top-0 end-0 p-3">
@@ -303,7 +302,7 @@
                 <h2 class="gi-title">User Profile<span></span></h2>
             </div>
             <!-- Account page navigation-->
-            <!-- <hr class="mt-0 mb-4"> -->
+            <hr class="mt-0 mb-4">
             <div class="row">
                 <div class="col-md-4">
                     <!-- Profile picture card-->
@@ -326,49 +325,52 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-
                     <!-- Account details card-->
-                    <div class="card-header">Account Details</div>
-                    <form>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3 account-details">
-                            <!-- Name-->
-                            <span class="col-md-6 mb-3 mb-md-0">
-                                <label class="small mb-1 form-label fonttext" for="displayName">Name</label>
-                                <input class="form-control h-75 fonttext" id="displayName" type="text"
-                                    placeholder="Enter your name" required>
-                                <small id="nameError" class="text-danger"></small>
-                            </span>
+                    <div class="card mb-4">
+                        <div class="card-header">Account Details</div>
+                        <div class="card-body">
+                            <form>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3 account-details">
+                                    <!-- Name-->
+                                    <span class="col-md-6 mb-3 mb-md-0">
+                                        <label class="small mb-1 form-label fonttext" for="displayName">Name</label>
+                                        <input class="form-control h-75 fonttext" id="displayName" type="text"
+                                            placeholder="Enter your name" required>
+                                        <small id="nameError" class="text-danger"></small>
+                                    </span>
 
-                            <!-- Email -->
-                            <span class="col-md-6">
-                                <label class="gi small mb-1 fonttext" for="email">Email</label>
-                                <input class="form-control h-75 fonttext" id="email" type="email"
-                                    placeholder="Enter your email address" readonly>
-                                <!-- <label class="small mb-1 fonttext" for="phone">Phone Number</label>
+                                    <!-- Email -->
+                                    <span class="col-md-6">
+                                        <label class="gi small mb-1 fonttext" for="email">Email</label>
+                                        <input class="form-control h-75 fonttext" id="email" type="email" readonly>
+                                        <!-- <label class="small mb-1 fonttext" for="phone">Phone Number</label>
                                     <input class="form-control h-75 fonttext" id="phone" type="tel"
                                         placeholder="Enter your phone number" readonly>
                                     <small id="phoneError" class="text-danger"></small> -->
-                            </span>
-                        </div>
-
-                        <!-- Form Row-->
-                        <!-- <div class="row gx-3 mb-3 account-details">
-                                <div class="col-md-6"></div>
-                                <div class="col-md-12">
-                                    <label class="gi small mb-1 fonttext" for="email">Email</label>
-                                    <input class="form-control h-75 fonttext" id="email" type="email"
-                                        placeholder="Enter your email address" readonly>
+                                    </span>
                                 </div>
-                            </div> -->
-                    </form>
-                    <div class="modal-footer d-flex justify-content-between  ">
-                        <button type="button" class="gi-btn-1 bg-success mt-5" id="saveProfileChangesBtn">
-                            Save Changes
-                        </button>
-                        <button href="#" class="gi-btn-1 bg-gray mt-5" data-bs-toggle="modal"
-                            data-bs-target="#changePasswordModal" style="background:#4A412A;">Change
-                            Password</button>
+
+                                <!-- Display Tpo Details -->
+                                <div class="row gx-3 mb-3 account-details">
+                                    <!-- Tpo's Email -->
+                                    <span class="col-md-6 mb-3 mb-md-0" id="tpo-email">
+                                        <label class="gi small mb-1 fonttext" for="tpoEmail">TPO's
+                                            Referral Email (Optional)</label>
+                                        <input class="form-control h-75 fonttext" id="tpoEmail" type="email"
+                                            placeholder="Enter TPO's Referral Email">
+                                    </span>
+                                </div>
+                            </form>
+                            <div class="modal-footer d-flex justify-content-between  ">
+                                <button type="button" class="gi-btn-1 bg-success mt-5" id="saveProfileChangesBtn">
+                                    Save Changes
+                                </button>
+                                <button href="#" class="gi-btn-1 bg-gray mt-5" data-bs-toggle="modal"
+                                    data-bs-target="#changePasswordModal" style="background:#4A412A;">Change
+                                    Password</button>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <br>
