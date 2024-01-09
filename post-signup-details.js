@@ -55,7 +55,7 @@ var loggedIn = null;
  * @author mydev
  */
 const userId = new URLSearchParams(window.location.search).get('userId');
-// const userId = '2ETrPGLGWvePC3xSLDgjEretaW93'
+// const userId = 'P2rHHyaocWVhsJBANMKYEBvfglp1';
 if (userId) {
     await continueLoginBtnshowOrHide();
     displayMessage('Please continue with filling the remaining details', 'success');
@@ -239,8 +239,8 @@ document.querySelector('#save-user-address-button').addEventListener('click', as
                     state: userState,
                     country: userCountry
                 });
-                console.log('User Address details saved successfully');
-                displayMessage('User Address details saved successfully', 'success');
+                console.log('User Address details updated successfully');
+                displayMessage('User Address details updated successfully', 'success');
                 document.querySelector('#save-user-address-button').disabled = false;
                 document.querySelector('#save-user-address-button').textContent = 'Submit';
                 document.getElementById('user-address-form').reset();
@@ -368,8 +368,8 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
                             userSchoolPercentage: userSchoolPercentage,
                             schoolCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User 10th Class details saved successfully');
-                    displayMessage('User 10th Class details saved successfully', 'success');
+                    console.log('User 10th Class details updated successfully');
+                    displayMessage('User 10th Class details updated successfully', 'success');
                     document.querySelector('#save-school-edu-button').disabled = false;
                     document.querySelector('#save-school-edu-button').textContent = 'Submit';
                     document.getElementById('school-edu-details-form').reset();
@@ -506,8 +506,8 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
                             userInterPercentage: userInterPercentage,
                             interCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User Intermediate/12th details saved successfully');
-                    displayMessage('User Intermediate/12th details saved successfully', 'success');
+                    console.log('User Intermediate/12th details updated successfully');
+                    displayMessage('User Intermediate/12th details updated successfully', 'success');
                     document.querySelector('#save-inter-edu-button').disabled = false;
                     document.querySelector('#save-inter-edu-button').textContent = 'Submit';
                     document.getElementById('inter-edu-details-form').reset();
@@ -650,12 +650,12 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
                             userDegreePercentage: userDegreePercentage,
                             degreeCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User Graduation/Degree details saved successfully');
-                    displayMessage('User Graduation/Degree details saved successfully', 'success');
+                    console.log('User Graduation/Degree details updated successfully');
+                    displayMessage('User Graduation/Degree details updated successfully', 'success');
                     document.querySelector('#save-degree-edu-button').disabled = false;
                     document.querySelector('#save-degree-edu-button').textContent = 'Submit';
                     document.getElementById('degree-edu-details-form').reset();
-                   await continueLoginBtnshowOrHide()
+                    await continueLoginBtnshowOrHide()
 
                 })
             }
@@ -720,7 +720,7 @@ async function checkUserDegreeDocumentExists(userId) {
  * to show or hide the continue login button
  */
 async function continueLoginBtnshowOrHide() {
-    console.log("showorhidethe login button")
+    // console.log("showorhidethe login button")
     const userDetailsExist = await checkUserDegreeDocumentExists(userId);
     if (userDetailsExist) {
         // console.log("if")
@@ -816,8 +816,8 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
                             userMastersPercentage: userMastersPercentage,
                             mastersCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User Post-Graduation/Masters details saved successfully');
-                    displayMessage('User Post-Graduation/Masters details saved successfully', 'success');
+                    console.log('User Post-Graduation/Masters details updated successfully');
+                    displayMessage('User Post-Graduation/Masters details updated successfully', 'success');
                     document.querySelector('#save-masters-edu-button').disabled = false;
                     document.querySelector('#save-masters-edu-button').textContent = 'Submit';
                     document.getElementById('masters-edu-details-form').reset();
@@ -990,8 +990,8 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
                             userProjectDescription: userProjectDescription,
                             internshipCertificateImageUrl: certificateImageUrl
                         });
-                    console.log('User Internship/Academic Project details saved successfully');
-                    displayMessage('User Internship/Academic Project details saved successfully', 'success');
+                    console.log('User Internship/Academic Project details updated successfully');
+                    displayMessage('User Internship/Academic Project details updated successfully', 'success');
                     document.querySelector('#save-internship-button').disabled = false;
                     document.querySelector('#save-internship-button').textContent = 'Submit';
                     document.getElementById('internship-project-details-form').reset();
@@ -1093,8 +1093,8 @@ document.querySelector('#save-user-additional-button').addEventListener('click',
                     userAdditionalLanguages: userAdditionalLanguages,
                     userAdditionalHobbies: userAdditionalHobbies
                 });
-                console.log('User Additional Details saved successfully');
-                displayMessage('User Additional Details saved successfully', 'success');
+                console.log('User Additional Details updated successfully');
+                displayMessage('User Additional Details updated successfully', 'success');
                 document.querySelector('#save-user-additional-button').disabled = false;
                 document.querySelector('#save-user-additional-button').textContent = 'Submit';
                 document.getElementById('user-additional-details-form').reset();
@@ -1125,6 +1125,82 @@ document.querySelector('#save-user-additional-button').addEventListener('click',
     }
 
 })
+
+document.getElementById('user-referral-btn').addEventListener('click', async function () {
+
+    document.querySelector('#user-referral-btn').disabled = true;
+    document.querySelector('#user-referral-btn').textContent = 'Submitting...';
+
+    // Get the entered referral email
+    const referralEmail = document.getElementById('referral-email').value.trim();
+
+    // Validate the email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(referralEmail);
+
+    // Display an error if the email is not valid
+    if (!isValidEmail) {
+        // document.getElementById('referral-email-error').textContent = 'Invalid email format';
+        displayMessage('Invalid email format', 'danger');
+        return;
+    }
+
+    // Check if the current user is a student (learner)
+    const userQuery = await getDocs(collection(firestore, 'learners'), where('userId', '==', userId));
+    const userDocs = userQuery.docs;
+
+    if (userDocs.length > 0) {
+        const userDoc = userDocs[0];
+        const userRole = userDoc.data().role;
+
+        // Check if the user is a learner
+        if (userRole === 'ROLE_LEARNER') {
+            // Query Firestore for the TPO with the specified email
+            const tpoQuery = await getDocs(query(collection(firestore, 'learners'), where('role', '==', 'ROLE_TPO'), where('email', '==', referralEmail)));
+            const tpoDocs = tpoQuery.docs;
+
+            // Check if a TPO with the provided email exists
+            if (tpoDocs.length > 0) {
+                const tpoDoc = tpoDocs[0];
+                const tpoId = tpoDoc.id;
+
+                // Update the learner's document with the TPO's information
+                const learnerDocRef = doc(collection(firestore, 'learners'), userId);
+
+                await updateDoc(learnerDocRef, {
+                    tpoEmail: referralEmail,
+                });
+
+                // Reset the error message
+                // document.getElementById('referral-email-error').textContent = '';
+
+                // Optional: Display a success message or perform other actions
+                displayMessage('Student associated with TPO successfully', 'success');
+
+                document.querySelector('#user-referral-btn').disabled = false;
+                document.querySelector('#user-referral-btn').textContent = 'Submit';
+            } else {
+                // Display an error if no TPO with the provided email is found
+                // document.getElementById('referral-email-error').textContent = 'No TPO found with the provided email';
+                displayMessage('No TPO found with the provided email', 'danger');
+                document.querySelector('#user-referral-btn').disabled = false;
+                document.querySelector('#user-referral-btn').textContent = 'Submit';
+            }
+        } else {
+            // Display an error if the current user is not a learner
+            // document.getElementById('referral-email-error').textContent = 'Invalid user role';
+            displayMessage('Invalid student role', 'danger');
+            document.querySelector('#user-referral-btn').disabled = false;
+            document.querySelector('#user-referral-btn').textContent = 'Submit';
+        }
+    } else {
+        // Display an error if the user is not found
+        // document.getElementById('referral-email-error').textContent = 'User not found';
+        displayMessage('Student not found', 'danger');
+        document.querySelector('#user-referral-btn').disabled = false;
+        document.querySelector('#user-referral-btn').textContent = 'Submit';
+    }
+});
 
 /**
  * continue to login button 

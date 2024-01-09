@@ -126,12 +126,13 @@ onAuthStateChanged(auth, (user) => {
         const docRef = doc(firestore, "learners", user.uid);
         // console.log(user.uid)
         const docSnap = getDoc(docRef);
-        docSnap.then((docSnapshot) => {
+        docSnap.then( async (docSnapshot) => {
             if (docSnapshot.exists()) {
                 userData = docSnapshot.data();
                 roleAccess(userData.role);
                 populateShownDetails();
                 populateProfileData(userData);
+                await fetchAndDisplayTpoDetails();
                 getUserRealTime();
                 stopLoader();
             }
@@ -247,6 +248,28 @@ function handleProfilePictureChange() {
     }
 }
 
+// Function to fetch and display tpo details
+async function fetchAndDisplayTpoDetails() {
+    const userId = auth.currentUser.uid;
+
+    // Query Firestore to check if the student is associated with a tpo
+    const userDoc = await getDoc(doc(firestore, 'learners', userId));
+    const tpoEmail = userDoc.data().tpoEmail;
+
+    if (tpoEmail) {
+        // If associated, query Firestore for the tpo's details
+        const tpoQuery = await getDocs(query(collection(firestore, 'learners'), where('email', '==', tpoEmail)));
+        const tpoDocs = tpoQuery.docs;
+
+        if (tpoDocs.length > 0) {
+            const tpoData = tpoDocs[0].data();
+
+            // Display tpo's email
+            document.getElementById('tpoEmail').value = tpoData.email || '';
+        }
+    }
+}
+
 /**
  * save profile with profile image
  * @author mydev
@@ -257,40 +280,62 @@ document.getElementById("saveProfileChangesBtn").addEventListener("click", async
         document.querySelector('#saveProfileChangesBtn').disabled = true
         document.querySelector('#saveProfileChangesBtn').textContent = 'Updating Profile....'
         const name = document.getElementById("displayName").value;
-        // const phone = document.getElementById("phone").value;
-        const email = document.getElementById("email").value;
+        const tpoEmail = document.getElementById("tpoEmail").value.trim();
         const profilePictureInput = document.getElementById("profilePicture");
         const profilePictureFile = profilePictureInput.files[0];
 
         if (!isValidName(name)) {
             document.querySelector('#saveProfileChangesBtn').disabled = false
             document.querySelector('#saveProfileChangesBtn').textContent = 'Save Changes'
-            displayMessage('Please check your entered values!', 'danger')
+            displayMessage('Please check your entered name!', 'danger')
             return;
+        }
+
+        // If tpoEmail is not empty, validate it and check if it exists in the database
+        if (tpoEmail !== "") {
+            // Validate the email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValidEmail = emailRegex.test(tpoEmail);
+
+            // Display an error if the email is not valid
+            if (!isValidEmail) {
+                document.querySelector('#saveProfileChangesBtn').disabled = false
+                document.querySelector('#saveProfileChangesBtn').textContent = 'Save Changes'
+                displayMessage('Please check your entered email!', 'danger')
+                return;
+            }
+
+            // Check if the entered TPO email exists in the database
+            const tpoQuery = await getDocs(query(collection(firestore, 'learners'), where('email', '==', tpoEmail), where('role', '==', 'ROLE_TPO')));
+            const tpoDocs = tpoQuery.docs;
+
+            if (tpoDocs.length === 0) {
+                // Display an error if no TPO with the provided email is found
+                document.querySelector('#saveProfileChangesBtn').disabled = false
+                document.querySelector('#saveProfileChangesBtn').textContent = 'Save Changes'
+                displayMessage('No TPO found with the provided email', 'danger')
+                return;
+            }
+        }
+
+        // Create the userJson object with the properties that have values
+        const userJson = {
+            name: name,
+        };
+
+        // Add tpoEmail to userJson only if it's not empty
+        if (tpoEmail !== "") {
+            userJson.tpoEmail = tpoEmail;
         }
 
         if (profilePictureFile) {
             const storageRef = ref(storage, "avatars/" + user.uid + '.' + 'jpeg');
             const uploadTask = await uploadBytes(storageRef, profilePictureFile);
             const url = await getDownloadURL(uploadTask.ref)
-            const userJson = {
-                name: name,
-                // lastName: lastName,
-                // phoneNumber: phone,
-                email: email,
-                profilePicture: url,
-            };
-            saveUserProfile(user.uid, userJson);
+            userJson.profilePicture = url;
         }
-        else {
-            const userJson = {
-                name: name,
-                // lastName: lastName,
-                // phoneNumber: phone,
-                email: email,
-            };
-            saveUserProfile(user.uid, userJson);
-        }
+
+        saveUserProfile(user.uid, userJson);
     }
 });
 

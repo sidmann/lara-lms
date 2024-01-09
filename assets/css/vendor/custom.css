@@ -32,7 +32,7 @@
     padding: 5px;
 }
 
-.card {
+/* .card {
     font-family: "Manrope", sans-serif;
     margin-bottom: 30px;
     border: 0;
@@ -42,27 +42,27 @@
     border-radius: 8px;
     -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
     box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
-}
+} */
 
-.card .card-header {
+/* .card .card-header {
     background-color: #fff;
     border-bottom: none;
     padding: 24px;
     border-bottom: 1px solid #f6f7fb;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-}
+} */
 
-.card-header:first-child {
+/* .card-header:first-child {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-}
+} */
 
 
 
-.card .card-body {
+/* .card .card-body {
     padding: 30px;
     background-color: transparent;
-}
+} */
 
 .btn-primary,
 .btn-primary.disabled,
