@@ -76,7 +76,7 @@ onAuthStateChanged(auth, async (user) => {
 function roleAccess(role) {
     // console.log('inside role')
     const roleMap = new Map([
-        ["ROLE_ADMIN", "learnerAppbar"],
+        ["ROLE_ADMIN", "adminAppbar"],
         ["ROLE_LEARNER", "learnerAppbar"],
         ["ROLE_TPO", "tpoAppbar"],
     ]);
