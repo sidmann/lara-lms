@@ -439,6 +439,13 @@
 
 
 <body>
+    <div class="overlay" id="overlay">
+        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
 
     <div id="main" class="position-relative">
         <!-- Navigation -->
@@ -537,21 +544,25 @@
 
     <!-- learnerdetails -->
     <section class="gi-shop">
-        <div class="container">
+        <div class="container w-100">
             <div class="row">
                 <div class="shop-pro-content">
                     <div class="shop-pro-inner">
                         <div class="text-center text-bg-secondary m-2">
                             <h3 class="text-center">Tpo Details List</h3>
                         </div>
-                        <div class=" d-flex justify-content-between text-center mt-4 gap-2">
-                            <input type="text" id="searchby-learner-name" placeholder="Search by Name " class="w-50">
-                            <input type="text" id="searchby-learner-email" placeholder="Search by Email" class="w-50">
-                            <!-- <input type="text" id="searchby-learner-role" placeholder="Search by Role" class="w-50"> -->
-                            <button class="btn btn-danger clear-learner-details">Clear</button>
-                            <button class="btn btn-primary search-learner-details">Search</button>
+                        <div class=" d-flex justify-content-between text-center">
+                            <div class=" search-details-learners" style="width: 100%;">
+                                <input type="text" id="searchby-learner-name" placeholder="Search by Name "
+                                    style="width: 40%;">
+                                <input type="text" id="searchby-learner-email" placeholder="Search by Email"
+                                    style="width: 40%;">
+                                <!-- <input type="text" id="searchby-learner-role" placeholder="Search by Role" class="w-50"> -->
+                                <button class="btn btn-danger clear-learner-details user-clear-btn">Clear</button>
+                                <button class="btn btn-primary search-learner-details user-search-btn">Search</button>
+                            </div>
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 overflow-x-scroll">
                             <table>
                                 <thead>
                                     <tr>
