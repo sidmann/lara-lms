@@ -112,7 +112,7 @@ onAuthStateChanged(auth, (user) => {
                 // console.log(auth.currentUser.uid);
                 // getUserRealTime();
                 // toggleVideoContainer();
-                // stopLoader();
+                stopLoader();
             }
         });
     } else {

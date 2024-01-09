@@ -587,3 +587,27 @@
   }
 }
 /*# sourceMappingURL=responsive.css.map */
+
+/* learner details and search details */
+@media screen and (max-width:578px) {
+  .search-details-learners input{
+    display: flex;
+     flex-wrap: wrap;
+     width: 100% !important;
+     flex-direction: column;
+     padding: 10px;
+     margin-top: 10%;
+  }
+
+  .user-clear-btn{
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .user-search-btn{
+    flex-wrap: wrap;
+    margin-top: 5%;
+    width: 100%;
+  }
+}
