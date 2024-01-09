@@ -38,8 +38,6 @@
     <link rel="stylesheet" id="main_style" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/vendor/custom.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- GSAP -->
 
@@ -57,12 +55,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
     <script type="module" src="./index.js"></script>
-    <script src="assets/css/plugins/bootstrap.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
         integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1132,7 +1125,7 @@
             margin-bottom: 2rem;
             font-family: Cambria, Cochin, Georgia, Times, serif;
             margin-left: 6.5rem;
-            margin-top: 5rem;
+            margin-top: 1.5rem;
 
         }
 
@@ -1258,11 +1251,7 @@
         } */
 
         @media (max-width: 576px) {
-            .row-card {
-                margin-bottom: 2rem;
-                border: 2px solid #e7e7e7;
-                border-radius: 0.5rem;
-            }
+        
 
             .display-2 {
                 font-size: 2.5rem;
@@ -1317,8 +1306,11 @@
 
             .row-card {
                 margin-bottom: 2rem;
-                border: 2px solid #e7e7e7;
-                border-radius: 0.5rem;
+                /* border: 2px solid #e7e7e7; */
+                padding:10px;
+                border-radius: 10px;
+                box-shadow: 0 0 5px #f1faff;
+                border-radius: 1rem;
             }
         }
 
@@ -1365,6 +1357,7 @@
             .program h6 {
                 font-size: 1.4rem;
             }
+            
 
             /* .simple-text h2 {
             font-size: 2.2rem;
@@ -1437,6 +1430,7 @@
             .program h6 {
                 font-size: 1.4rem;
             }
+            
 
 
         }
@@ -1586,12 +1580,54 @@
         /* .animated-background {
         animation: backgroundAnimation 4s infinite; 
     } */
+    .div{
+        display:flex;
+        align-items: end;
+        flex-direction: column;
+    }
+    .h6-img {
+        order: 1;
+    }
+
+    .h6-text {
+        order: 2; 
+    }
+    .div .h6-img img{
+        width:350px;
+    }
+    @media (min-width: 768px) {
+        .h-text{
+            margin-bottom: -13%;
+        }
+        .div {
+            flex-direction: row;
+        }
+
+        .h6-img,
+        .h6-text {
+            order: initial;
+        }
+        /* .div .h6-img img{
+        width:;
+    } */
+    }
+    .highlight {
+        color: rgb(0, 255, 221);
+        animation: pulsate 1s infinite;
+    }
+    @keyframes pulsate {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.99); }
+        /* 100% { transform: scale(1); } */
+        100% { transform:scale3d(1); }
+        
+    }
     </style>
 </head>
 
 <body class="position-relative">
 
-    <!-- <div id="targetSection">
+    <div id="targetSection">
         <div class="overlay" id="overlay">
             <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
                 <div class="spinner-border" role="status">
@@ -1599,7 +1635,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Navigation -->
     <div id="main">
         <div class="one">
@@ -1675,7 +1711,7 @@
 
                             </ul>
                             <div>
-                                <ul class="navbar-nav nav-short mb-2  mb-lg-0 text">
+                                <ul class="navbar-nav nav-short mb-2 mb-lg-0 text">
                                     <!-- <li class="nav-item">
                                     <a class="nav-link custom-brand position-relative" href="cart.html">
                                         <i class="fa-solid fa-cart-shopping me-0"></i>
@@ -1685,7 +1721,10 @@
                                     </a>
                                 </li> -->
                                     <li class="nav-item">
-                                        <a class="nav-link custom-brand active  text-black fw-bold" href="#">Home</a>
+                                        <a class="nav-link custom-brand active text-black fw-bold" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link custom-brand text-black fw-bold" href="details.html">Course Content</a>
                                     </li>
                                     <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                         <a class="nav-link custom-brand text-black fw-bold" href="user.html">Profile</a>
@@ -1815,14 +1854,19 @@
                                 class="fa-solid fa-question" style="color:#ffa556"></i></span></h6>
                 </div>
             </div>
-            <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="flip-left" data-aos-delay="50"
-                data-aos-duration="1000">If so, you've come to the right place!</h6>
-            <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="slide-right" data-aos-delay="100"
-                data-aos-easing="ease-in-out-back" data-aos-duration="1000">We are pleased to inform you about the
-                Advanced
-                Training Program and placements offered to the
-                toppers
-                of all branches.</h6>
+            <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow h-text highlight" data-aos="flip-left" data-aos-delay="50"
+            data-aos-duration="1000">If so, you've come to the right place!</h6>
+            <div class="div">
+                <div class="h6-text">
+                    <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="slide-right" data-aos-delay="80"
+                        data-aos-easing="ease-in-out" data-aos-duration="1000">We are pleased to inform you about the
+                        Advanced Training Program and placements offered to the toppers of all branches.</h6>
+                </div>
+                <div class="h6-img">
+                    <img src="assets/img/logo/man-getting-award-writing-removebg.png" data-aos="zoom-out-up" data-aos-delay="80"
+                    data-aos-duration="2000" alt="">
+                </div>
+            </div>
 
         </div>
 
@@ -1868,7 +1912,7 @@
                         <h5>Online live.</h5>
                     </div>
                 </div>
-                <div class="row mb-1" data-aos="slide-up" data-aos-delay="150" data-aos-duration="1000">
+                <div class="row mb-1" data-aos="slide-up" data-aos-delay="145" data-aos-duration="1000">
                     <div class="col-sm-4">
                         <h6>Fee:</h6>
                     </div>
@@ -1877,7 +1921,7 @@
                             should pay 10% of the annual CTC</h5>
                     </div>
                 </div>
-                <div class="row mb-1" data-aos="slide-up" data-aos-delay="180" data-aos-duration="1000">
+                <div class="row mb-1" data-aos="slide-up" data-aos-delay="160" data-aos-duration="1000">
                     <div class="col-sm-4">
                         <h6>Expected Salary:</h6>
                     </div>
@@ -1886,7 +1930,7 @@
                                 10 LPA to 25 LPA</span>.</h5>
                     </div>
                 </div>
-                <div class="row mb-5" data-aos="slide-up" data-aos-delay="200" data-aos-duration="1000">
+                <div class="row mb-5" data-aos="slide-up" data-aos-delay="170" data-aos-duration="1000">
                     <div class="col-sm-4">
                         <h6>Start Date:</h6>
                     </div>
@@ -1905,10 +1949,12 @@
             <a href="signup.html">
                 <button class="btn btn-warning enroll-button px-3 text-white">Enroll Now</button>
             </a>
-            <a href="details.html">
+            <!-- <a href="details.html">
                 <button class="btn btn-warning Course-Content-button px-3 text-white">Course Content</button>
-            </a>
+            </a> -->
         </div>
+
+    </div>
 
 
 
@@ -2662,8 +2708,8 @@
                                     <h5><strong>About Us</strong></h5>
                                     <p style="color:rgb(222, 222, 222)">
                                         <!-- Lara Technologies is best place to start your career since 2005. -->
-                                        Since 2005
-                                        More than 60,000 Alumni
+                                        Since 2005,
+                                        More than 60,000 Alumni,
                                         Legendary trainer
                                     </p>
                                 </div>
@@ -2713,13 +2759,12 @@
         </footer>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
-        <script type="module" src="./index.js"></script>
-        <script src="assets/css/plugins/bootstrap.css"></script>
+        <!-- <script src="assets/css/plugins/bootstrap.css"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
             integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
