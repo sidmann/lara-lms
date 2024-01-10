@@ -43,23 +43,39 @@
         }
 
         /* Additional styles for navbar */
-        .navbar {
-            background-color: whitesmoke;
-            border: 3px solid beige;
-            /* background-color: #f8e624; */
-            /* background: linear-gradient(0deg, #36dadc 0%, #76c8fc 100%); */
-            /* border-bottom: 1px solid #ccc; */
+
+        /* .nav-link.custom-brand {
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 20px;
+    } */
+
+        /* Responsive styles for small screens */
+        @media (max-width: 768px) {
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
         }
 
-        .navbar-brand.custom-brand {
-            color: #007bff;
-            font-size: 2rem;
-        }
+        @media (min-width: 576px) {
+            .nav-item {
+                transition: all 0.3s linear;
+            }
 
-        .nav-link.custom-brand {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-right: 20px;
+            .nav-item:hover {
+                transform: translate(-0.5px, -3px);
+                scale: 1.01;
+            }
+
+            .logo {
+                transition: all 0.3s linear;
+            }
+
+            .logo:hover {
+                scale: 1.1;
+            }
         }
 
         .hidden {
@@ -247,7 +263,6 @@
             border-radius: 5px;
         }
 
-
         footer {
             /* background: linear-gradient(0deg, #36dadc 0%, #64bcf3 100%); */
             background-color: #565656;
@@ -259,10 +274,10 @@
     </style>
 </head>
 
-<body>
+<body class="position-relative">
     <div id="main">
         <nav class="navbar m-2 mt-2 shadow-lg rounded-3 navbar-expand-lg pt-0 mt-0 position-relative" id="header">
-            <div class="container-fluid">
+            <div class="container-fluid shadow">
                 <a href="index.html">
                     <img src="./assets/images/laralogo.png" class="navbar-brand custom-brand logo" alt="Home"
                         width="150px" title="Home"></img>
@@ -455,8 +470,7 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board*</label>
                                                             <input type="text" name="school-board" id="school-board"
-                                                                placeholder="Enter Board Name" class="mb-0"
-                                                                required>
+                                                                placeholder="Enter Board Name" class="mb-0" required>
                                                             <span id="school-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -568,8 +582,7 @@
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Board/University*</label>
                                                             <input type="text" name="inter-board" id="inter-board"
-                                                                placeholder="Enter Board Name"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter Board Name" class="mb-0" required>
                                                             <span id="inter-board-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -588,8 +601,8 @@
                                                             <label>City*</label>
                                                             <input type="text" name="inter-education-city"
                                                                 id="inter-education-city"
-                                                                placeholder="Enter Your Education City"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter Your Education City" class="mb-0"
+                                                                required>
                                                             <span id="inter-education-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -598,8 +611,8 @@
                                                             <label>State*</label>
                                                             <input type="text" name="inter-education-state"
                                                                 id="inter-education-state"
-                                                                placeholder="Enter Your Education State"
-                                                                class="mb-0" required>
+                                                                placeholder="Enter Your Education State" class="mb-0"
+                                                                required>
                                                             <span id="inter-education-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -942,8 +955,8 @@
                                                             <label>Technologies*</label>
                                                             <input type="text" name="internship-technologies"
                                                                 id="internship-technologies"
-                                                                placeholder="Enter Technologies Used In The Project" class="mb-0"
-                                                                required>
+                                                                placeholder="Enter Technologies Used In The Project"
+                                                                class="mb-0" required>
                                                             <span id="employee-technologies-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -951,9 +964,8 @@
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>City*</label>
                                                             <input type="text" name="internship-city"
-                                                                id="internship-city"
-                                                                placeholder="Enter City" class="mb-0"
-                                                                required>
+                                                                id="internship-city" placeholder="Enter City"
+                                                                class="mb-0" required>
                                                             <span id="employee-city-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -1091,7 +1103,8 @@
                         <!-- Referral Email Input Field -->
                         <div class="gi-register-wrap gi-register-full mt-5">
                             <label>TPO's Referral Email (Optional)</label>
-                            <input type="email" name="referral-email" id="referral-email" placeholder="Enter TPO's Referral Email" class="mb-0" style="width: 30%;">
+                            <input type="email" name="referral-email" id="referral-email"
+                                placeholder="Enter TPO's Referral Email" class="mb-0" style="width: 30%;">
                             <span id="referral-email-error" class="error-message" style="color: red"></span>
                             <button type="button" class="gi-btn-1 bg-success mt-1" id="user-referral-btn">
                                 Submit
