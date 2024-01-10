@@ -1251,7 +1251,7 @@
         } */
 
         @media (max-width: 576px) {
-        
+
 
             .display-2 {
                 font-size: 2.5rem;
@@ -1307,7 +1307,7 @@
             .row-card {
                 margin-bottom: 2rem;
                 /* border: 2px solid #e7e7e7; */
-                padding:10px;
+                padding: 10px;
                 border-radius: 10px;
                 box-shadow: 0 0 5px #f1faff;
                 border-radius: 1rem;
@@ -1357,7 +1357,7 @@
             .program h6 {
                 font-size: 1.4rem;
             }
-            
+
 
             /* .simple-text h2 {
             font-size: 2.2rem;
@@ -1430,7 +1430,7 @@
             .program h6 {
                 font-size: 1.4rem;
             }
-            
+
 
 
         }
@@ -1580,53 +1580,103 @@
         /* .animated-background {
         animation: backgroundAnimation 4s infinite; 
     } */
-    .div{
-        display:flex;
-        align-items: end;
-        flex-direction: column;
-    }
-    .h6-img {
-        order: 1;
-    }
-
-    .h6-text {
-        order: 2; 
-    }
-    .div .h6-img img{
-        width:350px;
-    }
-    @media (min-width: 768px) {
-        .h-text{
-            margin-bottom: -13%;
-        }
         .div {
-            flex-direction: row;
+            display: flex;
+            align-items: end;
+            flex-direction: column;
         }
 
-        .h6-img,
-        .h6-text {
-            order: initial;
+        .h6-img {
+            order: 1;
         }
-        /* .div .h6-img img{
+
+        .h6-text {
+            order: 2;
+        }
+
+        .div .h6-img img {
+            width: 350px;
+        }
+
+        @media (min-width: 768px) {
+            .h-text {
+                margin-bottom: -13%;
+            }
+
+            .div {
+                flex-direction: row;
+            }
+
+            .h6-img,
+            .h6-text {
+                order: initial;
+            }
+
+            /* .div .h6-img img{
         width:;
     } */
-    }
-    .highlight {
-        color: rgb(0, 255, 221);
-        animation: pulsate 1s infinite;
-    }
-    @keyframes pulsate {
-        0% { transform: scale(1); }
-        50% { transform: scale(0.99); }
-        /* 100% { transform: scale(1); } */
-        100% { transform:scale3d(1); }
-        
-    }
+        }
+
+        .highlight {
+            color: rgb(0, 255, 221);
+            animation: pulsate 1s infinite;
+        }
+
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(0.99);
+            }
+
+            /* 100% { transform: scale(1); } */
+            100% {
+                transform: scale3d(1);
+            }
+
+        }
+
+        /* Additional styles for navbar */
+
+        /* .nav-link.custom-brand {
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 20px;
+    } */
+
+        /* Responsive styles for small screens */
+        @media (max-width: 768px) {
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .nav-item {
+                transition: all 0.3s linear;
+            }
+
+            .nav-item:hover {
+                transform: translate(-0.5px, -3px);
+                scale: 1.01;
+            }
+
+            .logo {
+                transition: all 0.3s linear;
+            }
+
+            .logo:hover {
+                scale: 1.1;
+            }
+        }
     </style>
 </head>
 
 <body class="position-relative">
-
     <div id="targetSection">
         <div class="overlay" id="overlay">
             <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
@@ -1640,8 +1690,8 @@
     <div id="main">
         <div class="one">
 
-            <nav class="navbar shadow-lg  navbar-expand-lg  position-relative" id="header">
-                <div class="container-fluid">
+            <nav class="navbar shadow-lg navbar-expand-lg position-relative" id="header">
+                <div class="container-fluid shadow">
                     <div class="logo">
                         <!-- <img src="./assets/img/logo/laralogo.png" alt="Logo"> -->
                         <a href="index.html">
@@ -1724,13 +1774,25 @@
                                         <a class="nav-link custom-brand active text-black fw-bold" href="#">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link custom-brand text-black fw-bold" href="details.html">Course Content</a>
+                                        <a class="nav-link custom-brand text-black fw-bold" href="details.html">Course&nbsp;Content</a>
                                     </li>
                                     <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                         <a class="nav-link custom-brand text-black fw-bold" href="user.html">Profile</a>
                                     </li>
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand text-black fw-bold"
+                                            href="admin-dash.html">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                        <a class="nav-link custom-brand text-black fw-bold"
+                                            href="tpo-dash.html">Dashboard</a>
+                                    </li>
+
+                                    <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                        <a class="nav-link custom-brand text-black fw-bold" href="tpo-list.html">TPO&nbsp;List</a>
+                                    </li>
                                     <li class="nav-item loggedOut">
-                                        <a class="nav-link custom-brand  text-black fw-bold" href="signup.html">Sign
+                                        <a class="nav-link custom-brand text-black fw-bold" href="signup.html">Sign
                                             Up</a>
                                     </li>
                                     <li class="nav-item loggedOut">
@@ -1854,17 +1916,18 @@
                                 class="fa-solid fa-question" style="color:#ffa556"></i></span></h6>
                 </div>
             </div>
-            <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow h-text highlight" data-aos="flip-left" data-aos-delay="50"
-            data-aos-duration="1000">If so, you've come to the right place!</h6>
+            <h6 class="mt-5 fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow h-text highlight" data-aos="flip-left"
+                data-aos-delay="50" data-aos-duration="1000">If so, you've come to the right place!</h6>
             <div class="div">
                 <div class="h6-text">
-                    <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="slide-right" data-aos-delay="80"
-                        data-aos-easing="ease-in-out" data-aos-duration="1000">We are pleased to inform you about the
+                    <h6 class="fs-2 fs-sm-3 fs-md-4 fs-lg-5 fs-xl-6 custom-shadow" data-aos="slide-right"
+                        data-aos-delay="80" data-aos-easing="ease-in-out" data-aos-duration="1000">We are pleased to
+                        inform you about the
                         Advanced Training Program and placements offered to the toppers of all branches.</h6>
                 </div>
                 <div class="h6-img">
-                    <img src="assets/img/logo/man-getting-award-writing-removebg.png" data-aos="zoom-out-up" data-aos-delay="80"
-                    data-aos-duration="2000" alt="">
+                    <img src="assets/img/logo/man-getting-award-writing-removebg.png" data-aos="zoom-out-up"
+                        data-aos-delay="80" data-aos-duration="2000" alt="">
                 </div>
             </div>
 
@@ -1958,18 +2021,18 @@
 
 
 
-        <!-- <div class="container-fluid cont-fluid "> -->
+    <!-- <div class="container-fluid cont-fluid "> -->
 
 
 
-        <!-- </div> -->
+    <!-- </div> -->
 
 
 
 
 
-        <!-- Main Body Content -->
-        <!-- <div id="mainDiv">
+    <!-- Main Body Content -->
+    <!-- <div id="mainDiv">
         <div class="container-main pd-l0 pd-r0">
             <div class="row gradient-light-pink" style="width: 102%;">
                 <div class="col-lg-12">
@@ -1996,8 +2059,8 @@
                                         box-shadow: 2px 6px 12px #172024;
                                         color: white;"> -->
 
-        <!-- Left side content -->
-        <!-- <div class="left-container" style="margin-left: 5%; font-family: Righteous;">
+    <!-- Left side content -->
+    <!-- <div class="left-container" style="margin-left: 5%; font-family: Righteous;">
                                         <div class="left-corner">
                                             <span class="main-tag-pts" style="color: darkblue; font-size: xx-large;">
                                                 <i class="fa-solid fa-cubes"></i> 4 PILLORS TO EVERY LEARNER
@@ -2022,8 +2085,8 @@
                                             </li>
                                         </ul>
                                     </div> -->
-        <!-- Right side content -->
-        <!-- <div class="right-container" style=" font-family: Righteous;">
+    <!-- Right side content -->
+    <!-- <div class="right-container" style=" font-family: Righteous;">
                                         <div class="right-corner">
                                             <span class="main-tag-pts" style="color: darkblue; font-size: xx-large;">
                                                 <i class="fa-solid fa-globe"></i> LARA'S VISION AND MISION
@@ -2032,8 +2095,8 @@
                                         <hr style="background-color: darkblue;
                                                   width: 90%;">
                                         <div class="video-container"> -->
-        <!-- Embed your YouTube video here -->
-        <!-- <iframe height="200"
+    <!-- Embed your YouTube video here -->
+    <!-- <iframe height="200"
                                                 src="https://www.youtube.com/embed/fwWcB9OpBQs?si=4jYubX8Se58zB-NV"
                                                 title="YouTube video player" frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -2258,8 +2321,8 @@
         </div>
     </div> -->
 
-        <!-- Company show carousel -->
-        <!-- <div class="container-one mt-2 mb-2">
+    <!-- Company show carousel -->
+    <!-- <div class="container-one mt-2 mb-2">
         <div id="companyCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="companytitle mb-3">
                 <h2>COMPANIES WHERE LARAITES ARE WORKING</h2>
@@ -2275,11 +2338,11 @@
                             <img src="https://www.narayanahealth.org/sites/all/themes/nh_default_theme/logo.svg"
                                 class="img-fluid" alt="Company 2">
                         </div> -->
-        <!-- <div class="col-md-2 text-center">
+    <!-- <div class="col-md-2 text-center">
                             <img src="https://cognissolutions.com/assets/img/logo.png" class="img-fluid"
                                 alt="Company 3">
                         </div> -->
-        <!-- <div class="col-md-2 text-center">
+    <!-- <div class="col-md-2 text-center">
                             <img src="https://www.bonbloc.com/images/bonbloc_logo_c.svg" class="img-fluid"
                                 alt="Company 4">
                         </div>
@@ -2362,7 +2425,7 @@
                     </div>
                 </div>
             </div> -->
-        <!-- <a class="carousel-control-prev" href="#companyCarousel" role="button" data-slide="prev">
+    <!-- <a class="carousel-control-prev" href="#companyCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </a>
@@ -2370,11 +2433,11 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </a> -->
-        <!-- </div>
+    <!-- </div>
     </div> -->
 
-        <!-- Company Reviews -->
-        <!-- <div class="container-two mt-1 mb-1" style="background: linen;">
+    <!-- Company Reviews -->
+    <!-- <div class="container-two mt-1 mb-1" style="background: linen;">
         <div id="userCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -2655,9 +2718,9 @@
                         </div>
                     </div>
                 </div> -->
-        <!-- Add more carousel items here for additional sets of reviews -->
-        <!-- </div> -->
-        <!-- <a class="carousel-control-prev" href="#userCarousel" role="button" data-bs-slide="prev">
+    <!-- Add more carousel items here for additional sets of reviews -->
+    <!-- </div> -->
+    <!-- <a class="carousel-control-prev" href="#userCarousel" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </a>
@@ -2665,68 +2728,68 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </a> -->
-        <!-- </div>
+    <!-- </div>
     </div> -->
 
 
-        <!-- Logout Confirmation Modal -->
+    <!-- Logout Confirmation Modal -->
 
-        <div class="modal fade" id="logoutConfirmationModal" tabindex="-1"
-            aria-labelledby="logoutConfirmationModalLabel" data-bs-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="logoutConfirmationModalLabel">
-                            Confirm Logout
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">Are you sure you want to logout?</div>
-                    <div class="modal-footer">
-                        <!-- Cancel button to close the modal -->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <!-- Logout button to trigger the logout -->
-                        <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
-                            Logout
-                        </button>
-                    </div>
+    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered w-sm-50">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutConfirmationModalLabel">
+                        Confirm Logout
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Are you sure you want to logout?</div>
+                <div class="modal-footer">
+                    <!-- Cancel button to close the modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <!-- Logout button to trigger the logout -->
+                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">
+                        Logout
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <!-- Footer -->
-        <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
-            <div class="container-fluid cntfld-fw" id="footer">
-                <div class="container-fluid ftr-bg">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
-                            <div class="row text-center text-xs-center text-sm-left text-md-left">
-                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                    <h5><strong>About Us</strong></h5>
-                                    <p style="color:rgb(222, 222, 222)">
-                                        <!-- Lara Technologies is best place to start your career since 2005. -->
-                                        Since 2005,
-                                        More than 60,000 Alumni,
-                                        Legendary trainer
-                                    </p>
-                                </div>
+    <!-- Footer -->
+    <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
+        <div class="container-fluid cntfld-fw" id="footer">
+            <div class="container-fluid ftr-bg">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 pd-t30 div-center">
+                        <div class="row text-center text-xs-center text-sm-left text-md-left">
+                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                <h5><strong>About Us</strong></h5>
+                                <p style="color:rgb(222, 222, 222)">
+                                    <!-- Lara Technologies is best place to start your career since 2005. -->
+                                    Since 2005,
+                                    More than 60,000 Alumni,
+                                    Legendary trainer
+                                </p>
+                            </div>
 
-                                <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
-                                    <h5><strong>Contact Us</strong></h5>
-                                    <p style="color:rgb(222, 222, 222)">
-                                        Feel free to get in touch with us:<br>
-                                        <!-- Email: support@lara.co.in<br>
+                            <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt">
+                                <h5><strong>Contact Us</strong></h5>
+                                <p style="color:rgb(222, 222, 222)">
+                                    Feel free to get in touch with us:<br>
+                                    <!-- Email: support@lara.co.in<br>
                                         Phone: <i class="fa fa-phone"></i> +91 7975938871 -->
-                                        <strong>Email:</strong> info@laragrooming.com<br>
-                                        <strong>Phone:</strong> <i class="fa fa-phone"></i> +91 7348840266 <br>
-                                        BTM, Bangalore
-                                    </p>
-                                </div>
+                                    <strong>Email:</strong> info@laragrooming.com<br>
+                                    <strong>Phone:</strong> <i class="fa fa-phone"></i> +91 7348840266 <br>
+                                    BTM, Bangalore
+                                </p>
+                            </div>
 
-                                <!-- <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
+                            <!-- <div class="col-xs-12 col-sm-4 col-md-4 ftr-txt ">
                                     <h5>Stay Connected</h5>
                                     <div class="text-bg-white">
                                         <p>
@@ -2742,158 +2805,157 @@
                                         </p>
                                     </div>
                                 </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
-                            <p>&copy; 2023 Laratechnology. All rights reserved. | <a
-                                    href="./assets/pdf/terms-and-conditions.pdf" target="_blank"
-                                    class="text-light">Terms &
-                                    Conditions</a>
-                            </p>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ftr-txt text-center">
+                        <p>&copy; 2023 Laratechnology. All rights reserved. | <a
+                                href="./assets/pdf/terms-and-conditions.pdf" target="_blank" class="text-light">Terms &
+                                Conditions</a>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </footer>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init();
-        </script>
-        <!-- <script src="assets/css/plugins/bootstrap.css"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
-            integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
-            integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
-        <script src="assets/js/script.js"></script>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <!-- <script src="assets/css/plugins/bootstrap.css"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+        integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+        integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script src="assets/js/script.js"></script>
 
-        <script>
-            gsap.from('.program-top h1', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
-            gsap.from('.program-top p', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
-            gsap.from('.program-top-img img', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+    <script>
+        gsap.from('.program-top h1', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+        gsap.from('.program-top p', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+        gsap.from('.program-top-img img', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
 
-            setTimeout(function () {
-                document.getElementById('targetSection').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }, 2000);
-
-            document.addEventListener('DOMContentLoaded', function () {
-                const observer = new IntersectionObserver(handleIntersection, {
-                    root: null,
-                    rootMargin: '0px',
-                });
-
-                document.querySelectorAll('.twist').forEach(element => {
-                    observer.observe(element);
-                });
-
-                function handleIntersection(entries, observer) {
-                    entries.forEach(entry => {
-                        const target = entry.target;
-                        if (entry.isIntersecting) {
-                            target.classList.add('shake');
-                        } else {
-                            target.classList.remove('shake');
-                        }
-                    });
-                }
+        setTimeout(function () {
+            document.getElementById('targetSection').scrollIntoView({
+                behavior: 'smooth'
             });
-            // document.getElementById('downArrow').addEventListener('click', function () {
-            //     const contentElement = document.getElementById('content');
+        }, 2000);
 
-            //     contentElement.scrollIntoView({
-            //         behavior: 'smooth',
-            //         block: 'start',
-            //     });
-            // });
-            // // GSAP ScrollTo Plugin
-            // gsap.registerPlugin(ScrollToPlugin);
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver(handleIntersection, {
+                root: null,
+                rootMargin: '0px',
+            });
 
-            // // Add a click event listener to the down arrow for smooth scrolling
-            // document.getElementById('downArrow').addEventListener('click', function () {
-            //     gsap.to(window, { duration: 1, scrollTo: { y: window.innerHeight, autoKill: false } });
-            // });
-
-
-
-            // Function to handle the intersection observer callback
-            // function handleIntersection(entries, observer) {
-            //     entries.forEach(entry => {
-            //         if (entry.isIntersecting) {
-            //             // Element is in view, apply the scaling
-            //             entry.target.style.transform = 'scale(1)';
-            //         } else {
-            //             // Element is out of view, reset the scaling
-            //             entry.target.style.transform = 'scale(0.5)';
-            //         }
-            //     });
-            // }
-
-            // // Create an intersection observer
-            // const observer = new IntersectionObserver(handleIntersection, {
-            //     root: null, // Use the viewport as the root
-            //     rootMargin: '0px',
-            //     threshold: 0.5, // Trigger the callback when 50% of the element is visible
-            // });
-
-            // // Get all images in the .program-top-1 container
-            // document.querySelectorAll('.program-top-1 img').forEach(img => {
-            //     // Initial styling
-            //     img.style.transform = 'scale(0.5)';
-            //     // Observe each image
-            //     observer.observe(img);
-            // });
+            document.querySelectorAll('.twist').forEach(element => {
+                observer.observe(element);
+            });
 
             function handleIntersection(entries, observer) {
                 entries.forEach(entry => {
                     const target = entry.target;
                     if (entry.isIntersecting) {
-                        target.style.transform = 'scale(1)';
+                        target.classList.add('shake');
                     } else {
-                        target.style.transform = 'scale(0.8)';
+                        target.classList.remove('shake');
                     }
                 });
             }
+        });
+        // document.getElementById('downArrow').addEventListener('click', function () {
+        //     const contentElement = document.getElementById('content');
 
-            const observer = new IntersectionObserver(handleIntersection, {
-                root: null,
-                rootMargin: '0px',
-                // threshold: 0.9,
+        //     contentElement.scrollIntoView({
+        //         behavior: 'smooth',
+        //         block: 'start',
+        //     });
+        // });
+        // // GSAP ScrollTo Plugin
+        // gsap.registerPlugin(ScrollToPlugin);
+
+        // // Add a click event listener to the down arrow for smooth scrolling
+        // document.getElementById('downArrow').addEventListener('click', function () {
+        //     gsap.to(window, { duration: 1, scrollTo: { y: window.innerHeight, autoKill: false } });
+        // });
+
+
+
+        // Function to handle the intersection observer callback
+        // function handleIntersection(entries, observer) {
+        //     entries.forEach(entry => {
+        //         if (entry.isIntersecting) {
+        //             // Element is in view, apply the scaling
+        //             entry.target.style.transform = 'scale(1)';
+        //         } else {
+        //             // Element is out of view, reset the scaling
+        //             entry.target.style.transform = 'scale(0.5)';
+        //         }
+        //     });
+        // }
+
+        // // Create an intersection observer
+        // const observer = new IntersectionObserver(handleIntersection, {
+        //     root: null, // Use the viewport as the root
+        //     rootMargin: '0px',
+        //     threshold: 0.5, // Trigger the callback when 50% of the element is visible
+        // });
+
+        // // Get all images in the .program-top-1 container
+        // document.querySelectorAll('.program-top-1 img').forEach(img => {
+        //     // Initial styling
+        //     img.style.transform = 'scale(0.5)';
+        //     // Observe each image
+        //     observer.observe(img);
+        // });
+
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                const target = entry.target;
+                if (entry.isIntersecting) {
+                    target.style.transform = 'scale(1)';
+                } else {
+                    target.style.transform = 'scale(0.8)';
+                }
             });
+        }
 
-            document.querySelectorAll('.program-top-1 img, .program-top-1 .card-body').forEach(element => {
-                element.style.transform = 'scale(0.8)';
-                observer.observe(element);
-            });
+        const observer = new IntersectionObserver(handleIntersection, {
+            root: null,
+            rootMargin: '0px',
+            // threshold: 0.9,
+        });
 
-
-
-            // gsap.registerPlugin(ScrollTrigger);
-
-            // // Loop through each image in the program-top-1 container
-            // gsap.utils.toArray('.program-top-1 img').forEach((img) => {
-            //     console.log(img);
-            //     gsap.to(img, {
-            //         scale: 1, // Final scale when scrolled to
-            //         scrollTrigger: {
-            //             trigger: img,
-            //             start: 'top center', // Adjust as needed
-            //             end: 'bottom center', // Adjust as needed
-            //             scrub: 1, // Adjust as needed for smoothness
-            //         },
-            //     });
-            // });
+        document.querySelectorAll('.program-top-1 img, .program-top-1 .card-body').forEach(element => {
+            element.style.transform = 'scale(0.8)';
+            observer.observe(element);
+        });
 
 
-        </script>
+
+        // gsap.registerPlugin(ScrollTrigger);
+
+        // // Loop through each image in the program-top-1 container
+        // gsap.utils.toArray('.program-top-1 img').forEach((img) => {
+        //     console.log(img);
+        //     gsap.to(img, {
+        //         scale: 1, // Final scale when scrolled to
+        //         scrollTrigger: {
+        //             trigger: img,
+        //             start: 'top center', // Adjust as needed
+        //             end: 'bottom center', // Adjust as needed
+        //             scrub: 1, // Adjust as needed for smoothness
+        //         },
+        //     });
+        // });
+
+
+    </script>
 
 </body>
 

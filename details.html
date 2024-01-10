@@ -40,6 +40,42 @@
             color: #2d2d2d;
         }
 
+        /* Additional styles for navbar */
+
+        /* .nav-link.custom-brand {
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 20px;
+    } */
+
+        /* Responsive styles for small screens */
+        @media (max-width: 768px) {
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .nav-item {
+                transition: all 0.3s linear;
+            }
+
+            .nav-item:hover {
+                transform: translate(-0.5px, -3px);
+                scale: 1.01;
+            }
+
+            .logo {
+                transition: all 0.3s linear;
+            }
+
+            .logo:hover {
+                scale: 1.1;
+            }
+        }
+
         .resource-container a {
             display: block;
             margin-bottom: 10px;
@@ -97,8 +133,8 @@
         </div>
     </div>
     <div id="main">
-        <nav class="navbar shadow-lg  navbar-expand-lg  position-relative" id="header">
-            <div class="container-fluid">
+        <nav class="navbar shadow-lg navbar-expand-lg position-relative" id="header">
+            <div class="container-fluid shadow">
                 <div class="logo">
                     <!-- <img src="./assets/img/logo/laralogo.png" alt="Logo"> -->
                     <a href="index.html">
@@ -182,10 +218,23 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link custom-brand active text-black fw-bold"
-                                        href="details.html">Course Content</a>
+                                        href="details.html">Course&nbsp;Content</a>
                                 </li>
                                 <li class="nav-item d-none loggedIn" id="learnerAppbar">
                                     <a class="nav-link custom-brand text-black fw-bold" href="user.html">Profile</a>
+                                </li>
+                                <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                    <a class="nav-link custom-brand text-black fw-bold"
+                                        href="admin-dash.html">Dashboard</a>
+                                </li>
+                                <li class="nav-item d-none loggedIn" id="tpoAppbar">
+                                    <a class="nav-link custom-brand text-black fw-bold"
+                                        href="tpo-dash.html">Dashboard</a>
+                                </li>
+
+                                <li class="nav-item d-none loggedIn" id="adminAppbar">
+                                    <a class="nav-link custom-brand text-black fw-bold" href="tpo-list.html">TPO
+                                        List</a>
                                 </li>
                                 <li class="nav-item loggedOut">
                                     <a class="nav-link custom-brand text-black fw-bold" href="signup.html">Sign
@@ -502,10 +551,6 @@
             </div>
         </div>
     </div>
-
-
-
-    </div>
     <!-- Footer -->
     <footer class="text-center py-3 m-2 rounded-3 font-weight-light">
         <div class="container-fluid cntfld-fw" id="footer">
@@ -570,7 +615,7 @@
 
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel"
         data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered w-sm-50">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="logoutConfirmationModalLabel">
