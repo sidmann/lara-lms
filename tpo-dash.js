@@ -129,7 +129,7 @@ onAuthStateChanged(auth, (user) => {
 function roleAccess(role) {
     const roleMap = new Map([
         ["ROLE_ADMIN", "adminAppbar"],
-        ["ROLE_LEARNER", "userAppbar"],
+        ["ROLE_LEARNER", "learnerAppbar"],
         ["ROLE_TPO", "tpoAppbar"],
     ]);
     const appbarList = document.querySelectorAll(`#${roleMap.get(role)}`);

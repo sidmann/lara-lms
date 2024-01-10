@@ -42,9 +42,6 @@ function getUserSnapshot(uid) {
 //************************************************************************
 
 onAuthStateChanged(auth, async (user) => {
-    const adminAppbar = document.getElementById("adminAppbar");
-    const tpoAppbar = document.getElementById("tpoAppbar");
-    const learnerAppbar = document.getElementById("learnerAppbar");
 
     if (user) {
         // User is logged in
