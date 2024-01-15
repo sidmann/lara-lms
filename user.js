@@ -859,6 +859,12 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
             displayMessage('User is not authenticated', 'danger')
             return;
         }
+
+        if (!['image/jpeg', 'image/png', 'image/jpg','application/pdf'].includes(userSchoolCertificateEdit)) {
+            alert('Please upload only JPG, PNG, or PDF files.');
+            userSchoolCertificateEdit.value = ''; // Reset the input
+            return;
+        }
         const userSchoolCollectionRef = collection(firestore, 'learners', userId, 'userschool');
         const userSchoolSnapshot = await getDocs(userSchoolCollectionRef);
 
@@ -1942,7 +1948,9 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                 }
                 else {
                     // console.log("else")
-                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userInternship', docu.id)
+                    // console.log(userProjectNameEdit,userProjectTechnologiesEdit,userInternshipCityEdit, userInternshipStartEdit
+                    //     ,userInternshipEndEdit , userProjectDescriptionEdit)
+                    const userInternshipDocRef = doc(firestore, 'learners', userId, 'userinternship', docu.id)
                     await updateDoc(userInternshipDocRef,
                         {
                             userProjectName: userProjectNameEdit,
@@ -1950,7 +1958,7 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
                             userInternshipCity: userInternshipCityEdit,
                             userInternshipStart: userInternshipStartEdit,
                             userInternshipEnd: userInternshipEndEdit,
-                            userProjectDescription: userInternshipEndEdit,
+                            userProjectDescription: userProjectDescriptionEdit,
                         });
                     console.log('User Internship/Academic Project details updated successfully');
                     displayMessage('User Internship/Academic Project details updated successfully', 'success');

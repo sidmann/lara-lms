@@ -356,6 +356,12 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
     if (userSchoolBoard && userSchoolName && userSchoolEducationCity && userSchoolEducationState
         && userSchoolStart && userSchoolEnd && userSchoolCertificate.files.length > 0) {
         try {
+
+            if (!['image/jpeg', 'image/png', 'application/pdf'].includes(userSchoolCertificate)) {
+                alert('Please upload only JPG, PNG, or PDF files.');
+                userSchoolCertificate.value = ''; // Reset the input
+                return;
+            }
             // const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
             // const userAddressSnapshot = await getDocs(userAddressCollectionRef);
             // if (userAddressSnapshot.empty) {
