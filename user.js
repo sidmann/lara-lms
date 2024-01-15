@@ -126,7 +126,7 @@ onAuthStateChanged(auth, (user) => {
         const docRef = doc(firestore, "learners", user.uid);
         // console.log(user.uid)
         const docSnap = getDoc(docRef);
-        docSnap.then( async (docSnapshot) => {
+        docSnap.then(async (docSnapshot) => {
             if (docSnapshot.exists()) {
                 userData = docSnapshot.data();
                 roleAccess(userData.role);
@@ -379,6 +379,14 @@ document.getElementById("changePasswordBtn").addEventListener("click", () => {
         const newPassword = document.getElementById("newPassword").value;
         const confirmNewPassword =
             document.getElementById("confirmNewPassword").value;
+
+        if (!currentPassword || !newPassword || !confirmNewPassword) {
+            displayMessage("All fields must be filled in.", "danger");
+            document.querySelector('#changePasswordBtn').disabled = false;
+            document.querySelector('#changePasswordBtn').textContent = 'Change Password';
+            return;
+        }
+
         if (currentPassword === newPassword) {
             displayMessage(
                 "Current password and new password should not be the same.",
@@ -427,6 +435,7 @@ function updatePasswordFn(user, currentPassword, newPassword) {
                 displayMessage("Password updated successfully!", "success");
                 document.querySelector('#changePasswordBtn').disabled = false
                 document.querySelector('#changePasswordBtn').textContent = 'Change Password'
+                document.getElementById('changePasswordForm').reset();
                 const changePasswordModal = new bootstrap.Modal(
                     document.getElementById("changePasswordModalLabel")
                 );
@@ -629,6 +638,15 @@ document.getElementById('save-user-address-button').addEventListener('click', as
     const userStateEdit = document.querySelector('#user-state').value;
     const userCountryEdit = document.querySelector('#user-country').value;
 
+    // Validate postal code using a regular expression
+    if (!isValidPostalCode(userPostcodeEdit)) {
+        console.log('Invalid postal code format');
+        displayMessage('Invalid postal code format', 'danger');
+        document.querySelector('#save-user-address-button').disabled = false;
+        document.querySelector('#save-user-address-button').textContent = 'Submit';
+        return;
+    }
+
     if (userAddressEdit && userPostcodeEdit && userCityEdit && userStateEdit && userCountryEdit) {
 
         if (userId) {
@@ -757,7 +775,7 @@ async function openUserSchoolModel(userId) {
             // console.log(userSchoolData)
             const fileName = getFileNameFromUrl(userSchoolData.schoolCertificateImageUrl);
             userSchoolBoardEdit.value = userSchoolData.userSchoolBoard || '';
-            userSchoolNameEdit.value = userSchoolData.userSchoolEducationName || '';
+            userSchoolNameEdit.value = userSchoolData.userSchoolName || '';
             userSchoolCityEdit.value = userSchoolData.userSchoolEducationCity || '';
             userSchoolStateEdit.value = userSchoolData.userSchoolEducationState || '';
             userSchoolStartDateEdit.value = userSchoolData.userSchoolStart || '';
@@ -813,6 +831,24 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
         fileLinkContainer.style.display = 'none';
+    }
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userSchoolStartDateEdit) || !isValidYear(userSchoolEndDateEdit)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userSchoolPercentageEdit)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
     }
 
     if (userSchoolBoardEdit && userSchoolNameEdit && userSchoolCityEdit && userSchoolStateEdit
@@ -886,7 +922,6 @@ document.getElementById('save-school-edu-button').addEventListener('click', asyn
                     await userSchoolDisplayMsg();
                 }
             })
-
         }
         else {
             if (userSchoolCertificateEdit.files.length > 0) {
@@ -1052,6 +1087,24 @@ document.getElementById('save-inter-edu-button').addEventListener('click', async
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
         fileLinkContainer.style.display = 'none';
+    }
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userInterStartDateEdit) || !isValidYear(userInterEndDateEdit)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userInterPercentageEdit)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
     }
 
     if (userInterBoardEdit && userInterEducationNameEdit && userInterCityEdit && userInterStartDateEdit
@@ -1292,6 +1345,24 @@ document.getElementById('save-degree-edu-button').addEventListener('click', asyn
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
         fileLinkContainer.style.display = 'none';
+    }
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userDegreeStartDateEdit) || !isValidYear(userDegreeEndDateEdit)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userDegreePercentageEdit)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
     }
 
     if (userDegreeBoardEdit && userDegreeEducationNameEdit && userDegreeCityEdit && userDegreeStartDateEdit
@@ -1539,6 +1610,24 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
     } else {
         fileLink.style.display = 'none'; // Hide the link if there is no file
         fileLinkContainer.style.display = 'none';
+    }
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userMastersStart) || !isValidYear(userMastersEnd)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userMastersPercentage)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
     }
 
     if (userMastersBoard && userMastersEducationName && userMastersEduSpeName && userMastersEducationCity && userMastersEducationState
@@ -1795,6 +1884,14 @@ document.getElementById('save-internship-button').addEventListener('click', asyn
         fileLinkContainer.style.display = 'none'; // Hide the container
     }
 
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userInternshipStartEdit) || !isValidYear(userInternshipEndEdit)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
 
     if (userProjectNameEdit && userProjectTechnologiesEdit && userInternshipCityEdit && userInternshipStartEdit
         && userInternshipEndEdit && userProjectDescriptionEdit) {
@@ -2062,6 +2159,24 @@ document.getElementById('save-user-additional-button').addEventListener('click',
 function getFileNameFromUrl(imageUrl) {
     const url = new URL(imageUrl);
     return decodeURIComponent(url.pathname).replace(/^.*[\\\/]/, '');
+}
+
+// Function to validate if the input is a 4-digit numeric year
+function isValidYear(year) {
+    return /^\d{4}$/.test(year);
+}
+
+// Function to validate if the input is a valid percentage
+function isValidPercentage(percentage) {
+    const numericValue = parseFloat(percentage);
+    return !isNaN(numericValue) && numericValue >= 0 && numericValue <= 100;
+}
+
+// Function to validate postal code using a regular expression
+function isValidPostalCode(postcode) {
+    // Regular expression for a typical 6-digit Indian postal code
+    const postalCodeRegex = /^[1-9][0-9]{5}$/;
+    return postalCodeRegex.test(postcode);
 }
 
 //display message function

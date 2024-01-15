@@ -223,6 +223,16 @@ document.querySelector('#save-user-address-button').addEventListener('click', as
     const userCity = document.querySelector('#user-city').value;
     const userState = document.querySelector('#user-state').value;
     const userCountry = document.querySelector('#user-country').value;
+
+    // Validate postal code using a regular expression
+    if (!isValidPostalCode(userPostcode)) {
+        console.log('Invalid postal code format');
+        displayMessage('Invalid postal code format', 'danger');
+        document.querySelector('#save-user-address-button').disabled = false;
+        document.querySelector('#save-user-address-button').textContent = 'Submit';
+        return;
+    }
+
     // console.log(userId)
     if (userAddress && userPostcode && userCity && userState && userCountry) {
         const userAddressCollectionRef = collection(firestore, 'learners', userId, 'useraddress')
@@ -324,6 +334,24 @@ document.querySelector('#save-school-edu-button').addEventListener('click', asyn
     const userSchoolPercentage = document.querySelector("#school-education-percentage").value;
     const userSchoolCertificate = document.querySelector('#school-education-cert');
     const userCertificateImageFile = userSchoolCertificate.files[0];
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userSchoolStart) || !isValidYear(userSchoolEnd)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userSchoolPercentage)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-school-edu-button').disabled = false;
+        document.querySelector('#save-school-edu-button').textContent = 'Submit';
+        return;
+    }
 
     if (userSchoolBoard && userSchoolName && userSchoolEducationCity && userSchoolEducationState
         && userSchoolStart && userSchoolEnd && userSchoolCertificate.files.length > 0) {
@@ -465,6 +493,24 @@ document.querySelector('#save-inter-edu-button').addEventListener('click', async
     const userInterCertificate = document.querySelector('#inter-education-cert');
     const userInterCertificateImageFile = userInterCertificate.files[0];
 
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userInterStart) || !isValidYear(userInterEnd)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-inter-edu-button').disabled = false;
+        document.querySelector('#save-inter-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userInterPercentage)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-inter-edu-button').disabled = false;
+        document.querySelector('#save-inter-edu-button').textContent = 'Submit';
+        return;
+    }
+
     if (userInterBoard && userInterEducationName && userInterEducationCity && userInterEducationState && userInterStart
         && userInterEnd && userInterPercentage && userInterCertificate.files.length > 0) {
         try {
@@ -604,6 +650,24 @@ document.querySelector('#save-degree-edu-button').addEventListener('click', asyn
     const userDegreePercentage = document.querySelector("#degree-education-percentage").value;
     const userDegreeCertificate = document.querySelector('#degree-education-cert');
     const userDegreeCertificateImageFile = userDegreeCertificate.files[0];
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userDegreeStart) || !isValidYear(userDegreeEnd)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-degree-edu-button').disabled = false;
+        document.querySelector('#save-degree-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userDegreePercentage)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-degree-edu-button').disabled = false;
+        document.querySelector('#save-degree-edu-button').textContent = 'Submit';
+        return;
+    }
 
     if (userDegreeBoard && userDegreeEducationName && userDegreeEducationCity && userDegreeEducationState && userDegreeStart
         && userDegreeStart && userDegreePercentage && userDegreeEduSpeName && userDegreeCertificate.files.length > 0) {
@@ -772,6 +836,24 @@ document.querySelector('#save-masters-edu-button').addEventListener('click', asy
     const userMastersCertificate = document.querySelector('#masters-education-cert');
     const userMastersCertificateImageFile = userMastersCertificate.files[0];
 
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userMastersStart) || !isValidYear(userMastersEnd)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-masters-edu-button').disabled = false;
+        document.querySelector('#save-masters-edu-button').textContent = 'Submit';
+        return;
+    }
+
+    // Validate that the percentage is a number between 0 and 100
+    if (!isValidPercentage(userMastersPercentage)) {
+        console.log('Invalid percentage format');
+        displayMessage('Invalid percentage format (use numeric value between 0 and 100)', 'danger');
+        document.querySelector('#save-masters-edu-button').disabled = false;
+        document.querySelector('#save-masters-edu-button').textContent = 'Submit';
+        return;
+    }
+
     if (userMastersBoard && userMastersEducationName && userMastersEduSpeName && userMastersEducationCity && userMastersEducationState
         && userMastersStart && userMastersEnd && userMastersPercentage && userMastersCertificate.files.length > 0) {
         try {
@@ -927,6 +1009,15 @@ document.querySelector('#save-internship-button').addEventListener('click', asyn
     const userProjectDescription = document.querySelector("#internship-project-description").value;
     const userInternshipCertificate = document.querySelector('#internship-cert');
     const userInternshipCertificateImageFile = userInternshipCertificate.files[0];
+
+    // Validate that start and end dates are numeric and have 4 digits
+    if (!isValidYear(userInternshipStart) || !isValidYear(userInternshipEnd)) {
+        console.log('Invalid year format');
+        displayMessage('Invalid year format (use numeric, 4-digit years)', 'danger');
+        document.querySelector('#save-internship-button').disabled = false;
+        document.querySelector('#save-internship-button').textContent = 'Submit';
+        return;
+    }
 
     if (userProjectName && userProjectTechnologies && userInternshipCity && userInternshipStart
         && userInternshipEnd && userProjectDescription && userInternshipCertificate.files.length > 0) {
@@ -1127,12 +1218,19 @@ document.querySelector('#save-user-additional-button').addEventListener('click',
 })
 
 document.getElementById('user-referral-btn').addEventListener('click', async function () {
-
-    document.querySelector('#user-referral-btn').disabled = true;
-    document.querySelector('#user-referral-btn').textContent = 'Submitting...';
-
+        
     // Get the entered referral email
     const referralEmail = document.getElementById('referral-email').value.trim();
+    
+    // Check if the referral email is empty
+    if (!referralEmail) {
+        // Optional: Display an error message or perform other actions
+        displayMessage('Please enter a referral email', 'danger');
+        return;
+    }
+    
+    document.querySelector('#user-referral-btn').disabled = true;
+    document.querySelector('#user-referral-btn').textContent = 'Submitting...';
 
     // Validate the email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1142,6 +1240,8 @@ document.getElementById('user-referral-btn').addEventListener('click', async fun
     if (!isValidEmail) {
         // document.getElementById('referral-email-error').textContent = 'Invalid email format';
         displayMessage('Invalid email format', 'danger');
+        document.querySelector('#user-referral-btn').disabled = false;
+        document.querySelector('#user-referral-btn').textContent = 'Submit';
         return;
     }
 
@@ -1217,3 +1317,21 @@ document.querySelector('.user-login-continue-btn').addEventListener('click', (ev
         }
     }
 })
+
+// Function to validate if the input is a 4-digit numeric year
+function isValidYear(year) {
+    return /^\d{4}$/.test(year);
+}
+
+// Function to validate if the input is a valid percentage
+function isValidPercentage(percentage) {
+    const numericValue = parseFloat(percentage);
+    return !isNaN(numericValue) && numericValue >= 0 && numericValue <= 100;
+}
+
+// Function to validate postal code using a regular expression
+function isValidPostalCode(postcode) {
+    // Regular expression for a typical 6-digit Indian postal code
+    const postalCodeRegex = /^[1-9][0-9]{5}$/;
+    return postalCodeRegex.test(postcode);
+}

@@ -393,9 +393,9 @@
                                                         </span>
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Postal Code*</label>
-                                                            <input type="text" name="user-postcode" id="user-postcode"
+                                                            <input type="number" name="user-postcode" id="user-postcode"
                                                                 placeholder="Enter Your Postal Code" class="mb-0"
-                                                                required>
+                                                                required minlength="6" maxlength="6">
                                                             <span id="user-postcode-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
@@ -506,28 +506,28 @@
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Start Year*</label>
-                                                            <input type="text" name="school-education-sDate"
+                                                            <input type="number" name="school-education-sDate"
                                                                 id="school-education-sDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="school-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>End Year*</label>
-                                                            <input type="text" name="school-education-eDate"
+                                                            <input type="number" name="school-education-eDate"
                                                                 id="school-education-eDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="school-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Percentage*</label>
-                                                            <input type="text" name="school-education-percentage"
+                                                            <input type="number" name="school-education-percentage"
                                                                 id="school-education-percentage"
                                                                 placeholder="Please Enter Your Percentage" class="mb-0"
-                                                                required>
+                                                                required min="0" max="100">
                                                             <span id="school-education-percentage-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
@@ -580,7 +580,7 @@
                                                 <div class="gi-register-form">
                                                     <form id="inter-edu-details-form" class="">
                                                         <span class="gi-register-wrap gi-register-full mt-3">
-                                                            <label>Board/University*</label>
+                                                            <label>Board*</label>
                                                             <input type="text" name="inter-board" id="inter-board"
                                                                 placeholder="Enter Board Name" class="mb-0" required>
                                                             <span id="inter-board-error" class="error-message"
@@ -619,28 +619,28 @@
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Start Year*</label>
-                                                            <input type="text" name="inter-education-sDate"
+                                                            <input type="number" name="inter-education-sDate"
                                                                 id="inter-education-sDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="inter-education-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>End Year*</label>
-                                                            <input type="text" name="inter-education-eDate"
+                                                            <input type="number" name="inter-education-eDate"
                                                                 id="inter-education-eDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="inter-education-eDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Percentage*</label>
-                                                            <input type="text" name="inter-education-percentage"
+                                                            <input type="number" name="inter-education-percentage"
                                                                 id="inter-education-percentage"
                                                                 placeholder="Please Enter Your Percentage" class="mb-0"
-                                                                required>
+                                                                required min="0" max="100">
                                                             <span id="inter-education-percentage-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
@@ -743,28 +743,28 @@
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Start Year*</label>
-                                                            <input type="text" name="degree-education-sDate"
+                                                            <input type="number" name="degree-education-sDate"
                                                                 id="degree-education-sDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="degree-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>End Year*</label>
-                                                            <input type="text" name="degree-education-eDate"
+                                                            <input type="number" name="degree-education-eDate"
                                                                 id="degree-education-eDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="degree-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Percentage*</label>
-                                                            <input type="text" name="degree-education-percentage"
+                                                            <input type="number" name="degree-education-percentage"
                                                                 id="degree-education-percentage"
                                                                 placeholder="Please Enter Your Percentage" class="mb-0"
-                                                                required>
+                                                                required min="0" max="100">
                                                             <span id="degree-education-percentage-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
@@ -868,28 +868,28 @@
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Start Year*</label>
-                                                            <input type="text" name="masters-education-sDate"
+                                                            <input type="number" name="masters-education-sDate"
                                                                 id="masters-education-sDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="masters-education-sDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>End Year*</label>
-                                                            <input type="text" name="masters-education-eDate"
+                                                            <input type="number" name="masters-education-eDate"
                                                                 id="masters-education-eDate" placeholder="YYYY"
-                                                                class="mb-0" required>
+                                                                class="mb-0" required minlength="4" maxlength="4">
                                                             <span id="degree-education-eDate-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-full mt-3">
                                                             <label>Percentage*</label>
-                                                            <input type="text" name="masters-education-percentage"
+                                                            <input type="number" name="masters-education-percentage"
                                                                 id="masters-education-percentage"
                                                                 placeholder="Please Enter Your Percentage" class="mb-0"
-                                                                required>
+                                                                required min="0" max="100">
                                                             <span id="degree-education-percentage-error"
                                                                 class="error-message" style="color: red"></span>
                                                         </span>
@@ -972,18 +972,18 @@
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>Start Date*</label>
-                                                            <input type="text" name="internship-sDate"
+                                                            <input type="number" name="internship-sDate"
                                                                 id="internship-sDate" placeholder="MM/YYYY" class="mb-0"
-                                                                required>
+                                                                required minlength="4" maxlength="4">
                                                             <span id="employee-sDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
 
                                                         <span class="gi-register-wrap gi-register-half mt-3">
                                                             <label>End Date*</label>
-                                                            <input type="text" name="internship-eDate"
+                                                            <input type="number" name="internship-eDate"
                                                                 id="internship-eDate" placeholder="MM/YYYY" class="mb-0"
-                                                                required>
+                                                                required minlength="4" maxlength="4">
                                                             <span id="employee-eDate-error" class="error-message"
                                                                 style="color: red"></span>
                                                         </span>
