@@ -217,8 +217,8 @@ function displayMessage(message, type) {
 
 // ------------------------------------------------------------------------------------
 let learnersDocs = null
-let learnersPerPage = 3
-let currentPage = 0 
+let learnersPerPage = 10
+let currentPage = 0
 let pageNotebook = []
 let noOfRecords = null;
 let sortOrderChange = true
@@ -232,7 +232,7 @@ let prevPageFlag = false
  */
 let searchByName = null;
 let searchByEmail = null;
-document.querySelector('.search-learner-details').addEventListener('click',async(e)=>{
+document.querySelector('.search-learner-details').addEventListener('click', async (e) => {
     e.preventDefault();
     searchByName = document.querySelector('#searchby-learner-name').value;
     searchByEmail = document.querySelector('#searchby-learner-email').value;
@@ -241,27 +241,27 @@ document.querySelector('.search-learner-details').addEventListener('click',async
     document.querySelector('.next-page').classList.add('d-none');
     let queryRef = null;
 
-    if(searchByEmail || searchByName){
-        if(searchByName){
-            queryRef = query(collection(firestore,'learners'),
-                                where('name','==',searchByName),
-                                where('role', '==', 'ROLE_LEARNER')
-                             );
+    if (searchByEmail || searchByName) {
+        if (searchByName) {
+            queryRef = query(collection(firestore, 'learners'),
+                where('name', '==', searchByName),
+                where('role', '==', 'ROLE_LEARNER')
+            );
         }
-        if(searchByEmail){
-            queryRef = query(collection(firestore,'learners'),
-                                where('email','==',searchByEmail),
-                                where('role', '==', 'ROLE_LEARNER')
-                            );
+        if (searchByEmail) {
+            queryRef = query(collection(firestore, 'learners'),
+                where('email', '==', searchByEmail),
+                where('role', '==', 'ROLE_LEARNER')
+            );
         }
         // if(searchByRole){
         //     queryRef = query(collection(firestore,'learners'),where('role','==',searchByRole));
         // }
         fetchAndDisplayLearnersDetails(queryRef)
     }
-    else{
+    else {
         console.log("Please search users details by filling atleast one field")
-        displayMessage('Please search users details by filling atleast one field','danger')
+        displayMessage('Please search users details by filling atleast one field', 'danger')
     }
 })
 
@@ -278,57 +278,57 @@ document.querySelector('.clear-learner-details').addEventListener('click', () =>
 document.querySelector('.prev-page').addEventListener('click', prevPage)
 document.querySelector('.next-page').addEventListener('click', nextPage)
 
-async function fetchAndDisplayLearnersDetails(queryRef = null){
-    const learnersDetail  = document.querySelector('.learners-details');
+async function fetchAndDisplayLearnersDetails(queryRef = null) {
+    const learnersDetail = document.querySelector('.learners-details');
     learnersDetail.innerHTML = '';
     const learnersDetailsRef = collection(firestore, 'learners');
-    let searchDataFound  = false;
+    let searchDataFound = false;
     console.log(tpoEmail);
 
     if (currentPage > 0) {
         console.log("if")
         const lastVisible = pageNotebook[currentPage - 1];
         const snapshot = await getDocs(query(
-                queryRef || learnersDetailsRef, 
-                orderBy('name'),
-                startAfter(lastVisible),
-                where('role', '==', 'ROLE_LEARNER'),
-                where('tpoEmail','==',tpoEmail),
-                limit(learnersPerPage)
-            ));
+            queryRef || learnersDetailsRef,
+            orderBy('name'),
+            startAfter(lastVisible),
+            where('role', '==', 'ROLE_LEARNER'),
+            where('tpoEmail', '==', tpoEmail),
+            limit(learnersPerPage)
+        ));
         learnersDocs = snapshot.docs;
     } else {
         console.log("esle")
         const snapshot = await getDocs(
-                query(queryRef || learnersDetailsRef, 
+            query(queryRef || learnersDetailsRef,
                 orderBy('name'),
                 where('role', '==', 'ROLE_LEARNER'),
-                where('tpoEmail','==',tpoEmail),
+                where('tpoEmail', '==', tpoEmail),
                 limit(learnersPerPage)
             ));
         learnersDocs = snapshot.docs;
     }
-    
+
     pageNotebook[currentPage] = learnersDocs[learnersDocs.length - 1];
     console.log(currentPage)
     // console.log(learnersDocs)
-    if(!learnersDocs.empty){
+    if (!learnersDocs.empty) {
         console.log("if")
-        learnersDocs.forEach((doc)=>{
-            const learnerData  = doc.data();
+        learnersDocs.forEach((doc) => {
+            const learnerData = doc.data();
             console.log(learnerData.role)
-                const tableRow  = document.createElement('tr');
-                tableRow.innerHTML = `
+            const tableRow = document.createElement('tr');
+            tableRow.innerHTML = `
                 <td>${learnerData.name}</td>
                 <td>${learnerData.email}</td>
                 <td>${learnerData.role}</td>
                 `
-                learnersDetail.appendChild(tableRow);
+            learnersDetail.appendChild(tableRow);
         })
     }
 
-     // If search data is not found, display a message
-     if ((searchByName || searchByEmail) && learnersDocs.length ===0) {
+    // If search data is not found, display a message
+    if ((searchByName || searchByEmail) && learnersDocs.length === 0) {
         const messageRow = document.createElement('tr');
         const messageCell = document.createElement('td');
         messageCell.colSpan = 3;
@@ -343,11 +343,11 @@ async function fetchAndDisplayLearnersDetails(queryRef = null){
  * Move to next page
  * @author dev
  */
- async function nextPage() {
+async function nextPage() {
     document.querySelector('#searchby-learner-name').value = '';
     document.querySelector('#searchby-learner-email').value = '';
     console.log(await totalNopages());
-    if (currentPage <await totalNopages()-1) {
+    if (currentPage < await totalNopages() - 1) {
         console.log("nextpage")
         currentPage++;
         fetchAndDisplayLearnersDetails();
@@ -377,17 +377,17 @@ function prevPage() {
  * total numberpages
  * @returns 
  */
-async function totalNopages(){
-    return Math.ceil(await totalNoLearnersDocs()/learnersPerPage);
+async function totalNopages() {
+    return Math.ceil(await totalNoLearnersDocs() / learnersPerPage);
 }
 
-async function totalNoLearnersDocs(){
+async function totalNoLearnersDocs() {
     console.log(tpoEmail)
-    const learnersCollectionRef  = collection(firestore,'learners');
+    const learnersCollectionRef = collection(firestore, 'learners');
     const learnersDocs = await getDocs(query(learnersCollectionRef,
-                                        where('role','==','ROLE_LEARNER'),
-                                        where('tpoEmail','==',tpoEmail)
-                                      ));
+        where('role', '==', 'ROLE_LEARNER'),
+        where('tpoEmail', '==', tpoEmail)
+    ));
     return learnersDocs.docs.length;
 }
 
